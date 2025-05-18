@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #004080;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+.news article {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.student-lookup {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.student-lookup input {
+    padding: 10px;
+    width: 200px;
+}
+
+.student-lookup button {
+    padding: 10px 20px;
+    margin-right: 10px;
+}

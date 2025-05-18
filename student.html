@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>استعلام عن الطالب</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script>
+        // Function to search and render PDF page based on the student name or code
+        function searchInPDF() {
+            var classSelected = document.getElementById('class').value;
+            var studentNameOrCode = document.getElementById('student_name').value;
+
+            // Map the selected class to the PDF filename
+            var pdfFileName = classSelected + '.pdf';
+
+            // Load the PDF file
+            var loadingTask = pdfjsLib.getDocument(pdfFileName);
+            
+            loadingTask.promise.then(function(pdf) {
+                var totalPages = pdf.numPages;
+                // Search for the student name or code in each page
+                for (var pageNum = 1; pageNum <= totalPages; pageNum++) {
+                    pdf.getPage(pageNum).then(function(page) {
+                        page.getTextContent().then(function(textContent) {
+                            var textItems = textContent.items;
+                            var pageText = "";
+                            for (var i = 0; i < textItems.length; i++) {
+                                pageText += textItems[i].str + " ";
+                            }
+
+                            // Check if the student name or code is found in the page
+                            if (pageText.includes(studentNameOrCode)) {
+                                // If found, render the page
+                                renderPage(pdf, pageNum);
+                            }
+                        });
+                    });
+                }
+            }, function(error) {
+                console.error('Error loading PDF:', error);
+            });
+        }
+
+        function renderPage(pdf, pageNum) {
+            pdf.getPage(pageNum).then(function(page) {
+                var canvas = document.getElementById('pdfViewer');
+                var context = canvas.getContext('2d');
+                var viewport = page.getViewport({ scale: 1.5 });
+
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                });
+
+                // Show the canvas with the PDF page
+                canvas.style.display = 'block';
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img src="school_blog_logo_new.png" alt="شعار ثانوية التحدي الأهلية" width="150" />
+        <h1>استعلام عن بيانات الطالب</h1>
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="student.html">استعلام عن الطالب</a>
+            <a href="info.html">معلومات</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="student-lookup">
+            <h2>استعلام عن الطالب</h2>
+            <form action="#">
+                <label for="class">اختار الصف:</label>
+                <select id="class">
+                    <option value="1st_grade">الأول متوسط</option>
+                    <option value="2nd_grade">الثاني متوسط</option>
+                    <option value="3rd_grade">الثالث متوسط</option>
+                    <option value="4th_science">الرابع علمي</option>
+                    <option value="5th_science">الخامس علمي</option>
+                    <option value="6th_science">السادس علمي</option>
+                </select>
+                <br><br>
+                <label for="student_name">اسم الطالب الثلاثي أو الكود الخاص به:</label>
+                <input type="text" id="student_name" placeholder="ادخل اسم الطالب أو الكود">
+                <br><br>
+                <button type="button" class="button" onclick="searchInPDF()">بحث</button>
+            </form>
+
+            <!-- PDF viewer will be displayed here -->
+            <canvas id="pdfViewer" width="100%" height="500px" style="display:none;"></canvas>
+        </section>
+    </main>
+</body>
+</html>
