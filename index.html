@@ -56,17 +56,17 @@
 
   .input-group {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     gap: 10px;
-    justify-content: center;
     margin-bottom: 10px;
   }
 
   .input-group input {
-    flex: 0 0 200px;
-    padding: 12px 15px;
-    font-size: 16px;
-    border-radius: 10px;
+    flex: 0 0 140px;
+    padding: 8px 10px;
+    font-size: 14px;
+    border-radius: 8px;
     border: 1px solid #ccc;
     transition: 0.3s;
   }
@@ -78,10 +78,10 @@
   }
 
   button {
-    padding: 12px 25px;
-    font-size: 16px;
+    padding: 10px 20px;
+    font-size: 14px;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     background: #28a745;
     color: #fff;
     cursor: pointer;
@@ -169,7 +169,7 @@
   }
 
   @media (max-width: 768px) {
-    .input-group { flex-direction: column; }
+    .input-group input { flex: 0 0 120px; }
     th, td { font-size: 12px; padding:6px; }
   }
 </style>
@@ -183,8 +183,8 @@
 
 <div class="container">
   <div class="input-group">
-    <input id="studentCode" placeholder="أدخل كود الطالب">
     <input id="parentNumber" placeholder="أدخل رقم ولي الأمر">
+    <input id="studentCode" placeholder="أدخل كود الطالب">
     <button onclick="searchStudent()">بحث</button>
   </div>
   <div class="year-label">العام الدراسي 2025-2026</div>
@@ -243,30 +243,32 @@ async function searchStudent() {
     // الدرجات
     html+=`<div class="section grades"><h3>الدرجات التفصيلية</h3>`;
     const subjects=["الاسلامية","العربي","الانكليزي","الرياضيات","الكيمياء","الفيزياء","الاحياء","الاجتماعيات","الحاسوب","الرياضة","الفنية","السلوك"];
-    let colIndex = header.indexOf("الاسلامية شهر 1");
-    for(let sub of subjects){
-      html+=`<h4>${sub}</h4><table><tr>`;
-      for(let i=0;i<10;i++){ if(header[colIndex+i]) html+=`<th>${header[colIndex+i]}</th>`;}
+    const startCols = ["AC","AM","AW","BG","BQ","CA","CK","CU","DE","DO","DY","EI"];
+    for(let s=0;s<subjects.length;s++){
+      html+=`<h4>${subjects[s]}</h4><table><tr>`;
+      let start = header.indexOf(startCols[s]);
+      for(let i=0;i<10;i++){ if(header[start+i]) html+=`<th>${header[start+i]}</th>`;}
       html+="</tr><tr>";
-      for(let i=0;i<10;i++){ if(header[colIndex+i]) html+=`<td>${student[header[colIndex+i]]}</td>`;}
+      for(let i=0;i<10;i++){ if(header[start+i]) html+=`<td>${student[header[start+i]]}</td>`;}
       html+="</tr></table>";
-      colIndex+=10;
     }
     html+="</div>";
 
-    // الملاحظات والسلوك
-    html+=`<div class="section notes"><h3>الملاحظات والسلوك</h3><table>`;
+    // ملاحظات وغياب
+    html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
     const noteFields=["ET","EU","AA","AB"];
-    for(let f of noteFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`;}
+    for(let f of noteFields){
+      if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`;
+    }
     html+="</table></div>";
 
-    output.innerHTML=html;
-  } catch(err){
+    output.innerHTML = html;
+
+  } catch (err) {
     console.error(err);
-    output.innerHTML="⚠️ خطأ أثناء جلب البيانات. تأكد من نشر ملف Google Sheets بشكل صحيح.";
+    output.innerHTML = "⚠️ خطأ أثناء جلب البيانات. تأكد أن الملف منشور للويب.";
   }
 }
 </script>
-
 </body>
 </html>
