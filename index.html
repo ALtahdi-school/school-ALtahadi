@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
@@ -29,8 +29,6 @@
     padding: 25px 10px;
     font-size: 24px;
     font-weight: bold;
-    position: relative;
-    overflow: hidden;
   }
 
   header span {
@@ -61,11 +59,11 @@
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .input-group input {
-    flex: 1 1 200px;
+    flex: 0 0 200px;
     padding: 12px 15px;
     font-size: 16px;
     border-radius: 10px;
@@ -147,7 +145,6 @@
     top: 0;
   }
 
-  /* قسم الحوكمة مع أنميشن */
   .governance {
     margin-top: 40px;
     background: #343a40;
@@ -162,6 +159,13 @@
     0% { transform: scale(0.5); opacity:0; }
     60% { transform: scale(1.1); opacity:1; }
     100% { transform: scale(1); }
+  }
+
+  .version {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #555;
   }
 
   @media (max-width: 768px) {
@@ -183,7 +187,9 @@
     <input id="parentNumber" placeholder="أدخل رقم ولي الأمر">
     <button onclick="searchStudent()">بحث</button>
   </div>
+  <div class="year-label">العام الدراسي 2025-2026</div>
   <div id="output"></div>
+  <div class="version">الإصدار V.0.0.1</div>
 </div>
 
 <div class="governance">
@@ -237,35 +243,27 @@ async function searchStudent() {
     // الدرجات
     html+=`<div class="section grades"><h3>الدرجات التفصيلية</h3>`;
     const subjects=["الاسلامية","العربي","الانكليزي","الرياضيات","الكيمياء","الفيزياء","الاحياء","الاجتماعيات","الحاسوب","الرياضة","الفنية","السلوك"];
-    const colStart = header.indexOf("الاسلامية شهر 1");
-    let idx=colStart;
+    let colIndex = header.indexOf("الاسلامية شهر 1");
     for(let sub of subjects){
       html+=`<h4>${sub}</h4><table><tr>`;
-      for(let i=0;i<10;i++){
-        if(header[idx+i]) html+=`<th>${header[idx+i]}</th>`;
-      }
+      for(let i=0;i<10;i++){ if(header[colIndex+i]) html+=`<th>${header[colIndex+i]}</th>`;}
       html+="</tr><tr>";
-      for(let i=0;i<10;i++){
-        if(header[idx+i]) html+=`<td>${student[header[idx+i]]}</td>`;
-      }
+      for(let i=0;i<10;i++){ if(header[colIndex+i]) html+=`<td>${student[header[colIndex+i]]}</td>`;}
       html+="</tr></table>";
-      idx+=10;
+      colIndex+=10;
     }
     html+="</div>";
 
-    // الملاحظات
+    // الملاحظات والسلوك
     html+=`<div class="section notes"><h3>الملاحظات والسلوك</h3><table>`;
-    const noteFields=["الغياب","اختلاق مشاكل داخل المدرسة","ملاحظات كرت","ملاحظات النتيجة"];
-    for(let f of noteFields){
-      if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`;
-    }
+    const noteFields=["ET","EU","AA","AB"];
+    for(let f of noteFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`;}
     html+="</table></div>";
 
-    output.innerHTML = html;
-
-  } catch(err) {
+    output.innerHTML=html;
+  } catch(err){
     console.error(err);
-    output.innerHTML = "⚠️ حدث خطأ أثناء جلب البيانات.";
+    output.innerHTML="⚠️ خطأ أثناء جلب البيانات. تأكد من نشر ملف Google Sheets بشكل صحيح.";
   }
 }
 </script>
