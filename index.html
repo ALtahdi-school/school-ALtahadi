@@ -5,173 +5,173 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>نظام استعلام عن الطالب</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-  body {
-    font-family: 'Cairo', sans-serif;
-    direction: rtl;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom, #e0f0ff, #ffffff);
-    overflow-x: hidden;
-    animation: fadeInBody 1s ease;
-  }
+body {
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #e0f0ff, #ffffff);
+  overflow-x: hidden;
+  animation: fadeInBody 1s ease;
+}
 
-  @keyframes fadeInBody {
-    from {opacity:0;}
-    to {opacity:1;}
-  }
+@keyframes fadeInBody {
+  from {opacity:0;}
+  to {opacity:1;}
+}
 
-  header {
-    background: #007bff;
-    color: #fff;
-    text-align: center;
-    padding: 25px 10px;
-    font-size: 24px;
-    font-weight: bold;
-  }
+header {
+  background: #007bff;
+  color: #fff;
+  text-align: center;
+  padding: 25px 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
 
-  header span {
-    display: block;
-    font-size: 16px;
-    font-weight: normal;
-    margin-top: 5px;
-    opacity: 0.8;
-  }
+header span {
+  display: block;
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 5px;
+  opacity: 0.8;
+}
 
-  .container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 15px;
-    box-shadow: 0 6px 25px rgba(0,0,0,0.15);
-    animation: fadeIn 1s ease forwards;
-  }
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+  animation: fadeIn 1s ease forwards;
+}
 
-  @keyframes fadeIn {
-    from {opacity:0; transform: translateY(20px);}
-    to {opacity:1; transform: translateY(0);}
-  }
+@keyframes fadeIn {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
 
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
 
-  .input-group input {
-    flex: 0 0 140px;
-    padding: 8px 10px;
-    font-size: 14px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    transition: 0.3s;
-  }
+.input-group input {
+  flex: 0 0 140px;
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+}
 
-  .input-group input:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0,123,255,0.3);
-  }
+.input-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0,123,255,0.3);
+}
 
-  button {
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    border-radius: 8px;
-    background: #28a745;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #28a745;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-  button:hover {
-    background: #218838;
-    transform: scale(1.05);
-  }
+button:hover {
+  background: #218838;
+  transform: scale(1.05);
+}
 
-  .year-label {
-    text-align: center;
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 20px;
-    opacity: 0.8;
-  }
+.year-label {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
 
-  .section {
-    margin-top: 25px;
-    padding: 15px;
-    border-radius: 12px;
-    animation: slideIn 0.8s ease forwards;
-  }
+.section {
+  margin-top: 25px;
+  padding: 15px;
+  border-radius: 12px;
+  animation: slideIn 0.8s ease forwards;
+}
 
-  @keyframes slideIn {
-    from {opacity:0; transform: translateX(-50px);}
-    to {opacity:1; transform: translateX(0);}
-  }
+@keyframes slideIn {
+  from {opacity:0; transform: translateX(-50px);}
+  to {opacity:1; transform: translateX(0);}
+}
 
-  .section h3 {
-    margin-top: 0;
-    padding: 8px 12px;
-    border-radius: 8px;
-    color: #fff;
-  }
+.section h3 {
+  margin-top: 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #fff;
+}
 
-  .info { background: #007bff; }
-  .finance { background: #28a745; }
-  .grades { background: #ffc107; color:#000; }
-  .notes { background: #dc3545; }
+.info { background: #007bff; }
+.finance { background: #28a745; }
+.grades { background: #ffc107; color:#000; }
+.notes { background: #dc3545; }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 12px;
-    overflow-x: auto;
-  }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  overflow-x: auto;
+}
 
-  th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    font-size: 14px;
-    text-align: right;
-  }
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+  text-align: right;
+}
 
-  th {
-    background-color: rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-  }
+th {
+  background-color: rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+}
 
-  .governance {
-    margin-top: 40px;
-    background: #343a40;
-    color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    animation: bounceIn 1s ease;
-  }
+.governance {
+  margin-top: 40px;
+  background: #343a40;
+  color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  animation: bounceIn 1s ease;
+}
 
-  @keyframes bounceIn {
-    0% { transform: scale(0.5); opacity:0; }
-    60% { transform: scale(1.1); opacity:1; }
-    100% { transform: scale(1); }
-  }
+@keyframes bounceIn {
+  0% { transform: scale(0.5); opacity:0; }
+  60% { transform: scale(1.1); opacity:1; }
+  100% { transform: scale(1); }
+}
 
-  .version {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 12px;
-    color: #555;
-  }
+.version {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 12px;
+  color: #555;
+}
 
-  @media (max-width: 768px) {
-    .input-group input { flex: 0 0 120px; }
-    th, td { font-size: 12px; padding:6px; }
-  }
+@media (max-width: 768px) {
+  .input-group input { flex: 0 0 120px; }
+  th, td { font-size: 12px; padding:6px; }
+}
 </style>
 </head>
 <body>
@@ -240,23 +240,36 @@ async function searchStudent() {
     }
     html+="</table></div>";
 
-    // الدرجات
-    html+=`<div class="section grades"><h3>الدرجات التفصيلية</h3>`;
-    const subjects=["الاسلامية","العربي","الانكليزي","الرياضيات","الكيمياء","الفيزياء","الاحياء","الاجتماعيات","الحاسوب","الرياضة","الفنية","السلوك"];
-    const startCols = ["AC","AM","AW","BG","BQ","CA","CK","CU","DE","DO","DY","EI"];
-    for(let s=0;s<subjects.length;s++){
-      html+=`<h4>${subjects[s]}</h4><table><tr>`;
-      let start = header.indexOf(startCols[s]);
-      for(let i=0;i<10;i++){ if(header[start+i]) html+=`<th>${header[start+i]}</th>`;}
-      html+="</tr><tr>";
-      for(let i=0;i<10;i++){ if(header[start+i]) html+=`<td>${student[header[start+i]]}</td>`;}
-      html+="</tr></table>";
+    // الدرجات التفصيلية (الحاسوب بدل علم الأرض)
+    html += `<div class="section grades"><h3>الدرجات التفصيلية</h3><table><tr>`;
+    const gradeColumns = [
+      "AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL",
+      "AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV",
+      "AW","AX","AY","AZ","BA","BB","BC","BD","BE","BF",
+      "BG","BH","BI","BJ","BK","BL","BM","BN","BO","BP",
+      "BQ","BR","BS","BT","BU","BV","BW","BX","BY","BZ",
+      "CA","CB","CC","CD","CE","CF","CG","CH","CI","CJ",
+      "CK","CL","CM","CN","CO","CP","CQ","CR","CS","CT",
+      "CU","CV","CW","CX","CY","CZ","DA","DB","DC","DD",
+      "DE","DF","DG","DH","DI","DJ","DK","DL","DM","DN",
+      "DO","DP","DQ","DR","DS","DT","DU","DV","DW","DX",
+      "DY","DZ","EA","EB","EC","ED","EE","EF","EG","EH",
+      "EI","EJ","EK","EL","EM","EN","EO","EP","EQ","ER"
+    ];
+
+    // رأس الجدول
+    for(let col of gradeColumns){
+      html+=`<th>${col}</th>`;
     }
-    html+="</div>";
+    html+="</tr><tr>";
+    for(let col of gradeColumns){
+      html+=`<td>${student[col]||""}</td>`;
+    }
+    html+="</tr></table></div>";
 
     // ملاحظات وغياب
     html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
-    const noteFields=["ET","EU","AA","AB"];
+    const noteFields=["ملاحظات كرت","ملاحظات النتيجة","الغياب","اختلاق مشاكل داخل المدرسة"];
     for(let f of noteFields){
       if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`;
     }
@@ -264,11 +277,12 @@ async function searchStudent() {
 
     output.innerHTML = html;
 
-  } catch (err) {
+  } catch(err){
     console.error(err);
-    output.innerHTML = "⚠️ خطأ أثناء جلب البيانات. تأكد أن الملف منشور للويب.";
+    output.innerHTML = "❌ حدث خطأ أثناء جلب البيانات.";
   }
 }
 </script>
+
 </body>
 </html>
