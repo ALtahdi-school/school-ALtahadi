@@ -189,7 +189,7 @@ th {
   </div>
   <div class="year-label">العام الدراسي 2025-2026</div>
   <div id="output"></div>
-  <div class="version">الإصدار V.0.0.1</div>
+  <div class="version">الإصدار V.0.1.1</div>
 </div>
 
 <div class="governance">
@@ -198,9 +198,18 @@ th {
 
 <script>
 async function searchStudent() {
-  const code = document.getElementById("studentCode").value.trim();
-  const parent = document.getElementById("parentNumber").value.trim();
+  let code = document.getElementById("studentCode").value.trim();
+  let parent = document.getElementById("parentNumber").value.trim();
+
+  if(parent.startsWith("0")) parent = parent.substring(1);
+  if(code.startsWith("0")) code = code.substring(1);
+
   const output = document.getElementById("output");
+  if(!parent || !code){
+    output.innerHTML = "<p style='color:#dc3545;'>⚠️ الرجاء إدخال رقم ولي الأمر وكود الطالب لعرض النتائج.</p>";
+    return;
+  }
+
   output.innerHTML = "<p>⏳ جاري البحث...</p>";
 
   const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vReghaYoMk3f8ffSBLRHIwZieEWCfk5Yx8W6c843TXkC6wpA78Z0X5nw21RRpxMdQ/pub?gid=1229272896&single=true&output=csv";
@@ -220,13 +229,13 @@ async function searchStudent() {
     });
 
     const student = objects.find(o=>o["كود الطالب"]===code && o["رقم ولي الامر"]===parent);
-    if(!student){ output.innerHTML="❌ لم أجد بيانات تطابق البحث."; return; }
+    if(!student){ output.innerHTML="<p style='color:#dc3545;'>❌ لم أجد بيانات تطابق البحث.</p>"; return; }
 
     let html="";
 
-    // معلومات الطالب
+    // معلومات عامة
     html+=`<div class="section info"><h3>المعلومات العامة</h3><table>`;
-    const studentFields=["id","اسم الطالب","الجنس","الصف","القاعة","رقم الطالب","رقم ولي الامر","رقم الخط","العنوان","الكتب","اسم الام","المدرسة القادم منها","المعدل"];
+    const studentFields=["id","رقم الطالب","اسم الطالب","الجنس","الصف","القاعة","رقم ولي الامر","رقم الخط","الملاحظات","الكتب","العنوان","اسم الام","المدرسة القادم منها","المعدل","كود الطالب"];
     for(let f of studentFields){
       if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`;
     }
@@ -234,38 +243,35 @@ async function searchStudent() {
 
     // المعلومات المالية
     html+=`<div class="section finance"><h3>المعلومات المالية</h3><table>`;
-    const financeFields=["القسط 1","تاريخ 1","القسط 2","تاريخ 2","القسط 3","تاريخ 3","القسط 4","تاريخ 4","القسط 5","تاريخ 5","القسط 6","تاريخ 6","القسط 7","تاريخ 7","القسط 8","تاريخ 8","الكفالة","مبلغ الكفالة","المبلغ الكلي","الباقي الكلي","الواصل الكلي"];
+    const financeFields=["القسط 1","تاريخ 1","القسط 2","تاريخ 2","القسط 3","تاريخ 3","القسط 4","تاريخ 4","القسط 5","تاريخ 5","القسط 6","تاريخ 6","القسط 7","تاريخ 7","القسط 8","تاريخ 8","الباقي الكلي","المبلغ الكلي","الواصل الكلي","الكفالة","مبلغ الكفالة"];
     for(let f of financeFields){
       if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`;
     }
     html+="</table></div>";
 
-    // الدرجات التفصيلية (الحاسوب بدل علم الأرض)
-    html += `<div class="section grades"><h3>الدرجات التفصيلية</h3><table><tr>`;
-    const gradeColumns = [
-      "AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL",
-      "AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV",
-      "AW","AX","AY","AZ","BA","BB","BC","BD","BE","BF",
-      "BG","BH","BI","BJ","BK","BL","BM","BN","BO","BP",
-      "BQ","BR","BS","BT","BU","BV","BW","BX","BY","BZ",
-      "CA","CB","CC","CD","CE","CF","CG","CH","CI","CJ",
-      "CK","CL","CM","CN","CO","CP","CQ","CR","CS","CT",
-      "CU","CV","CW","CX","CY","CZ","DA","DB","DC","DD",
-      "DE","DF","DG","DH","DI","DJ","DK","DL","DM","DN",
-      "DO","DP","DQ","DR","DS","DT","DU","DV","DW","DX",
-      "DY","DZ","EA","EB","EC","ED","EE","EF","EG","EH",
-      "EI","EJ","EK","EL","EM","EN","EO","EP","EQ","ER"
-    ];
+    // الدرجات التفصيلية لكل مادة
+    const subjects = {
+      "الاسلامية":["AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL"],
+      "عربي":["AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV"],
+      "انكليزي":["AW","AX","AY","AZ","BA","BB","BC","BD","BE","BF"],
+      "رياضيات":["BG","BH","BI","BJ","BK","BL","BM","BN","BO","BP"],
+      "كيمياء":["BQ","BR","BS","BT","BU","BV","BW","BX","BY","BZ"],
+      "فيزياء":["CA","CB","CC","CD","CE","CF","CG","CH","CI","CJ"],
+      "احياء":["CK","CL","CM","CN","CO","CP","CQ","CR","CS","CT"],
+      "اجتماعيات":["CU","CV","CW","CX","CY","CZ","DA","DB","DC","DD"],
+      "حاسوب":["DE","DF","DG","DH","DI","DJ","DK","DL","DM","DN"],
+      "رياضة":["DO","DP","DQ","DR","DS","DT","DU","DV","DW","DX"],
+      "فنية":["DY","DZ","EA","EB","EC","ED","EE","EF","EG","EH"],
+      "سلوك":["EI","EJ","EK","EL","EM","EN","EO","EP","EQ","ER"]
+    };
 
-    // رأس الجدول
-    for(let col of gradeColumns){
-      html+=`<th>${col}</th>`;
+    for(let subject in subjects){
+      html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
+      subjects[subject].forEach(col=>html+=`<th>${col}</th>`);
+      html+="</tr><tr>";
+      subjects[subject].forEach(col=>html+=`<td>${student[col]||""}</td>`);
+      html+="</tr></table></div>";
     }
-    html+="</tr><tr>";
-    for(let col of gradeColumns){
-      html+=`<td>${student[col]||""}</td>`;
-    }
-    html+="</tr></table></div>";
 
     // ملاحظات وغياب
     html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
@@ -279,7 +285,7 @@ async function searchStudent() {
 
   } catch(err){
     console.error(err);
-    output.innerHTML = "❌ حدث خطأ أثناء جلب البيانات.";
+    output.innerHTML = "<p style='color:#dc3545;'>❌ حدث خطأ أثناء جلب البيانات.</p>";
   }
 }
 </script>
