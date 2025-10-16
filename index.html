@@ -7,17 +7,17 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
-* { box-sizing: border-box; margin:0; padding:0; }
-
 body {
   font-family: 'Cairo', sans-serif;
   direction: rtl;
-  background: linear-gradient(135deg, #e0f0ff, #ffffff);
-  animation: fadeInBody 1s ease;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #e0f0ff, #ffffff);
   overflow-x: hidden;
+  animation: fadeInBody 1s ease;
 }
 
-@keyframes fadeInBody { from{opacity:0;} to{opacity:1;} }
+@keyframes fadeInBody { from {opacity:0;} to {opacity:1;} }
 
 header {
   background: #007bff;
@@ -26,7 +26,6 @@ header {
   padding: 25px 10px;
   font-size: 24px;
   font-weight: bold;
-  animation: slideDown 0.8s ease;
 }
 
 header span {
@@ -37,94 +36,86 @@ header span {
   opacity: 0.8;
 }
 
-@keyframes slideDown { from {transform: translateY(-50px); opacity:0;} to {transform:translateY(0); opacity:1;} }
-
-.container {
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-  animation: fadeIn 1s ease forwards;
-}
-
-@keyframes fadeIn { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
-
 .input-group {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
 }
 
 .input-group input {
-  flex: 1 1 140px;
-  min-width: 120px;
-  padding: 10px 12px;
+  flex: 0 0 160px;
+  padding: 10px;
   font-size: 14px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  transition: all 0.3s ease;
-  text-align: right;
+  transition: 0.3s;
 }
 
 .input-group input:focus {
   outline: none;
   border-color: #007bff;
-  box-shadow: 0 0 10px rgba(0,123,255,0.3);
-  transform: scale(1.02);
+  box-shadow: 0 0 8px rgba(0,123,255,0.3);
 }
 
 button {
   padding: 10px 25px;
-  font-size: 15px;
+  font-size: 14px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(45deg, #28a745, #20c997);
+  background: #28a745;
   color: #fff;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 button:hover {
-  background: linear-gradient(45deg, #218838, #17a2b8);
-  transform: scale(1.08);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  background: #218838;
+  transform: scale(1.05);
 }
 
 .year-label {
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   color: #555;
   margin-bottom: 20px;
-  opacity: 0.9;
+  opacity: 0.8;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto 30px auto;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-items: center;
 }
 
 .section {
-  margin-top: 25px;
-  padding: 15px;
-  border-radius: 12px;
-  animation: slideIn 0.8s ease forwards;
-  transition: transform 0.3s ease;
+  width: 100%;
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: fadeIn 0.8s ease forwards;
 }
 
-.section:hover { transform: translateY(-5px); }
-
-@keyframes slideIn { from {opacity:0; transform: translateX(-50px);} to {opacity:1; transform: translateX(0);} }
+.section:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
 
 .section h3 {
-  margin-top: 0;
-  padding: 10px 15px;
-  border-radius: 8px;
+  text-align: center;
   color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 10px 0;
+  margin-bottom: 15px;
   animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
 }
 
 .info { background: #007bff; }
@@ -135,26 +126,23 @@ button:hover {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 12px;
-  overflow-x: auto;
-  display: block;
+  font-size: 14px;
 }
 
 th, td {
-  border: 1px solid #ddd;
   padding: 10px 8px;
-  font-size: 14px;
   text-align: right;
-  transition: all 0.3s ease;
+  border: 1px solid #ddd;
 }
-
-th { background-color: rgba(0,0,0,0.05); position: sticky; top: 0; }
 
 tr:hover { background-color: rgba(0,123,255,0.1); }
 
+@keyframes fadeIn { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
+
 .governance {
-  margin-top: 35px;
-  background: linear-gradient(90deg,#343a40,#495057);
+  margin-top: 20px;
+  background: #343a40;
   color: #fff;
   padding: 20px;
   border-radius: 15px;
@@ -162,23 +150,19 @@ tr:hover { background-color: rgba(0,123,255,0.1); }
   animation: bounceIn 1s ease;
 }
 
-@keyframes bounceIn {
-  0% { transform: scale(0.5); opacity:0; }
-  60% { transform: scale(1.1); opacity:1; }
-  100% { transform: scale(1); }
-}
+@keyframes bounceIn { 0% { transform: scale(0.5); opacity:0; } 60% { transform: scale(1.1); opacity:1; } 100% { transform: scale(1); } }
 
 .version {
   text-align: center;
-  margin-top: 18px;
-  font-size: 13px;
+  margin-top: 10px;
+  font-size: 12px;
   color: #555;
 }
 
 @media (max-width: 768px) {
-  .input-group input { flex: 1 1 100px; font-size:13px; }
+  .input-group input { flex: 0 0 140px; }
   th, td { font-size: 12px; padding:6px; }
-  table { display: block; overflow-x: auto; }
+  .container { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -189,37 +173,42 @@ tr:hover { background-color: rgba(0,123,255,0.1); }
   <span>العام الدراسي 2025-2026</span>
 </header>
 
-<div class="container">
-  <div class="input-group">
-    <input id="parentNumber" placeholder="أدخل رقم ولي الأمر">
-    <input id="studentCode" placeholder="أدخل كود الطالب">
-    <button onclick="searchStudent()">بحث</button>
-  </div>
-  <div class="year-label">العام الدراسي 2025-2026</div>
-  <div id="output"></div>
-  <div class="version">الإصدار V.0.1.2</div>
+<div class="input-group">
+  <input id="parentNumber" placeholder="أدخل رقم ولي الأمر">
+  <input id="studentCode" placeholder="أدخل كود الطالب">
+  <button onclick="searchStudent()">بحث</button>
 </div>
 
+<div class="year-label">العام الدراسي 2025-2026</div>
+<div class="container" id="output"></div>
+<div class="version">الإصدار V0.1.2</div>
 <div class="governance">
   قسم الحوكمة: جميع الحقوق محفوظة © ثانوية التحدي الأهلية
 </div>
 
 <script>
-async function searchStudent() {
+async function searchStudent(saveToStorage=true){
   let code = document.getElementById("studentCode").value.trim();
   let parent = document.getElementById("parentNumber").value.trim();
   if(parent.startsWith("0")) parent = parent.substring(1);
   if(code.startsWith("0")) code = code.substring(1);
+
   const output = document.getElementById("output");
   if(!parent || !code){
-    output.innerHTML = "<p style='color:#dc3545;'>⚠️ الرجاء إدخال رقم ولي الأمر وكود الطالب لعرض النتائج.</p>";
+    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>⚠️ الرجاء إدخال رقم ولي الأمر وكود الطالب لعرض النتائج.</p>";
     return;
   }
 
-  output.innerHTML = "<p>⏳ جاري البحث...</p>";
+  if(saveToStorage){
+    localStorage.setItem("studentCode", code);
+    localStorage.setItem("parentNumber", parent);
+  }
+
+  output.innerHTML = "<p style='text-align:center;'>⏳ جاري البحث...</p>";
+
   const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vReghaYoMk3f8ffSBLRHIwZieEWCfk5Yx8W6c843TXkC6wpA78Z0X5nw21RRpxMdQ/pub?gid=1229272896&single=true&output=csv";
 
-  try {
+  try{
     const resp = await fetch(sheetURL);
     if(!resp.ok) throw new Error("فشل في جلب البيانات");
     const text = await resp.text();
@@ -233,42 +222,24 @@ async function searchStudent() {
     });
 
     const student = objects.find(o=>o["كود الطالب"]===code && o["رقم ولي الامر"]===parent);
-    if(!student){ output.innerHTML="<p style='color:#dc3545;'>❌ لم أجد بيانات تطابق البحث.</p>"; return; }
+    if(!student){ output.innerHTML="<p style='color:#dc3545; text-align:center;'>❌ لم أجد بيانات تطابق البحث.</p>"; return; }
 
     let html="";
+
     // المعلومات العامة
     html+=`<div class="section info"><h3>المعلومات العامة</h3><table>`;
-    const studentFields=["id","رقم الطالب","اسم الطالب","الجنس","الصف","القاعة","رقم ولي الامر","رقم الخط","الملاحظات","الكتب","العنوان","اسم الام","المدرسة القادم منها","المعدل","كود الطالب"];
-    for(let f of studentFields){
-      if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`;
-    }
+    const studentFields=["id","رقم الطالب","اسم الطالب","الجنس","الصف","القاعة","رقم ولي الامر","رقم الخط","الملاحظات"];
+    for(let f of studentFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`; }
     html+="</table></div>";
 
     // المعلومات المالية
     html+=`<div class="section finance"><h3>المعلومات المالية</h3><table>`;
     const financeFields=["القسط 1","تاريخ 1","القسط 2","تاريخ 2","القسط 3","تاريخ 3","القسط 4","تاريخ 4","القسط 5","تاريخ 5","القسط 6","تاريخ 6","القسط 7","تاريخ 7","القسط 8","تاريخ 8","الباقي الكلي","المبلغ الكلي","الواصل الكلي","الكفالة","مبلغ الكفالة"];
-    for(let f of financeFields){
-      if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`;
-    }
+    for(let f of financeFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
     html+="</table></div>";
 
-    // الدرجات التفصيلية
+    // الدرجات
     const subjects = {
-      "الاسلامية":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "عربي":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الانكليزي":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الرياضيات":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الكيمياء":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1 (فصل ثاني)","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الفيزياء":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الاحياء":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "اجتماعيات":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "حاسوب":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "رياضة":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "فنية":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "السلوك":["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"]
-    };
-
-    const subjectCodes = {
       "الاسلامية":["AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL"],
       "عربي":["AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV"],
       "الانكليزي":["AW","AX","AY","AZ","BA","BB","BC","BD","BE","BF"],
@@ -283,26 +254,40 @@ async function searchStudent() {
       "السلوك":["EI","EJ","EK","EL","EM","EN","EO","EP","EQ","ER"]
     };
 
+    const labels = ["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"];
+
     for(let subject in subjects){
       html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
-      subjects[subject].forEach(label=>html+=`<th>${label}</th>`);
+      labels.forEach(l=>html+=`<th>${l}</th>`);
       html+="</tr><tr>";
-      subjectCodes[subject].forEach(code=>html+=`<td>${student[code] ? student[code] : ""}</td>`);
+      subjects[subject].forEach(c=>html+=`<td>${student[c]||""}</td>`);
       html+="</tr></table></div>";
     }
 
+    // الملاحظات
     html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
     const noteFields=["ملاحظات كرت","ملاحظات النتيجة","الغياب","اختلاق مشاكل داخل المدرسة"];
-    for(let f of noteFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`; }
+    for(let f of noteFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
     html+="</table></div>";
 
     output.innerHTML = html;
 
-  } catch(err){
+  }catch(err){
     console.error(err);
-    output.innerHTML = "<p style='color:#dc3545;'>❌ حدث خطأ أثناء جلب البيانات.</p>";
+    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>❌ حدث خطأ أثناء جلب البيانات.</p>";
   }
 }
+
+// الاحتفاظ بالبيانات عند إعادة فتح الموقع
+window.addEventListener("DOMContentLoaded", ()=>{
+  const savedCode = localStorage.getItem("studentCode");
+  const savedParent = localStorage.getItem("parentNumber");
+  if(savedCode && savedParent){
+    document.getElementById("studentCode").value = savedCode;
+    document.getElementById("parentNumber").value = savedParent;
+    searchStudent(false);
+  }
+});
 </script>
 
 </body>
