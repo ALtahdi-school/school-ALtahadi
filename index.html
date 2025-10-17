@@ -246,32 +246,23 @@ async function searchStudent(saveToStorage=true){
     html+="</table></div>";
 
     // الدرجات
-    const allColumns = [
-      "AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL",
-      "AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV",
-      "AW","AX","AY","AZ","BA","BB","BC","BD","BE","BF",
-      "BG","BH","BI","BJ","BK","BL","BM","BN","BO","BP",
-      "BQ","BR","BS","BT","BU","BV","BW","BX","BY","BZ",
-      "CA","CB","CC","CD","CE","CF","CG","CH","CI","CJ",
-      "CK","CL","CM","CN","CO","CP","CQ","CR","CS","CT",
-      "CU","CV","CW","CX","CY","CZ","DA","DB","DC","DD",
-      "DE","DF","DG","DH","DI","DJ","DK","DL","DM","DN",
-      "DO","DP","DQ","DR","DS","DT","DU","DV","DW","DX",
-      "DY","DZ","EA","EB","EC","ED","EE","EF","EG","EH",
-      "EI","EJ","EK","EL","EM","EN","EO","EP","EQ","ER"
-    ];
-
     const subjects = ["الاسلامية","عربي","الانكليزي","الرياضيات","الكيمياء","الفيزياء","الاحياء","اجتماعيات","حاسوب","رياضة","فنية","السلوك"];
     const labels = ["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"];
 
-    for(let i=0; i<subjects.length; i++){
-      html+=`<div class="section grades"><h3>الدرجات - ${subjects[i]}</h3><table><tr>`;
+    let startIndex = header.findIndex(h => h.includes("AC")); // بداية الأعمدة حسب CSV
+    if(startIndex < 0) startIndex = 0; // fallback
+
+    subjects.forEach(subject => {
+      html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
       labels.forEach(l=>html+=`<th>${l}</th>`);
       html+="</tr><tr>";
-      const cols = allColumns.slice(i*10, i*10+10);
-      cols.forEach(c=> html+=`<td>${student[c]||""}</td>`);
+      for(let i=0;i<10;i++){
+        const colName = header[startIndex + i];
+        html+=`<td>${student[colName] || ""}</td>`;
+      }
       html+="</tr></table></div>";
-    }
+      startIndex +=10; // الانتقال للمادة التالية
+    });
 
     // الملاحظات
     html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
