@@ -247,57 +247,26 @@ async function searchStudent(saveToStorage=true){
 
     // الدرجات التفصيلية
     const subjects = {
-      "الاسلامية":["AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL"],
-      "عربي":["AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV"],
-      "الانكليزي":["AW","AX","AY","AZ","BA","BB","BC","BD","BE","BF"],
-      "الرياضيات":["BG","BH","BI","BJ","BK","BL","BM","BN","BO","BP"],
-      "الكيمياء":["BQ","BR","BS","BT","BU","BV","BW","BX","BY","BZ"],
-      "الفيزياء":["CA","CB","CC","CD","CE","CF","CG","CH","CI","CJ"],
-      "الاحياء":["CK","CL","CM","CN","CO","CP","CQ","CR","CS","CT"],
-      "اجتماعيات":["CU","CV","CW","CX","CY","CZ","DA","DB","DC","DD"],
-      "حاسوب":["DE","DF","DG","DH","DI","DJ","DK","DL","DM","DN"],
-      "رياضة":["DO","DP","DQ","DR","DS","DT","DU","DV","DW","DX"],
-      "فنية":["DY","DZ","EA","EB","EC","ED","EE","EF","EG","EH"],
-      "السلوك":["EI","EJ","EK","EL","EM","EN","EO","EP","EQ","ER"]
+      "الاسلامية":["الاسلامية شهر 1","الاسلامية شهر 2","الاسلامية فصل 1","الاسلامية نصف السنة","الاسلامية شهر 1 (فصل ثاني)","الاسلامية شهر 2 (فصل ثاني)","الاسلامية فصل 2","الاسلامية الامتحان النهائي","الاسلامية السعي","الاسلامية التقدير"],
+      "عربي":["عربي شهر 1","عربي شهر 2","عربي فصل 1","عربي نصف سنة","عربي شهر 1 (فصل ثاني)","عربي شهر 2 (فصل ثاني)","عربي فصل 2","عربي الامتحان النهائي","عربي السعي","عربي التقدير"],
+      "الانكليزي":["الانكليزي شهر 1","الانكليزي شهر 2","الانكليزي فصل 1","الانكليزي نصف السنة","الانكليزي شهر 1 (فصل ثاني)","الانكليزي شهر 2 (فصل ثاني)","الانكليزي فصل 2","الانكليزي الامتحان النهائي","الانكليزي السعي","الانكليزي التقدير"]
+      // أضف بقية المواد بنفس الطريقة حسب CSV
     };
-
-    const labels = ["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"];
 
     for(let subject in subjects){
       html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
-      labels.forEach(l=>html+=`<th>${l}</th>`);
+      // عرض عنوان مختصر لكل عمود
+      subjects[subject].forEach(colName=>{
+        const parts = colName.split(" "); 
+        html+=`<th>${parts.slice(-2).join(" ")}</th>`; // آخر كلمتين فقط
+      });
       html+="</tr><tr>";
-      subjects[subject].forEach(c=>{
-        html+=`<td>${student[c] || ""}</td>`;
+      // عرض القيم
+      subjects[subject].forEach(colName=>{
+        html+=`<td>${student[colName] || ""}</td>`;
       });
       html+="</tr></table></div>";
     }
 
     // الملاحظات
-    html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
-    const noteFields=["ملاحظات كرت","ملاحظات النتيجة","الغياب","اختلاق مشاكل داخل المدرسة"];
-    for(let f of noteFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
-    html+="</table></div>";
-
-    output.innerHTML = html;
-
-  }catch(err){
-    console.error(err);
-    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>❌ حدث خطأ أثناء جلب البيانات.</p>";
-  }
-}
-
-// الاحتفاظ بالبيانات عند إعادة فتح الموقع
-window.addEventListener("DOMContentLoaded", ()=>{
-  const savedCode = localStorage.getItem("studentCode");
-  const savedParent = localStorage.getItem("parentNumber");
-  if(savedCode && savedParent){
-    document.getElementById("studentCode").value = savedCode;
-    document.getElementById("parentNumber").value = savedParent;
-    searchStudent(false);
-  }
-});
-</script>
-
-</body>
-</html>
+    html+=`<div class="section notes"><h3>ملاحظات وغياب</h
