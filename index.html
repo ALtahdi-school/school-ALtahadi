@@ -103,7 +103,7 @@ button:hover {
   transition: transform 0.3s, box-shadow 0.3s;
   animation: fadeIn 0.8s ease forwards;
   font-family: 'Cairo', sans-serif;
-  font-size: 14px; /* استعادة حجم الخط الأصلي */
+  font-size: 14px;
   overflow-x: auto;
 }
 
@@ -115,7 +115,7 @@ button:hover {
 .section h3 {
   text-align: center;
   color: #fff;
-  font-size: 18px; /* الحجم الأصلي */
+  font-size: 18px;
   border-radius: 10px;
   padding: 10px 0;
   margin-bottom: 15px;
@@ -130,12 +130,12 @@ button:hover {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px; /* الحجم الأصلي */
+  font-size: 14px;
   table-layout: fixed;
 }
 
 th, td {
-  padding: 8px 6px; /* الحجم الأصلي */
+  padding: 8px 6px;
   text-align: right;
   border: 1px solid #ddd;
   word-wrap: break-word;
@@ -245,17 +245,33 @@ async function searchStudent(saveToStorage=true){
     for(let f of financeFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
     html+="</table></div>";
 
-    // الدرجات التفصيلية من العمود AC
-    let gradeStartIndex = header.findIndex((h,i) => i >= 28 && h); // AC هو العمود رقم 29 (0-indexed = 28)
-    html+=`<div class="section grades"><h3>الدرجات التفصيلية</h3><table><tr>`;
-    for(let i=gradeStartIndex; i<header.length; i++){
-      html+=`<th>${header[i]}</th>`;
+    // الدرجات التفصيلية
+    const subjects = {
+      "الاسلامية":["AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL"],
+      "عربي":["AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV"],
+      "الانكليزي":["AW","AX","AY","AZ","BA","BB","BC","BD","BE","BF"],
+      "الرياضيات":["BG","BH","BI","BJ","BK","BL","BM","BN","BO","BP"],
+      "الكيمياء":["BQ","BR","BS","BT","BU","BV","BW","BX","BY","BZ"],
+      "الفيزياء":["CA","CB","CC","CD","CE","CF","CG","CH","CI","CJ"],
+      "الاحياء":["CK","CL","CM","CN","CO","CP","CQ","CR","CS","CT"],
+      "اجتماعيات":["CU","CV","CW","CX","CY","CZ","DA","DB","DC","DD"],
+      "حاسوب":["DE","DF","DG","DH","DI","DJ","DK","DL","DM","DN"],
+      "رياضة":["DO","DP","DQ","DR","DS","DT","DU","DV","DW","DX"],
+      "فنية":["DY","DZ","EA","EB","EC","ED","EE","EF","EG","EH"],
+      "السلوك":["EI","EJ","EK","EL","EM","EN","EO","EP","EQ","ER"]
+    };
+
+    const labels = ["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"];
+
+    for(let subject in subjects){
+      html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
+      labels.forEach(l=>html+=`<th>${l}</th>`);
+      html+="</tr><tr>";
+      subjects[subject].forEach(c=>{
+        html+=`<td>${student[c] || ""}</td>`;
+      });
+      html+="</tr></table></div>";
     }
-    html+=`</tr><tr>`;
-    for(let i=gradeStartIndex; i<header.length; i++){
-      html+=`<td>${student[header[i]] || ""}</td>`;
-    }
-    html+=`</tr></table></div>`;
 
     // الملاحظات
     html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
