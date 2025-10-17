@@ -103,7 +103,7 @@ button:hover {
   transition: transform 0.3s, box-shadow 0.3s;
   animation: fadeIn 0.8s ease forwards;
   font-family: 'Cairo', sans-serif;
-  font-size: 12px;
+  font-size: 14px; /* استعادة حجم الخط الأصلي */
   overflow-x: auto;
 }
 
@@ -115,10 +115,10 @@ button:hover {
 .section h3 {
   text-align: center;
   color: #fff;
-  font-size: 14px;
+  font-size: 18px; /* الحجم الأصلي */
   border-radius: 10px;
-  padding: 6px 0;
-  margin-bottom: 10px;
+  padding: 10px 0;
+  margin-bottom: 15px;
   animation: pulse 1.5s infinite;
 }
 
@@ -130,12 +130,12 @@ button:hover {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 14px; /* الحجم الأصلي */
   table-layout: fixed;
 }
 
 th, td {
-  padding: 4px 3px;
+  padding: 8px 6px; /* الحجم الأصلي */
   text-align: right;
   border: 1px solid #ddd;
   word-wrap: break-word;
@@ -167,7 +167,7 @@ tr:hover { background-color: rgba(0,123,255,0.1); }
 
 @media (max-width: 768px) {
   .input-group input { flex: 0 0 140px; }
-  th, td { font-size: 11px; padding:3px; }
+  th, td { font-size: 12px; padding:6px; }
   .container { grid-template-columns: 1fr; }
   .section { min-height: auto; }
 }
@@ -245,10 +245,8 @@ async function searchStudent(saveToStorage=true){
     for(let f of financeFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
     html+="</table></div>";
 
-    // الدرجات التفصيلية من بداية العمود
-    let gradeStartIndex = header.findIndex(h => h.includes("شهر 1")); // البداية حسب CSV
-    if(gradeStartIndex < 0) gradeStartIndex = 0;
-
+    // الدرجات التفصيلية من العمود AC
+    let gradeStartIndex = header.findIndex((h,i) => i >= 28 && h); // AC هو العمود رقم 29 (0-indexed = 28)
     html+=`<div class="section grades"><h3>الدرجات التفصيلية</h3><table><tr>`;
     for(let i=gradeStartIndex; i<header.length; i++){
       html+=`<th>${header[i]}</th>`;
