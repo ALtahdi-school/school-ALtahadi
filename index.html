@@ -127,6 +127,10 @@ button:hover {
 .grades { background: #ffc107; color:#000; }
 .notes { background: #dc3545; }
 
+.section.grades table {
+  font-size: 13px; /* تصغير حجم الخط */
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -263,13 +267,9 @@ async function searchStudent(saveToStorage=true){
 
     for(let subject in subjectsColumns){
       html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
-      subjectsColumns[subject].forEach(colName=>{
-        html+=`<th>${colName}</th>`;
-      });
+      subjectsColumns[subject].forEach(colName=>{ html+=`<th>${colName}</th>`; });
       html+="</tr><tr>";
-      subjectsColumns[subject].forEach(colName=>{
-        html+=`<td>${student[colName]||""}</td>`;
-      });
+      subjectsColumns[subject].forEach(colName=>{ html+=`<td>${student[colName]||""}</td>`; });
       html+="</tr></table></div>";
     }
 
@@ -287,7 +287,6 @@ async function searchStudent(saveToStorage=true){
   }
 }
 
-// الاحتفاظ بالبيانات عند إعادة فتح الموقع
 window.addEventListener("DOMContentLoaded", ()=>{
   const savedCode = localStorage.getItem("studentCode");
   const savedParent = localStorage.getItem("parentNumber");
