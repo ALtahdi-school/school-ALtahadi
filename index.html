@@ -269,4 +269,30 @@ async function searchStudent(saveToStorage=true){
     }
 
     // الملاحظات
-    html+=`<div class="section notes"><h3>ملاحظات وغياب</h
+    html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
+    const noteFields=["ملاحظات كرت","ملاحظات النتيجة","الغياب","اختلاق مشاكل داخل المدرسة"];
+    for(let f of noteFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
+    html+="</table></div>";
+
+    output.innerHTML = html;
+
+  }catch(err){
+    console.error(err);
+    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>❌ حدث خطأ أثناء جلب البيانات.</p>";
+  }
+}
+
+// الاحتفاظ بالبيانات عند إعادة فتح الموقع
+window.addEventListener("DOMContentLoaded", ()=>{
+  const savedCode = localStorage.getItem("studentCode");
+  const savedParent = localStorage.getItem("parentNumber");
+  if(savedCode && savedParent){
+    document.getElementById("studentCode").value = savedCode;
+    document.getElementById("parentNumber").value = savedParent;
+    searchStudent(false);
+  }
+});
+</script>
+
+</body>
+</html>
