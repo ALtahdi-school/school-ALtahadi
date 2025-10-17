@@ -246,24 +246,29 @@ async function searchStudent(saveToStorage=true){
     html+="</table></div>";
 
     // الدرجات التفصيلية
-    const subjects = {
-      "الاسلامية":["الاسلامية شهر 1","الاسلامية شهر 2","الاسلامية فصل 1","الاسلامية نصف السنة","الاسلامية شهر 1 (فصل ثاني)","الاسلامية شهر 2 (فصل ثاني)","الاسلامية فصل 2","الاسلامية الامتحان النهائي","الاسلامية السعي","الاسلامية التقدير"],
-      "عربي":["عربي شهر 1","عربي شهر 2","عربي فصل 1","عربي نصف سنة","عربي شهر 1 (فصل ثاني)","عربي شهر 2 (فصل ثاني)","عربي فصل 2","عربي الامتحان النهائي","عربي السعي","عربي التقدير"],
-      "الانكليزي":["الانكليزي شهر 1","الانكليزي شهر 2","الانكليزي فصل 1","الانكليزي نصف السنة","الانكليزي شهر 1 (فصل ثاني)","الانكليزي شهر 2 (فصل ثاني)","الانكليزي فصل 2","الانكليزي الامتحان النهائي","الانكليزي السعي","الانكليزي التقدير"]
-      // أضف بقية المواد بنفس الطريقة حسب CSV
+    const subjectsColumns = {
+      "الاسلامية": header.slice(28, 38), // AC → AL
+      "عربي": header.slice(38, 48),      // AM → AV
+      "الانكليزي": header.slice(48, 58), // AW → BF
+      "الرياضيات": header.slice(58, 68), // BG → BP
+      "الكيمياء": header.slice(68, 78),  // BQ → BZ
+      "الفيزياء": header.slice(78, 88),  // CA → CJ
+      "الاحياء": header.slice(88, 98),    // CK → CT
+      "اجتماعيات": header.slice(98,108),  // CU → DD
+      "علم الارض": header.slice(108,118), // DE → DN
+      "رياضة": header.slice(118,128),     // DO → DX
+      "فنية": header.slice(128,138),       // DY → EH
+      "السلوك": header.slice(138,148)      // EI → ER
     };
 
-    for(let subject in subjects){
+    for(let subject in subjectsColumns){
       html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
-      // عرض عنوان مختصر لكل عمود
-      subjects[subject].forEach(colName=>{
-        const parts = colName.split(" "); 
-        html+=`<th>${parts.slice(-2).join(" ")}</th>`; // آخر كلمتين فقط
+      subjectsColumns[subject].forEach(colName=>{
+        html+=`<th>${colName}</th>`;
       });
       html+="</tr><tr>";
-      // عرض القيم
-      subjects[subject].forEach(colName=>{
-        html+=`<td>${student[colName] || ""}</td>`;
+      subjectsColumns[subject].forEach(colName=>{
+        html+=`<td>${student[colName]||""}</td>`;
       });
       html+="</tr></table></div>";
     }
