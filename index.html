@@ -14,10 +14,7 @@ body {
   padding: 0;
   background: linear-gradient(to bottom, #e0f0ff, #ffffff);
   overflow-x: hidden;
-  animation: fadeInBody 1s ease;
 }
-
-@keyframes fadeInBody { from {opacity:0;} to {opacity:1;} }
 
 header {
   background: #007bff;
@@ -50,7 +47,6 @@ header span {
   font-size: 14px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  transition: 0.3s;
 }
 
 .input-group input:focus {
@@ -67,7 +63,6 @@ button {
   background: #28a745;
   color: #fff;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 button:hover {
@@ -100,16 +95,9 @@ button:hover {
   border-radius: 15px;
   padding: 15px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
-  animation: fadeIn 0.8s ease forwards;
   font-family: 'Cairo', sans-serif;
   font-size: 14px;
   overflow-x: auto;
-}
-
-.section:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
 }
 
 .section h3 {
@@ -119,36 +107,27 @@ button:hover {
   border-radius: 10px;
   padding: 10px 0;
   margin-bottom: 15px;
-  animation: pulse 1.5s infinite;
 }
 
 .info { background: #007bff; }
 .finance { background: #28a745; }
-.grades { background: #ffc107; color:#000; }
+.grades { background: #ffc107; color:#000; font-size:13px; } /* خط أصغر */
 .notes { background: #dc3545; }
-
-.section.grades table {
-  font-size: 13px; /* تصغير حجم الخط */
-}
 
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
   table-layout: fixed;
 }
 
 th, td {
-  padding: 8px 6px;
+  padding: 6px 4px;
   text-align: right;
   border: 1px solid #ddd;
   word-wrap: break-word;
 }
 
 tr:hover { background-color: rgba(0,123,255,0.1); }
-
-@keyframes fadeIn { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
-@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
 
 .governance {
   margin-top: 20px;
@@ -157,10 +136,7 @@ tr:hover { background-color: rgba(0,123,255,0.1); }
   padding: 20px;
   border-radius: 15px;
   text-align: center;
-  animation: bounceIn 1s ease;
 }
-
-@keyframes bounceIn { 0% { transform: scale(0.5); opacity:0; } 60% { transform: scale(1.1); opacity:1; } 100% { transform: scale(1); } }
 
 .version {
   text-align: center;
@@ -171,7 +147,7 @@ tr:hover { background-color: rgba(0,123,255,0.1); }
 
 @media (max-width: 768px) {
   .input-group input { flex: 0 0 140px; }
-  th, td { font-size: 12px; padding:6px; }
+  th, td { font-size: 12px; padding:4px; }
   .container { grid-template-columns: 1fr; }
   .section { min-height: auto; }
 }
@@ -249,7 +225,7 @@ async function searchStudent(saveToStorage=true){
     for(let f of financeFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
     html+="</table></div>";
 
-    // الدرجات التفصيلية
+    // الدرجات التفصيلية لكل مادة
     const subjectsColumns = {
       "الاسلامية": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
       "عربي": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
@@ -287,6 +263,7 @@ async function searchStudent(saveToStorage=true){
   }
 }
 
+// الاحتفاظ بالبيانات عند إعادة فتح الموقع
 window.addEventListener("DOMContentLoaded", ()=>{
   const savedCode = localStorage.getItem("studentCode");
   const savedParent = localStorage.getItem("parentNumber");
