@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نظام استعلام عن الطالب - تقليب الأقسام</title>
+<title>نظام استعلام عن الطالب</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
@@ -14,8 +14,10 @@ body {
   padding: 0;
   background: linear-gradient(to bottom, #e0f0ff, #ffffff);
   overflow-x: hidden;
-  perspective: 1200px; /* لتأثير 3D */
+  animation: fadeInBody 1s ease;
 }
+
+@keyframes fadeInBody { from {opacity:0;} to {opacity:1;} }
 
 header {
   background: #007bff;
@@ -48,6 +50,7 @@ header span {
   font-size: 14px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  transition: 0.3s;
 }
 
 .input-group input:focus {
@@ -64,6 +67,7 @@ button {
   background: #28a745;
   color: #fff;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 button:hover {
@@ -71,89 +75,70 @@ button:hover {
   transform: scale(1.05);
 }
 
+.year-label {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto 30px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-}
-
-.card {
-  width: 320px;
-  height: 360px;
-  perspective: 1200px;
+  justify-items: center;
 }
 
 .section {
   width: 100%;
-  height: 100%;
   background: #fff;
   border-radius: 15px;
+  padding: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  cursor: pointer;
-  overflow: hidden;
-  position: relative;
-  font-family: 'Cairo', sans-serif;
-  font-size: 13px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: fadeIn 0.8s ease forwards;
 }
 
-.section.flipped {
-  transform: rotateY(180deg);
+.section:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
 }
 
-.front, .back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  padding: 15px;
-  box-sizing: border-box;
-  overflow: auto;
-  border-radius: 15px;
-}
-
-.front {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.back {
-  background-color: #ffc107;
-  color: #000;
-  transform: rotateY(180deg);
-}
-
-h3 {
+.section h3 {
   text-align: center;
-  margin-top: 0;
-  font-size: 16px;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  animation: pulse 1.5s infinite;
 }
+
+.info { background: #007bff; }
+.finance { background: #28a745; }
+.grades { background: #ffc107; color:#000; }
+.notes { background: #dc3545; }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 th, td {
-  border: 1px solid #ddd;
-  padding: 4px 6px;
+  padding: 10px 8px;
   text-align: right;
-  word-wrap: break-word;
+  border: 1px solid #ddd;
 }
 
 tr:hover { background-color: rgba(0,123,255,0.1); }
 
-.version {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 12px;
-  color: #555;
-}
+@keyframes fadeIn { from {opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+@keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.05);} }
 
 .governance {
   margin-top: 20px;
@@ -162,11 +147,22 @@ tr:hover { background-color: rgba(0,123,255,0.1); }
   padding: 20px;
   border-radius: 15px;
   text-align: center;
+  animation: bounceIn 1s ease;
+}
+
+@keyframes bounceIn { 0% { transform: scale(0.5); opacity:0; } 60% { transform: scale(1.1); opacity:1; } 100% { transform: scale(1); } }
+
+.version {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #555;
 }
 
 @media (max-width: 768px) {
-  .card { width: 90%; }
-  th, td { font-size: 11px; padding:3px; }
+  .input-group input { flex: 0 0 140px; }
+  th, td { font-size: 12px; padding:6px; }
+  .container { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -183,6 +179,7 @@ tr:hover { background-color: rgba(0,123,255,0.1); }
   <button onclick="searchStudent()">بحث</button>
 </div>
 
+<div class="year-label">العام الدراسي 2025-2026</div>
 <div class="container" id="output"></div>
 <div class="version">الإصدار V0.1.2</div>
 <div class="governance">
@@ -198,7 +195,7 @@ async function searchStudent(saveToStorage=true){
 
   const output = document.getElementById("output");
   if(!parent || !code){
-    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>⚠️ الرجاء إدخال رقم ولي الأمر وكود الطالب.</p>";
+    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>⚠️ الرجاء إدخال رقم ولي الأمر وكود الطالب لعرض النتائج.</p>";
     return;
   }
 
@@ -229,30 +226,49 @@ async function searchStudent(saveToStorage=true){
 
     let html="";
 
-    const subjectsColumns = {
-      "الاسلامية": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "عربي": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الانكليزي": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الرياضيات": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الكيمياء": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الفيزياء": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الاحياء": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "اجتماعيات": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "حاسوب": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "رياضة": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "فنية": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "السلوك": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"]
+    // المعلومات العامة
+    html+=`<div class="section info"><h3>المعلومات العامة</h3><table>`;
+    const studentFields=["id","رقم الطالب","اسم الطالب","الجنس","الصف","القاعة","رقم ولي الامر","رقم الخط","الملاحظات"];
+    for(let f of studentFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`; }
+    html+="</table></div>";
+
+    // المعلومات المالية
+    html+=`<div class="section finance"><h3>المعلومات المالية</h3><table>`;
+    const financeFields=["القسط 1","تاريخ 1","القسط 2","تاريخ 2","القسط 3","تاريخ 3","القسط 4","تاريخ 4","القسط 5","تاريخ 5","القسط 6","تاريخ 6","القسط 7","تاريخ 7","القسط 8","تاريخ 8","الباقي الكلي","المبلغ الكلي","الواصل الكلي","الكفالة","مبلغ الكفالة"];
+    for(let f of financeFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
+    html+="</table></div>";
+
+    // الدرجات
+    const subjects = {
+      "الاسلامية":["AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL"],
+      "عربي":["AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV"],
+      "الانكليزي":["AW","AX","AY","AZ","BA","BB","BC","BD","BE","BF"],
+      "الرياضيات":["BG","BH","BI","BJ","BK","BL","BM","BN","BO","BP"],
+      "الكيمياء":["BQ","BR","BS","BT","BU","BV","BW","BX","BY","BZ"],
+      "الفيزياء":["CA","CB","CC","CD","CE","CF","CG","CH","CI","CJ"],
+      "الاحياء":["CK","CL","CM","CN","CO","CP","CQ","CR","CS","CT"],
+      "اجتماعيات":["CU","CV","CW","CX","CY","CZ","DA","DB","DC","DD"],
+      "حاسوب":["DE","DF","DG","DH","DI","DJ","DK","DL","DM","DN"],
+      "رياضة":["DO","DP","DQ","DR","DS","DT","DU","DV","DW","DX"],
+      "فنية":["DY","DZ","EA","EB","EC","ED","EE","EF","EG","EH"],
+      "السلوك":["EI","EJ","EK","EL","EM","EN","EO","EP","EQ","ER"]
     };
 
-    for(let subject in subjectsColumns){
-      html+=`<div class="card"><div class="section" onclick="this.classList.toggle('flipped')">`;
-      html+=`<div class="front"><h3>${subject}</h3></div>`;
-      html+=`<div class="back"><table><tr>`;
-      subjectsColumns[subject].forEach(colName=>html+=`<th>${colName}</th>`);
+    const labels = ["شهر 1","شهر 2","فصل 1","نصف السنة","شهر 1","شهر 2","فصل 2","الامتحان النهائي","السعي","التقدير"];
+
+    for(let subject in subjects){
+      html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
+      labels.forEach(l=>html+=`<th>${l}</th>`);
       html+="</tr><tr>";
-      subjectsColumns[subject].forEach(colName=>html+=`<td>${student[colName]||""}</td>`);
-      html+="</tr></table></div></div></div>";
+      subjects[subject].forEach(c=>html+=`<td>${student[c]||""}</td>`);
+      html+="</tr></table></div>";
     }
+
+    // الملاحظات
+    html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
+    const noteFields=["ملاحظات كرت","ملاحظات النتيجة","الغياب","اختلاق مشاكل داخل المدرسة"];
+    for(let f of noteFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
+    html+="</table></div>";
 
     output.innerHTML = html;
 
@@ -262,6 +278,7 @@ async function searchStudent(saveToStorage=true){
   }
 }
 
+// الاحتفاظ بالبيانات عند إعادة فتح الموقع
 window.addEventListener("DOMContentLoaded", ()=>{
   const savedCode = localStorage.getItem("studentCode");
   const savedParent = localStorage.getItem("parentNumber");
@@ -275,3 +292,4 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
 </body>
 </html>
+
