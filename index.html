@@ -16,14 +16,11 @@ button { padding:10px 25px; font-size:14px; border:none; border-radius:8px; back
 button:hover { background:#218838; transform:scale(1.05);}
 .year-label { text-align:center; font-size:14px; color:#555; margin-bottom:20px; opacity:0.8;}
 .container { max-width:1200px; margin:0 auto 30px auto; padding:10px; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; justify-items:center;}
-.section { width:100%; min-height:350px; background:#fff; border-radius:15px; padding:15px; box-shadow:0 10px 30px rgba(0,0,0,0.15); font-family:'Cairo',sans-serif; font-size:14px; overflow-x:auto;}
+.section { width:100%; min-height:300px; background:#fff; border-radius:15px; padding:15px; box-shadow:0 10px 30px rgba(0,0,0,0.15); font-family:'Cairo',sans-serif; font-size:14px; overflow-x:auto;}
 .section h3 { text-align:center; color:#fff; font-size:18px; border-radius:10px; padding:10px 0; margin-bottom:15px;}
-.info { background:#007bff; }
-.finance { background:#28a745; }
 .grades { background:#ffc107; color:#000; font-size:13px; }
-.notes { background:#dc3545; }
 table { width:100%; border-collapse:collapse; table-layout:fixed;}
-th, td { padding:6px 4px; text-align:right; border:1px solid #ddd; word-wrap:break-word;}
+th, td { padding:6px 4px; text-align:center; border:1px solid #ddd; word-wrap:break-word;}
 tr:hover { background-color: rgba(0,123,255,0.1);}
 .governance { margin-top:20px; background:#343a40; color:#fff; padding:20px; border-radius:15px; text-align:center;}
 .version { text-align:center; margin-top:10px; font-size:12px; color:#555;}
@@ -52,11 +49,8 @@ tr:hover { background-color: rgba(0,123,255,0.1);}
 
 <script>
 async function searchStudent(saveToStorage=true){
-  let code = document.getElementById("studentCode").value.trim();
-  let parent = document.getElementById("parentNumber").value.trim();
-  if(parent.startsWith("0")) parent = parent.substring(1);
-  if(code.startsWith("0")) code = code.substring(1);
-
+  const code = document.getElementById("studentCode").value.trim();
+  const parent = document.getElementById("parentNumber").value.trim();
   const output = document.getElementById("output");
   if(!parent || !code){
     output.innerHTML = "<p style='color:#dc3545; text-align:center;'>⚠️ الرجاء إدخال رقم ولي الأمر وكود الطالب لعرض النتائج.</p>";
@@ -72,38 +66,25 @@ async function searchStudent(saveToStorage=true){
 
   const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vReghaYoMk3f8ffSBLRHIwZieEWCfk5Yx8W6c843TXkC6wpA78Z0X5nw21RRpxMdQ/pub?gid=1229272896&single=true&output=csv";
 
-  try{
+  try {
     const resp = await fetch(sheetURL);
-    if(!resp.ok) throw new Error("فشل في جلب البيانات");
     const text = await resp.text();
     const rows = text.split("\n").map(r=>r.split(","));
     const header = rows[0].map(h=>h.trim());
     const dataRows = rows.slice(1);
-    const objects = dataRows.map(r=>{
+    const students = dataRows.map(r=>{
       const obj={};
       for(let i=0;i<header.length;i++) obj[header[i]]=(r[i]||"").trim();
       return obj;
     });
 
-    const student = objects.find(o=>o["كود الطالب"]===code && o["رقم ولي الامر"]===parent);
+    const student = students.find(s => s["كود الطالب"]===code && s["رقم ولي الامر"]===parent);
     if(!student){ output.innerHTML="<p style='color:#dc3545; text-align:center;'>❌ لم أجد بيانات تطابق البحث.</p>"; return; }
 
-    let html="";
+    let html = "";
 
-    // المعلومات العامة
-    html+=`<div class="section info"><h3>المعلومات العامة</h3><table>`;
-    const studentFields=["id","رقم الطالب","اسم الطالب","الجنس","الصف","القاعة","رقم ولي الامر","رقم الخط","الملاحظات"];
-    for(let f of studentFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`; }
-    html+="</table></div>";
-
-    // المعلومات المالية
-    html+=`<div class="section finance"><h3>المعلومات المالية</h3><table>`;
-    const financeFields=["القسط 1","تاريخ 1","القسط 2","تاريخ 2","القسط 3","تاريخ 3","القسط 4","تاريخ 4","القسط 5","تاريخ 5","القسط 6","تاريخ 6","القسط 7","تاريخ 7","القسط 8","تاريخ 8","الباقي الكلي","المبلغ الكلي","الواصل الكلي","الكفالة","مبلغ الكفالة"];
-    for(let f of financeFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
-    html+="</table></div>";
-
-    // الدرجات التفصيلية لكل مادة مع أعمدة CSV الحقيقية
-    const subjectsColumns = {
+    // المواد والفترات (10 أعمدة لكل مادة)
+    const subjects = {
       "الاسلامية": ["AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL"],
       "عربي": ["AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV"],
       "الانكليزي": ["AW","AX","AY","AZ","BA","BB","BC","BD","BE","BF"],
@@ -118,23 +99,23 @@ async function searchStudent(saveToStorage=true){
       "السلوك": ["EI","EJ","EK","EL","EM","EN","EO","EP","EQ","ER"]
     };
 
-    for(let subject in subjectsColumns){
-      html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
-      subjectsColumns[subject].forEach(col=>html+=`<th>${col}</th>`);
-      html+="</tr><tr>";
-      subjectsColumns[subject].forEach(col=>html+=`<td>${student[col]||""}</td>`);
-      html+="</tr></table></div>";
+    for(const subject in subjects){
+      html += `<div class="section grades"><h3>${subject}</h3><table><tr>`;
+      // رؤوس الأعمدة: الفترات الحقيقية
+      subjects[subject].forEach(col=>{
+        html += `<th>${header[header.indexOf(col)]||col}</th>`;
+      });
+      html += "</tr><tr>";
+      // درجات الطالب
+      subjects[subject].forEach(col=>{
+        html += `<td>${student[col]||""}</td>`;
+      });
+      html += "</tr></table></div>";
     }
-
-    // الملاحظات
-    html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
-    const noteFields=["ملاحظات كرت","ملاحظات النتيجة","الغياب","اختلاق مشاكل داخل المدرسة"];
-    for(let f of noteFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
-    html+="</table></div>";
 
     output.innerHTML = html;
 
-  }catch(err){
+  } catch(err){
     console.error(err);
     output.innerHTML = "<p style='color:#dc3545; text-align:center;'>❌ حدث خطأ أثناء جلب البيانات.</p>";
   }
