@@ -39,7 +39,7 @@ body{
 .form{margin-top:14px;display:flex;flex-direction:column;gap:12px}
 .input{display:flex;align-items:center;border:1px solid #eee;padding:10px;border-radius:8px;background:#fafafa}
 .input input{border:0;outline:0;flex:1;background:transparent;font-size:15px}
-.btn{padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:700;transition:0.3s}
+.btn{padding:12px 18px;border-radius:8px;border:0;cursor:pointer;font-weight:700;transition:0.3s;font-size:15px}
 .btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.1)}
 .btn-primary{background:var(--blue);color:#fff}
 .btn-secondary{background:#f0f0f0;color:#333}
@@ -52,7 +52,7 @@ body{
 @keyframes fadeUp{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
 .err{color:var(--danger);font-weight:700;animation:shake .5s}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
-.copyBtn{margin-top:12px;padding:10px 12px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
+.copyBtn{margin-top:12px;padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:700;transition:0.3s;font-size:15px}
 .copyBtn.success{background:var(--success);color:#fff}
 .copyBtn.fail{background:#f0f0f0;color:#333}
 .back{margin-top:14px;text-align:center}
@@ -68,9 +68,9 @@ body{
   <div class="form" id="forgotForm">
     <div class="input"><input id="parent" placeholder="رقم ولي الأمر" inputmode="numeric" /></div>
     <div class="input"><input id="studentName" placeholder="اسم الطالب (باللغة العربية كما في السجل)" /></div>
-    <div style="display:flex;gap:8px;justify-content:center">
-      <button class="btn btn-primary" id="searchBtn">استرجاع الكود</button>
-      <button class="btn btn-secondary" id="clearBtn">مسح</button>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:12px">
+      <button class="btn btn-primary" id="searchBtn">🔍 استرجاع الكود</button>
+      <button class="btn btn-secondary" id="copyBtn" style="display:none">📋 نسخ الكود</button>
     </div>
     <div class="result" id="resultArea">
       <div style="text-align:center;color:#666">النتيجة ستظهر هنا بعد البحث</div>
@@ -86,7 +86,7 @@ body{
 window.addEventListener('DOMContentLoaded',()=>{
   gsap.to('.box',{duration:0.8,opacity:1,y:0,ease:"power3.out"});
   gsap.from('.input',{duration:0.8,opacity:0,x:40,stagger:0.1,delay:0.2});
-  gsap.from('.btn',{duration:0.8,opacity:0,scale:0.8,stagger:0.1,delay:0.5});
+  gsap.from('#searchBtn',{duration:0.8,opacity:0,scale:0.8,y:20,ease:"back.out(1.7)",delay:0.6});
   gsap.from('.back',{duration:0.8,opacity:0,delay:0.8});
 });
 
@@ -94,10 +94,10 @@ window.addEventListener('DOMContentLoaded',()=>{
 const sheetURL="https://docs.google.com/spreadsheets/d/e/2PACX-1vReghaYoMk3f8ffSBLRHIwZieEWCfk5Yx8W6c843TXkC6wpA78Z0X5nw21RRpxMdQ/pub?gid=1229272896&single=true&output=csv";
 
 function parseCSV(text){
-  const rows=[]; let cur='',row=[],inQuotes=false;
+  const rows=[];let cur='',row=[],inQuotes=false;
   for(let i=0;i<text.length;i++){
     const ch=text[i],next=text[i+1];
-    if(ch=='"'){if(inQuotes&&next=='"'){cur+='"';i++;continue;} inQuotes=!inQuotes; continue;}
+    if(ch=='"'){if(inQuotes&&next=='"'){cur+='"';i++;continue;}inQuotes=!inQuotes;continue;}
     if(ch=='\r')continue;
     if(ch==','&&!inQuotes){row.push(cur);cur='';continue;}
     if(ch=='\n'&&!inQuotes){row.push(cur);rows.push(row);row=[];cur='';continue;}
@@ -106,6 +106,7 @@ function parseCSV(text){
   if(cur!=''||row.length>0){row.push(cur);rows.push(row);}
   return rows;
 }
+
 function normalizeKey(k){return (k||'').toString().trim();}
 async function fetchSheetObjects(){
   const resp=await fetch(sheetURL);
@@ -115,20 +116,23 @@ async function fetchSheetObjects(){
   if(rows.length===0)return{header:[],rows:[]};
   const header=rows[0].map(h=>normalizeKey(h));
   const dataRows=rows.slice(1);
-  const objects=dataRows.map(r=>{const obj={};for(let i=0;i<header.length;i++){obj[header[i]]=(r[i]||'').toString().trim();} return obj;});
+  const objects=dataRows.map(r=>{const obj={};for(let i=0;i<header.length;i++){obj[header[i]]=(r[i]||'').toString().trim();}return obj;});
   return{header,rows:objects};
 }
+
 const resultArea=document.getElementById('resultArea');
 const parentInput=document.getElementById('parent');
 const nameInput=document.getElementById('studentName');
+const copyBtn=document.getElementById('copyBtn');
+
 function cleanNumber(n){if(!n)return'';n=n.toString().trim();if(n.startsWith('0'))n=n.replace(/^0+/,'');return n;}
 function showError(msg){resultArea.innerHTML=`<div class="card err">${msg}</div>`;}
 function showMessageHTML(html){resultArea.innerHTML=html;}
+
 function revealCodeAnim(codeStr){
   const html=`<div class="card">
-  <h3>الكود الخاص بالطالب هو:</h3>
-  <div class="codeBox" id="codeBox"></div>
-  <div><button class="copyBtn" id="copyBtn">نسخ الكود</button></div>
+    <h3>الكود الخاص بالطالب هو:</h3>
+    <div class="codeBox" id="codeBox"></div>
   </div>`;
   showMessageHTML(html);
   const box=document.getElementById('codeBox');
@@ -141,15 +145,17 @@ function revealCodeAnim(codeStr){
     box.appendChild(span);
     setTimeout(()=>span.classList.add('visible'),120*idx);
   });
-  // نسخة تلقائية
-  const copyBtn=document.getElementById('copyBtn');
-  copyBtn.addEventListener('click',()=>{
+
+  // عرض زر النسخ مع أنيميشن
+  copyBtn.style.display='inline-block';
+  gsap.from(copyBtn, {duration:0.8, opacity:0, scale:0.8, y:20, ease:"back.out(1.7)"});
+  copyBtn.onclick=()=>{
     navigator.clipboard.writeText(codeStr).then(()=>{
-      copyBtn.textContent='تم النسخ';
-      copyBtn.classList.add('success');
-      setTimeout(()=>{copyBtn.textContent='نسخ الكود';copyBtn.classList.remove('success');},2000);
-    }).catch(()=>{copyBtn.classList.add('fail');});
-  });
+      gsap.to(copyBtn, {duration:0.3, scale:1.1, repeat:1, yoyo:true});
+      copyBtn.textContent='✅ تم النسخ';
+      setTimeout(()=>{copyBtn.textContent='📋 نسخ الكود';},2000);
+    });
+  };
 }
 
 document.getElementById('searchBtn').addEventListener('click',async()=>{
@@ -164,16 +170,19 @@ document.getElementById('searchBtn').addEventListener('click',async()=>{
       const studentName=(r['اسم الطالب']||r['اسم']||r['Name']||'').toString().trim().toLowerCase();
       return p===parent&&studentName===name;
     });
-    if(!found){showError('❌ البيانات خاطئة — حاول أن تتذكر أو تراجع قسم الحوكمة');return;}
+    if(!found){showError('❌ البيانات خاطئة — حاول أن تتذكر أو راجع قسم الحوكمة');return;}
     const code=found['كود الطالب']||found['كود']||found['id']||found['ID']||'';
     if(!code){showError('لم يتم العثور على كود في السجل — تواصل مع قسم الحوكمة');return;}
     revealCodeAnim(code);
-  }catch(err){console.error(err); showError('حدث خطأ أثناء الوصول إلى الملف. تأكد من اتصال الإنترنت وحاول مرة أخرى.');}
+  }catch(err){
+    console.error(err);
+    showError('حدث خطأ أثناء الوصول إلى الملف. تأكد من اتصال الإنترنت وحاول مرة أخرى.');
+  }
 });
 
-document.getElementById('clearBtn').addEventListener('click',()=>{
-  parentInput.value=''; nameInput.value=''; 
-  resultArea.innerHTML='<div style="text-align:center;color:#666">النتيجة ستظهر هنا بعد البحث</div>';
+document.getElementById('clearBtn')?.addEventListener('click',()=>{
+  parentInput.value='';nameInput.value='';resultArea.innerHTML='<div style="text-align:center;color:#666">النتيجة ستظهر هنا بعد البحث</div>';
+  copyBtn.style.display='none';
 });
 </script>
 </body>
