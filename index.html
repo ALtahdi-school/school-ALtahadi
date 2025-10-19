@@ -63,10 +63,21 @@ button {
   background: #28a745;
   color: #fff;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button:hover {
   background: #218838;
+  transform: scale(1.05);
+}
+
+#forgotBtn {
+  background: #ffc107;
+  color: #000;
+}
+
+#forgotBtn:hover {
+  background: #e0a800;
   transform: scale(1.05);
 }
 
@@ -95,7 +106,6 @@ button:hover {
   border-radius: 15px;
   padding: 15px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  font-family: 'Cairo', sans-serif;
   font-size: 14px;
   overflow-x: auto;
 }
@@ -112,6 +122,8 @@ button:hover {
 .info { background: #007bff; }
 .finance { background: #28a745; }
 .notes { background: #dc3545; }
+.grades { background: #ffc107; color: #000; }
+
 .governance {
   margin-top: 20px;
   background: #343a40;
@@ -128,29 +140,9 @@ button:hover {
   color: #555;
 }
 
-/* قسم الدرجات */
-.grades {
-  background: #ffc107;
-  color: #000;
-  font-size: 13px;
-}
-.grades h3 {
-  font-size: 14px; /* حجم صغير للعنوان */
-  padding: 5px 0;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  color: #000;
-  background: #ffc107;
-}
-.grades table th, .grades table td {
-  font-size: 11px; /* حجم أصغر لخلايا الجدول */
-  padding: 3px 2px;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
 }
 
 th, td {
@@ -181,16 +173,21 @@ tr:hover { background-color: rgba(0,123,255,0.1); }
   <input id="parentNumber" placeholder="أدخل رقم ولي الأمر">
   <input id="studentCode" placeholder="أدخل كود الطالب">
   <button onclick="searchStudent()">بحث</button>
+  <button id="forgotBtn" onclick="goToForgot()">نسيت الكود؟</button>
 </div>
 
 <div class="year-label">العام الدراسي 2025-2026</div>
 <div class="container" id="output"></div>
-<div class="version">الإصدار V0.1.2</div>
+<div class="version">الإصدار V0.2.4</div>
 <div class="governance">
   قسم الحوكمة: جميع الحقوق محفوظة © ثانوية التحدي الأهلية
 </div>
 
 <script>
+function goToForgot(){
+  window.location.href = "forgot.html";
+}
+
 async function searchStudent(saveToStorage=true){
   let code = document.getElementById("studentCode").value.trim();
   let parent = document.getElementById("parentNumber").value.trim();
@@ -199,7 +196,7 @@ async function searchStudent(saveToStorage=true){
 
   const output = document.getElementById("output");
   if(!parent || !code){
-    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>⚠️ الرجاء إدخال رقم ولي الأمر وكود الطالب لعرض النتائج.</p>";
+    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>⚠️ الرجاء إدخال رقم ولي الأمر وكود الطالب.</p>";
     return;
   }
 
@@ -232,17 +229,17 @@ async function searchStudent(saveToStorage=true){
 
     // المعلومات العامة
     html+=`<div class="section info"><h3>المعلومات العامة</h3><table>`;
-    const studentFields=["id","رقم الطالب","اسم الطالب","الجنس","الصف","القاعة","رقم ولي الامر","رقم الخط","الملاحظات"];
-    for(let f of studentFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`; }
+    const infoFields=["id","رقم الطالب","اسم الطالب","الجنس","الصف","القاعة","رقم ولي الامر","رقم الخط"];
+    for(let f of infoFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`; }
     html+="</table></div>";
 
     // المعلومات المالية
     html+=`<div class="section finance"><h3>المعلومات المالية</h3><table>`;
-    const financeFields=["القسط 1","تاريخ 1","القسط 2","تاريخ 2","القسط 3","تاريخ 3","القسط 4","تاريخ 4","القسط 5","تاريخ 5","القسط 6","تاريخ 6","القسط 7","تاريخ 7","القسط 8","تاريخ 8","الباقي الكلي","المبلغ الكلي","الواصل الكلي","الكفالة","مبلغ الكفالة"];
-    for(let f of financeFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
+    const financeFields=header.filter(h=>h.includes("القسط") || h.includes("تاريخ") || h.includes("الباقي") || h.includes("المبلغ") || h.includes("الواصل") || h.includes("الكفالة"));
+    for(let f of financeFields){ html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
     html+="</table></div>";
 
-    // الدرجات التفصيلية لكل مادة مع الأعمدة الشهرية والفصلية
+    // الدرجات التفصيلية لكل مادة
     const subjectsColumns = {
       "الاسلامية": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
       "عربي": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
@@ -280,7 +277,6 @@ async function searchStudent(saveToStorage=true){
   }
 }
 
-// الاحتفاظ بالبيانات عند إعادة فتح الموقع
 window.addEventListener("DOMContentLoaded", ()=>{
   const savedCode = localStorage.getItem("studentCode");
   const savedParent = localStorage.getItem("parentNumber");
