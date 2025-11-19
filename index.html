@@ -3,291 +3,677 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نظام استعلام عن الطالب</title>
+<title>نظام استعلام الطالب</title>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
+/* =========================
+   خلفية — أزرق نيون
+========================= */
 body {
-  font-family: 'Cairo', sans-serif;
-  direction: rtl;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to bottom, #e0f0ff, #ffffff);
-  overflow-x: hidden;
+    font-family: 'Cairo', sans-serif;
+    direction: rtl;
+    background: linear-gradient(135deg, #00e1ff, #007bff);
+    background-size: 300% 300%;
+    animation: neonBg 8s infinite alternate ease-in-out;
+    margin: 0;
+    padding-bottom: 120px;
 }
+@keyframes neonBg { 0%{background-position:0% 50%} 100%{background-position:100% 50%} }
 
+/* =========================
+   Splash Screen
+========================= */
+#splash {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: splashFadeOut 3.4s forwards;
+}
+@keyframes splashFadeOut { 0%,70%{opacity:1;} 100%{opacity:0;visibility:hidden;} }
+.splash-title { font-size: 30px; font-weight:bold; color:#007bff; }
+
+/* =========================
+   Header
+========================= */
 header {
-  background: #007bff;
-  color: #fff;
-  text-align: center;
-  padding: 25px 10px;
-  font-size: 24px;
-  font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+    opacity: 0;
+    animation: fadeIn 1.4s 3.2s forwards;
+}
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* =========================
+   Login Box
+========================= */
+.login-box {
+    width: 85%;
+    max-width: 340px;
+    margin: 140px auto 0;
+    text-align: center;
+}
+.login-box input,
+.login-box button {
+    width: 100%;
+    padding: 13px;
+    font-size: 17px;
+    border-radius: 14px;
+    border: none;
+    margin-top: 14px;
 }
 
-header span {
-  display: block;
-  font-size: 16px;
-  font-weight: normal;
-  margin-top: 5px;
-  opacity: 0.8;
+/* حقل الإدخال */
+.login-box input {
+    background: white;
+    color: #0060c9;
+    font-weight: bold;
 }
 
-.input-group {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 20px 0;
+/* زر تسجيل الدخول (أخضر وبنفس الحجم) */
+.login-box button {
+    background: linear-gradient(135deg, #19e05a, #0a9b32);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(10,155,50,0.35);
+    transition: 0.25s;
 }
+.login-box button:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 16px rgba(10,155,50,0.45);
+}
+.error { color: yellow; font-weight: bold; }
 
-.input-group input {
-  flex: 0 0 160px;
-  padding: 10px;
-  font-size: 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.input-group input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 8px rgba(0,123,255,0.3);
-}
-
-button {
-  padding: 10px 25px;
-  font-size: 14px;
-  border: none;
-  border-radius: 8px;
-  background: #28a745;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: #218838;
-  transform: scale(1.05);
-}
-
-#forgotBtn {
-  background: #ffc107;
-  color: #000;
-}
-
-#forgotBtn:hover {
-  background: #e0a800;
-  transform: scale(1.05);
-}
-
-.year-label {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 20px;
-  opacity: 0.8;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto 30px auto;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-  justify-items: center;
-}
+/* =========================
+   Pages
+========================= */
+.page { display: none; }
 
 .section {
-  width: 100%;
-  min-height: 350px;
-  background: #fff;
-  border-radius: 15px;
-  padding: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  font-size: 14px;
-  overflow-x: auto;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(16px);
+    color: #004a99;
+    font-weight: bold;
 }
 
-.section h3 {
-  text-align: center;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 10px;
-  padding: 10px 0;
-  margin-bottom: 15px;
+/* =========================
+   Tables
+========================= */
+table { width: 100%; border-collapse: collapse; }
+td, th {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+}
+.table-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255,255,255,0.75);
+    color: #004a99;
+}
+.table-input.hasDate {
+    color: #002855;
+    font-weight: bold;
 }
 
-.info { background: #007bff; }
-.finance { background: #28a745; }
-.notes { background: #dc3545; }
-.grades { background: #ffc107; color: #000; }
+/* =========================
+   Action Buttons (profile)
+========================= */
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.logout-btn, .save-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+.logout-btn { background:#ff1744; }
+.save-btn { background:#ffd600; color:black; }
 
-.governance {
-  margin-top: 20px;
-  background: #343a40;
-  color: #fff;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
+/* =========================
+   Bottom Navigation
+========================= */
+#bottomBar {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 92%;
+    height: 70px;
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 30px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow:0 5px 20px rgba(0,0,0,0.25);
+    transition:0.8s;
+    color:#004a99;
+}
+#bottomBar.show-bar { transform: translateX(-50%) translateY(0); }
+
+.nav-item { cursor:pointer; opacity:.7; font-weight:bold; position:relative; }
+.nav-item:hover { opacity:1; }
+
+.burst {
+    position:absolute;
+    width:12px;
+    height:12px;
+    background:white;
+    border-radius:50%;
+    transform:translate(-50%,-50%) scale(0);
+    animation:burstAnim .5s forwards;
+}
+@keyframes burstAnim {
+    0%{transform:translate(-50%,-50%) scale(0);opacity:1;}
+    100%{transform:translate(-50%,-50%) scale(15);opacity:0;}
 }
 
-.version {
-  text-align: center;
-  margin-top: 10px;
-  font-size: 12px;
-  color: #555;
+/* =========================
+   بطاقات الدرجات (خضراء)
+========================= */
+.grade-card {
+    background: linear-gradient(135deg, #00c853, #009624);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    color: white;
+}
+.grade-title {
+    font-size: 19px;
+    margin-bottom: 10px;
+    color: #ffffff;
+    border-bottom: 2px solid rgba(255,255,255,0.6);
+    padding-bottom: 6px;
+}
+.grade-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.35);
+    color: #f5f5f5;
+}
+.grade-row:last-child { border-bottom: none; }
+
+.objection-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 12px;
+    background: #00e676;
+    color: #004d40;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+/* بطاقة معلومات الغياب والملاحظات */
+.grades-info-card {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.9);
+    padding: 14px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.16);
+    font-size: 14px;
+    color: #003f7d;
 }
+.grades-info-card p { margin: 4px 0; }
 
-th, td {
-  padding: 6px 4px;
-  text-align: right;
-  border: 1px solid #ddd;
-  word-wrap: break-word;
-}
-
-tr:hover { background-color: rgba(0,123,255,0.1); }
-
-@media (max-width: 768px) {
-  .input-group input { flex: 0 0 140px; }
-  th, td { font-size: 10px; padding:2px; }
-  .container { grid-template-columns: 1fr; }
-  .section { min-height: auto; }
-}
 </style>
 </head>
+
 <body>
 
-<header>
-  🎓 ثانوية التحدي الأهلية
-  <span>العام الدراسي 2025-2026</span>
-</header>
-
-<div class="input-group">
-  <input id="parentNumber" placeholder="أدخل رقم ولي الأمر">
-  <input id="studentCode" placeholder="أدخل كود الطالب">
-  <button onclick="searchStudent()">بحث</button>
-  <button id="forgotBtn" onclick="goToForgot()">نسيت الكود؟</button>
+<!-- Splash -->
+<div id="splash">
+    <div class="splash-title">قسم الحوكمة</div>
+    <div class="splash-sub">ثانوية التحدي الأهلية</div>
+    <div class="splash-year">العام الدراسي 2025 - 2026</div>
 </div>
 
-<div class="year-label">العام الدراسي 2025-2026</div>
-<div class="container" id="output"></div>
-<div class="version">الإصدار V0.2.4</div>
-<div class="governance">
-  قسم الحوكمة: جميع الحقوق محفوظة © ثانوية التحدي الأهلية
+<header>📘 نظام استعلام الطالب</header>
+
+<!-- Login -->
+<div class="login-box" id="loginBox">
+    <input id="studentCode" placeholder="أدخل كود الطالب">
+    <button onclick="searchStudent()">تسجيل الدخول</button>
+    <div id="output"></div>
+</div>
+
+<!-- Pages -->
+<div id="profilePage" class="page section"></div>
+<div id="gradesPage" class="page section">لا توجد درجات حالياً</div>
+<div id="notifyPage" class="page section">لا توجد تبليغات حالياً</div>
+<div id="chatPage" class="page section">لا توجد رسائل حالياً</div>
+
+<!-- Bottom Bar -->
+<div id="bottomBar">
+    <div class="nav-item" onclick="showPage('profilePage', this)">الملف الشخصي</div>
+    <div class="nav-item" onclick="showPage('gradesPage', this)">الدرجات</div>
+    <div class="nav-item" onclick="showPage('notifyPage', this)">التبليغات</div>
+    <div class="nav-item" onclick="showPage('chatPage', this)">الدردشة</div>
 </div>
 
 <script>
-function goToForgot(){
-  window.location.href = "forgot.html";
-}
 
-async function searchStudent(saveToStorage=true){
-  let code = document.getElementById("studentCode").value.trim();
-  let parent = document.getElementById("parentNumber").value.trim();
-  if(parent.startsWith("0")) parent = parent.substring(1);
-  if(code.startsWith("0")) code = code.substring(1);
+/* رابط API */
+const API_URL = "https://script.google.com/macros/s/AKfycbxn5f4smL2SYZ8BkFKdOZzRoZdugC4fHycSO7VEJi4JLAD8X1-pOCZneYLqGL3GuVFf/exec";
 
-  const output = document.getElementById("output");
-  if(!parent || !code){
-    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>⚠️ الرجاء إدخال رقم ولي الأمر وكود الطالب.</p>";
-    return;
-  }
+/* =========================
+   الدخول التلقائي بعد إعادة فتح الصفحة
+========================= */
+window.addEventListener("DOMContentLoaded", () => {
+    let savedCode = localStorage.getItem("studentCode");
+    let isLoggedIn = localStorage.getItem("loggedIn");
 
-  if(saveToStorage){
-    localStorage.setItem("studentCode", code);
-    localStorage.setItem("parentNumber", parent);
-  }
+    if (isLoggedIn === "true" && savedCode) {
+        document.getElementById("studentCode").value = savedCode;
+        searchStudent(false); // لا يعيد حفظ الجلسة ولا يحدّث الحالة
+    }
+});
 
-  output.innerHTML = "<p style='text-align:center;'>⏳ جاري البحث...</p>";
+/* =========================
+   إصلاح التاريخ القادم من الشيت
+========================= */
+function fixDate(dateStr) {
+    if (!dateStr) return "";
 
-  const sheetURL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vReghaYoMk3f8ffSBLRHIwZieEWCfk5Yx8W6c843TXkC6wpA78Z0X5nw21RRpxMdQ/pub?gid=1229272896&single=true&output=csv";
+    dateStr = dateStr.replace(/[٠-٩]/g, d => "0123456789"["٠١٢٣٤٥٦٧٨٩".indexOf(d)]);
 
-  try{
-    const resp = await fetch(sheetURL);
-    if(!resp.ok) throw new Error("فشل في جلب البيانات");
-    const text = await resp.text();
-    const rows = text.split("\n").map(r=>r.split(","));
-    const header = rows[0].map(h=>h.trim());
-    const dataRows = rows.slice(1);
-    const objects = dataRows.map(r=>{
-      const obj={};
-      for(let i=0;i<header.length;i++) obj[header[i]]=(r[i]||"").trim();
-      return obj;
-    });
-
-    const student = objects.find(o=>o["كود الطالب"]===code && o["رقم ولي الامر"]===parent);
-    if(!student){ output.innerHTML="<p style='color:#dc3545; text-align:center;'>❌ لم أجد بيانات تطابق البحث.</p>"; return; }
-
-    let html="";
-
-    // المعلومات العامة
-    html+=`<div class="section info"><h3>المعلومات العامة</h3><table>`;
-    const infoFields=["id","رقم الطالب","اسم الطالب","الجنس","الصف","القاعة","رقم ولي الامر","رقم الخط"];
-    for(let f of infoFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]}</td></tr>`; }
-    html+="</table></div>";
-
-    // المعلومات المالية
-    html+=`<div class="section finance"><h3>المعلومات المالية</h3><table>`;
-    const financeFields=header.filter(h=>h.includes("القسط") || h.includes("تاريخ") || h.includes("الباقي") || h.includes("المبلغ") || h.includes("الواصل") || h.includes("الكفالة"));
-    for(let f of financeFields){ html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
-    html+="</table></div>";
-
-    // الدرجات التفصيلية لكل مادة
-    const subjectsColumns = {
-      "الاسلامية": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "عربي": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الانكليزي": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الرياضيات": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الكيمياء": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الفيزياء": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "الاحياء": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "اجتماعيات": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "حاسوب": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "رياضة": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "فنية": ["شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"],
-      "السلوك": ["سلوك شهر 1","شهر 2","فصل 1","نصف سنة","شهر 3","شهر 4","فصل 2","الامتحان النهائي","السعي","التقدير"]
-    };
-
-    for(let subject in subjectsColumns){
-      html+=`<div class="section grades"><h3>الدرجات - ${subject}</h3><table><tr>`;
-      subjectsColumns[subject].forEach(colName=>{ html+=`<th>${colName}</th>`; });
-      html+="</tr><tr>";
-      subjectsColumns[subject].forEach(colName=>{ html+=`<td>${student[colName]||""}</td>`; });
-      html+="</tr></table></div>";
+    let parsed = Date.parse(dateStr);
+    if (!isNaN(parsed)) {
+        let d = new Date(parsed);
+        let yyyy = d.getFullYear();
+        let mm = String(d.getMonth()+1).padStart(2,'0');
+        let dd = String(d.getDate()).padStart(2,'0');
+        return `${yyyy}-${mm}-${dd}`;
     }
 
-    // الملاحظات
-    html+=`<div class="section notes"><h3>ملاحظات وغياب</h3><table>`;
-    const noteFields=["ملاحظات كرت","ملاحظات النتيجة","الغياب","اختلاق مشاكل داخل المدرسة"];
-    for(let f of noteFields){ if(header.includes(f)) html+=`<tr><th>${f}</th><td>${student[f]||""}</td></tr>`; }
-    html+="</table></div>";
-
-    output.innerHTML = html;
-
-  }catch(err){
-    console.error(err);
-    output.innerHTML = "<p style='color:#dc3545; text-align:center;'>❌ حدث خطأ أثناء جلب البيانات.</p>";
-  }
+    return "";
 }
 
-window.addEventListener("DOMContentLoaded", ()=>{
-  const savedCode = localStorage.getItem("studentCode");
-  const savedParent = localStorage.getItem("parentNumber");
-  if(savedCode && savedParent){
-    document.getElementById("studentCode").value = savedCode;
-    document.getElementById("parentNumber").value = savedParent;
-    searchStudent(false);
-  }
-});
+/* =========================
+   تحديث حالة الطالب: تسجيل/خروج
+========================= */
+async function updateState(code, state) {
+    await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+            action: "update_state",
+            code: code,
+            state: state
+        })
+    });
+}
+
+/* =========================
+   تسجيل الدخول
+========================= */
+async function searchStudent(saveSession = true) {
+
+    let code = document.getElementById("studentCode").value.trim();
+    let output = document.getElementById("output");
+
+    if (!code) {
+        output.innerHTML = "<p class='error'>⚠️ يرجى إدخال الكود</p>";
+        return;
+    }
+
+    output.innerHTML = `<p style="color:white">⏳ جاري التحميل...</p>`;
+
+    try {
+        let res = await fetch(`${API_URL}?code=${code}`);
+        let data = await res.json();
+
+        if (data.status !== "success") {
+            output.innerHTML = `<p class='error'>❌ ${data.data}</p>`;
+            return;
+        }
+
+        let student = data.data;
+
+        if (saveSession) {
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("studentCode", code);
+            updateState(code, "تم التسجيل");
+        }
+
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("bottomBar").style.display = "flex";
+        document.getElementById("bottomBar").classList.add("show-bar");
+
+        loadProfile(student);
+        loadGrades(student);
+
+    } catch (err) {
+        output.innerHTML = `<p class="error">❌ خطأ في الاتصال</p>`;
+    }
+}
+
+/* =========================
+   الملف الشخصي
+========================= */
+function loadProfile(student) {
+
+    const code = student["كود الطالب"] || "";
+
+    document.getElementById("profilePage").innerHTML = `
+
+    <div class="profile-actions">
+        <button onclick="logout()" class="logout-btn">🔐 خروج</button>
+        <button onclick="saveChanges('${code}')" class="save-btn">💾 حفظ</button>
+    </div>
+
+    <h3>📄 الملف الشخصي</h3>
+
+    <table>
+
+      <tr><th>ID</th><td>${student["id"] || ""}</td></tr>
+
+      <tr><th>اسم الطالب</th><td>${student["اسم الطالب"] || ""}</td></tr>
+
+      <tr>
+          <th>المواليد</th>
+          <td>
+              <input 
+                  type="date" 
+                  class="table-input" 
+                  id="المواليد"
+                  min="1960-01-01"
+                  max="2027-12-31"
+                  value="${ fixDate(student["المواليد"]) }"
+                  onchange="this.classList.add('hasDate')"
+              >
+          </td>
+      </tr>
+
+      <tr><th>الصف</th><td>${student["الصف"] || ""}</td></tr>
+      <tr><th>القاعة</th><td>${student["القاعة"] || ""}</td></tr>
+      <tr><th>الجنس</th><td>${student["الجنس"] || ""}</td></tr>
+
+      <tr><th>رقم ولي الأمر</th>
+      <td><input class="table-input" id="رقم ولي الامر" value="${student["رقم ولي الامر"] || ""}"></td></tr>
+
+      <tr><th>رقم الخط</th>
+      <td><input class="table-input" id="رقم الخط" value="${student["رقم الخط"] || ""}"></td></tr>
+
+      <tr><th>كود الطالب</th><td>${student["كود الطالب"] || ""}</td></tr>
+
+      <tr><th>رقم الطالب</th>
+      <td><input class="table-input" id="رقم الطالب" value="${student["رقم الطالب"] || ""}"></td></tr>
+
+      <tr><th>الكتب</th><td>${student["الكتب"] || ""}</td></tr>
+
+      <tr><th>العنوان</th>
+      <td><input class="table-input" id="العنوان" value="${student["العنوان"] || ""}"></td></tr>
+
+      <tr><th>اسم الأم</th>
+      <td><input class="table-input" id="اسم الام" value="${student["اسم الام"] || ""}"></td></tr>
+
+      <tr><th>المدرسة القادم منها</th>
+      <td><input class="table-input" id="المدرسة القادم منها" value="${student["المدرسة القادم منها"] || ""}"></td></tr>
+
+      <tr><th>المعدل</th><td>${student["المعدل في الصف السابق"] || ""}</td></tr>
+
+      <tr><th>الملاحظات</th><td>${student["الملاحظات"] || ""}</td></tr>
+
+      <tr><th>الرمز</th>
+      <td><input class="table-input" id="الرمز" value="${student["الرمز"] || ""}"></td></tr>
+
+    </table>
+    `;
+
+    showPage("profilePage");
+}
+
+/* =========================
+   حفظ التعديلات
+========================= */
+async function saveChanges(code) {
+
+    const data = {
+        "المواليد": document.getElementById("المواليد").value,
+        "رقم ولي الامر": document.getElementById("رقم ولي الامر").value,
+        "رقم الخط": document.getElementById("رقم الخط").value,
+        "رقم الطالب": document.getElementById("رقم الطالب").value,
+        "العنوان": document.getElementById("العنوان").value,
+        "اسم الام": document.getElementById("اسم الام").value,
+        "المدرسة القادم منها": document.getElementById("المدرسة القادم منها").value,
+        "الرمز": document.getElementById("الرمز").value
+    };
+
+    await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+            action: "update",
+            code: code,
+            data: data
+        })
+    });
+
+    alert("✔ تم حفظ التعديلات");
+}
+
+/* =========================
+   تحديد عمود الاعتراض حسب المادة
+========================= */
+function getObjectionColumn(subject) {
+    const map = {
+        "الإسلامية": "الاعتراضات الاسلامية",
+        "العربي": "الاعتراض عربي",
+        "الانكليزي": "الاعتراض انكليزي",
+        "الرياضيات": "الاعتراض رياضيات",
+        "الكيمياء": "الاعتراض كيمياء",
+        "الفيزياء": "الاعتراض فيزياء",
+        "الاحياء": "الاعتراض احياء",
+        "الاجتماعيات": "الاعتراض الاجتماعيات",
+        "الحاسوب": "الاعتراض الحاسوب",
+        "رياضة": "الاعتراض رياضة",
+        "الفنية": "الاعتراض فنية",
+        "السلوك": "الاعتراض السلوك"
+    };
+    return map[subject] || "";
+}
+
+/* =========================
+   إرسال الاعتراض إلى الشيت
+========================= */
+async function sendObjection(code, column, subjectName) {
+
+    if (!column) {
+        alert("⚠ لا يوجد عمود اعتراض مرتبط بهذه المادة");
+        return;
+    }
+
+    const value = subjectName; // يكتب فقط اسم المادة
+
+    await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+            action: "update",
+            code: code,
+            data: { [column]: value }
+        })
+    });
+
+    alert("✔ تم تسجيل اعتراضك على مادة " + subjectName);
+}
+
+/* =========================
+   صفحة الدرجات
+========================= */
+function loadGrades(st) {
+
+    const code = st["كود الطالب"] || "";
+
+    let html = ``;
+
+    const subjects = {
+        "الإسلامية": [
+            "اسلامية شهر 1","اسلامية شهر 2","اسلامية فصل 1","اسلامية نصف سنة",
+            "اسلامية شهر 3","اسلامية شهر 4","اسلامية فصل 2","اسلامية الامتحان النهائي",
+            "اسلامية السعي","اسلامية التقدير"
+        ],
+        "العربي": [
+            "العربي شهر 1","العربي شهر 2","العربي فصل 1","العربي نصف سنة",
+            "العربي شهر 3","العربي شهر 4","العربي فصل 2","العربي الامتحان النهائي",
+            "العربي السعي","العربي التقدير"
+        ],
+        "الانكليزي": [
+            "الانكليزي شهر 1","الانكليزي شهر 2","الانكليزي فصل 1","الانكليزي نصف سنة",
+            "الانكليزي شهر 3","الانكليزي شهر 4","الانكليزي فصل 2","الانكليزي الامتحان النهائي",
+            "الانكليزي السعي","الانكليزي التقدير"
+        ],
+        "الرياضيات": [
+            "الرياضيات شهر 1","الرياضيات شهر 2","الرياضيات فصل 1","الرياضيات نصف سنة",
+            "الرياضيات شهر 3","الرياضيات شهر 4","الرياضيات فصل 2","الرياضيات الامتحان النهائي",
+            "الرياضيات السعي","الرياضيات التقدير"
+        ],
+        "الكيمياء": [
+            "الكيمياء شهر 1","الكيمياء شهر 2","الكيمياء فصل 1","الكيمياء نصف سنة",
+            "الكيمياء شهر 3","الكيمياء شهر 4","الكيمياء فصل 2","الكيمياء الامتحان النهائي",
+            "الكيمياء السعي","الكيمياء التقدير"
+        ],
+        "الفيزياء": [
+            "الفيزياء شهر 1","الفيزياء شهر 2","الفيزياء فصل 1","الفيزياء نصف سنة",
+            "الفيزياء شهر 3","الفيزياء شهر 4","الفيزياء فصل 2","الفيزياء الامتحان النهائي",
+            "الفيزياء السعي","الفيزياء التقدير"
+        ],
+        "الاحياء": [
+            "الاحياء شهر 1","الاحياء شهر 2","الاحياء فصل 1","الاحياء نصف سنة",
+            "الاحياء شهر 3","الاحياء شهر 4","الاحياء فصل 2","الاحياء الامتحان النهائي",
+            "الاحياء السعي","الاحياء التقدير"
+        ],
+        "الاجتماعيات": [
+            "الاجتماعيات شهر 1","الاجتماعيات شهر 2","الاجتماعيات فصل 1","الاجتماعيات نصف سنة",
+            "الاجتماعيات شهر 3","الاجتماعيات شهر 4","الاجتماعيات فصل 2","الاجتماعيات الامتحان النهائي",
+            "الاجتماعيات السعي","الاجتماعيات التقدير"
+        ],
+        "الحاسوب": [
+            "الحاسوب شهر 1","الحاسوب شهر 2","الحاسوب فصل 1","الحاسوب نصف سنة",
+            "الحاسوب شهر 3","الحاسوب شهر 4","الحاسوب فصل 2","الحاسوب الامتحان النهائي",
+            "الحاسوب السعي","الحاسوب التقدير"
+        ],
+        "رياضة": [
+            "رياضة شهر 1","رياضة شهر 2","رياضة فصل 1","رياضة نصف سنة",
+            "رياضة شهر 3","رياضة شهر 4","رياضة فصل 2","رياضة الامتحان النهائي",
+            "رياضة السعي","رياضة التقدير"
+        ],
+        "الفنية": [
+            "الفنية شهر 1","الفنية شهر 2","الفنية فصل 1","الفنية نصف سنة",
+            "الفنية شهر 3","الفنية شهر 4","الفنية فصل 2","الفنية الامتحان النهائي",
+            "الفنية السعي","الفنية التقدير"
+        ],
+        "السلوك": [
+            "السلوك شهر 1","السلوك شهر 2","السلوك فصل 1","السلوك نصف سنة",
+            "السلوك شهر 3","السلوك شهر 4","السلوك فصل 2","السلوك الامتحان النهائي",
+            "السلوك السعي","السلوك التقدير"
+        ]
+    };
+
+    for (let sub in subjects) {
+
+        html += `
+        <div class="grade-card">
+            <div class="grade-title">${sub}</div>
+        `;
+
+        subjects[sub].forEach(col => {
+            html += `
+                <div class="grade-row">
+                    <span>${col}</span>
+                    <span>${st[col] || "-"}</span>
+                </div>
+            `;
+        });
+
+        const colName = getObjectionColumn(sub);
+
+        html += `
+            <button class="objection-btn"
+                onclick="sendObjection('${code}', '${colName}', '${sub}')">
+                اعترض على مادة ${sub}
+            </button>
+
+        </div>
+        `;
+    }
+
+    html += `
+        <div class="grades-info-card">
+            <p>🔵 الغياب: <b>${st["الغياب"] || "-"}</b></p>
+            <p>🔵 اختلاق مشاكل داخل المدرسة: <b>${st["اختلاق مشاكل داخل المدرسة"] || "-"}</b></p>
+            <p>🔵 ملاحظات كرت: <b>${st["ملاحظات كرت"] || "-"}</b></p>
+            <p>🔵 ملاحظات النتيجة: <b>${st["ملاحظات النتيجة"] || "-"}</b></p>
+        </div>
+    `;
+
+    document.getElementById("gradesPage").innerHTML = html;
+}
+
+/* =========================
+   تسجيل الخروج
+========================= */
+function logout() {
+
+    const code = localStorage.getItem("studentCode");
+
+    if (code) {
+        updateState(code, "خرج");
+    }
+
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("studentCode");
+    location.reload();
+}
+
+/* =========================
+   Navigation + Animation
+========================= */
+function showPage(pageId, element = null) {
+
+    document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+
+    document.getElementById(pageId).style.display = "block";
+
+    document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+
+    if (element) {
+        element.classList.add("active");
+
+        let burst = document.createElement("span");
+        burst.classList.add("burst");
+        burst.style.left = "50%";
+        burst.style.top = "50%";
+        element.appendChild(burst);
+
+        setTimeout(() => burst.remove(), 500);
+    }
+}
+
 </script>
 
 </body>
 </html>
-
