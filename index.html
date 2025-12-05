@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>منصة التحدي 2025-2026</title>
 
 <style>
 /* =============================
-   🔥 خلفية نيون متحركة — أزرق + أحمر + أخضر + برتقالي
+   🔥 خلفية متحركة — أزرق + أحمر + أبيض + أسود (أسرع)
    ============================= */
 body {
   font-family: 'Cairo', sans-serif;
@@ -18,34 +18,34 @@ body {
   overflow-x: hidden;
 }
 
-/* طبقة كرات لونية متحركة */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 30%, rgba(0,150,255,0.65), transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255,80,50,0.65), transparent 50%),
-    radial-gradient(circle at 30% 80%, rgba(50,255,120,0.65), transparent 50%),
-    radial-gradient(circle at 70% 70%, rgba(255,165,0,0.65), transparent 50%);
-  filter: blur(40px);
-  animation: bgMove 18s infinite alternate ease-in-out;
+    radial-gradient(circle at 15% 25%, rgba(0,150,255,0.78), transparent 50%),
+    radial-gradient(circle at 85% 20%, rgba(255,60,60,0.78), transparent 50%),
+    radial-gradient(circle at 30% 82%, rgba(255,255,255,0.55), transparent 52%),
+    radial-gradient(circle at 70% 70%, rgba(0,0,0,0.65), transparent 55%);
+  filter: blur(42px);
+  animation: bgMove 8s infinite alternate ease-in-out;
   z-index: -2;
+  pointer-events: none;
 }
 
-/* طبقة فوقية لإضافة نعومة ودمج الألوان */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6));
+  background: linear-gradient(135deg, rgba(0,0,0,0.35), rgba(0,0,0,0.74));
   z-index: -3;
+  pointer-events: none;
 }
 
 @keyframes bgMove {
-  0%   { transform: scale(1) translate(0,0); }
-  50%  { transform: scale(1.15) translate(-40px, 30px); }
-  100% { transform: scale(1.25) translate(40px, -30px); }
+  0%   { transform: scale(1.00) translate(0,0); }
+  50%  { transform: scale(1.22) translate(-55px, 40px); }
+  100% { transform: scale(1.38) translate(55px, -40px); }
 }
 
 /* =============================
@@ -97,16 +97,15 @@ header {
   border-radius: 22px;
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
   border: 1px solid rgba(255,255,255,0.4);
   box-shadow: 0 15px 40px rgba(0,0,0,0.45);
   animation: slideIn 1.4s ease-out;
 }
-
 @keyframes slideIn {
   0%   { transform: translateY(60px); opacity:0; }
   100% { transform: translateY(0); opacity:1; }
 }
-
 .login-box input,
 .login-box button {
   width: 100%;
@@ -118,6 +117,11 @@ header {
   margin-top: 14px;
 }
 
+/* =============================
+   ✅ منع الزوم عند الكتابة (مهم للموبايل)
+   ============================= */
+input, select, textarea { font-size: 16px !important; }
+
 /* حقل الإدخال */
 .login-box input {
   background: rgba(255,255,255,0.95);
@@ -127,9 +131,7 @@ header {
   box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
   transition: .25s;
 }
-.login-box input:focus {
-  box-shadow: 0 0 0 2px #00b0ff;
-}
+.login-box input:focus { box-shadow: 0 0 0 2px #00b0ff; }
 
 /* زر تسجيل الدخول */
 .login-box button {
@@ -144,34 +146,25 @@ header {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 12px 28px rgba(0,0,0,0.35);
 }
-.login-box button:active {
-  transform: scale(0.97);
-}
+.login-box button:active { transform: scale(0.97); }
 
-.error {
-  color: #ffeb3b;
-  font-weight: bold;
-  margin-top: 10px;
-}
+.error { color: #ffeb3b; font-weight: bold; margin-top: 10px; }
 
 /* =============================
    📄 الصفحات العامة
    ============================= */
-.page {
-  display: none;
-  animation: fadePage .6s ease;
-}
+.page { display: none; animation: fadePage .6s ease; }
 @keyframes fadePage {
   0%   { opacity:0; transform: translateY(25px); }
   100% { opacity:1; transform: translateY(0); }
 }
-
 .section {
   padding: 15px;
   margin: 20px;
   border-radius: 18px;
   background: rgba(255,255,255,0.25);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   font-weight: bold;
   box-shadow: 0 8px 22px rgba(0,0,0,0.25);
   color: white;
@@ -184,7 +177,7 @@ header {
   position: fixed;
   bottom: 20px;
   left: 50%;
-  transform: translateX(-50%) translateY(120%);
+  transform: translateX(-50%);
   width: 92%;
   height: 72px;
   display: none;
@@ -193,20 +186,29 @@ header {
   border-radius: 28px;
   background: rgba(255,255,255,0.2);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255,255,255,0.3);
-  transition: .8s;
+  transition: opacity .35s ease;
   box-shadow: 0 10px 24px rgba(0,0,0,0.3);
   color: white;
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2000;
+  will-change: opacity;
+  isolation: isolate;
 }
-#bottomBar.show-bar {
-  transform: translateX(-50%) translateY(0);
-}
+#bottomBar.show-bar { opacity: 1; pointer-events: auto; }
 
 .nav-item {
   cursor: pointer;
   opacity: .7;
   font-size: 14px;
   position: relative;
+  z-index: 1;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 .nav-item:hover { opacity:1; }
 .nav-item.active { opacity:1; }
@@ -219,56 +221,16 @@ header {
   border-radius:50%;
   transform:translate(-50%,-50%) scale(0);
   animation:burstAnim .5s forwards;
+  pointer-events: none;
 }
 @keyframes burstAnim {
   0% { transform: scale(0); opacity:1; }
   100% { transform: scale(18); opacity:0; }
 }
-</style>
-</head>
 
-<body>
-
-<!-- شاشة البداية -->
-<div id="splash">
-  <div class="splash-title">قسم الحوكمة</div>
-  <div class="splash-sub">ثانوية التحدي الأهلية</div>
-  <div class="splash-year">العام الدراسي 2025 - 2026</div>
-</div>
-
-<!-- العنوان -->
-<header>منصة التحدي 2025-2026</header>
-
-<!-- تسجيل الدخول -->
-<div class="login-box" id="loginBox">
-  <input id="studentCode" placeholder="أدخل كود الطالب هنا ">
-  <button onclick="searchStudent()">تسجيل الدخول</button>
-  <div id="output"></div>
-</div>
-<!-- صفحات الطالب -->
-<div id="profilePage" class="page section"></div>
-<div id="gradesPage" class="page section">لا توجد درجات حالياً</div>
-<div id="notifyPage" class="page section">لا توجد تبليغات حالياً</div>
-<div id="chatPage" class="page section">لا توجد رسائل حالياً</div>
-
-<!-- صفحات الأستاذ -->
-<div id="teacherClassesPage" class="page section"></div>
-<div id="teacherGradesPage" class="page section"></div>
-
-<!-- شريط الطالب السفلي -->
-<div id="bottomBar">
-  <div class="nav-item" onclick="showPage('profilePage', this)">الملف الشخصي</div>
-  <div class="nav-item" onclick="showPage('gradesPage', this)">الدرجات</div>
-  <div class="nav-item" onclick="showPage('notifyPage', this)">التبليغات</div>
-  <div class="nav-item" onclick="showPage('chatPage', this)">الدردشة</div>
-</div>
-
-<!-- Toast -->
-<div id="toast">تم الحفظ بنجاح ✓</div>
-
-<!-- باقي التنسيقات (CSS) الخاصة بالصفحات والجدول والدرجات والأستاذ -->
-<style>
-/* ====== الجداول العامة ====== */
+/* =============================
+   ✅ الجداول العامة + الإدخالات
+   ============================= */
 table { width: 100%; border-collapse: collapse; }
 td, th {
   padding: 10px;
@@ -277,50 +239,31 @@ td, th {
 }
 th { text-align: right; }
 
-/* عناصر الإدخال داخل الجداول */
 .table-input {
   width: 100%;
   padding: 8px;
   border-radius: 10px;
   border: none;
   box-sizing: border-box;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.92);
   color: #004a99;
 }
-.table-input.hasDate {
-  font-weight: bold;
-  color: #003366;
-}
 
-/* ====== أزرار الملف الشخصي (الطالب) ====== */
-.profile-actions {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
+/* =============================
+   ✅ أزرار الملف الشخصي
+   ============================= */
+.profile-actions { display: flex; gap: 10px; margin-bottom: 15px; }
 .logout-btn, .save-btn {
-  flex: 1;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
+  flex: 1; padding: 12px; border-radius: 12px; border: none;
+  font-weight: bold; cursor: pointer;
 }
-.logout-btn {
-  background: #ff1744;
-  color: white;
-  box-shadow: 0 4px 12px rgba(244,67,54,0.6);
-}
-.save-btn {
-  background: #ffd600;
-  color: #000;
-  box-shadow: 0 4px 12px rgba(255,214,0,0.6);
-}
-.logout-btn:active, .save-btn:active {
-  transform: scale(0.97);
-}
+.logout-btn { background: #ff1744; color: white; box-shadow: 0 4px 12px rgba(244,67,54,0.6); }
+.save-btn   { background: #ffd600; color: #000; box-shadow: 0 4px 12px rgba(255,214,0,0.6); }
+.logout-btn:active, .save-btn:active { transform: scale(0.97); }
 
-/* ====== بطاقات الدرجات للطالب ====== */
+/* =============================
+   ✅ بطاقات الدرجات (طالب)
+   ============================= */
 .grade-card {
   background: linear-gradient(135deg, #00c853, #009624);
   padding: 14px;
@@ -343,19 +286,7 @@ th { text-align: right; }
   font-size: 14px;
 }
 .grade-row:last-child { border-bottom: none; }
-.objection-btn {
-  width: 100%;
-  margin-top: 10px;
-  padding: 9px;
-  border-radius: 12px;
-  border: none;
-  background: #00e676;
-  color: #004d40;
-  font-weight: bold;
-  cursor: pointer;
-}
 
-/* معلومات الغياب والملاحظات */
 .grades-info-card {
   margin-top: 18px;
   padding: 12px;
@@ -367,23 +298,26 @@ th { text-align: right; }
 }
 .grades-info-card p { margin: 4px 0; }
 
-/* ====== واجهة الأستاذ ====== */
-.teacher-header {
-  font-size: 20px;
-  margin-bottom: 6px;
-  color: #fff;
-}
-.teacher-sub {
-  font-size: 14px;
-  margin-bottom: 10px;
-  color: #e3f2fd;
-}
-.teacher-classes-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.objection-open-btn {
+  width: 100%;
   margin-top: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  background: #00e676;
+  color: #004d40;
+  font-weight: bold;
+  cursor: pointer;
 }
+.objection-open-btn:active { transform: scale(0.98); }
+
+/* =============================
+   ✅ واجهة الأستاذ
+   ============================= */
+.teacher-header { font-size: 20px; margin-bottom: 6px; color: #fff; }
+.teacher-sub { font-size: 14px; margin-bottom: 10px; color: #e3f2fd; }
+
+.teacher-classes-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
 .teacher-class-btn {
   flex: 1 1 45%;
   padding: 12px;
@@ -396,11 +330,8 @@ th { text-align: right; }
   box-shadow: 0 4px 16px rgba(0,0,0,0.25);
   transition: 0.25s;
 }
-.teacher-class-btn:hover {
-  transform: translateY(-1px) scale(1.02);
-}
+.teacher-class-btn:hover { transform: translateY(-1px) scale(1.02); }
 
-/* زر الرجوع للأستاذ */
 .teacher-back-btn {
   padding: 8px 14px;
   border-radius: 12px;
@@ -412,34 +343,23 @@ th { text-align: right; }
   margin-bottom: 10px;
 }
 
-/* جدول درجات الأستاذ */
-.teacher-table-wrapper {
-  margin-top: 12px;
-  overflow-x: auto;
-}
-#teacherGradesTable {
-  width: 1000px;
-  max-width: 100%;
-  border-collapse: collapse;
-}
-#teacherGradesTable th,
-#teacherGradesTable td {
+.teacher-table-wrapper { margin-top: 12px; overflow-x: auto; }
+#teacherGradesTable { width: 1000px; max-width: 100%; border-collapse: collapse; }
+#teacherGradesTable th, #teacherGradesTable td {
   padding: 7px;
   border-bottom: 1px solid rgba(255,255,255,0.35);
   white-space: nowrap;
   font-size: 13px;
 }
-#teacherGradesTable th {
-  background: rgba(255,255,255,0.12);
-  color: #e3f2fd;
-}
+#teacherGradesTable th { background: rgba(255,255,255,0.12); color: #e3f2fd; }
+
 .teacher-grade-input {
   width: 70px;
   max-width: 100%;
   padding: 5px;
   border-radius: 8px;
   border: none;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.92);
   text-align: center;
   font-weight: bold;
   color: #004a99;
@@ -451,57 +371,25 @@ th { text-align: right; }
   font-weight: bold;
   color: #ffeb3b;
 }
+.objection-cell { color: #ffcdd2; font-size: 12px; max-width: 160px; white-space: normal; }
 
-/* خلية الاعتراض (قراءة فقط) */
-.objection-cell {
-  color: #ffcdd2;
-  font-size: 12px;
-  max-width: 160px;
-  white-space: normal;
-}
-
-/* أزرار الأستاذ (حفظ / PDF / حذف اعتراضات) */
-.teacher-actions {
-  margin-top: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.teacher-save-btn {
+.teacher-actions { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+.teacher-save-btn, .teacher-clear-btn {
   width: 100%;
   padding: 11px;
   border-radius: 14px;
   border: none;
-  background: linear-gradient(135deg, #19e05a, #0a9b32);
   color: white;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(0,0,0,0.35);
 }
-.teacher-pdf-btn {
-  width: 100%;
-  padding: 11px;
-  border-radius: 14px;
-  border: none;
-  background: linear-gradient(135deg, #42a5f5, #1e88e5);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-}
-.teacher-clear-btn {
-  width: 100%;
-  padding: 11px;
-  border-radius: 14px;
-  border: none;
-  background: linear-gradient(135deg, #ef5350, #e53935);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-}
+.teacher-save-btn { background: linear-gradient(135deg, #19e05a, #0a9b32); }
+.teacher-clear-btn{ background: linear-gradient(135deg, #ef5350, #e53935); }
 
-/* Toast */
+/* =============================
+   ✅ Toast
+   ============================= */
 #toast {
   position: fixed;
   bottom: -60px;
@@ -515,33 +403,139 @@ th { text-align: right; }
   opacity: 0;
   transition: .5s;
   z-index: 9999;
+  pointer-events: none;
 }
-#toast.show {
-  bottom: 26px;
-  opacity: 1;
+#toast.show { bottom: 26px; opacity: 1; pointer-events: auto; }
+
+/* =============================
+   ✅ نافذة الاعتراض (Modal)
+   ============================= */
+#objectionModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 18px;
 }
+.objection-card {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.30);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  padding: 14px;
+  color: white;
+}
+.objection-card h3 { margin: 6px 0 10px; font-size: 18px; }
+.objection-card textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.92);
+  color: #003a6b;
+  outline: none;
+}
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.modal-actions button {
+  flex: 1;
+  padding: 11px;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal-cancel { background: rgba(255,255,255,0.85); color: #003a6b; }
+.modal-send { background: linear-gradient(135deg, #00d46a, #009944); color: white; }
+.modal-send:active, .modal-cancel:active { transform: scale(0.98); }
 
 /* استجابة للشاشات الصغيرة */
 @media(max-width: 600px) {
-  #teacherGradesTable th,
-  #teacherGradesTable td {
-    font-size: 11px;
-    padding: 5px;
-  }
-  .teacher-class-btn {
-    flex: 1 1 100%;
-  }
+  #teacherGradesTable th, #teacherGradesTable td { font-size: 11px; padding: 5px; }
+  .teacher-class-btn { flex: 1 1 100%; }
 }
 </style>
+</head>
+
+<body>
+
+<!-- شاشة البداية -->
+<div id="splash">
+  <div class="splash-title">قسم الحوكمة</div>
+  <div class="splash-sub">ثانوية التحدي الأهلية</div>
+  <div class="splash-year">العام الدراسي 2025 - 2026</div>
+</div>
+
+<header>منصة التحدي 2025-2026</header>
+
+<!-- تسجيل الدخول -->
+<div class="login-box" id="loginBox">
+  <input id="studentCode" placeholder="  أدخل كود الطالب ">
+  <button onclick="searchStudent()">تسجيل الدخول</button>
+  <div id="output"></div>
+</div>
+
+<!-- صفحات الطالب -->
+<div id="profilePage" class="page section"></div>
+<div id="gradesPage" class="page section">لا توجد درجات حالياً</div>
+<div id="notifyPage" class="page section">لا توجد تبليغات حالياً</div>
+<div id="chatPage" class="page section">لا توجد رسائل حالياً</div>
+
+<!-- صفحات الأستاذ -->
+<div id="teacherClassesPage" class="page section"></div>
+<div id="teacherGradesPage" class="page section"></div>
+
+<!-- شريط الطالب السفلي -->
+<div id="bottomBar">
+  <div class="nav-item" data-page="profilePage" onclick="showPage('profilePage', this)">الملف الشخصي</div>
+  <div class="nav-item" data-page="gradesPage"  onclick="showPage('gradesPage', this)">الدرجات</div>
+  <div class="nav-item" data-page="notifyPage"  onclick="showPage('notifyPage', this)">التبليغات</div>
+  <div class="nav-item" data-page="chatPage"    onclick="showPage('chatPage', this)">الدردشة</div>
+</div>
+
+<!-- Toast -->
+<div id="toast">تم الحفظ بنجاح ✓</div>
+
+<!-- Modal: اعتراض -->
+<div id="objectionModal" onclick="closeObjectionModal(true)">
+  <div class="objection-card" onclick="event.stopPropagation()">
+    <h3 id="objectionTitle">اعتراض</h3>
+    <textarea id="objectionText" placeholder="اكتب اعتراضك هنا..."></textarea>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeObjectionModal(false)">إلغاء</button>
+      <button class="modal-send" onclick="sendObjection()">إرسال الاعتراض</button>
+    </div>
+  </div>
+</div>
+
 <script>
-/* رابط API */
-const API_URL = "https://script.google.com/macros/s/AKfycbwxBbM_g8dYuPF7VuPeyNTrLYcAov0YWTijVXLjpXyhLRO7skl1TuwDwkY4bezaFWBo/exec";
+/* ✅ غيّر هذا الرابط فقط بعد نشر الـWeb App */
+const API_URL = "https://script.google.com/macros/s/AKfycbx9v4mQRU4H6hzKoW2R7sYq_gwvmhVB3PdKeRsvhCGEkAVcOjxrtMJNzEIIGklZryt2/exec";
 
 /* بيانات الأستاذ */
-let currentTeacher        = null;
+let currentTeacher = null;
 let currentTeacherClasses = [];
 let currentTeacherSubject = "";
 let currentTeacherClassName = "";
+
+/* بيانات الطالب الحالي */
+let currentStudent = null;
+
+/* اعتراض Modal state */
+let currentObjectionSubject = "";
 
 /* Toast */
 function showToast(msg, error=false) {
@@ -551,6 +545,26 @@ function showToast(msg, error=false) {
   t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 2600);
 }
+
+/* ✅ دعم لمس قوي للشريط السفلي */
+document.addEventListener("DOMContentLoaded", () => {
+  const bar = document.getElementById("bottomBar");
+  if (!bar) return;
+
+  bar.addEventListener("touchend", (e) => {
+    const item = e.target.closest(".nav-item");
+    if (!item) return;
+    e.preventDefault();
+    item.click();
+  }, { passive: false });
+
+  bar.addEventListener("click", (e) => {
+    const item = e.target.closest(".nav-item");
+    if (!item) return;
+    const page = item.getAttribute("data-page");
+    if (page) showPage(page, item);
+  });
+});
 
 /* تسجيل الدخول تلقائي */
 window.addEventListener("DOMContentLoaded", () => {
@@ -591,23 +605,31 @@ async function searchStudent(saveSession = true) {
 
     if (data.status === "success") {
       let student = data.data;
+      currentStudent = student;
+
       if (saveSession) {
         localStorage.setItem("loggedIn", "true");
         localStorage.setItem("studentCode", code);
         updateState(code, "تم التسجيل");
       }
+
       document.getElementById("loginBox").style.display = "none";
+
+      // شريط الطالب
       document.getElementById("bottomBar").style.display = "flex";
       document.getElementById("bottomBar").classList.add("show-bar");
 
       loadProfile(student);
       loadGrades(student);
-      showPage('profilePage');
+
+      const first = document.querySelector('#bottomBar .nav-item[data-page="profilePage"]');
+      showPage('profilePage', first);
+
       output.innerHTML = "";
       return;
     }
 
-    /* ليس طالب → تجربة الدخول كأستاذ */
+    // ليس طالب -> جرب أستاذ
     await loginAsTeacher(code, output);
   } catch (err) {
     await loginAsTeacher(code, output);
@@ -618,12 +640,12 @@ async function searchStudent(saveSession = true) {
    تسجيل الأستاذ
    ============================ */
 async function loginAsTeacher(email, outputElement, saveSession = true) {
-
   outputElement.innerHTML = `<p style="color:white">⏳ جاري التحقق كأستاذ...</p>`;
 
   try {
     let res = await fetch(API_URL, {
       method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify({ action: "get_teacher_info", email })
     });
 
@@ -639,7 +661,7 @@ async function loginAsTeacher(email, outputElement, saveSession = true) {
       localStorage.setItem("teacherEmail", email);
     }
 
-    currentTeacher        = data.data.teacher || {};
+    currentTeacher = data.data.teacher || {};
     currentTeacherClasses = data.data.classes || [];
     currentTeacherSubject = currentTeacher["اسم المادة "] || currentTeacher["اسم المادة"] || "";
     currentTeacherClassName = "";
@@ -650,7 +672,6 @@ async function loginAsTeacher(email, outputElement, saveSession = true) {
     loadTeacherClasses();
     outputElement.innerHTML = "";
     showToast("✔ تسجيل دخول الأستاذ");
-
   } catch (err) {
     outputElement.innerHTML = `<p class='error'>❌ خطأ اتصال</p>`;
   }
@@ -691,8 +712,8 @@ function loadTeacherClasses() {
   }
 
   html += `</div>`;
-
   page.innerHTML = html;
+
   showPage("teacherClassesPage");
 }
 
@@ -701,7 +722,6 @@ function loadTeacherClasses() {
    ============================ */
 async function openTeacherClass(className) {
   const page = document.getElementById("teacherGradesPage");
-
   currentTeacherClassName = className;
 
   page.innerHTML = `<p style="color:white">⏳ تحميل...</p>`;
@@ -710,6 +730,7 @@ async function openTeacherClass(className) {
   try {
     let res = await fetch(API_URL, {
       method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify({
         action: "get_class_grades",
         subject: currentTeacherSubject,
@@ -718,7 +739,6 @@ async function openTeacherClass(className) {
     });
 
     let data = await res.json();
-
     if (data.status !== "success") {
       page.innerHTML = `<p class='error'>❌ ${data.data}</p>`;
       return;
@@ -731,18 +751,80 @@ async function openTeacherClass(className) {
 }
 
 /* ============================
+   ✅ حساب الدرجات للأستاذ (لا يحسب إلا عند اكتمال المطلوب)
+   ============================ */
+function toNum(v) {
+  const n = parseFloat(v);
+  return isNaN(n) ? 0 : n;
+}
+function hasVal(v) {
+  return v !== null && v !== undefined && String(v).trim() !== "";
+}
+function calcTerm(a, b) {
+  if (!hasVal(a) || !hasVal(b)) return "";
+  return ((toNum(a) + toNum(b)) / 2).toFixed(2);
+}
+function calcSaay(term1, mid, term2, fin) {
+  if (!hasVal(term1) || !hasVal(mid) || !hasVal(term2) || !hasVal(fin)) return "";
+  return ((toNum(term1) + toNum(mid) + toNum(term2) + toNum(fin)) / 4).toFixed(2);
+}
+function calcGrade(saay) {
+  if (!hasVal(saay)) return "";
+  const s = parseFloat(saay);
+  if (isNaN(s)) return "";
+  if (s < 50) return "مكمل";
+  if (s >= 90) return "ممتاز";
+  if (s >= 80) return "جيد جداً";
+  if (s >= 70) return "جيد";
+  if (s >= 60) return "متوسط";
+  return "ضعيف";
+}
+function recalcRow(tr) {
+  const m1  = tr.querySelector('input[data-key="month1"]')?.value ?? "";
+  const m2  = tr.querySelector('input[data-key="month2"]')?.value ?? "";
+  const mid = tr.querySelector('input[data-key="mid"]')?.value ?? "";
+  const m3  = tr.querySelector('input[data-key="month3"]')?.value ?? "";
+  const m4  = tr.querySelector('input[data-key="month4"]')?.value ?? "";
+  const fin = tr.querySelector('input[data-key="final"]')?.value ?? "";
+
+  const term1 = calcTerm(m1, m2);
+  const term2 = calcTerm(m3, m4);
+  const saay  = calcSaay(term1, mid, term2, fin);
+  const grade = calcGrade(saay);
+
+  const s1 = tr.querySelector('[data-static="term1"]');
+  const s2 = tr.querySelector('[data-static="term2"]');
+  const ss = tr.querySelector('[data-static="saay"]');
+  const sg = tr.querySelector('[data-static="grade"]');
+
+  if (s1) s1.innerText = term1;
+  if (s2) s2.innerText = term2;
+  if (ss) ss.innerText = saay;
+  if (sg) sg.innerText = grade;
+}
+function bindAutoCalc() {
+  const table = document.getElementById("teacherGradesTable");
+  if (!table) return;
+
+  table.querySelectorAll("tbody tr").forEach(tr => {
+    recalcRow(tr);
+    tr.querySelectorAll("input.teacher-grade-input").forEach(inp => {
+      inp.addEventListener("input", () => recalcRow(tr));
+      inp.addEventListener("change", () => recalcRow(tr));
+    });
+  });
+}
+
+/* ============================
    عرض جدول الدرجات للأستاذ
    ============================ */
 function renderTeacherGrades(info) {
   const page = document.getElementById("teacherGradesPage");
-
   const subject   = info.subject;
   const className = info.className;
   let students    = info.students;
 
   const teacherName = currentTeacher["اسم الاستاذ"] || currentTeacher["اسم الأستاذ"] || "-";
-
-  /* ترتيب الطلاب أبجديًا */
   students.sort((a, b) => a.name.localeCompare(b.name, "ar"));
 
   let html = `
@@ -778,23 +860,31 @@ function renderTeacherGrades(info) {
   `;
 
   students.forEach((st, i) => {
-    const g = st.grades;
+    const g = st.grades || {};
     const objection = st.objection || "";
 
     html += `
       <tr data-row="${st.row}">
         <td>${i+1}</td>
         <td>${st.name}</td>
-        <td><input type="number" data-key="month1" class="teacher-grade-input" value="${g.month1}"></td>
-        <td><input type="number" data-key="month2" class="teacher-grade-input" value="${g.month2}"></td>
-        <td><span class="teacher-grade-static">${g.term1}</span></td>
-        <td><input type="number" data-key="mid" class="teacher-grade-input" value="${g.mid}"></td>
-        <td><input type="number" data-key="month3" class="teacher-grade-input" value="${g.month3}"></td>
-        <td><input type="number" data-key="month4" class="teacher-grade-input" value="${g.month4}"></td>
-        <td><span class="teacher-grade-static">${g.term2}</span></td>
-        <td><input type="number" data-key="final" class="teacher-grade-input" value="${g.final}"></td>
-        <td><span class="teacher-grade-static">${g.saay}</span></td>
-        <td><span class="teacher-grade-static">${g.grade}</span></td>
+
+        <td><input type="number" inputmode="decimal" data-key="month1" class="teacher-grade-input" value="${g.month1 ?? ""}"></td>
+        <td><input type="number" inputmode="decimal" data-key="month2" class="teacher-grade-input" value="${g.month2 ?? ""}"></td>
+
+        <td><span class="teacher-grade-static" data-static="term1">${g.term1 ?? ""}</span></td>
+
+        <td><input type="number" inputmode="decimal" data-key="mid" class="teacher-grade-input" value="${g.mid ?? ""}"></td>
+
+        <td><input type="number" inputmode="decimal" data-key="month3" class="teacher-grade-input" value="${g.month3 ?? ""}"></td>
+        <td><input type="number" inputmode="decimal" data-key="month4" class="teacher-grade-input" value="${g.month4 ?? ""}"></td>
+
+        <td><span class="teacher-grade-static" data-static="term2">${g.term2 ?? ""}</span></td>
+
+        <td><input type="number" inputmode="decimal" data-key="final" class="teacher-grade-input" value="${g.final ?? ""}"></td>
+
+        <td><span class="teacher-grade-static" data-static="saay">${g.saay ?? ""}</span></td>
+        <td><span class="teacher-grade-static" data-static="grade">${g.grade ?? ""}</span></td>
+
         <td><span class="objection-cell">${objection}</span></td>
       </tr>
     `;
@@ -807,18 +897,16 @@ function renderTeacherGrades(info) {
 
     <div class="teacher-actions">
       <button class="teacher-save-btn" onclick="saveTeacherGrades()">💾 حفظ الدرجات</button>
-
-      <button class="teacher-pdf-btn" onclick="downloadPDF()">📄 تحميل PDF</button>
-
       <button class="teacher-clear-btn" onclick="clearObjections()">🧹 حذف الاعتراضات</button>
     </div>
   `;
 
   page.innerHTML = html;
+  bindAutoCalc();
 }
 
 /* ============================
-   حفظ الدرجات
+   حفظ الدرجات (يرسل المدخلات + المحسوب)
    ============================ */
 async function saveTeacherGrades() {
   let rows = document.querySelectorAll("#teacherGradesTable tbody tr");
@@ -828,29 +916,37 @@ async function saveTeacherGrades() {
     let row = parseInt(tr.getAttribute("data-row"));
     let obj = { row };
 
+    // المدخلات فقط
     tr.querySelectorAll("input").forEach(inp => {
       obj[inp.dataset.key] = inp.value;
     });
 
+    // المحسوب
+    obj.term1 = tr.querySelector('[data-static="term1"]')?.innerText ?? "";
+    obj.term2 = tr.querySelector('[data-static="term2"]')?.innerText ?? "";
+    obj.saay  = tr.querySelector('[data-static="saay"]')?.innerText ?? "";
+    obj.grade = tr.querySelector('[data-static="grade"]')?.innerText ?? "";
+
     grades.push(obj);
   });
 
-  let res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "save_grades",
-      subject: currentTeacherSubject,
-      className: currentTeacherClassName,
-      grades
-    })
-  });
+  try {
+    let res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        action: "save_grades",
+        subject: currentTeacherSubject,
+        className: currentTeacherClassName,
+        grades
+      })
+    });
 
-  let data = await res.json();
-
-  if (data.status === "success") {
-    showToast("✔ تم حفظ الدرجات");
-  } else {
-    showToast("❌ فشل الحفظ", true);
+    let data = await res.json();
+    if (data.status === "success") showToast("✔ تم حفظ الدرجات");
+    else showToast("❌ فشل الحفظ", true);
+  } catch (e) {
+    showToast("❌ خطأ اتصال", true);
   }
 }
 
@@ -858,60 +954,41 @@ async function saveTeacherGrades() {
    حذف كل الاعتراضات
    ============================ */
 async function clearObjections() {
-  let res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "clear_objections",
-      subject: currentTeacherSubject,
-      className: currentTeacherClassName
-    })
-  });
+  try {
+    let res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        action: "clear_objections",
+        subject: currentTeacherSubject,
+        className: currentTeacherClassName
+      })
+    });
 
-  let data = await res.json();
+    let data = await res.json();
 
-  if (data.status === "success") {
-    showToast("✔ تم حذف الاعتراضات");
-    openTeacherClass(currentTeacherClassName); 
-  } else {
-    showToast("❌ فشل حذف الاعتراضات", true);
+    if (data.status === "success") {
+      showToast("✔ تم حذف الاعتراضات");
+      openTeacherClass(currentTeacherClassName);
+    } else {
+      showToast("❌ فشل حذف الاعتراضات", true);
+    }
+  } catch (e) {
+    showToast("❌ خطأ اتصال", true);
   }
-}
-
-/* ============================
-   تحميل PDF
-   ============================ */
-async function downloadPDF() {
-  const res = await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "download_grades_pdf",
-      subject: currentTeacherSubject,
-      className: currentTeacherClassName
-    })
-  });
-
-  let blob = await res.blob();
-  let url = URL.createObjectURL(blob);
-
-  let a = document.createElement("a");
-  a.href = url;
-  a.download = `درجات_${currentTeacherSubject}_${currentTeacherClassName}.pdf`;
-  a.click();
-  URL.revokeObjectURL(url);
 }
 
 /* ============================
    تحديث حالة الطالب
    ============================ */
 async function updateState(code, state) {
-  await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "update_state",
-      code,
-      state
-    })
-  });
+  try {
+    await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "update_state", code, state })
+    });
+  } catch (e) {}
 }
 
 /* ============================
@@ -938,7 +1015,6 @@ function showPage(id, element=null) {
   document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
   if (element) {
     element.classList.add("active");
-
     let burst = document.createElement("span");
     burst.classList.add("burst");
     element.appendChild(burst);
@@ -947,7 +1023,8 @@ function showPage(id, element=null) {
 }
 
 /* ============================
-   تحميل الملف الشخصي للطالب
+   تحميل الملف الشخصي (طالب)
+   ✅ حقل "رقم الخط" يطابق Sh1
    ============================ */
 function loadProfile(st) {
   const code = st["كود الطالب"];
@@ -983,7 +1060,10 @@ function loadProfile(st) {
       </tr>
 
       <tr><th>اسم الأم</th>
-        <td><input id="اسم الام" class="table-input" value="${st["اسم الام"] || ""}"></td>
+            <td><input id="اسم الام" class="table-input" inputmode="numeric"
+            placeholder="اسم الام الثلاثي "
+            value="${st["اسم الام"] || ""}">
+            
       </tr>
 
       <tr><th>المدرسة القادم منها</th>
@@ -994,7 +1074,17 @@ function loadProfile(st) {
       <tr><th>الملاحظات</th><td>${st["الملاحظات"] || ""}</td></tr>
 
       <tr><th>الرمز</th>
-        <td><input id="الرمز" class="table-input" value="${st["الرمز"] || ""}"></td>
+        <td><input id="الرمز" class="table-input" inputmode="numeric"
+            placeholder="رمز خاص بك لا احد غيرك يستطيع التحدث بالدردشة باسمك"
+            value="${st["الرمز"] || st["الرمز "] || ""}">
+        </td>
+      </tr>
+
+      <tr><th>رقم الخط</th>
+        <td><input id="رقم الخط" class="table-input" inputmode="numeric"
+            placeholder="رقم خط النقل الخاص بالطالب"
+            value="${st["رقم الخط"] || ""}">
+        </td>
       </tr>
     </table>
   `;
@@ -1004,7 +1094,6 @@ function loadProfile(st) {
    حفظ الملف الشخصي
    ============================ */
 async function saveChanges(code) {
-
   const data = {
     "المواليد": document.getElementById("المواليد").value,
     "رقم ولي الامر": document.getElementById("رقم ولي الامر").value,
@@ -1012,15 +1101,22 @@ async function saveChanges(code) {
     "العنوان": document.getElementById("العنوان").value,
     "اسم الام": document.getElementById("اسم الام").value,
     "المدرسة القادم منها": document.getElementById("المدرسة القادم منها").value,
-    "الرمز": document.getElementById("الرمز").value
+    "الرمز": document.getElementById("الرمز").value,
+    "رقم الخط": document.getElementById("رقم الخط").value
   };
 
-  await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify({ action:"update", code, data })
-  });
+  try {
+    await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action:"update", code, data })
+    });
 
-  showToast("✔ تم حفظ التعديلات");
+    showToast("✔ تم حفظ التعديلات");
+    await searchStudent(false);
+  } catch (e) {
+    showToast("❌ خطأ اتصال", true);
+  }
 }
 
 /* ============================
@@ -1038,60 +1134,79 @@ function fixDate(dateStr) {
 }
 
 /* ============================
-   تحميل درجات الطالب
+   اعتراض Modal
+   ============================ */
+function openObjectionModal(subjectName) {
+  currentObjectionSubject = subjectName;
+  document.getElementById("objectionTitle").innerText = `اعتراض على مادة: ${subjectName}`;
+  document.getElementById("objectionText").value = "";
+  document.getElementById("objectionModal").style.display = "flex";
+  setTimeout(() => document.getElementById("objectionText").focus(), 0);
+}
+function closeObjectionModal() {
+  document.getElementById("objectionModal").style.display = "none";
+  currentObjectionSubject = "";
+}
+
+async function sendObjection() {
+  if (!currentStudent) return showToast("❌ لم يتم تحديد الطالب", true);
+
+  const code = currentStudent["كود الطالب"] || localStorage.getItem("studentCode") || "";
+  if (!code) return showToast("❌ كود الطالب غير موجود", true);
+
+  const subject = currentObjectionSubject;
+  if (!subject) return showToast("❌ مادة غير محددة", true);
+
+  const objectionText = document.getElementById("objectionText").value.trim();
+  if (!objectionText) return showToast("⚠️ اكتب الاعتراض أولاً", true);
+
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        action: "submit_objection",
+        code,
+        subject,
+        objection: objectionText
+      })
+    });
+
+    const data = await res.json();
+    if (data.status === "success") {
+      showToast("✔ تم إرسال الاعتراض");
+      closeObjectionModal();
+
+      await searchStudent(false);
+      const gradesTab = document.querySelector('#bottomBar .nav-item[data-page="gradesPage"]');
+      showPage("gradesPage", gradesTab);
+    } else {
+      showToast("❌ فشل إرسال الاعتراض: " + (data.data || ""), true);
+    }
+  } catch (e) {
+    showToast("❌ خطأ اتصال", true);
+  }
+}
+
+/* ============================
+   تحميل درجات الطالب + زر اعتراض تحت كل مادة
    ============================ */
 function loadGrades(st) {
-  const code = st["كود الطالب"];
   let html = ``;
 
   const subjects = {
-    "الإسلامية": ["اسلامية شهر 1","اسلامية شهر 2","اسلامية فصل 1","اسلامية نصف سنة",
-                  "اسلامية شهر 3","اسلامية شهر 4","اسلامية فصل 2","اسلامية الامتحان النهائي",
-                  "اسلامية السعي","اسلامية التقدير"],
-
-    "العربي": ["العربي شهر 1","العربي شهر 2","العربي فصل 1","العربي نصف سنة",
-                "العربي شهر 3","العربي شهر 4","العربي فصل 2","العربي الامتحان النهائي",
-                "العربي السعي","العربي التقدير"],
-
-    "الانكليزي": ["الانكليزي شهر 1","الانكليزي شهر 2","الانكليزي فصل 1","الانكليزي نصف سنة",
-                    "الانكليزي شهر 3","الانكليزي شهر 4","الانكليزي فصل 2","الانكليزي الامتحان النهائي",
-                    "الانكليزي السعي","الانكليزي التقدير"],
-
-    "الرياضيات": ["الرياضيات شهر 1","الرياضيات شهر 2","الرياضيات فصل 1","الرياضيات نصف سنة",
-                    "الرياضيات شهر 3","الرياضيات شهر 4","الرياضيات فصل 2","الرياضيات الامتحان النهائي",
-                    "الرياضيات السعي","الرياضيات التقدير"],
-
-    "الكيمياء": ["الكيمياء شهر 1","الكيمياء شهر 2","الكيمياء فصل 1","الكيمياء نصف سنة",
-                  "الكيمياء شهر 3","الكيمياء شهر 4","الكيمياء فصل 2","الكيمياء الامتحان النهائي",
-                  "الكيمياء السعي","الكيمياء التقدير"],
-
-    "الفيزياء": ["الفيزياء شهر 1","الفيزياء شهر 2","الفيزياء فصل 1","الفيزياء نصف سنة",
-                  "الفيزياء شهر 3","الفيزياء شهر 4","الفيزياء فصل 2","الفيزياء الامتحان النهائي",
-                  "الفيزياء السعي","الفيزياء التقدير"],
-
-    "الاحياء": ["الاحياء شهر 1","الاحياء شهر 2","الاحياء فصل 1","الاحياء نصف سنة",
-                 "الاحياء شهر 3","الاحياء شهر 4","الاحياء فصل 2","الاحياء الامتحان النهائي",
-                 "الاحياء السعي","الاحياء التقدير"],
-
-    "الاجتماعيات": ["الاجتماعيات شهر 1","الاجتماعيات شهر 2","الاجتماعيات فصل 1","الاجتماعيات نصف سنة",
-                     "الاجتماعيات شهر 3","الاجتماعيات شهر 4","الاجتماعيات فصل 2","الاجتماعيات الامتحان النهائي",
-                     "الاجتماعيات السعي","الاجتماعيات التقدير"],
-
-    "الحاسوب": ["الحاسوب شهر 1","الحاسوب شهر 2","الحاسوب فصل 1","الحاسوب نصف سنة",
-                 "الحاسوب شهر 3","الحاسوب شهر 4","الحاسوب فصل 2","الحاسوب الامتحان النهائي",
-                 "الحاسوب السعي","الحاسوب التقدير"],
-
-    "رياضة": ["رياضة شهر 1","رياضة شهر 2","رياضة فصل 1","رياضة نصف سنة",
-               "رياضة شهر 3","رياضة شهر 4","رياضة فصل 2","رياضة الامتحان النهائي",
-               "رياضة السعي","رياضة التقدير"],
-
-    "الفنية": ["الفنية شهر 1","الفنية شهر 2","الفنية فصل 1","الفنية نصف سنة",
-               "الفنية شهر 3","الفنية شهر 4","الفنية فصل 2","الفنية الامتحان النهائي",
-               "الفنية السعي","الفنية التقدير"],
-
-    "السلوك": ["السلوك شهر 1","السلوك شهر 2","السلوك فصل 1","السلوك نصف سنة",
-               "السلوك شهر 3","السلوك شهر 4","السلوك فصل 2","السلوك الامتحان النهائي",
-               "السلوك السعي","السلوك التقدير"]
+    "الإسلامية": ["اسلامية شهر 1","اسلامية شهر 2","اسلامية فصل 1","اسلامية نصف سنة","اسلامية شهر 3","اسلامية شهر 4","اسلامية فصل 2","اسلامية الامتحان النهائي","اسلامية السعي","اسلامية التقدير"],
+    "العربي": ["العربي شهر 1","العربي شهر 2","العربي فصل 1","العربي نصف سنة","العربي شهر 3","العربي شهر 4","العربي فصل 2","العربي الامتحان النهائي","العربي السعي","العربي التقدير"],
+    "الانكليزي": ["الانكليزي شهر 1","الانكليزي شهر 2","الانكليزي فصل 1","الانكليزي نصف سنة","الانكليزي شهر 3","الانكليزي شهر 4","الانكليزي فصل 2","الانكليزي الامتحان النهائي","الانكليزي السعي","الانكليزي التقدير"],
+    "الرياضيات": ["الرياضيات شهر 1","الرياضيات شهر 2","الرياضيات فصل 1","الرياضيات نصف سنة","الرياضيات شهر 3","الرياضيات شهر 4","الرياضيات فصل 2","الرياضيات الامتحان النهائي","الرياضيات السعي","الرياضيات التقدير"],
+    "الكيمياء": ["الكيمياء شهر 1","الكيمياء شهر 2","الكيمياء فصل 1","الكيمياء نصف سنة","الكيمياء شهر 3","الكيمياء شهر 4","الكيمياء فصل 2","الكيمياء الامتحان النهائي","الكيمياء السعي","الكيمياء التقدير"],
+    "الفيزياء": ["الفيزياء شهر 1","الفيزياء شهر 2","الفيزياء فصل 1","الفيزياء نصف سنة","الفيزياء شهر 3","الفيزياء شهر 4","الفيزياء فصل 2","الفيزياء الامتحان النهائي","الفيزياء السعي","الفيزياء التقدير"],
+    "الاحياء": ["الاحياء شهر 1","الاحياء شهر 2","الاحياء فصل 1","الاحياء نصف سنة","الاحياء شهر 3","الاحياء شهر 4","الاحياء فصل 2","الاحياء الامتحان النهائي","الاحياء السعي","الاحياء التقدير"],
+    "الاجتماعيات": ["الاجتماعيات شهر 1","الاجتماعيات شهر 2","الاجتماعيات فصل 1","الاجتماعيات نصف سنة","الاجتماعيات شهر 3","الاجتماعيات شهر 4","الاجتماعيات فصل 2","الاجتماعيات الامتحان النهائي","الاجتماعيات السعي","الاجتماعيات التقدير"],
+    "الحاسوب": ["الحاسوب شهر 1","الحاسوب شهر 2","الحاسوب فصل 1","الحاسوب نصف سنة","الحاسوب شهر 3","الحاسوب شهر 4","الحاسوب فصل 2","الحاسوب الامتحان النهائي","الحاسوب السعي","الحاسوب التقدير"],
+    "رياضة": ["رياضة شهر 1","رياضة شهر 2","رياضة فصل 1","رياضة نصف سنة","رياضة شهر 3","رياضة شهر 4","رياضة فصل 2","رياضة الامتحان النهائي","رياضة السعي","رياضة التقدير"],
+    "الفنية": ["الفنية شهر 1","الفنية شهر 2","الفنية فصل 1","الفنية نصف سنة","الفنية شهر 3","الفنية شهر 4","الفنية فصل 2","الفنية الامتحان النهائي","الفنية السعي","الفنية التقدير"],
+    "السلوك": ["السلوك شهر 1","السلوك شهر 2","السلوك فصل 1","السلوك نصف سنة","السلوك شهر 3","السلوك شهر 4","السلوك فصل 2","السلوك الامتحان النهائي","السلوك السعي","السلوك التقدير"]
   };
 
   for (let sub in subjects) {
@@ -1106,6 +1221,10 @@ function loadGrades(st) {
           <span>${st[col] || "-"}</span>
         </div>`;
     });
+
+    html += `
+      <button class="objection-open-btn" onclick="openObjectionModal('${sub}')">✍️ اعتراض على مادة (${sub})</button>
+    `;
 
     html += `</div>`;
   }
@@ -1125,4 +1244,3 @@ function loadGrades(st) {
 
 </body>
 </html>
-
