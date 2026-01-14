@@ -766,12 +766,7 @@ function calcTerm(a, b) {
 }
 function calcSaay(term1, mid, term2, fin) {
   if (!hasVal(term1) || !hasVal(mid) || !hasVal(term2) || !hasVal(fin)) return "";
-
-  const avg = (toNum(term1) + toNum(mid) + toNum(term2) + toNum(fin)) / 4;
-
-  // تقريب للأعلى دائمًا بدون كسور
-  return Math.ceil(avg);
-
+  return ((toNum(term1) + toNum(mid) + toNum(term2) + toNum(fin)) / 4).toFixed(2);
 }
 function calcGrade(saay) {
   if (!hasVal(saay)) return "";
