@@ -760,14 +760,19 @@ function toNum(v) {
 function hasVal(v) {
   return v !== null && v !== undefined && String(v).trim() !== "";
 }
+
+/* فصل 1 و فصل 2 بدون بوينت */
 function calcTerm(a, b) {
   if (!hasVal(a) || !hasVal(b)) return "";
-  return ((toNum(a) + toNum(b)) / 2).toFixed(2);
+  return Math.ceil((toNum(a) + toNum(b)) / 2);
 }
+
+/* السعي بدون بوينت */
 function calcSaay(term1, mid, term2, fin) {
   if (!hasVal(term1) || !hasVal(mid) || !hasVal(term2) || !hasVal(fin)) return "";
-  return ((toNum(term1) + toNum(mid) + toNum(term2) + toNum(fin)) / 4).toFixed(2);
+  return Math.ceil((toNum(term1) + toNum(mid) + toNum(term2) + toNum(fin)) / 4);
 }
+
 function calcGrade(saay) {
   if (!hasVal(saay)) return "";
   const s = parseFloat(saay);
@@ -779,6 +784,7 @@ function calcGrade(saay) {
   if (s >= 60) return "متوسط";
   return "ضعيف";
 }
+
 function recalcRow(tr) {
   const m1  = tr.querySelector('input[data-key="month1"]')?.value ?? "";
   const m2  = tr.querySelector('input[data-key="month2"]')?.value ?? "";
