@@ -482,100 +482,115 @@ th { text-align: right; }
 <header>منصة التحدي 2025-2026</header>
 
 <!-- تسجيل الدخول -->
-<div class="login-box">
-  <input type="text" placeholder="اسم المستخدم" id="username" />
-  <input type="password" placeholder="كلمة المرور" id="password" />
-  <button id="loginBtn">تسجيل الدخول</button>
-  <div class="error" id="loginError"></div>
+<div class="login-box" id="loginBox">
+  <input id="studentCode" placeholder="  أدخل كود الطالب ">
+  <button onclick="searchStudent()">تسجيل الدخول</button>
+  <div id="output"></div>
 </div>
 
-<!-- لوحة الطالب -->
-<div class="page" id="studentPage">
-  <div class="section">
-    <div class="grade-card">
-      <div class="grade-title">المادة: الرياضيات</div>
-      <div class="grade-row"><span>الفصل الأول</span><span class="grade-static" id="term1Grade">80</span></div>
-      <div class="grade-row"><span>الفصل الثاني</span><span class="grade-static" id="term2Grade">85</span></div>
-      <div class="grade-row"><span>المعدل</span><span class="grade-static" id="saayGrade">83</span></div>
+<!-- صفحات الطالب -->
+<div id="profilePage" class="page section"></div>
+<div id="gradesPage" class="page section"></div>
+
+<!-- bottom bar -->
+<div id="bottomBar">
+  <div class="nav-item active">الملف الشخصي</div>
+  <div class="nav-item">الدرجات</div>
+</div>
+
+<!-- نافذة الاعتراض -->
+<div id="objectionModal">
+  <div class="objection-card">
+    <h3>إرسال اعتراض</h3>
+    <textarea placeholder="اكتب اعتراضك هنا..."></textarea>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeObjection()">إلغاء</button>
+      <button class="modal-send" onclick="sendObjection()">إرسال</button>
     </div>
   </div>
 </div>
 
-<!-- لوحة الأستاذ -->
-<div class="page" id="teacherPage">
-  <div class="teacher-header">مرحبا أستاذ</div>
-  <div class="teacher-sub">اختر الصف:</div>
-  <div class="teacher-classes-grid" id="classesGrid">
-    <button class="teacher-class-btn">الصف السادس</button>
-    <button class="teacher-class-btn">الصف الخامس</button>
-  </div>
-  <div class="teacher-table-wrapper">
-    <table id="teacherGradesTable">
-      <thead>
-        <tr>
-          <th>الطالب</th>
-          <th>الفصل الأول</th>
-          <th>الفصل الثاني</th>
-          <th>المعدل</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>أحمد</td>
-          <td><input type="number" class="teacher-grade-input" /></td>
-          <td><input type="number" class="teacher-grade-input" /></td>
-          <td><span class="teacher-grade-static">0</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="teacher-actions">
-    <button class="teacher-save-btn">حفظ</button>
-    <button class="teacher-clear-btn">مسح الكل</button>
-  </div>
-</div>
+<!-- توست -->
+<div id="toast"></div>
 
 <script>
 // =============================
-// 🔹 وظائف الصفحات
+// 🎯 إعداد الدرجات وحساب المعدل مع تقريب للأعلى
 // =============================
-
-// مؤقت شاشة البداية
-setTimeout(() => document.getElementById("splash").style.display = "none", 3600);
-
-// حساب متوسط ورفع الكسور للأعلى
-function roundUp(n) { return Math.ceil(n); }
-
-function hasVal(x) { return x !== null && x !== undefined && x !== ""; }
-function toNum(x) { return parseFloat(x) || 0; }
-
-// حساب الفصل
-function calcTerm(a, b) {
-  if (!hasVal(a) || !hasVal(b)) return "";
-  let avg = (toNum(a) + toNum(b)) / 2;
-  return roundUp(avg);
-}
-
-// حساب السعي والمعدل
-function calcSaay(term1, mid, term2, fin) {
-  if (!hasVal(term1) || !hasVal(mid) || !hasVal(term2) || !hasVal(fin)) return "";
-  let avg = (toNum(term1) + toNum(mid) + toNum(term2) + toNum(fin)) / 4;
-  return roundUp(avg);
+function calculateAverage(grades) {
+  let sum = 0;
+  let count = 0;
+  for (let g of grades) {
+    if (!isNaN(g) && g !== null) {
+      let rounded = Math.ceil(g); // تقريب دائم للأعلى
+      sum += rounded;
+      count++;
+    }
+  }
+  return count > 0 ? Math.round(sum / count) : 0;
 }
 
 // =============================
-// 🔹 مثال تفاعل الأستاذ
+// 👤 تسجيل الدخول بالطالب فقط (الكود) 
 // =============================
-document.querySelectorAll(".teacher-grade-input").forEach((input, idx, arr) => {
-  input.addEventListener("input", () => {
-    const row = input.closest("tr");
-    const term1 = row.children[1].querySelector("input").value;
-    const term2 = row.children[2].querySelector("input").value;
-    const saay = calcTerm(term1, term2);
-    row.children[3].querySelector("span").textContent = saay;
-  });
-});
+function searchStudent() {
+  const code = document.getElementById("studentCode").value.trim();
+  const output = document.getElementById("output");
 
+  if (code === "") {
+    output.innerHTML = '<span class="error">الرجاء إدخال كود الطالب</span>';
+    return;
+  }
+
+  // مثال بيانات الطالب
+  const student = {
+    name: "أحمد السلطان",
+    motherName: "فاطمة محمد", // الآن نص فقط
+    grades: [70, 81, 90, 79]
+  };
+
+  document.getElementById("loginBox").style.display = "none";
+  showProfile(student);
+}
+
+// =============================
+// عرض الملف الشخصي
+// =============================
+function showProfile(student) {
+  const profilePage = document.getElementById("profilePage");
+  profilePage.innerHTML = `
+    <div class="grades-info-card">
+      <p><strong>اسم الطالب:</strong> ${student.name}</p>
+      <p><strong>اسم الأم:</strong> ${student.motherName}</p>
+      <p><strong>معدل الدرجات:</strong> ${calculateAverage(student.grades)}</p>
+    </div>
+  `;
+  profilePage.style.display = "block";
+}
+
+// =============================
+// الاعتراض
+// =============================
+function closeObjection() { document.getElementById("objectionModal").style.display = "none"; }
+function sendObjection() {
+  const textarea = document.querySelector("#objectionModal textarea");
+  const text = textarea.value.trim();
+  if (text === "") { alert("الرجاء كتابة الاعتراض"); return; }
+  alert("تم إرسال الاعتراض!");
+  textarea.value = "";
+  closeObjection();
+}
+
+// =============================
+// عرض توست
+// =============================
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(()=>{ toast.classList.remove("show"); }, 2500);
+}
 </script>
+
 </body>
 </html>
