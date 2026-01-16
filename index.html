@@ -6,193 +6,173 @@
 <title>معالجة الدرجات</title>
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        font-family: "Cairo", sans-serif;
-        overflow: hidden;
-        background: linear-gradient(
-            -45deg,
-            #0f2027,
-            #203a43,
-            #2c5364,
-            #1b2735
-        );
-        background-size: 400% 400%;
-        animation: gradientMove 18s ease infinite;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #ffffff;
-    }
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Cairo", sans-serif;
+    overflow: hidden;
+}
 
-    @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+/* خلفية متدرجة فاخرة */
+body {
+    background: linear-gradient(
+        120deg,
+        #ffffff,
+        #000000,
+        #ff7a18,
+        #ff003c,
+        #005bea,
+        #00c6ff,
+        #2ecc71,
+        #6f4e37
+    );
+    background-size: 600% 600%;
+    animation: gradientFlow 25s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
 
-    canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
 
-    .container {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        backdrop-filter: blur(6px);
-        padding: 30px 45px;
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.06);
-        box-shadow: 0 0 40px rgba(0, 255, 255, 0.12);
-        animation: fadeIn 2s ease;
-    }
+canvas {
+    position: absolute;
+    inset: 0;
+}
 
-    .title {
-        font-size: 32px;
-        margin-bottom: 12px;
-        letter-spacing: 1px;
-    }
+/* صندوق النص */
+.container {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    padding: 35px 55px;
+    border-radius: 22px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(12px);
+    box-shadow:
+        0 0 60px rgba(255,255,255,0.15),
+        inset 0 0 30px rgba(255,255,255,0.08);
+    animation: fadeUp 2.5s ease;
+}
 
-    .subtitle {
-        font-size: 18px;
-        opacity: 0.85;
-    }
+.title {
+    font-size: 34px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(30px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+.subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
 
 <body>
 
-<canvas id="canvas"></canvas>
+<!-- طبقات العمق -->
+<canvas id="back"></canvas>
+<canvas id="front"></canvas>
 
 <div class="container">
-    <div class="title">المنصة متوقفة حالياً   </div>
+    <div class="title">المنصة متوقفة حالياً</div>
     <div class="subtitle">
         يتم الآن معالجة الدرجات ورفعها إلى الكرتات
     </div>
 </div>
 
 <script>
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+const back = document.getElementById("back");
+const front = document.getElementById("front");
+const ctxBack = back.getContext("2d");
+const ctxFront = front.getContext("2d");
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+function resize() {
+    back.width = front.width = innerWidth;
+    back.height = front.height = innerHeight;
+}
+resize();
+addEventListener("resize", resize);
 
-let mouse = { x: null, y: null };
-
+let mouse = { x: innerWidth/2, y: innerHeight/2 };
 addEventListener("mousemove", e => {
-    mouse.x = e.x;
-    mouse.y = e.y;
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
 });
 
-addEventListener("resize", () => {
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
-});
+/* جسيمات */
+class Particle {
+    constructor(layer) {
+        this.layer = layer;
+        this.reset();
+    }
 
-class Electron {
-    constructor(radius, speed, size, hue) {
-        this.radius = radius;
+    reset() {
         this.angle = Math.random() * Math.PI * 2;
-        this.speed = speed;
-        this.size = size;
-        this.hue = hue;
+        this.radius = 120 + Math.random() * 220;
+        this.speed = (Math.random() * 0.004 + 0.001) * (Math.random() < 0.5 ? -1 : 1);
+        this.size = this.layer === "front" ? 4 + Math.random() * 3 : 2 + Math.random() * 2;
+        this.hue = Math.random() * 360;
     }
 
     update(cx, cy) {
         this.angle += this.speed;
-
-        let dx = 0, dy = 0;
-        if (mouse.x && mouse.y) {
-            dx = (mouse.x - cx) * 0.02;
-            dy = (mouse.y - cy) * 0.02;
-        }
+        const depth = this.layer === "front" ? 0.05 : 0.02;
+        const dx = (mouse.x - cx) * depth;
+        const dy = (mouse.y - cy) * depth;
 
         this.x = cx + Math.cos(this.angle) * this.radius + dx;
         this.y = cy + Math.sin(this.angle) * this.radius + dy;
     }
 
-    draw() {
+    draw(ctx) {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${this.hue}, 80%, 65%, 0.9)`;
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = `hsla(${this.hue}, 80%, 65%, 1)`;
+        ctx.fillStyle = `hsla(${this.hue},85%,70%,0.9)`;
+        ctx.shadowBlur = 25;
+        ctx.shadowColor = `hsla(${this.hue},85%,70%,1)`;
         ctx.fill();
         ctx.shadowBlur = 0;
     }
 }
 
-let electrons = [];
+const backParticles = [];
+const frontParticles = [];
 
-function init() {
-    electrons = [];
-    const orbits = [
-        { r: 80, speed: 0.012, hue: 190 },
-        { r: 130, speed: -0.009, hue: 210 },
-        { r: 190, speed: 0.006, hue: 230 }
-    ];
-
-    orbits.forEach(o => {
-        for (let i = 0; i < 16; i++) {
-            electrons.push(
-                new Electron(
-                    o.r + Math.random() * 8,
-                    o.speed,
-                    Math.random() * 1.6 + 1,
-                    o.hue
-                )
-            );
-        }
-    });
-}
-
-function drawNucleus(cx, cy) {
-    ctx.beginPath();
-    ctx.arc(cx, cy, 8, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(255,100,100,0.9)";
-    ctx.shadowBlur = 20;
-    ctx.shadowColor = "rgba(255,100,100,1)";
-    ctx.fill();
-    ctx.shadowBlur = 0;
-}
-
-function drawOrbits(cx, cy) {
-    ctx.strokeStyle = "rgba(255,255,255,0.08)";
-    ctx.lineWidth = 1;
-    [80, 130, 190].forEach(r => {
-        ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.stroke();
-    });
-}
+for (let i = 0; i < 60; i++) backParticles.push(new Particle("back"));
+for (let i = 0; i < 45; i++) frontParticles.push(new Particle("front"));
 
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctxBack.clearRect(0,0,back.width,back.height);
+    ctxFront.clearRect(0,0,front.width,front.height);
 
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
+    const cx = innerWidth / 2;
+    const cy = innerHeight / 2;
 
-    drawOrbits(cx, cy);
-    drawNucleus(cx, cy);
+    backParticles.forEach(p => {
+        p.update(cx, cy);
+        p.draw(ctxBack);
+    });
 
-    electrons.forEach(e => {
-        e.update(cx, cy);
-        e.draw();
+    frontParticles.forEach(p => {
+        p.update(cx, cy);
+        p.draw(ctxFront);
     });
 
     requestAnimationFrame(animate);
 }
 
-init();
 animate();
 </script>
 
