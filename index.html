@@ -14,28 +14,27 @@ html, body {
     overflow: hidden;
 }
 
-/* خلفية متدرجة فاخرة */
 body {
     background: linear-gradient(
         120deg,
         #ffffff,
         #000000,
-        #ff7a18,
-        #ff003c,
+        #ff8c00,
+        #ff0033,
         #005bea,
         #00c6ff,
         #2ecc71,
         #6f4e37
     );
-    background-size: 600% 600%;
-    animation: gradientFlow 25s ease infinite;
+    background-size: 800% 800%;
+    animation: bgFlow 30s ease infinite;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
 }
 
-@keyframes gradientFlow {
+@keyframes bgFlow {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
@@ -46,34 +45,59 @@ canvas {
     inset: 0;
 }
 
-/* صندوق النص */
 .container {
     position: relative;
-    z-index: 5;
-    text-align: center;
-    padding: 35px 55px;
-    border-radius: 22px;
-    background: rgba(0,0,0,0.35);
-    backdrop-filter: blur(12px);
+    z-index: 10;
+    padding: 38px 60px;
+    border-radius: 24px;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(14px);
     box-shadow:
-        0 0 60px rgba(255,255,255,0.15),
-        inset 0 0 30px rgba(255,255,255,0.08);
-    animation: fadeUp 2.5s ease;
+        0 0 80px rgba(255,255,255,0.18),
+        inset 0 0 35px rgba(255,255,255,0.08);
+    text-align: center;
+    animation: fadeUp 3s ease;
 }
 
 .title {
-    font-size: 34px;
+    font-size: 36px;
     margin-bottom: 10px;
-    letter-spacing: 1px;
 }
 
 .subtitle {
     font-size: 18px;
     opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+/* العداد */
+.countdown {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.time-box {
+    background: rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 14px 16px;
+    min-width: 80px;
+    box-shadow: inset 0 0 15px rgba(255,255,255,0.12);
+}
+
+.time-box span {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.time-box small {
+    font-size: 13px;
+    opacity: 0.8;
 }
 
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
+    from { opacity: 0; transform: translateY(45px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 </style>
@@ -81,22 +105,77 @@ canvas {
 
 <body>
 
-<!-- طبقات العمق -->
-<canvas id="back"></canvas>
-<canvas id="front"></canvas>
+<canvas id="canvasBack"></canvas>
+<canvas id="canvasFront"></canvas>
 
 <div class="container">
-    <div class="title">المنصة متوقفة حالياً</div>
+    <div class="title" id="statusTitle">المنصة متوقفة حالياً</div>
     <div class="subtitle">
         يتم الآن معالجة الدرجات ورفعها إلى الكرتات
+    </div>
+
+    <div class="countdown" id="countdown">
+        <div class="time-box">
+            <span id="days">0</span>
+            <small>يوم</small>
+        </div>
+        <div class="time-box">
+            <span id="hours">0</span>
+            <small>ساعة</small>
+        </div>
+        <div class="time-box">
+            <span id="minutes">0</span>
+            <small>دقيقة</small>
+        </div>
+        <div class="time-box">
+            <span id="seconds">0</span>
+            <small>ثانية</small>
+        </div>
     </div>
 </div>
 
 <script>
-const back = document.getElementById("back");
-const front = document.getElementById("front");
-const ctxBack = back.getContext("2d");
-const ctxFront = front.getContext("2d");
+// ====== عداد تنازلي ======
+const targetDate = new Date();
+targetDate.setDate(targetDate.getDate() + 2);
+targetDate.setHours(20, 0, 0, 0); // الأحد الساعة 8 مساءً
+
+function updateCountdown() {
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+        document.getElementById("statusTitle").textContent = "✅ تم فتح المنصة";
+        document.getElementById("countdown").style.display = "none";
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    daysEl.textContent = days;
+    hoursEl.textContent = hours;
+    minutesEl.textContent = minutes;
+    secondsEl.textContent = seconds;
+}
+
+const daysEl = document.getElementById("days");
+const hoursEl = document.getElementById("hours");
+const minutesEl = document.getElementById("minutes");
+const secondsEl = document.getElementById("seconds");
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
+<script>
+// ====== الذرات ثلاثية الأبعاد (كما هي) ======
+const back = document.getElementById("canvasBack");
+const front = document.getElementById("canvasFront");
+const ctxB = back.getContext("2d");
+const ctxF = front.getContext("2d");
 
 function resize() {
     back.width = front.width = innerWidth;
@@ -111,69 +190,58 @@ addEventListener("mousemove", e => {
     mouse.y = e.clientY;
 });
 
-/* جسيمات */
-class Particle {
+class Atom {
     constructor(layer) {
         this.layer = layer;
-        this.reset();
-    }
-
-    reset() {
         this.angle = Math.random() * Math.PI * 2;
-        this.radius = 120 + Math.random() * 220;
-        this.speed = (Math.random() * 0.004 + 0.001) * (Math.random() < 0.5 ? -1 : 1);
-        this.size = this.layer === "front" ? 4 + Math.random() * 3 : 2 + Math.random() * 2;
+        this.radius = 150 + Math.random() * 260;
+        this.z = Math.random();
+        this.speed = (Math.random() * 0.004 + 0.001) * (Math.random()<0.5?-1:1);
+        this.baseSize = layer === "front" ? 4 : 2.5;
         this.hue = Math.random() * 360;
     }
 
-    update(cx, cy) {
+    update(cx, cy, t) {
         this.angle += this.speed;
-        const depth = this.layer === "front" ? 0.05 : 0.02;
-        const dx = (mouse.x - cx) * depth;
-        const dy = (mouse.y - cy) * depth;
+        this.z += Math.sin(t * 0.001 + this.angle) * 0.002;
+        this.z = Math.max(0, Math.min(1, this.z));
+
+        const depth = this.layer === "front" ? 0.06 : 0.03;
+        const dx = (mouse.x - cx) * depth * this.z;
+        const dy = (mouse.y - cy) * depth * this.z;
 
         this.x = cx + Math.cos(this.angle) * this.radius + dx;
         this.y = cy + Math.sin(this.angle) * this.radius + dy;
+        this.size = this.baseSize + this.z * 6;
     }
 
     draw(ctx) {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${this.hue},85%,70%,0.9)`;
-        ctx.shadowBlur = 25;
-        ctx.shadowColor = `hsla(${this.hue},85%,70%,1)`;
+        ctx.fillStyle = `hsla(${this.hue},85%,65%,${0.4 + this.z * 0.6})`;
+        ctx.shadowBlur = 35 * this.z;
+        ctx.shadowColor = `hsla(${this.hue},85%,65%,1)`;
         ctx.fill();
         ctx.shadowBlur = 0;
     }
 }
 
-const backParticles = [];
-const frontParticles = [];
+const backAtoms = Array.from({length:80}, ()=>new Atom("back"));
+const frontAtoms = Array.from({length:55}, ()=>new Atom("front"));
 
-for (let i = 0; i < 60; i++) backParticles.push(new Particle("back"));
-for (let i = 0; i < 45; i++) frontParticles.push(new Particle("front"));
+function animate(t) {
+    ctxB.clearRect(0,0,back.width,back.height);
+    ctxF.clearRect(0,0,front.width,front.height);
 
-function animate() {
-    ctxBack.clearRect(0,0,back.width,back.height);
-    ctxFront.clearRect(0,0,front.width,front.height);
+    const cx = innerWidth/2;
+    const cy = innerHeight/2;
 
-    const cx = innerWidth / 2;
-    const cy = innerHeight / 2;
-
-    backParticles.forEach(p => {
-        p.update(cx, cy);
-        p.draw(ctxBack);
-    });
-
-    frontParticles.forEach(p => {
-        p.update(cx, cy);
-        p.draw(ctxFront);
-    });
+    backAtoms.forEach(a => { a.update(cx,cy,t); a.draw(ctxB); });
+    frontAtoms.forEach(a => { a.update(cx,cy,t); a.draw(ctxF); });
 
     requestAnimationFrame(animate);
 }
-
-animate();
+animate(0);
 </script>
 
 </body>
