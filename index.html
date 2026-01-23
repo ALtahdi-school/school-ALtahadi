@@ -597,7 +597,7 @@ async function searchStudent(saveSession = true) {
     return;
   }
 
-  output.innerHTML = `<p style="color:white">⏳ جاري التحقق...</p>`;
+  output.innerHTML = `<p style="color:white"> جاري التحقق..</p>`;
 
   try {
     let res = await fetch(`${API_URL}?code=${encodeURIComponent(code)}`);
@@ -640,7 +640,7 @@ async function searchStudent(saveSession = true) {
    تسجيل الأستاذ
    ============================ */
 async function loginAsTeacher(email, outputElement, saveSession = true) {
-  outputElement.innerHTML = `<p style="color:white">⏳ جاري التحقق كأستاذ...</p>`;
+  outputElement.innerHTML = `<p style="color:white"> جاري التحقق ...</p>`;
 
   try {
     let res = await fetch(API_URL, {
