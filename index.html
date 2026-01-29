@@ -652,7 +652,7 @@ async function loginAsTeacher(email, outputElement, saveSession = true) {
     let data = await res.json();
 
     if (data.status !== "success") {
-      outputElement.innerHTML = `<p class='error'> المنصة تعمل للطلب الذي دفع الخامس فقط</p>`;
+      outputElement.innerHTML = `<p class='error'> المنصة تعمل بعد اعلان نتائج نصف السنة</p>`;
       return;
     }
 
