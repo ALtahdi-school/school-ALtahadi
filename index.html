@@ -1014,7 +1014,21 @@ function logout() {
 /* ============================
    التحكم في الصفحات
    ============================ */
-function showPage(id, element=null) {
+  function showPage(id, element=null) {
+
+  // ✅ منع الدخول إلى الدرجات إذا الملف الشخصي غير مكتمل
+  if (id === "gradesPage") {
+    if (!isProfileComplete()) {
+      showToast("⚠️ يرجى ملء جميع حقول الملف الشخصي بدقة قبل الدخول إلى صفحة الدرجات", true);
+
+      const profileTab = document.querySelector(
+        '#bottomBar .nav-item[data-page="profilePage"]'
+      );
+      showPage("profilePage", profileTab);
+      return;
+    }
+  }
+
   document.querySelectorAll(".page").forEach(p => p.style.display="none");
   document.getElementById(id).style.display="block";
 
