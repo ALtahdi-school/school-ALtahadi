@@ -116,6 +116,40 @@ header {
   box-sizing: border-box;
   margin-top: 14px;
 }
+/* =============================
+   📌 تثبيت عمود الاسم + الرقم
+   ============================= */
+#teacherGradesTable {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* اسم الطالب (ثابت) */
+#teacherGradesTable th:nth-child(2),
+#teacherGradesTable td:nth-child(2) {
+  position: sticky;
+  right: 0; /* لأن الاتجاه RTL */
+  background: rgba(0, 74, 153, 0.95);
+  z-index: 5;
+  min-width: 160px;
+}
+
+/* رقم التسلسل (ثابت أيضاً) */
+#teacherGradesTable th:nth-child(1),
+#teacherGradesTable td:nth-child(1) {
+  position: sticky;
+  right: 160px;
+  background: rgba(0, 74, 153, 0.85);
+  z-index: 6;
+  min-width: 50px;
+}
+
+/* شكل الحقول المقفلة */
+.teacher-grade-input:disabled {
+  background: rgba(255,255,255,0.5);
+  color: #666;
+  cursor: not-allowed;
+}
 
 /* =============================
    ✅ منع الزوم عند الكتابة (مهم للموبايل)
@@ -873,45 +907,68 @@ function renderTeacherGrades(info) {
       <tr data-row="${st.row}">
         <td>${i+1}</td>
         <td>${st.name}</td>
-<td>
-  <input type="number" inputmode="decimal"
-    data-key="month1"
-    class="teacher-grade-input"
-    value="${g.month1 ?? ""}"
-    disabled>
-</td>
 
-<td>
-  <input type="number" inputmode="decimal"
-    data-key="month2"
-    class="teacher-grade-input"
-    value="${g.month2 ?? ""}"
-    disabled>
-</td>
+        <!-- 🔒 مقفلة -->
+        <td>
+          <input type="number" data-key="month1"
+            class="teacher-grade-input"
+            value="${g.month1 ?? ""}" disabled>
+        </td>
 
-<td>
-  <span class="teacher-grade-static" data-static="term1">
-    ${g.term1 ?? ""}
-  </span>
-</td>
+        <td>
+          <input type="number" data-key="month2"
+            class="teacher-grade-input"
+            value="${g.month2 ?? ""}" disabled>
+        </td>
 
-<td>
-  <input type="number" inputmode="decimal"
-    data-key="mid"
-    class="teacher-grade-input"
-    value="${g.mid ?? ""}"
-    disabled>
-</td>
+        <td>
+          <span class="teacher-grade-static" data-static="term1">
+            ${g.term1 ?? ""}
+          </span>
+        </td>
 
-        <td><input type="number" inputmode="decimal" data-key="month3" class="teacher-grade-input" value="${g.month3 ?? ""}"></td>
-        <td><input type="number" inputmode="decimal" data-key="month4" class="teacher-grade-input" value="${g.month4 ?? ""}"></td>
+        <td>
+          <input type="number" data-key="mid"
+            class="teacher-grade-input"
+            value="${g.mid ?? ""}" disabled>
+        </td>
 
-        <td><span class="teacher-grade-static" data-static="term2">${g.term2 ?? ""}</span></td>
+        <!-- ✅ قابلة للتعديل -->
+        <td>
+          <input type="number" data-key="month3"
+            class="teacher-grade-input"
+            value="${g.month3 ?? ""}">
+        </td>
 
-        <td><input type="number" inputmode="decimal" data-key="final" class="teacher-grade-input" value="${g.final ?? ""}"></td>
+        <td>
+          <input type="number" data-key="month4"
+            class="teacher-grade-input"
+            value="${g.month4 ?? ""}">
+        </td>
 
-        <td><span class="teacher-grade-static" data-static="saay">${g.saay ?? ""}</span></td>
-        <td><span class="teacher-grade-static" data-static="grade">${g.grade ?? ""}</span></td>
+        <td>
+          <span class="teacher-grade-static" data-static="term2">
+            ${g.term2 ?? ""}
+          </span>
+        </td>
+
+        <td>
+          <input type="number" data-key="final"
+            class="teacher-grade-input"
+            value="${g.final ?? ""}">
+        </td>
+
+        <td>
+          <span class="teacher-grade-static" data-static="saay">
+            ${g.saay ?? ""}
+          </span>
+        </td>
+
+        <td>
+          <span class="teacher-grade-static" data-static="grade">
+            ${g.grade ?? ""}
+          </span>
+        </td>
 
         <td><span class="objection-cell">${objection}</span></td>
       </tr>
