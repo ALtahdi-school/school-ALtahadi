@@ -119,31 +119,50 @@ header {
 /* =============================
    📌 تثبيت عمود الاسم + الرقم
    ============================= */
+/* ضروري حتى يشتغل sticky صح */
+.teacher-table-wrapper {
+  margin-top: 12px;
+  overflow-x: auto;
+  position: relative;
+}
+
+/* خلي الجدول separate */
 #teacherGradesTable {
   border-collapse: separate;
   border-spacing: 0;
+  min-width: 1200px;
 }
 
-/* اسم الطالب (ثابت) */
+/* ====== العمود الأول (التسلسل) ====== */
+#teacherGradesTable th:first-child,
+#teacherGradesTable td:first-child {
+  position: sticky;
+  right: 0;
+  z-index: 10;
+  min-width: 60px;
+  background: linear-gradient(135deg,#004a99,#003366);
+  color: #fff;
+  box-shadow: -3px 0 8px rgba(0,0,0,0.3);
+}
+
+/* ====== العمود الثاني (اسم الطالب) ====== */
 #teacherGradesTable th:nth-child(2),
 #teacherGradesTable td:nth-child(2) {
   position: sticky;
-  right: 0; /* لأن الاتجاه RTL */
-  background: rgba(0, 74, 153, 0.95);
-  z-index: 5;
-  min-width: 160px;
+  right: 60px; /* نفس عرض العمود الأول */
+  z-index: 9;
+  min-width: 180px;
+  background: linear-gradient(135deg,#005bbb,#003f7d);
+  color: #fff;
+  box-shadow: -3px 0 8px rgba(0,0,0,0.25);
 }
 
-/* رقم التسلسل (ثابت أيضاً) */
-#teacherGradesTable th:nth-child(1),
-#teacherGradesTable td:nth-child(1) {
+/* حتى يبقى الهيدر ثابت فوقهم */
+#teacherGradesTable thead th {
   position: sticky;
-  right: 160px;
-  background: rgba(0, 74, 153, 0.85);
-  z-index: 6;
-  min-width: 50px;
+  top: 0;
+  z-index: 20;
 }
-
 /* شكل الحقول المقفلة */
 .teacher-grade-input:disabled {
   background: rgba(255,255,255,0.5);
