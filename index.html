@@ -117,52 +117,58 @@ header {
   margin-top: 14px;
 }
 /* =============================
-   📌 تثبيت عمود الاسم + الرقم
+   📌 تثبيت عمود الرقم + الاسم + الهيدر
    ============================= */
-/* ضروري حتى يشتغل sticky صح */
+
+/* حاوية الجدول */
 .teacher-table-wrapper {
   margin-top: 12px;
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: 70vh;
   position: relative;
 }
 
-/* خلي الجدول separate */
+/* لازم يكون separate حتى يشتغل sticky مضبوط */
 #teacherGradesTable {
-  border-collapse: separate;
+  border-collapse: separate !important;
   border-spacing: 0;
-  min-width: 1200px;
+  min-width: 1300px;
 }
 
-/* ====== العمود الأول (التسلسل) ====== */
+/* ===== العمود الأول (ت) ===== */
 #teacherGradesTable th:first-child,
 #teacherGradesTable td:first-child {
   position: sticky;
   right: 0;
-  z-index: 10;
-  min-width: 60px;
+  min-width: 55px;
+  z-index: 30;
   background: linear-gradient(135deg,#004a99,#003366);
   color: #fff;
-  box-shadow: -3px 0 8px rgba(0,0,0,0.3);
+  box-shadow: -4px 0 10px rgba(0,0,0,0.35);
 }
 
-/* ====== العمود الثاني (اسم الطالب) ====== */
+/* ===== العمود الثاني (اسم الطالب) ===== */
 #teacherGradesTable th:nth-child(2),
 #teacherGradesTable td:nth-child(2) {
   position: sticky;
-  right: 60px; /* نفس عرض العمود الأول */
-  z-index: 9;
-  min-width: 180px;
+  right: 55px;
+  min-width: 190px;
+  z-index: 29;
   background: linear-gradient(135deg,#005bbb,#003f7d);
   color: #fff;
-  box-shadow: -3px 0 8px rgba(0,0,0,0.25);
+  box-shadow: -4px 0 10px rgba(0,0,0,0.25);
 }
 
-/* حتى يبقى الهيدر ثابت فوقهم */
+/* ===== تثبيت رأس الجدول ===== */
 #teacherGradesTable thead th {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 50;
+  background: rgba(0,74,153,0.95);
+  backdrop-filter: blur(6px);
 }
+
 /* شكل الحقول المقفلة */
 .teacher-grade-input:disabled {
   background: rgba(255,255,255,0.5);
