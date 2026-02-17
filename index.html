@@ -116,65 +116,6 @@ header {
   box-sizing: border-box;
   margin-top: 14px;
 }
-/* =============================
-   📌 تثبيت عمود الرقم + الاسم + الهيدر
-   ============================= */
-
-/* حاوية الجدول */
-.teacher-table-wrapper {
-  margin-top: 12px;
-  overflow-x: auto;
-  overflow-y: auto;
-  max-height: 70vh;
-  position: relative;
-}
-
-/* لازم يكون separate حتى يشتغل sticky مضبوط */
-#teacherGradesTable {
-  border-collapse: separate !important;
-  border-spacing: 0;
-  min-width: 1300px;
-}
-
-/* ===== العمود الأول (ت) ===== */
-#teacherGradesTable th:first-child,
-#teacherGradesTable td:first-child {
-  position: sticky;
-  right: 0;
-  min-width: 55px;
-  z-index: 30;
-  background: linear-gradient(135deg,#004a99,#003366);
-  color: #fff;
-  box-shadow: -4px 0 10px rgba(0,0,0,0.35);
-}
-
-/* ===== العمود الثاني (اسم الطالب) ===== */
-#teacherGradesTable th:nth-child(2),
-#teacherGradesTable td:nth-child(2) {
-  position: sticky;
-  right: 55px;
-  min-width: 190px;
-  z-index: 29;
-  background: linear-gradient(135deg,#005bbb,#003f7d);
-  color: #fff;
-  box-shadow: -4px 0 10px rgba(0,0,0,0.25);
-}
-
-/* ===== تثبيت رأس الجدول ===== */
-#teacherGradesTable thead th {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(0,74,153,0.95);
-  backdrop-filter: blur(6px);
-}
-
-/* شكل الحقول المقفلة */
-.teacher-grade-input:disabled {
-  background: rgba(255,255,255,0.5);
-  color: #666;
-  cursor: not-allowed;
-}
 
 /* =============================
    ✅ منع الزوم عند الكتابة (مهم للموبايل)
@@ -933,67 +874,45 @@ function renderTeacherGrades(info) {
         <td>${i+1}</td>
         <td>${st.name}</td>
 
-        <!-- 🔒 مقفلة -->
-        <td>
-          <input type="number" data-key="month1"
-            class="teacher-grade-input"
-            value="${g.month1 ?? ""}" disabled>
-        </td>
+   <td>
+  <input type="number" inputmode="decimal"
+    data-key="month1"
+    class="teacher-grade-input"
+    value="${g.month1 ?? ""}"
+    disabled>
+</td>
 
-        <td>
-          <input type="number" data-key="month2"
-            class="teacher-grade-input"
-            value="${g.month2 ?? ""}" disabled>
-        </td>
+<td>
+  <input type="number" inputmode="decimal"
+    data-key="month2"
+    class="teacher-grade-input"
+    value="${g.month2 ?? ""}"
+    disabled>
+</td>
 
-        <td>
-          <span class="teacher-grade-static" data-static="term1">
-            ${g.term1 ?? ""}
-          </span>
-        </td>
+<td>
+  <span class="teacher-grade-static" data-static="term1">
+    ${g.term1 ?? ""}
+  </span>
+</td>
 
-        <td>
-          <input type="number" data-key="mid"
-            class="teacher-grade-input"
-            value="${g.mid ?? ""}" disabled>
-        </td>
+<td>
+  <input type="number" inputmode="decimal"
+    data-key="mid"
+    class="teacher-grade-input"
+    value="${g.mid ?? ""}"
+    disabled>
+</td>
 
-        <!-- ✅ قابلة للتعديل -->
-        <td>
-          <input type="number" data-key="month3"
-            class="teacher-grade-input"
-            value="${g.month3 ?? ""}">
-        </td>
+        <td><input type="number" inputmode="decimal" data-key="month3" class="teacher-grade-input" value="${g.month3 ?? ""}"></td>
+        <td><input type="number" inputmode="decimal" data-key="month4" class="teacher-grade-input" value="${g.month4 ?? ""}"></td>
 
-        <td>
-          <input type="number" data-key="month4"
-            class="teacher-grade-input"
-            value="${g.month4 ?? ""}">
-        </td>
+        <td><span class="teacher-grade-static" data-static="term2">${g.term2 ?? ""}</span></td>
 
-        <td>
-          <span class="teacher-grade-static" data-static="term2">
-            ${g.term2 ?? ""}
-          </span>
-        </td>
+        <td><input type="number" inputmode="decimal" data-key="final" class="teacher-grade-input" value="${g.final ?? ""}"></td>
 
-        <td>
-          <input type="number" data-key="final"
-            class="teacher-grade-input"
-            value="${g.final ?? ""}">
-        </td>
-
-        <td>
-          <span class="teacher-grade-static" data-static="saay">
-            ${g.saay ?? ""}
-          </span>
-        </td>
-
-        <td>
-          <span class="teacher-grade-static" data-static="grade">
-            ${g.grade ?? ""}
-          </span>
-        </td>
+        <td><span class="teacher-grade-static" data-static="saay">${g.saay ?? ""}</span></td>
+        <td><span class="teacher-grade-static" data-static="grade">${g.grade ?? ""}</span></td>
 
         <td><span class="objection-cell">${objection}</span></td>
       </tr>
@@ -1352,5 +1271,3 @@ function loadGrades(st) {
 }
 </script>
 
-</body>
-</html>
