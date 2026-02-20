@@ -652,7 +652,7 @@ async function loginAsTeacher(email, outputElement, saveSession = true) {
     let data = await res.json();
 
     if (data.status !== "success") {
-      outputElement.innerHTML = `<p class='error'>         ❌الكود غير فعال   </p>`;
+      outputElement.innerHTML = `<p class='error'>   انتظر نتائج الاعتراض     </p>`;
       return;
     }
 
