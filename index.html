@@ -524,6 +524,8 @@ th { text-align: right; }
 <script>
 /* ✅ غيّر هذا الرابط فقط بعد نشر الـWeb App */
 const API_URL = "https://script.google.com/macros/s/AKfycbx9v4mQRU4H6hzKoW2R7sYq_gwvmhVB3PdKeRsvhCGEkAVcOjxrtMJNzEIIGklZryt2/exec";
+let currentStudent = null;
+let profileCompleted = false;
 
 /* بيانات الأستاذ */
 let currentTeacher = null;
@@ -538,6 +540,28 @@ let currentStudent = null;
 let currentObjectionSubject = "";
 
 /* Toast */
+function checkProfileCompletion(st) {
+  if (!st) return false;
+
+  const requiredFields = [
+    "المواليد",
+    "رقم ولي الامر",
+    "رقم الطالب",
+    "العنوان",
+    "اسم الام",
+    "المدرسة القادم منها",
+    "الرمز",
+    "رقم الخط"
+  ];
+
+  for (let field of requiredFields) {
+    if (!st[field] || String(st[field]).trim() === "") {
+      return false;
+    }
+  }
+
+  return true;
+}
 function showToast(msg, error=false) {
   const t = document.getElementById("toast");
   t.innerText = msg;
@@ -619,8 +643,13 @@ async function searchStudent(saveSession = true) {
       document.getElementById("bottomBar").style.display = "flex";
       document.getElementById("bottomBar").classList.add("show-bar");
 
-      loadProfile(student);
-      loadGrades(student);
+   profileCompleted = checkProfileCompletion(student);
+
+loadProfile(student);
+
+if (profileCompleted) {
+  loadGrades(student);
+}
 
       const first = document.querySelector('#bottomBar .nav-item[data-page="profilePage"]');
       showPage('profilePage', first);
@@ -1038,6 +1067,17 @@ function logout() {
    التحكم في الصفحات
    ============================ */
 function showPage(id, element=null) {
+
+  // إذا الطالب وملفه غير مكتمل
+  if (
+    currentStudent &&
+    !profileCompleted &&
+    id !== "profilePage"
+  ) {
+    showToast("⚠️ يرجى إكمال الملف الشخصي أولاً", true);
+    return;
+  }
+
   document.querySelectorAll(".page").forEach(p => p.style.display="none");
   document.getElementById(id).style.display="block";
 
@@ -1050,7 +1090,6 @@ function showPage(id, element=null) {
     setTimeout(()=>burst.remove(), 500);
   }
 }
-
 /* ============================
    تحميل الملف الشخصي (طالب)
    ✅ حقل "رقم الخط" يطابق Sh1
@@ -1142,6 +1181,8 @@ async function saveChanges(code) {
     });
 
     showToast("✔ تم حفظ التعديلات");
+    profileCompleted = true;
+loadGrades(currentStudent);
     await searchStudent(false);
   } catch (e) {
     showToast("❌ خطأ اتصال", true);
