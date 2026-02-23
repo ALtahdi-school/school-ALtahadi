@@ -534,7 +534,6 @@ let currentTeacherSubject = "";
 let currentTeacherClassName = "";
 
 /* بيانات الطالب الحالي */
-let currentStudent = null;
 
 /* اعتراض Modal state */
 let currentObjectionSubject = "";
@@ -562,6 +561,7 @@ function checkProfileCompletion(st) {
 
   return true;
 }
+
 function showToast(msg, error=false) {
   const t = document.getElementById("toast");
   t.innerText = msg;
@@ -1066,28 +1066,30 @@ function logout() {
 /* ============================
    التحكم في الصفحات
    ============================ */
-function showPage(id, element=null) {
+function showPage(id, element = null) {
 
-  // إذا الطالب وملفه غير مكتمل
+  // منع فتح الأقسام إذا الملف غير مكتمل
   if (
     currentStudent &&
     !profileCompleted &&
     id !== "profilePage"
   ) {
-    showToast("⚠️ يرجى إكمال الملف الشخصي أولاً", true);
+    showToast("⚠️ يرجى إكمال الملف الشخصي بالبيانات الصحيحة", true);
     return;
   }
 
-  document.querySelectorAll(".page").forEach(p => p.style.display="none");
-  document.getElementById(id).style.display="block";
+  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+  document.getElementById(id).style.display = "block";
 
   document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+
   if (element) {
     element.classList.add("active");
+
     let burst = document.createElement("span");
     burst.classList.add("burst");
     element.appendChild(burst);
-    setTimeout(()=>burst.remove(), 500);
+    setTimeout(() => burst.remove(), 500);
   }
 }
 /* ============================
@@ -1181,7 +1183,7 @@ async function saveChanges(code) {
     });
 
     showToast("✔ تم حفظ التعديلات");
-    profileCompleted = true;
+  profileCompleted = true;
 loadGrades(currentStudent);
     await searchStudent(false);
   } catch (e) {
