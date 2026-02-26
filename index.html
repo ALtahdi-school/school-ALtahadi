@@ -645,13 +645,8 @@ async function searchStudent(saveSession = true) {
       document.getElementById("bottomBar").style.display = "flex";
       document.getElementById("bottomBar").classList.add("show-bar");
 
-   profileCompleted = checkProfileCompletion(student);
-
 loadProfile(student);
-
-if (profileCompleted) {
-  loadGrades(student);
-}
+loadGrades(student);
 
       const first = document.querySelector('#bottomBar .nav-item[data-page="profilePage"]');
       showPage('profilePage', first);
