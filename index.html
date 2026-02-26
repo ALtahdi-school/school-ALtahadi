@@ -526,7 +526,6 @@ th { text-align: right; }
 /* ✅ غيّر هذا الرابط فقط بعد نشر الـWeb App */
 const API_URL = "https://script.google.com/macros/s/AKfycbx9v4mQRU4H6hzKoW2R7sYq_gwvmhVB3PdKeRsvhCGEkAVcOjxrtMJNzEIIGklZryt2/exec";
 let currentStudent = null;
-
 let profileCompleted = false;
 
 /* بيانات الأستاذ */
@@ -541,11 +540,28 @@ let currentTeacherClassName = "";
 let currentObjectionSubject = "";
 
 /* Toast */
+function checkProfileCompletion(st) {
+  if (!st) return false;
 
+  const requiredFields = [
+    "المواليد",
+    "رقم ولي الامر",
+    "رقم الطالب",
+    "العنوان",
+    "اسم الام",
+    "المدرسة القادم منها",
+    "الرمز",
+    "رقم الخط"
+  ];
+
+  for (let field of requiredFields) {
+    if (!st[field] || String(st[field]).trim() === "") {
+      return false;
+    }
+  }
 
   return true;
 }
-
 function showToast(msg, error=false) {
   const t = document.getElementById("toast");
   t.innerText = msg;
@@ -627,7 +643,7 @@ async function searchStudent(saveSession = true) {
       document.getElementById("bottomBar").style.display = "flex";
       document.getElementById("bottomBar").classList.add("show-bar");
 
-profileCompleted = checkProfileCompletion(student);
+   profileCompleted = checkProfileCompletion(student);
 
 loadProfile(student);
 
@@ -1050,30 +1066,28 @@ function logout() {
 /* ============================
    التحكم في الصفحات
    ============================ */
-function showPage(id, element = null) {
+function showPage(id, element=null) {
 
-  // منع فتح الأقسام إذا الملف غير مكتمل
+  // إذا الطالب وملفه غير مكتمل
   if (
     currentStudent &&
     !profileCompleted &&
     id !== "profilePage"
   ) {
-    showToast("⚠️ يرجى إكمال الملف الشخصي بالبيانات الصحيحة", true);
+    showToast("⚠️ يرجى إكمال الملف الشخصي أولاً", true);
     return;
   }
 
-  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
-  document.getElementById(id).style.display = "block";
+  document.querySelectorAll(".page").forEach(p => p.style.display="none");
+  document.getElementById(id).style.display="block";
 
   document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-
   if (element) {
     element.classList.add("active");
-
     let burst = document.createElement("span");
     burst.classList.add("burst");
     element.appendChild(burst);
-    setTimeout(() => burst.remove(), 500);
+    setTimeout(()=>burst.remove(), 500);
   }
 }
 /* ============================
@@ -1113,8 +1127,7 @@ function loadProfile(st) {
         <td><input id="العنوان" class="table-input" value="${st["العنوان"] || ""}"></td>
       </tr>
 
-   <tr>
-  <th>اسم الأم</th>
+ <tr><th>اسم الأم</th>
   <td>
     <input id="اسم الام" class="table-input"
       placeholder="اسم الام الثلاثي"
@@ -1169,7 +1182,7 @@ async function saveChanges(code) {
     });
 
     showToast("✔ تم حفظ التعديلات");
-  profileCompleted = true;
+    profileCompleted = true;
 loadGrades(currentStudent);
     await searchStudent(false);
   } catch (e) {
@@ -1180,9 +1193,6 @@ loadGrades(currentStudent);
 /* ============================
    إصلاح صيغة التاريخ
    ============================ */
-  
-
-  
 function fixDate(dateStr) {
   if (!dateStr) return "";
   let parsed = Date.parse(dateStr);
@@ -1301,3 +1311,5 @@ function loadGrades(st) {
 
   document.getElementById("gradesPage").innerHTML = html;
 }
+</script>
+
