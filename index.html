@@ -524,8 +524,6 @@ th { text-align: right; }
 <script>
 /* ✅ غيّر هذا الرابط فقط بعد نشر الـWeb App */
 const API_URL = "https://script.google.com/macros/s/AKfycbx9v4mQRU4H6hzKoW2R7sYq_gwvmhVB3PdKeRsvhCGEkAVcOjxrtMJNzEIIGklZryt2/exec";
-let currentStudent = null;
-let profileCompleted = false;
 
 /* بيانات الأستاذ */
 let currentTeacher = null;
@@ -534,34 +532,14 @@ let currentTeacherSubject = "";
 let currentTeacherClassName = "";
 
 /* بيانات الطالب الحالي */
+let currentStudent = null;
+let profileCompleted = false;
+
 
 /* اعتراض Modal state */
 let currentObjectionSubject = "";
 
 /* Toast */
-function checkProfileCompletion(st) {
-  if (!st) return false;
-
-  const requiredFields = [
-    "المواليد",
-    "رقم ولي الامر",
-    "رقم الطالب",
-    "العنوان",
-    "اسم الام",
-    "المدرسة القادم منها",
-    "الرمز",
-    "رقم الخط"
-  ];
-
-  for (let field of requiredFields) {
-    if (!st[field] || String(st[field]).trim() === "") {
-      return false;
-    }
-  }
-
-  return true;
-}
-
 function showToast(msg, error=false) {
   const t = document.getElementById("toast");
   t.innerText = msg;
@@ -681,7 +659,7 @@ async function loginAsTeacher(email, outputElement, saveSession = true) {
     let data = await res.json();
 
     if (data.status !== "success") {
-      outputElement.innerHTML = `<p class='error'>   انتظر نتائج الاعتراض     </p>`;
+      outputElement.innerHTML = `<p class='error'>         ❌الكود غير فعال   </p>`;
       return;
     }
 
@@ -903,7 +881,7 @@ function renderTeacherGrades(info) {
         <td>${i+1}</td>
         <td>${st.name}</td>
 
-   <td>
+<td>
   <input type="number" inputmode="decimal"
     data-key="month1"
     class="teacher-grade-input"
@@ -1092,6 +1070,7 @@ function showPage(id, element = null) {
     setTimeout(() => burst.remove(), 500);
   }
 }
+
 /* ============================
    تحميل الملف الشخصي (طالب)
    ✅ حقل "رقم الخط" يطابق Sh1
@@ -1129,14 +1108,12 @@ function loadProfile(st) {
         <td><input id="العنوان" class="table-input" value="${st["العنوان"] || ""}"></td>
       </tr>
 
-   <tr>
-  <th>اسم الأم</th>
-  <td>
-    <input id="اسم الام" class="table-input"
-      placeholder="اسم الام الثلاثي"
-      value="${st["اسم الام"] || ""}">
-  </td>
-</tr>
+      <tr><th>اسم الأم</th>
+            <td><input id="اسم الام" class="table-input" inputmode="numeric"
+            placeholder="اسم الام الثلاثي "
+            value="${st["اسم الام"] || ""}">
+            
+      </tr>
 
       <tr><th>المدرسة القادم منها</th>
         <td><input id="المدرسة القادم منها" class="table-input" value="${st["المدرسة القادم منها"] || ""}"></td>
@@ -1185,9 +1162,10 @@ async function saveChanges(code) {
     });
 
     showToast("✔ تم حفظ التعديلات");
-  profileCompleted = true;
+    profileCompleted = true;
 loadGrades(currentStudent);
     await searchStudent(false);
+    
   } catch (e) {
     showToast("❌ خطأ اتصال", true);
   }
