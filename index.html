@@ -533,8 +533,6 @@ let currentTeacherClassName = "";
 
 /* بيانات الطالب الحالي */
 let currentStudent = null;
-let profileCompleted = false;
-
 
 /* اعتراض Modal state */
 let currentObjectionSubject = "";
@@ -621,13 +619,8 @@ async function searchStudent(saveSession = true) {
       document.getElementById("bottomBar").style.display = "flex";
       document.getElementById("bottomBar").classList.add("show-bar");
 
-   profileCompleted = checkProfileCompletion(student);
-
-loadProfile(student);
-
-if (profileCompleted) {
-  loadGrades(student);
-}
+      loadProfile(student);
+      loadGrades(student);
 
       const first = document.querySelector('#bottomBar .nav-item[data-page="profilePage"]');
       showPage('profilePage', first);
@@ -881,35 +874,12 @@ function renderTeacherGrades(info) {
         <td>${i+1}</td>
         <td>${st.name}</td>
 
-<td>
-  <input type="number" inputmode="decimal"
-    data-key="month1"
-    class="teacher-grade-input"
-    value="${g.month1 ?? ""}"
-    disabled>
-</td>
+        <td><input type="number" inputmode="decimal" data-key="month1" class="teacher-grade-input" value="${g.month1 ?? ""}"></td>
+        <td><input type="number" inputmode="decimal" data-key="month2" class="teacher-grade-input" value="${g.month2 ?? ""}"></td>
 
-<td>
-  <input type="number" inputmode="decimal"
-    data-key="month2"
-    class="teacher-grade-input"
-    value="${g.month2 ?? ""}"
-    disabled>
-</td>
+        <td><span class="teacher-grade-static" data-static="term1">${g.term1 ?? ""}</span></td>
 
-<td>
-  <span class="teacher-grade-static" data-static="term1">
-    ${g.term1 ?? ""}
-  </span>
-</td>
-
-<td>
-  <input type="number" inputmode="decimal"
-    data-key="mid"
-    class="teacher-grade-input"
-    value="${g.mid ?? ""}"
-    disabled>
-</td>
+        <td><input type="number" inputmode="decimal" data-key="mid" class="teacher-grade-input" value="${g.mid ?? ""}"></td>
 
         <td><input type="number" inputmode="decimal" data-key="month3" class="teacher-grade-input" value="${g.month3 ?? ""}"></td>
         <td><input type="number" inputmode="decimal" data-key="month4" class="teacher-grade-input" value="${g.month4 ?? ""}"></td>
@@ -1044,30 +1014,17 @@ function logout() {
 /* ============================
    التحكم في الصفحات
    ============================ */
-function showPage(id, element = null) {
-
-  // منع فتح الأقسام إذا الملف غير مكتمل
-  if (
-    currentStudent &&
-    !profileCompleted &&
-    id !== "profilePage"
-  ) {
-    showToast("⚠️ يرجى إكمال الملف الشخصي بالبيانات الصحيحة", true);
-    return;
-  }
-
-  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
-  document.getElementById(id).style.display = "block";
+function showPage(id, element=null) {
+  document.querySelectorAll(".page").forEach(p => p.style.display="none");
+  document.getElementById(id).style.display="block";
 
   document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
-
   if (element) {
     element.classList.add("active");
-
     let burst = document.createElement("span");
     burst.classList.add("burst");
     element.appendChild(burst);
-    setTimeout(() => burst.remove(), 500);
+    setTimeout(()=>burst.remove(), 500);
   }
 }
 
@@ -1162,10 +1119,7 @@ async function saveChanges(code) {
     });
 
     showToast("✔ تم حفظ التعديلات");
-    profileCompleted = true;
-loadGrades(currentStudent);
     await searchStudent(false);
-    
   } catch (e) {
     showToast("❌ خطأ اتصال", true);
   }
