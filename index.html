@@ -541,25 +541,7 @@ let currentTeacherClassName = "";
 let currentObjectionSubject = "";
 
 /* Toast */
-function checkProfileCompletion(st) {
-  if (!st) return false;
 
-  const requiredFields = [
-    "المواليد",
-    "رقم ولي الامر",
-    "رقم الطالب",
-    "العنوان",
-    "اسم الام",
-    "المدرسة القادم منها",
-    "الرمز",
-    "رقم الخط"
-  ];
-
-  for (let field of requiredFields) {
-    if (!st[field] || String(st[field]).trim() === "") {
-      return false;
-    }
-  }
 
   return true;
 }
@@ -645,8 +627,13 @@ async function searchStudent(saveSession = true) {
       document.getElementById("bottomBar").style.display = "flex";
       document.getElementById("bottomBar").classList.add("show-bar");
 
+profileCompleted = checkProfileCompletion(student);
+
 loadProfile(student);
-loadGrades(student);
+
+if (profileCompleted) {
+  loadGrades(student);
+}
 
       const first = document.querySelector('#bottomBar .nav-item[data-page="profilePage"]');
       showPage('profilePage', first);
@@ -1194,28 +1181,7 @@ loadGrades(currentStudent);
    إصلاح صيغة التاريخ
    ============================ */
   
-function checkProfileCompletion(st) {
-  if (!st) return false;
 
-  const requiredFields = [
-    "المواليد",
-    "رقم ولي الامر",
-    "رقم الطالب",
-    "العنوان",
-    "اسم الام",
-    "المدرسة القادم منها",
-    "الرمز",
-    "رقم الخط"
-  ];
-
-  for (let field of requiredFields) {
-    if (!st[field] || String(st[field]).trim() === "") {
-      return false;
-    }
-  }
-
-  return true;
-}
   
 function fixDate(dateStr) {
   if (!dateStr) return "";
