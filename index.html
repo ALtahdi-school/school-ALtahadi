@@ -1074,7 +1074,7 @@ function showPage(id, element=null) {
     !profileCompleted &&
     id !== "profilePage"
   ) {
-    showToast("⚠️ يرجى إكمال الملف الشخصي أولاً", true);
+    showToast(" يرجى إكمال الملف الشخصي بدقة", true);
     return;
   }
 
@@ -1110,22 +1110,39 @@ function loadProfile(st) {
       <tr><th>الصف</th><td>${st["الصف"] || ""}</td></tr>
       <tr><th>القاعة</th><td>${st["القاعة"] || ""}</td></tr>
 
-      <tr>
-        <th>المواليد</th>
-        <td><input id="المواليد" class="table-input" type="date" value="${fixDate(st["المواليد"])}"></td>
-      </tr>
+     
+       <tr><th>اسم المواليد</th>
+  <td>
+    <input id=" المواليد" class="table-input"
+      placeholder=" ضع التاريخ هنا  "
+      value="${st["المواليد "] || ""}">
+  </td>
+</tr>
 
-      <tr><th>رقم ولي الأمر</th>
-        <td><input id="رقم ولي الامر" class="table-input" value="${st["رقم ولي الامر"] || ""}"></td>
-      </tr>
 
-      <tr><th>رقم الطالب</th>
-        <td><input id="رقم الطالب" class="table-input" value="${st["رقم الطالب"] || ""}"></td>
-      </tr>
+ 
+<tr><th> رقم ولي الامر</th>
+  <td>
+    <input id="رقم ولي الامر " class="table-input"
+      placeholder="رقم ولي الامر فيه واتساب  "
+      value="${st["رقم ولي الامر "] || ""}">
+  </td>
+</tr>
 
-      <tr><th>العنوان</th>
-        <td><input id="العنوان" class="table-input" value="${st["العنوان"] || ""}"></td>
-      </tr>
+<tr><th> رقم الطالب </th>
+  <td>
+    <input id="  رقم الطالب " class="table-input"
+      placeholder="رقم  الطالب (رقمك) فيه واتساب  "
+      value="${st["رقم الطالب  "] || ""}">
+  </td>
+</tr>
+  <tr><th> العنوان </th>
+  <td>
+    <input id="العنوان " class="table-input"
+      placeholder="   ضع عنوان سكن الطالب في اي منطقة   "
+      value="${st[" العنوان  "] || ""}">
+  </td>
+</tr>
 
  <tr><th>اسم الأم</th>
   <td>
@@ -1135,10 +1152,13 @@ function loadProfile(st) {
   </td>
 </tr>
 
-      <tr><th>المدرسة القادم منها</th>
-        <td><input id="المدرسة القادم منها" class="table-input" value="${st["المدرسة القادم منها"] || ""}"></td>
-      </tr>
-
+ <tr><th> المدرسة القادم منها   </th>
+  <td>
+    <input id="رقم ولي المدرسة القادم منها  " class="table-input"
+      placeholder="    ضع اسم المدرسة القادم منها ألى مدرستنا  "
+      value="${st["  المدرسة القادم منها "] || ""}">
+  </td>
+</tr>
       <tr><th>الكتب</th><td>${st["الكتب"] || ""}</td></tr>
       <tr><th>الملاحظات</th><td>${st["الملاحظات"] || ""}</td></tr>
 
@@ -1311,3 +1331,5 @@ function loadGrades(st) {
 
   document.getElementById("gradesPage").innerHTML = html;
 }
+</script>
+
