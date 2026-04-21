@@ -523,8 +523,124 @@ th { text-align: right; }
 </div>
 
 <script>
+
+/* ============================
+   معاينة السعي لجميع المواد لكل الطلاب
+   ============================ */
+async function previewStudentsGrades() {
+  const page = document.getElementById("teacherGradesPage");
+
+  page.innerHTML = `<p style="color:white">⏳ جاري تحميل جميع درجات الطلاب...</p>`;
+  showPage("teacherGradesPage");
+
+  try {
+    let res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify({
+        action: "get_full_class_grades",
+        className: currentTeacherClassName
+      })
+    });
+
+    let data = await res.json();
+
+    if (data.status !== "success") {
+      page.innerHTML = `<p class="error">❌ فشل تحميل البيانات</p>`;
+      return;
+    }
+
+    const students = data.data.students || [];
+
+    const allSubjects = [
+      "الإسلامية",
+      "العربي",
+      "الانكليزي",
+      "الرياضيات",
+      "الكيمياء",
+      "الفيزياء",
+      "الاحياء",
+      "الاجتماعيات",
+      "الحاسوب",
+      "رياضة",
+      "الفنية",
+      "السلوك"
+    ];
+
+    let html = `
+      <button class="teacher-back-btn"
+        onclick="openTeacherClass('${currentTeacherClassName}')">
+        ⬅ رجوع إلى جدول الدرجات
+      </button>
+
+      <div class="teacher-header">معاينة السعي السنوي للطلاب</div>
+
+      <div class="teacher-sub">
+        <div>الصف: <b>${currentTeacherClassName}</b></div>
+        <div>عرض بورد الدرجات </div>
+      </div>
+
+      <div class="teacher-table-wrapper">
+        <table style="width:1600px; max-width:100%; border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th>ت</th>
+              <th>اسم الطالب</th>
+    `;
+
+    allSubjects.forEach(sub => {
+      html += `<th>${sub}</th>`;
+    });
+
+    html += `
+            </tr>
+          </thead>
+          <tbody>
+    `;
+
+    students.forEach((st, index) => {
+      html += `
+        <tr>
+          <td>${index + 1}</td>
+          <td style="white-space:nowrap;">${st.name || "-"}</td>
+      `;
+allSubjects.forEach(sub => {
+  let value = st.saay?.[sub] || "-";
+
+  let style = "";
+
+  if (value !== "-" && !isNaN(value) && Number(value) < 50) {
+    style = `
+      color: #ff1744;
+      font-weight: bold;
+      text-decoration: underline;
+      text-decoration-color: #ff1744;
+      text-decoration-thickness: 2px;
+    `;
+  }
+
+  html += `<td style="${style}">${value}</td>`;
+});
+
+      html += `</tr>`;
+    });
+
+    html += `
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    page.innerHTML = html;
+
+  } catch (err) {
+    page.innerHTML = `<p class="error">❌ خطأ اتصال بالسيرفر</p>`;
+  }
+}
 /* ✅ غيّر هذا الرابط فقط بعد نشر الـWeb App */
-const API_URL = "https://script.google.com/macros/s/AKfycbx9v4mQRU4H6hzKoW2R7sYq_gwvmhVB3PdKeRsvhCGEkAVcOjxrtMJNzEIIGklZryt2/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyafrAPIKTOkaUHPO41rrlwgfbjQTdtY7eybF53bowzAJMANZLatE5zdLazEK3N0jSp/exec";
 let currentStudent = null;
 let profileCompleted = false;
 
@@ -956,10 +1072,15 @@ function renderTeacherGrades(info) {
       </table>
     </div>
 
-    <div class="teacher-actions">
-      <button class="teacher-save-btn" onclick="saveTeacherGrades()">💾 حفظ الدرجات</button>
-      <button class="teacher-clear-btn" onclick="clearObjections()">🧹 حذف الاعتراضات</button>
-    </div>
+<div class="teacher-actions">
+  <button class="teacher-save-btn" onclick="saveTeacherGrades()">💾 حفظ الدرجات</button>
+
+  <button class="teacher-save-btn" onclick="previewStudentsGrades()">
+     معاينة درجات الطلاب
+  </button>
+
+  <button class="teacher-clear-btn" onclick="clearObjections()">🧹 حذف الاعتراضات</button>
+</div>
   `;
 
   page.innerHTML = html;
