@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -524,6 +525,8 @@ th { text-align: right; }
 <script>
 /* ✅ غيّر هذا الرابط فقط بعد نشر الـWeb App */
 const API_URL = "https://script.google.com/macros/s/AKfycbx9v4mQRU4H6hzKoW2R7sYq_gwvmhVB3PdKeRsvhCGEkAVcOjxrtMJNzEIIGklZryt2/exec";
+let currentStudent = null;
+let profileCompleted = false;
 
 /* بيانات الأستاذ */
 let currentTeacher = null;
@@ -532,12 +535,33 @@ let currentTeacherSubject = "";
 let currentTeacherClassName = "";
 
 /* بيانات الطالب الحالي */
-let currentStudent = null;
 
 /* اعتراض Modal state */
 let currentObjectionSubject = "";
 
 /* Toast */
+function checkProfileCompletion(st) {
+  if (!st) return false;
+
+  const requiredFields = [
+    "المواليد",
+    "رقم ولي الامر",
+    "رقم الطالب",
+    "العنوان",
+    "اسم الام",
+    "المدرسة القادم منها",
+    "الرمز",
+    "رقم الخط"
+  ];
+
+  for (let field of requiredFields) {
+    if (!st[field] || String(st[field]).trim() === "") {
+      return false;
+    }
+  }
+
+  return true;
+}
 function showToast(msg, error=false) {
   const t = document.getElementById("toast");
   t.innerText = msg;
@@ -593,7 +617,7 @@ async function searchStudent(saveSession = true) {
   let output = document.getElementById("output");
 
   if (!code) {
-    output.innerHTML = "<p class='error'>⚠️ يرجى إدخال الكود أو الإيميل</p>";
+    output.innerHTML = "<p class='error'>⚠️ يرجى إدخال الكود الخاص بك </p>";
     return;
   }
 
@@ -619,8 +643,13 @@ async function searchStudent(saveSession = true) {
       document.getElementById("bottomBar").style.display = "flex";
       document.getElementById("bottomBar").classList.add("show-bar");
 
-      loadProfile(student);
-      loadGrades(student);
+   profileCompleted = checkProfileCompletion(student);
+
+loadProfile(student);
+
+if (profileCompleted) {
+  loadGrades(student);
+}
 
       const first = document.querySelector('#bottomBar .nav-item[data-page="profilePage"]');
       showPage('profilePage', first);
@@ -652,7 +681,7 @@ async function loginAsTeacher(email, outputElement, saveSession = true) {
     let data = await res.json();
 
     if (data.status !== "success") {
-      outputElement.innerHTML = `<p class='error'>         ❌الكود غير فعال   </p>`;
+      outputElement.innerHTML = `<p class='error'>  الكود الذي كتبته غير فعال     </p>`;
       return;
     }
 
@@ -692,7 +721,7 @@ function loadTeacherClasses() {
       <button onclick="teacherLogout()" class="logout-btn">🔐 خروج</button>
     </div>
 
-    <div class="teacher-header">👨‍🏫 لوحة الأستاذ</div>
+    <div class="teacher-header"> لوحة الأستاذ</div>
     <div class="teacher-sub">
       <div>الاسم: <b>${teacherName}</b></div>
       <div>المادة: <b>${subject}</b></div>
@@ -768,9 +797,12 @@ function calcTerm(a, b) {
 }
 
 /* السعي بدون بوينت */
-function calcSaay(term1, mid, term2, fin) {
-  if (!hasVal(term1) || !hasVal(mid) || !hasVal(term2) || !hasVal(fin)) return "";
-  return Math.ceil((toNum(term1) + toNum(mid) + toNum(term2) + toNum(fin)) / 4);
+function calcSaay(term1, mid, term2) {
+  if (!hasVal(term1) || !hasVal(mid) || !hasVal(term2)) return "";
+
+  return Math.ceil(
+    (toNum(term1) + toNum(mid) + toNum(term2)) / 3
+  );
 }
 
 function calcGrade(saay) {
@@ -795,7 +827,7 @@ function recalcRow(tr) {
 
   const term1 = calcTerm(m1, m2);
   const term2 = calcTerm(m3, m4);
-  const saay  = calcSaay(term1, mid, term2, fin);
+ const saay  = calcSaay(term1, mid, term2);
   const grade = calcGrade(saay);
 
   const s1 = tr.querySelector('[data-static="term1"]');
@@ -836,7 +868,7 @@ function renderTeacherGrades(info) {
   let html = `
     <button class="teacher-back-btn" onclick="loadTeacherClasses()">⬅ رجوع</button>
 
-    <div class="teacher-header">📊 درجات المادة</div>
+    <div class="teacher-header"> درجات المادة</div>
     <div class="teacher-sub">
       <div>الأستاذ: <b>${teacherName}</b></div>
       <div>المادة: <b>${subject}</b></div>
@@ -874,12 +906,35 @@ function renderTeacherGrades(info) {
         <td>${i+1}</td>
         <td>${st.name}</td>
 
-        <td><input type="number" inputmode="decimal" data-key="month1" class="teacher-grade-input" value="${g.month1 ?? ""}"></td>
-        <td><input type="number" inputmode="decimal" data-key="month2" class="teacher-grade-input" value="${g.month2 ?? ""}"></td>
+   <td>
+  <input type="number" inputmode="decimal"
+    data-key="month1"
+    class="teacher-grade-input"
+    value="${g.month1 ?? ""}"
+    disabled>
+</td>
 
-        <td><span class="teacher-grade-static" data-static="term1">${g.term1 ?? ""}</span></td>
+<td>
+  <input type="number" inputmode="decimal"
+    data-key="month2"
+    class="teacher-grade-input"
+    value="${g.month2 ?? ""}"
+    disabled>
+</td>
 
-        <td><input type="number" inputmode="decimal" data-key="mid" class="teacher-grade-input" value="${g.mid ?? ""}"></td>
+<td>
+  <span class="teacher-grade-static" data-static="term1">
+    ${g.term1 ?? ""}
+  </span>
+</td>
+
+<td>
+  <input type="number" inputmode="decimal"
+    data-key="mid"
+    class="teacher-grade-input"
+    value="${g.mid ?? ""}"
+    disabled>
+</td>
 
         <td><input type="number" inputmode="decimal" data-key="month3" class="teacher-grade-input" value="${g.month3 ?? ""}"></td>
         <td><input type="number" inputmode="decimal" data-key="month4" class="teacher-grade-input" value="${g.month4 ?? ""}"></td>
@@ -1015,6 +1070,17 @@ function logout() {
    التحكم في الصفحات
    ============================ */
 function showPage(id, element=null) {
+
+  // إذا الطالب وملفه غير مكتمل
+  if (
+    currentStudent &&
+    !profileCompleted &&
+    id !== "profilePage"
+  ) {
+    showToast(" اكمل تعبئة بيانات ملفك يرجى إكمال الملف الشخصي بدقة في حال ادخال بيانات خطاء سوف يتم طردك من المنصة نهائياً ", true);
+    return;
+  }
+
   document.querySelectorAll(".page").forEach(p => p.style.display="none");
   document.getElementById(id).style.display="block";
 
@@ -1027,7 +1093,6 @@ function showPage(id, element=null) {
     setTimeout(()=>burst.remove(), 500);
   }
 }
-
 /* ============================
    تحميل الملف الشخصي (طالب)
    ✅ حقل "رقم الخط" يطابق Sh1
@@ -1048,34 +1113,55 @@ function loadProfile(st) {
       <tr><th>الصف</th><td>${st["الصف"] || ""}</td></tr>
       <tr><th>القاعة</th><td>${st["القاعة"] || ""}</td></tr>
 
-      <tr>
-        <th>المواليد</th>
-        <td><input id="المواليد" class="table-input" type="date" value="${fixDate(st["المواليد"])}"></td>
-      </tr>
+     
+       <tr><th>المواليد</th>
+  <td>
+    <input id="المواليد" class="table-input"
+      placeholder=" ضع التاريخ هنا يوم - شهر - سنة  "
+      value="${st["المواليد"] || ""}">
+  </td>
+</tr>
 
-      <tr><th>رقم ولي الأمر</th>
-        <td><input id="رقم ولي الامر" class="table-input" value="${st["رقم ولي الامر"] || ""}"></td>
-      </tr>
 
-      <tr><th>رقم الطالب</th>
-        <td><input id="رقم الطالب" class="table-input" value="${st["رقم الطالب"] || ""}"></td>
-      </tr>
+ 
+<tr><th>رقم ولي الامر</th>
+  <td>
+    <input id="رقم ولي الامر" class="table-input"
+      placeholder="رقم ولي الامر فيه واتساب  "
+      value="${st["رقم ولي الامر"] || ""}">
+  </td>
+</tr>
 
-      <tr><th>العنوان</th>
-        <td><input id="العنوان" class="table-input" value="${st["العنوان"] || ""}"></td>
-      </tr>
+<tr><th>رقم الطالب</th>
+  <td>
+    <input id="رقم الطالب" class="table-input"
+      placeholder="رقم  الطالب (رقمك) فيه واتساب  "
+      value="${st["رقم الطالب"] || ""}">
+  </td>
+</tr>
+  <tr><th>العنوان</th>
+  <td>
+    <input id="العنوان" class="table-input"
+      placeholder="   ضع عنوان سكن الطالب في اي منطقة   "
+      value="${st["العنوان"] || ""}">
+  </td>
+</tr>
 
-      <tr><th>اسم الأم</th>
-            <td><input id="اسم الام" class="table-input" inputmode="numeric"
-            placeholder="اسم الام الثلاثي "
-            value="${st["اسم الام"] || ""}">
-            
-      </tr>
+ <tr><th>اسم الأم</th>
+  <td>
+    <input id="اسم الام" class="table-input"
+      placeholder="اسم الام الثلاثي"
+      value="${st["اسم الام"] || ""}">
+  </td>
+</tr>
 
-      <tr><th>المدرسة القادم منها</th>
-        <td><input id="المدرسة القادم منها" class="table-input" value="${st["المدرسة القادم منها"] || ""}"></td>
-      </tr>
-
+ <tr><th>المدرسة القادم منها</th>
+  <td>
+    <input id="المدرسة القادم منها" class="table-input"
+      placeholder="    ضع اسم المدرسة القادم منها ألى مدرستنا  "
+      value="${st["المدرسة القادم منها"] || ""}">
+  </td>
+</tr>
       <tr><th>الكتب</th><td>${st["الكتب"] || ""}</td></tr>
       <tr><th>الملاحظات</th><td>${st["الملاحظات"] || ""}</td></tr>
 
@@ -1087,7 +1173,7 @@ function loadProfile(st) {
       </tr>
 
       <tr><th>رقم الخط</th>
-        <td><input id="رقم الخط" class="table-input" inputmode="numeric"
+        <td><input id="رقم الخط" class="table-input" 
             placeholder="رقم خط النقل الخاص بالطالب"
             value="${st["رقم الخط"] || ""}">
         </td>
@@ -1119,6 +1205,8 @@ async function saveChanges(code) {
     });
 
     showToast("✔ تم حفظ التعديلات");
+    profileCompleted = true;
+loadGrades(currentStudent);
     await searchStudent(false);
   } catch (e) {
     showToast("❌ خطأ اتصال", true);
@@ -1248,5 +1336,3 @@ function loadGrades(st) {
 }
 </script>
 
-</body>
-</html>
