@@ -527,113 +527,105 @@ th { text-align: right; }
 /* ============================
    معاينة السعي لجميع المواد لكل الطلاب
    ============================ */
-function previewStudentsGrades() {
-  let rows = document.querySelectorAll("#teacherGradesTable tbody tr");
+async function previewStudentsGrades() {
+  const page = document.getElementById("teacherGradesPage");
 
-  if (!rows.length) {
-    showToast("لا توجد بيانات للمعاينة", true);
-    return;
-  }
+  page.innerHTML = `<p style="color:white">⏳ جاري تحميل جميع درجات الطلاب...</p>`;
+  showPage("teacherGradesPage");
 
-  /* جميع المواد المطلوبة */
-  const allSubjects = [
-    "الإسلامية",
-    "العربي",
-    "الانكليزي",
-    "الرياضيات",
-    "الكيمياء",
-    "الفيزياء",
-    "الاحياء",
-    "الاجتماعيات",
-    "الحاسوب",
-    "رياضة",
-    "الفنية",
-    "السلوك"
-  ];
-
-  let html = `
-    <button class="teacher-back-btn" onclick="openTeacherClass('${currentTeacherClassName}')">
-      ⬅ رجوع إلى جدول الدرجات
-    </button>
-
-    <div class="teacher-header">معاينة السعي السنوي للطلاب</div>
-    <div class="teacher-sub">
-      <div>الصف: <b>${currentTeacherClassName}</b></div>
-      <div>عرض جميع المواد - السعي فقط</div>
-    </div>
-
-    <div class="teacher-table-wrapper">
-      <table id="previewGradesTable" style="width:1600px; max-width:100%; border-collapse:collapse;">
-        <thead>
-          <tr>
-            <th>ت</th>
-            <th>اسم الطالب</th>
-  `;
-
-  /* رؤوس المواد */
-  allSubjects.forEach(sub => {
-    html += `<th>${sub}</th>`;
-  });
-
-  html += `
-          </tr>
-        </thead>
-        <tbody>
-  `;
-
-  rows.forEach((tr, index) => {
-    const name = tr.children[1]?.innerText || "-";
-
-    html += `
-      <tr>
-        <td>${index + 1}</td>
-        <td style="white-space:nowrap;">${name}</td>
-    `;
-
-    /* قراءة السعي من currentStudent لو موجود من الجدول */
-    allSubjects.forEach(sub => {
-      let saayValue = "-";
-
-      const map = {
-        "الإسلامية": "اسلامية السعي",
-        "العربي": "العربي السعي",
-        "الانكليزي": "الانكليزي السعي",
-        "الرياضيات": "الرياضيات السعي",
-        "الكيمياء": "الكيمياء السعي",
-        "الفيزياء": "الفيزياء السعي",
-        "الاحياء": "الاحياء السعي",
-        "الاجتماعيات": "الاجتماعيات السعي",
-        "الحاسوب": "الحاسوب السعي",
-        "رياضة": "رياضة السعي",
-        "الفنية": "الفنية السعي",
-        "السلوك": "السلوك السعي"
-      };
-
-      const colName = map[sub];
-
-      /* إذا كانت المادة الحالية المفتوحة نأخذ القيمة الحية من الجدول */
-      if (sub === currentTeacherSubject) {
-        saayValue =
-          tr.querySelector('[data-static="saay"]')?.innerText || "-";
-      } else {
-        /* المواد الأخرى تبقى من البيانات المخزنة */
-        saayValue = "-";
-      }
-
-      html += `<td>${saayValue}</td>`;
+  try {
+    let res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify({
+        action: "get_full_class_grades",
+        className: currentTeacherClassName
+      })
     });
 
-    html += `</tr>`;
-  });
+    let data = await res.json();
 
-  html += `
-        </tbody>
-      </table>
-    </div>
-  `;
+    if (data.status !== "success") {
+      page.innerHTML = `<p class="error">❌ فشل تحميل البيانات</p>`;
+      return;
+    }
 
-  document.getElementById("teacherGradesPage").innerHTML = html;
-  showPage("teacherGradesPage");
+    const students = data.data.students || [];
+
+    const allSubjects = [
+      "الإسلامية",
+      "العربي",
+      "الانكليزي",
+      "الرياضيات",
+      "الكيمياء",
+      "الفيزياء",
+      "الاحياء",
+      "الاجتماعيات",
+      "الحاسوب",
+      "رياضة",
+      "الفنية",
+      "السلوك"
+    ];
+
+    let html = `
+      <button class="teacher-back-btn"
+        onclick="openTeacherClass('${currentTeacherClassName}')">
+        ⬅ رجوع إلى جدول الدرجات
+      </button>
+
+      <div class="teacher-header">معاينة السعي السنوي للطلاب</div>
+
+      <div class="teacher-sub">
+        <div>الصف: <b>${currentTeacherClassName}</b></div>
+        <div>عرض جميع المواد - السعي السنوي فقط</div>
+      </div>
+
+      <div class="teacher-table-wrapper">
+        <table style="width:1600px; max-width:100%; border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th>ت</th>
+              <th>اسم الطالب</th>
+    `;
+
+    allSubjects.forEach(sub => {
+      html += `<th>${sub}</th>`;
+    });
+
+    html += `
+            </tr>
+          </thead>
+          <tbody>
+    `;
+
+    students.forEach((st, index) => {
+      html += `
+        <tr>
+          <td>${index + 1}</td>
+          <td style="white-space:nowrap;">${st.name || "-"}</td>
+      `;
+
+      allSubjects.forEach(sub => {
+        const value = st.saay?.[sub] || "-";
+        html += `<td>${value}</td>`;
+      });
+
+      html += `</tr>`;
+    });
+
+    html += `
+          </tbody>
+        </table>
+      </div>
+    `;
+
+    page.innerHTML = html;
+
+  } catch (err) {
+    page.innerHTML = `<p class="error">❌ خطأ اتصال بالسيرفر</p>`;
+  }
 }
 /* ✅ غيّر هذا الرابط فقط بعد نشر الـWeb App */
 const API_URL = "https://script.google.com/macros/s/AKfycbyafrAPIKTOkaUHPO41rrlwgfbjQTdtY7eybF53bowzAJMANZLatE5zdLazEK3N0jSp/exec";
