@@ -579,20 +579,24 @@ async function previewStudentsGrades() {
 
       <div class="teacher-sub">
         <div>الصف: <b>${currentTeacherClassName}</b></div>
-        <div>عرض بورد الدرجات </div>
+        <div>عرض بورد الدرجات</div>
       </div>
 
       <div class="teacher-table-wrapper">
-        <table style="width:1600px; max-width:100%; border-collapse:collapse;">
+        <table style="width:1800px; max-width:100%; border-collapse:collapse;">
           <thead>
             <tr>
               <th>ت</th>
               <th>اسم الطالب</th>
     `;
 
+    // رؤوس المواد
     allSubjects.forEach(sub => {
       html += `<th>${sub}</th>`;
     });
+
+    // 🔥 عمود عدد المواد الراسبة
+    html += `<th>عدد المواد الراسبة</th>`;
 
     html += `
             </tr>
@@ -601,28 +605,53 @@ async function previewStudentsGrades() {
     `;
 
     students.forEach((st, index) => {
+
+      let failCount = 0;
+
+      // حساب عدد المواد الراسبة
+      allSubjects.forEach(sub => {
+        let value = st.saay?.[sub] || "-";
+        if (value !== "-" && !isNaN(value) && Number(value) < 50) {
+          failCount++;
+        }
+      });
+
       html += `
         <tr>
           <td>${index + 1}</td>
           <td style="white-space:nowrap;">${st.name || "-"}</td>
       `;
-allSubjects.forEach(sub => {
-  let value = st.saay?.[sub] || "-";
 
-  let style = "";
+      // عرض المواد مع تلوين الراسب
+      allSubjects.forEach(sub => {
+        let value = st.saay?.[sub] || "-";
 
-  if (value !== "-" && !isNaN(value) && Number(value) < 50) {
-    style = `
-      color: #ff1744;
-      font-weight: bold;
-      text-decoration: underline;
-      text-decoration-color: #ff1744;
-      text-decoration-thickness: 2px;
-    `;
-  }
+        let style = "";
 
-  html += `<td style="${style}">${value}</td>`;
-});
+        if (value !== "-" && !isNaN(value) && Number(value) < 50) {
+          style = `
+            background:#ff9800;
+            color:#000;
+            font-weight:bold;
+            padding:4px;
+            border-radius:6px;
+          `;
+        }
+
+        html += `<td style="${style}">${value}</td>`;
+      });
+
+      // عمود عدد الرسوب
+      html += `
+        <td style="
+          background:#fff3e0;
+          color:#000;
+          font-weight:bold;
+          text-align:center;
+        ">
+          ${failCount}
+        </td>
+      `;
 
       html += `</tr>`;
     });
