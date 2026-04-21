@@ -956,10 +956,15 @@ function renderTeacherGrades(info) {
       </table>
     </div>
 
-    <div class="teacher-actions">
-      <button class="teacher-save-btn" onclick="saveTeacherGrades()">💾 حفظ الدرجات</button>
-      <button class="teacher-clear-btn" onclick="clearObjections()">🧹 حذف الاعتراضات</button>
-    </div>
+<div class="teacher-actions">
+  <button class="teacher-save-btn" onclick="saveTeacherGrades()">💾 حفظ الدرجات</button>
+
+  <button class="teacher-save-btn" onclick="previewStudentsGrades()">
+     معاينة درجات الطلاب
+  </button>
+
+  <button class="teacher-clear-btn" onclick="clearObjections()">🧹 حذف الاعتراضات</button>
+</div>
   `;
 
   page.innerHTML = html;
