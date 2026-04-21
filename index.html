@@ -797,9 +797,12 @@ function calcTerm(a, b) {
 }
 
 /* السعي بدون بوينت */
-function calcSaay(term1, mid, term2, fin) {
-  if (!hasVal(term1) || !hasVal(mid) || !hasVal(term2) || !hasVal(fin)) return "";
-  return Math.ceil((toNum(term1) + toNum(mid) + toNum(term2) + toNum(fin)) / 4);
+function calcSaay(term1, mid, term2) {
+  if (!hasVal(term1) || !hasVal(mid) || !hasVal(term2)) return "";
+
+  return Math.ceil(
+    (toNum(term1) + toNum(mid) + toNum(term2)) / 3
+  );
 }
 
 function calcGrade(saay) {
@@ -824,7 +827,7 @@ function recalcRow(tr) {
 
   const term1 = calcTerm(m1, m2);
   const term2 = calcTerm(m3, m4);
-  const saay  = calcSaay(term1, mid, term2, fin);
+ const saay  = calcSaay(term1, mid, term2);
   const grade = calcGrade(saay);
 
   const s1 = tr.querySelector('[data-static="term1"]');
