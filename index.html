@@ -523,6 +523,79 @@ th { text-align: right; }
 </div>
 
 <script>
+
+/* ============================
+   معاينة درجات الطلاب
+   ============================ */
+function previewStudentsGrades() {
+  let rows = document.querySelectorAll("#teacherGradesTable tbody tr");
+
+  if (!rows.length) {
+    showToast("لا توجد بيانات للمعاينة", true);
+    return;
+  }
+
+  let html = `
+    <button class="teacher-back-btn" onclick="openTeacherClass('${currentTeacherClassName}')">
+      ⬅ رجوع إلى جدول الدرجات
+    </button>
+
+    <div class="teacher-header">معاينة درجات الطلاب</div>
+    <div class="teacher-sub">
+      <div>المادة: <b>${currentTeacherSubject}</b></div>
+      <div>الصف: <b>${currentTeacherClassName}</b></div>
+    </div>
+
+    <div class="teacher-table-wrapper">
+      <table id="previewGradesTable">
+        <thead>
+          <tr>
+            <th>ت</th>
+            <th>اسم الطالب</th>
+            <th>فصل 1</th>
+            <th>نصف السنة</th>
+            <th>فصل 2</th>
+            <th>السعي</th>
+            <th>النهائي</th>
+            <th>التقدير</th>
+          </tr>
+        </thead>
+        <tbody>
+  `;
+
+  rows.forEach((tr, index) => {
+    const name = tr.children[1]?.innerText || "-";
+
+    const term1 = tr.querySelector('[data-static="term1"]')?.innerText || "-";
+    const mid   = tr.querySelector('input[data-key="mid"]')?.value || "-";
+    const term2 = tr.querySelector('[data-static="term2"]')?.innerText || "-";
+    const saay  = tr.querySelector('[data-static="saay"]')?.innerText || "-";
+    const final = tr.querySelector('input[data-key="final"]')?.value || "-";
+    const grade = tr.querySelector('[data-static="grade"]')?.innerText || "-";
+
+    html += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${name}</td>
+        <td>${term1}</td>
+        <td>${mid}</td>
+        <td>${term2}</td>
+        <td>${saay}</td>
+        <td>${final}</td>
+        <td>${grade}</td>
+      </tr>
+    `;
+  });
+
+  html += `
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  document.getElementById("teacherGradesPage").innerHTML = html;
+  showPage("teacherGradesPage");
+}
 /* ✅ غيّر هذا الرابط فقط بعد نشر الـWeb App */
 const API_URL = "https://script.google.com/macros/s/AKfycbx9v4mQRU4H6hzKoW2R7sYq_gwvmhVB3PdKeRsvhCGEkAVcOjxrtMJNzEIIGklZryt2/exec";
 let currentStudent = null;
