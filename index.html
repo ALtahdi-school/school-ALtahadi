@@ -606,11 +606,23 @@ async function previewStudentsGrades() {
           <td>${index + 1}</td>
           <td style="white-space:nowrap;">${st.name || "-"}</td>
       `;
+allSubjects.forEach(sub => {
+  let value = st.saay?.[sub] || "-";
 
-      allSubjects.forEach(sub => {
-        const value = st.saay?.[sub] || "-";
-        html += `<td>${value}</td>`;
-      });
+  let style = "";
+
+  if (value !== "-" && !isNaN(value) && Number(value) < 50) {
+    style = `
+      color: #ff1744;
+      font-weight: bold;
+      text-decoration: underline;
+      text-decoration-color: #ff1744;
+      text-decoration-thickness: 2px;
+    `;
+  }
+
+  html += `<td style="${style}">${value}</td>`;
+});
 
       html += `</tr>`;
     });
