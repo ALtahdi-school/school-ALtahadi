@@ -525,7 +525,7 @@ th { text-align: right; }
 <script>
 
 /* ============================
-   معاينة درجات الطلاب
+   معاينة السعي لجميع المواد لكل الطلاب
    ============================ */
 function previewStudentsGrades() {
   let rows = document.querySelectorAll("#teacherGradesTable tbody tr");
@@ -535,29 +535,47 @@ function previewStudentsGrades() {
     return;
   }
 
+  /* جميع المواد المطلوبة */
+  const allSubjects = [
+    "الإسلامية",
+    "العربي",
+    "الانكليزي",
+    "الرياضيات",
+    "الكيمياء",
+    "الفيزياء",
+    "الاحياء",
+    "الاجتماعيات",
+    "الحاسوب",
+    "رياضة",
+    "الفنية",
+    "السلوك"
+  ];
+
   let html = `
     <button class="teacher-back-btn" onclick="openTeacherClass('${currentTeacherClassName}')">
       ⬅ رجوع إلى جدول الدرجات
     </button>
 
-    <div class="teacher-header">معاينة درجات الطلاب</div>
+    <div class="teacher-header">معاينة السعي السنوي للطلاب</div>
     <div class="teacher-sub">
-      <div>المادة: <b>${currentTeacherSubject}</b></div>
       <div>الصف: <b>${currentTeacherClassName}</b></div>
+      <div>عرض جميع المواد - السعي فقط</div>
     </div>
 
     <div class="teacher-table-wrapper">
-      <table id="previewGradesTable">
+      <table id="previewGradesTable" style="width:1600px; max-width:100%; border-collapse:collapse;">
         <thead>
           <tr>
             <th>ت</th>
             <th>اسم الطالب</th>
-            <th>فصل 1</th>
-            <th>نصف السنة</th>
-            <th>فصل 2</th>
-            <th>السعي</th>
-            <th>النهائي</th>
-            <th>التقدير</th>
+  `;
+
+  /* رؤوس المواد */
+  allSubjects.forEach(sub => {
+    html += `<th>${sub}</th>`;
+  });
+
+  html += `
           </tr>
         </thead>
         <tbody>
@@ -566,25 +584,46 @@ function previewStudentsGrades() {
   rows.forEach((tr, index) => {
     const name = tr.children[1]?.innerText || "-";
 
-    const term1 = tr.querySelector('[data-static="term1"]')?.innerText || "-";
-    const mid   = tr.querySelector('input[data-key="mid"]')?.value || "-";
-    const term2 = tr.querySelector('[data-static="term2"]')?.innerText || "-";
-    const saay  = tr.querySelector('[data-static="saay"]')?.innerText || "-";
-    const final = tr.querySelector('input[data-key="final"]')?.value || "-";
-    const grade = tr.querySelector('[data-static="grade"]')?.innerText || "-";
-
     html += `
       <tr>
         <td>${index + 1}</td>
-        <td>${name}</td>
-        <td>${term1}</td>
-        <td>${mid}</td>
-        <td>${term2}</td>
-        <td>${saay}</td>
-        <td>${final}</td>
-        <td>${grade}</td>
-      </tr>
+        <td style="white-space:nowrap;">${name}</td>
     `;
+
+    /* قراءة السعي من currentStudent لو موجود من الجدول */
+    allSubjects.forEach(sub => {
+      let saayValue = "-";
+
+      const map = {
+        "الإسلامية": "اسلامية السعي",
+        "العربي": "العربي السعي",
+        "الانكليزي": "الانكليزي السعي",
+        "الرياضيات": "الرياضيات السعي",
+        "الكيمياء": "الكيمياء السعي",
+        "الفيزياء": "الفيزياء السعي",
+        "الاحياء": "الاحياء السعي",
+        "الاجتماعيات": "الاجتماعيات السعي",
+        "الحاسوب": "الحاسوب السعي",
+        "رياضة": "رياضة السعي",
+        "الفنية": "الفنية السعي",
+        "السلوك": "السلوك السعي"
+      };
+
+      const colName = map[sub];
+
+      /* إذا كانت المادة الحالية المفتوحة نأخذ القيمة الحية من الجدول */
+      if (sub === currentTeacherSubject) {
+        saayValue =
+          tr.querySelector('[data-static="saay"]')?.innerText || "-";
+      } else {
+        /* المواد الأخرى تبقى من البيانات المخزنة */
+        saayValue = "-";
+      }
+
+      html += `<td>${saayValue}</td>`;
+    });
+
+    html += `</tr>`;
   });
 
   html += `
