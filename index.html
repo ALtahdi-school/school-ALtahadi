@@ -555,18 +555,9 @@ async function previewStudentsGrades() {
     const students = data.data.students || [];
 
     const allSubjects = [
-      "الإسلامية",
-      "العربي",
-      "الانكليزي",
-      "الرياضيات",
-      "الكيمياء",
-      "الفيزياء",
-      "الاحياء",
-      "الاجتماعيات",
-      "الحاسوب",
-      "رياضة",
-      "الفنية",
-      "السلوك"
+      "الإسلامية","العربي","الانكليزي","الرياضيات",
+      "الكيمياء","الفيزياء","الاحياء","الاجتماعيات",
+      "الحاسوب","رياضة","الفنية","السلوك"
     ];
 
     let html = `
@@ -590,12 +581,10 @@ async function previewStudentsGrades() {
               <th>اسم الطالب</th>
     `;
 
-    // رؤوس المواد
     allSubjects.forEach(sub => {
       html += `<th>${sub}</th>`;
     });
 
-    // 🔥 عمود عدد المواد الراسبة
     html += `<th>عدد المواد الراسبة</th>`;
 
     html += `
@@ -608,7 +597,6 @@ async function previewStudentsGrades() {
 
       let failCount = 0;
 
-      // حساب عدد المواد الراسبة
       allSubjects.forEach(sub => {
         let value = st.saay?.[sub] || "-";
         if (value !== "-" && !isNaN(value) && Number(value) < 50) {
@@ -622,26 +610,25 @@ async function previewStudentsGrades() {
           <td style="white-space:nowrap;">${st.name || "-"}</td>
       `;
 
-      // عرض المواد مع تلوين الراسب
       allSubjects.forEach(sub => {
         let value = st.saay?.[sub] || "-";
 
         let style = "";
 
+        // 🔶 أقل من 50 = برتقالي + خط تحت
         if (value !== "-" && !isNaN(value) && Number(value) < 50) {
           style = `
-            background:#ff9800;
-            color:#000;
+            color:#ff9800;
             font-weight:bold;
-            padding:4px;
-            border-radius:6px;
+            text-decoration: underline;
+            text-decoration-color:#ff9800;
+            text-decoration-thickness:2px;
           `;
         }
 
         html += `<td style="${style}">${value}</td>`;
       });
 
-      // عمود عدد الرسوب
       html += `
         <td style="
           background:#fff3e0;
