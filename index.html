@@ -928,13 +928,23 @@ function calcTerm(a, b) {
   return Math.ceil((toNum(a) + toNum(b)) / 2);
 }
 
-/* السعي بدون بوينت */
+/* السعي بدون بوينت *//* السعي مع التحكم بالبوينت
+إذا كان الكسر أقل من 0.5 ينزل
+وإذا كان 0.5 أو أكثر يصعد
+*/
 function calcSaay(term1, mid, term2) {
   if (!hasVal(term1) || !hasVal(mid) || !hasVal(term2)) return "";
 
-  return Math.ceil(
-    (toNum(term1) + toNum(mid) + toNum(term2)) / 3
-  );
+  let result = (toNum(term1) + toNum(mid) + toNum(term2)) / 3;
+
+  let integerPart = Math.floor(result);
+  let decimalPart = result - integerPart;
+
+  if (decimalPart < 0.5) {
+    return integerPart; // ينزل
+  } else {
+    return integerPart + 1; // يصعد
+  }
 }
 
 function calcGrade(saay) {
