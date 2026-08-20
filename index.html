@@ -1,0 +1,2039 @@
+```html
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta name="theme-color" content="#0b5ed7">
+
+    <title>التحدي | مدرسة التحدي</title>
+
+
+    <!-- =========================
+         Google Font
+    ========================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =========================
+         CSS
+    ========================== -->
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        :root {
+
+            --blue: #0b5ed7;
+            --blue-dark: #0647a5;
+            --blue-light: #eaf3ff;
+
+            --red: #d71920;
+
+            --text: #10233f;
+            --muted: #718096;
+
+            --white: #ffffff;
+
+            --border: #e4eaf2;
+
+        }
+
+
+        html,
+        body {
+
+            width: 100%;
+            min-height: 100%;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            font-family: "Cairo", sans-serif;
+
+            background: #ffffff;
+
+            color: var(--text);
+
+            overflow: hidden;
+
+        }
+
+
+        /* =====================================
+           BACKGROUND
+        ===================================== */
+
+        .background {
+
+            position: fixed;
+
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 0;
+
+        }
+
+
+        .blob {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(2px);
+
+            opacity: .65;
+
+        }
+
+
+        .blob-1 {
+
+            width: 360px;
+            height: 360px;
+
+            right: -150px;
+            top: -130px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(11,94,215,.16),
+                    rgba(11,94,215,0)
+                );
+
+            animation: blobMove1 10s ease-in-out infinite;
+
+        }
+
+
+        .blob-2 {
+
+            width: 300px;
+            height: 300px;
+
+            left: -140px;
+            bottom: -120px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(215,25,32,.10),
+                    rgba(215,25,32,0)
+                );
+
+            animation: blobMove2 12s ease-in-out infinite;
+
+        }
+
+
+        .blob-3 {
+
+            width: 180px;
+            height: 180px;
+
+            left: 12%;
+            top: 15%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(11,94,215,.07),
+                    rgba(11,94,215,0)
+                );
+
+            animation: blobMove3 8s ease-in-out infinite;
+
+        }
+
+
+        @keyframes blobMove1 {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0)
+                    scale(1);
+
+            }
+
+            50% {
+
+                transform:
+                    translate(-25px,25px)
+                    scale(1.08);
+
+            }
+
+        }
+
+
+        @keyframes blobMove2 {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0)
+                    scale(1);
+
+            }
+
+            50% {
+
+                transform:
+                    translate(30px,-20px)
+                    scale(1.12);
+
+            }
+
+        }
+
+
+        @keyframes blobMove3 {
+
+            0%,
+            100% {
+
+                transform:
+                    translate(0,0);
+
+            }
+
+            50% {
+
+                transform:
+                    translate(20px,30px);
+
+            }
+
+        }
+
+
+        /* =====================================
+           DECORATIVE LINES
+        ===================================== */
+
+        .line {
+
+            position: absolute;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(11,94,215,.15),
+                    transparent
+                );
+
+            width: 70%;
+
+            left: 15%;
+
+        }
+
+
+        .line-1 {
+
+            top: 18%;
+
+            animation: lineMove 6s ease-in-out infinite;
+
+        }
+
+
+        .line-2 {
+
+            bottom: 18%;
+
+            animation: lineMove 7s ease-in-out infinite reverse;
+
+        }
+
+
+        @keyframes lineMove {
+
+            0%,
+            100% {
+
+                opacity: .3;
+                transform: scaleX(.8);
+
+            }
+
+            50% {
+
+                opacity: .8;
+                transform: scaleX(1);
+
+            }
+
+        }
+
+
+        /* =====================================
+           PAGE
+        ===================================== */
+
+        .page {
+
+            position: relative;
+
+            z-index: 5;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 440px;
+
+            animation:
+                pageEnter
+                .9s
+                cubic-bezier(.22,.61,.36,1)
+                both;
+
+        }
+
+
+        @keyframes pageEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(35px)
+                    scale(.96);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* =====================================
+           LOGO
+        ===================================== */
+
+        .logo-area {
+
+            text-align: center;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .logo-box {
+
+            width: 115px;
+
+            height: 115px;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: relative;
+
+            animation:
+                logoAnimation
+                4s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .logo-box::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: -8px;
+
+            border-radius: 32px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(11,94,215,.13),
+                    transparent 65%
+                );
+
+            animation:
+                logoGlow
+                3s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .logo {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            border-radius: 28px;
+
+        }
+
+
+        .logo-fallback {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 28px;
+
+            color: white;
+
+            font-size: 43px;
+
+            font-weight: 900;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            box-shadow:
+                0 18px 40px
+                rgba(11,94,215,.23);
+
+        }
+
+
+        @keyframes logoAnimation {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-7px)
+                    rotate(1deg);
+
+            }
+
+        }
+
+
+        @keyframes logoGlow {
+
+            0%,
+            100% {
+
+                transform: scale(.95);
+
+                opacity: .5;
+
+            }
+
+            50% {
+
+                transform: scale(1.08);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        /* =====================================
+           TITLE
+        ===================================== */
+
+        .title {
+
+            margin-top: 8px;
+
+            font-size: 34px;
+
+            line-height: 1.2;
+
+            font-weight: 900;
+
+            color: var(--blue-dark);
+
+        }
+
+
+        .title .red {
+
+            color: var(--red);
+
+        }
+
+
+        .subtitle {
+
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =====================================
+           CARD
+        ===================================== */
+
+        .card {
+
+            background:
+                rgba(255,255,255,.96);
+
+            border:
+                1px solid
+                rgba(11,94,215,.09);
+
+            border-radius: 28px;
+
+            padding: 32px 30px;
+
+            box-shadow:
+                0 25px 70px
+                rgba(16,35,63,.10),
+
+                0 5px 20px
+                rgba(11,94,215,.05);
+
+            backdrop-filter: blur(15px);
+
+            animation:
+                cardEnter
+                1s
+                .15s
+                ease
+                both;
+
+        }
+
+
+        @keyframes cardEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        .card-title {
+
+            text-align: center;
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .card-description {
+
+            text-align: center;
+
+            font-size: 12px;
+
+            color: var(--muted);
+
+            margin-bottom: 24px;
+
+        }
+
+
+        /* =====================================
+           INPUT
+        ===================================== */
+
+        .input-container {
+
+            position: relative;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            right: 17px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: var(--blue);
+
+            font-size: 13px;
+
+            font-weight: 900;
+
+            z-index: 2;
+
+        }
+
+
+        .id-input {
+
+            width: 100%;
+
+            height: 60px;
+
+            border:
+                2px solid
+                var(--border);
+
+            border-radius: 17px;
+
+            outline: none;
+
+            background: #f9fbfe;
+
+            color: var(--text);
+
+            font-family:
+                "Cairo",
+                sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            direction: ltr;
+
+            text-align: left;
+
+            padding:
+                0 52px
+                0 18px;
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        .id-input::placeholder {
+
+            color: #a7b2c1;
+
+            font-weight: 500;
+
+        }
+
+
+        .id-input:hover {
+
+            border-color:
+                #cbd8e8;
+
+        }
+
+
+        .id-input:focus {
+
+            border-color:
+                var(--blue);
+
+            background:
+                #ffffff;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(11,94,215,.08);
+
+        }
+
+
+        /* =====================================
+           BUTTON
+        ===================================== */
+
+        .login-button {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 60px;
+
+            border: none;
+
+            border-radius: 17px;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            font-family:
+                "Cairo",
+                sans-serif;
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 13px 28px
+                rgba(11,94,215,.22);
+
+            transition:
+                .25s ease;
+
+        }
+
+
+        .login-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 17px 35px
+                rgba(11,94,215,.29);
+
+        }
+
+
+        .login-button:active {
+
+            transform:
+                scale(.985);
+
+        }
+
+
+        .login-button:disabled {
+
+            cursor:
+                not-allowed;
+
+            opacity:
+                .85;
+
+        }
+
+
+        .button-shine {
+
+            position: absolute;
+
+            top: 0;
+
+            left: -120%;
+
+            width: 80%;
+
+            height: 100%;
+
+            transform:
+                skewX(-20deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.25),
+                    transparent
+                );
+
+            animation:
+                shine
+                4s
+                infinite;
+
+        }
+
+
+        @keyframes shine {
+
+            0% {
+
+                left: -120%;
+
+            }
+
+            35%,
+            100% {
+
+                left: 150%;
+
+            }
+
+        }
+
+
+        .button-content {
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        /* =====================================
+           BUTTON LOADING
+        ===================================== */
+
+        .button-loading {
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+        }
+
+
+        .button-loading.active {
+
+            display: flex;
+
+        }
+
+
+        .button-loading span {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            animation:
+                dots
+                .8s
+                infinite
+                alternate;
+
+        }
+
+
+        .button-loading span:nth-child(2) {
+
+            animation-delay:
+                .2s;
+
+        }
+
+
+        .button-loading span:nth-child(3) {
+
+            animation-delay:
+                .4s;
+
+        }
+
+
+        @keyframes dots {
+
+            from {
+
+                opacity: .3;
+
+                transform:
+                    translateY(0);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(-4px);
+
+            }
+
+        }
+
+
+        /* =====================================
+           MESSAGE
+        ===================================== */
+
+        .message {
+
+            display: none;
+
+            margin-top: 15px;
+
+            padding:
+                12px
+                14px;
+
+            border-radius: 13px;
+
+            text-align: center;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            animation:
+                messageEnter
+                .3s
+                ease;
+
+        }
+
+
+        .message.show {
+
+            display: block;
+
+        }
+
+
+        .message.error {
+
+            color: #a70e15;
+
+            background: #fff1f2;
+
+            border:
+                1px solid
+                #ffd2d5;
+
+        }
+
+
+        .message.success {
+
+            color: #076134;
+
+            background: #edfff5;
+
+            border:
+                1px solid
+                #c7f0d9;
+
+        }
+
+
+        @keyframes messageEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(-6px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #9ba7b7;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+        }
+
+
+        .footer span {
+
+            color: var(--red);
+
+        }
+
+
+        /* =====================================
+           FULL SCREEN LOADER
+        ===================================== */
+
+        .screen-loader {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 99999;
+
+            background:
+                rgba(255,255,255,.97);
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+        }
+
+
+        .screen-loader.active {
+
+            display: flex;
+
+        }
+
+
+        .spinner {
+
+            width: 50px;
+
+            height: 50px;
+
+            border:
+                4px solid
+                #e5eefb;
+
+            border-top-color:
+                var(--blue);
+
+            border-right-color:
+                var(--red);
+
+            border-radius: 50%;
+
+            animation:
+                spin
+                .8s
+                linear
+                infinite;
+
+        }
+
+
+        @keyframes spin {
+
+            to {
+
+                transform:
+                    rotate(360deg);
+
+            }
+
+        }
+
+
+        .loader-text {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: var(--text);
+
+        }
+
+
+        /* =====================================
+           MOBILE
+        ===================================== */
+
+        @media (max-width: 480px) {
+
+            body {
+
+                overflow-y: auto;
+
+            }
+
+
+            .page {
+
+                min-height: 100dvh;
+
+                padding:
+                    18px;
+
+            }
+
+
+            .card {
+
+                padding:
+                    27px
+                    20px;
+
+                border-radius:
+                    24px;
+
+            }
+
+
+            .logo-box {
+
+                width: 92px;
+
+                height: 92px;
+
+            }
+
+
+            .title {
+
+                font-size: 29px;
+
+            }
+
+
+            .subtitle {
+
+                font-size: 12px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         BACKGROUND
+    ====================================== -->
+
+    <div class="background">
+
+        <div class="blob blob-1"></div>
+
+        <div class="blob blob-2"></div>
+
+        <div class="blob blob-3"></div>
+
+        <div class="line line-1"></div>
+
+        <div class="line line-2"></div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         FULL SCREEN LOADER
+    ====================================== -->
+
+    <div
+        class="screen-loader"
+        id="screenLoader"
+    >
+
+        <div class="spinner"></div>
+
+        <div class="loader-text">
+            جاري فتح الحساب...
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         PAGE
+    ====================================== -->
+
+    <main class="page">
+
+        <div class="container">
+
+
+            <!-- =================================
+                 LOGO
+            ================================== -->
+
+            <div class="logo-area">
+
+                <div class="logo-box">
+
+                    <!--
+                        عندما ترسل الشعار:
+                        ضع اسم الصورة logo.png
+                    -->
+
+                    <img
+                        src="logo.png"
+                        alt="شعار مدرسة التحدي"
+                        class="logo"
+                        id="schoolLogo"
+                    >
+
+                    <div
+                        class="logo-fallback"
+                        id="logoFallback"
+                        style="display:none;"
+                    >
+                        ت
+                    </div>
+
+                </div>
+
+
+                <h1 class="title">
+
+                    التحدي<span class="red">.</span>
+
+                </h1>
+
+
+                <p class="subtitle">
+
+                    نظام مدرسة التحدي
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================
+                 LOGIN CARD
+            ================================== -->
+
+            <section class="card">
+
+
+                <h2 class="card-title">
+
+                    تسجيل الدخول
+
+                </h2>
+
+
+                <p class="card-description">
+
+                    أدخل الـ ID الخاص بك للوصول إلى حسابك
+
+                </p>
+
+
+
+                <!-- =================================
+                     FORM
+                ================================== -->
+
+                <form id="loginForm">
+
+
+                    <!-- INPUT -->
+
+                    <div class="input-container">
+
+                        <div class="input-icon">
+                            ID
+                        </div>
+
+
+                        <input
+                            id="userId"
+                            class="id-input"
+                            type="text"
+                            placeholder="أدخل الـ ID"
+                            autocomplete="off"
+                            autocapitalize="characters"
+                            spellcheck="false"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton"
+                    >
+
+                        <div class="button-shine"></div>
+
+
+                        <span
+                            class="button-content"
+                            id="buttonText"
+                        >
+                            تسجيل الدخول
+                        </span>
+
+
+                        <span
+                            class="button-loading"
+                            id="buttonLoading"
+                        >
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </span>
+
+                    </button>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        class="message"
+                        id="message"
+                    ></div>
+
+
+                </form>
+
+            </section>
+
+
+
+            <!-- =================================
+                 FOOTER
+            ================================== -->
+
+            <div class="footer">
+
+                جميع الحقوق محفوظة ©
+                <span>مدرسة التحدي</span>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FIREBASE
+    ========================================== -->
+
+    <script type="module">
+
+
+        /* ========================================
+           FIREBASE SDK
+        ========================================= */
+
+        import {
+            initializeApp
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+        import {
+            getFirestore,
+            doc,
+            getDoc
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+        /* ========================================
+           FIREBASE CONFIG
+        ========================================= */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyAF6kxQoJUan19ZCbGK7djExbouYxOLGF8",
+
+            authDomain:
+                "ahtahadi-e6f61.firebaseapp.com",
+
+            projectId:
+                "ahtahadi-e6f61",
+
+            storageBucket:
+                "ahtahadi-e6f61.firebasestorage.app",
+
+            messagingSenderId:
+                "271225539711",
+
+            appId:
+                "1:271225539711:web:9fc4b45cf14d879b55434a",
+
+            measurementId:
+                "G-S5JDFN1RKF"
+
+        };
+
+
+
+        /* ========================================
+           INITIALIZE FIREBASE
+        ========================================= */
+
+        const app =
+            initializeApp(firebaseConfig);
+
+
+        const db =
+            getFirestore(app);
+
+
+
+        /* ========================================
+           ELEMENTS
+        ========================================= */
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+
+        const userIdInput =
+            document.getElementById(
+                "userId"
+            );
+
+
+        const loginButton =
+            document.getElementById(
+                "loginButton"
+            );
+
+
+        const buttonText =
+            document.getElementById(
+                "buttonText"
+            );
+
+
+        const buttonLoading =
+            document.getElementById(
+                "buttonLoading"
+            );
+
+
+        const message =
+            document.getElementById(
+                "message"
+            );
+
+
+        const screenLoader =
+            document.getElementById(
+                "screenLoader"
+            );
+
+
+        const schoolLogo =
+            document.getElementById(
+                "schoolLogo"
+            );
+
+
+        const logoFallback =
+            document.getElementById(
+                "logoFallback"
+            );
+
+
+
+        /* ========================================
+           LOGO FALLBACK
+        ========================================= */
+
+        schoolLogo.addEventListener(
+            "error",
+            function() {
+
+                schoolLogo.style.display =
+                    "none";
+
+                logoFallback.style.display =
+                    "flex";
+
+            }
+        );
+
+
+
+        /* ========================================
+           ACCOUNT PAGES
+        ========================================= */
+
+        const ACCOUNT_PAGES = {
+
+            admin:
+                "admin.html",
+
+            teacher:
+                "teacher.html",
+
+            student:
+                "student.html",
+
+            accountant:
+                "accountant.html"
+
+        };
+
+
+
+        /* ========================================
+           SHOW MESSAGE
+        ========================================= */
+
+        function showMessage(
+            text,
+            type = "error"
+        ) {
+
+            message.textContent =
+                text;
+
+            message.className =
+                "message show " + type;
+
+        }
+
+
+
+        /* ========================================
+           HIDE MESSAGE
+        ========================================= */
+
+        function hideMessage() {
+
+            message.textContent =
+                "";
+
+            message.className =
+                "message";
+
+        }
+
+
+
+        /* ========================================
+           SET LOADING
+        ========================================= */
+
+        function setLoading(
+            loading
+        ) {
+
+            loginButton.disabled =
+                loading;
+
+
+            if (loading) {
+
+                buttonText.style.display =
+                    "none";
+
+                buttonLoading.classList.add(
+                    "active"
+                );
+
+            } else {
+
+                buttonText.style.display =
+                    "inline";
+
+                buttonLoading.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+
+        /* ========================================
+           CLEAN ID
+        ========================================= */
+
+        function cleanID(value) {
+
+            return value
+                .trim()
+                .toUpperCase();
+
+        }
+
+
+
+        /* ========================================
+           LOGIN
+        ========================================= */
+
+        loginForm.addEventListener(
+            "submit",
+            async function(event) {
+
+                event.preventDefault();
+
+
+                hideMessage();
+
+
+                const id =
+                    cleanID(
+                        userIdInput.value
+                    );
+
+
+                /* ==============================
+                   EMPTY ID
+                ============================== */
+
+                if (!id) {
+
+                    showMessage(
+                        "يرجى إدخال الـ ID."
+                    );
+
+                    userIdInput.focus();
+
+                    return;
+
+                }
+
+
+
+                setLoading(true);
+
+
+
+                try {
+
+
+                    /* ==============================
+                       FIRESTORE DOCUMENT
+                    ============================== */
+
+                    const userReference =
+                        doc(
+                            db,
+                            "users",
+                            id
+                        );
+
+
+                    const userSnapshot =
+                        await getDoc(
+                            userReference
+                        );
+
+
+
+                    /* ==============================
+                       USER NOT FOUND
+                    ============================== */
+
+                    if (
+                        !userSnapshot.exists()
+                    ) {
+
+                        setLoading(false);
+
+                        showMessage(
+                            "هذا الـ ID غير موجود في النظام."
+                        );
+
+                        userIdInput.focus();
+
+                        return;
+
+                    }
+
+
+
+                    /* ==============================
+                       USER DATA
+                    ============================== */
+
+                    const userData =
+                        userSnapshot.data();
+
+
+
+                    /* ==============================
+                       ACCOUNT STATUS
+                    ============================== */
+
+                    if (
+                        userData.active === false
+                    ) {
+
+                        setLoading(false);
+
+                        showMessage(
+                            "هذا الحساب غير مفعل حالياً."
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    /* ==============================
+                       ROLE
+                    ============================== */
+
+                    const role =
+                        String(
+                            userData.role || ""
+                        )
+                        .trim()
+                        .toLowerCase();
+
+
+
+                    /* ==============================
+                       INVALID ROLE
+                    ============================== */
+
+                    if (
+                        !ACCOUNT_PAGES[role]
+                    ) {
+
+                        setLoading(false);
+
+                        showMessage(
+                            "نوع الحساب غير محدد بشكل صحيح."
+                        );
+
+                        console.error(
+                            "Invalid role:",
+                            role
+                        );
+
+                        return;
+
+                    }
+
+
+
+                    /* ==============================
+                       SESSION
+                    ============================== */
+
+                    const session = {
+
+                        id: id,
+
+                        name:
+                            userData.name ||
+                            "",
+
+                        role: role,
+
+                        loginTime:
+                            Date.now()
+
+                    };
+
+
+                    sessionStorage.setItem(
+                        "tahadiUser",
+                        JSON.stringify(
+                            session
+                        )
+                    );
+
+
+
+                    /* ==============================
+                       SUCCESS
+                    ============================== */
+
+                    showMessage(
+                        "تم تسجيل الدخول بنجاح.",
+                        "success"
+                    );
+
+
+
+                    /* ==============================
+                       SCREEN LOADER
+                    ============================== */
+
+                    setTimeout(
+                        function() {
+
+                            screenLoader.classList.add(
+                                "active"
+                            );
+
+                        },
+                        250
+                    );
+
+
+
+                    /* ==============================
+                       REDIRECT
+                    ============================== */
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                ACCOUNT_PAGES[
+                                    role
+                                ];
+
+                        },
+                        750
+                    );
+
+
+                } catch (error) {
+
+
+                    console.error(
+                        "Firebase Error:",
+                        error
+                    );
+
+
+                    setLoading(false);
+
+
+                    /* ==============================
+                       ERROR MESSAGE
+                    ============================== */
+
+                    if (
+                        error.code ===
+                        "permission-denied"
+                    ) {
+
+                        showMessage(
+                            "ليس لديك صلاحية للوصول إلى بيانات تسجيل الدخول."
+                        );
+
+                    } else {
+
+                        showMessage(
+                            "حدث خطأ أثناء الاتصال بـ Firebase. تأكد من اتصال الإنترنت وإعدادات قاعدة البيانات."
+                        );
+
+                    }
+
+                }
+
+            }
+        );
+
+
+
+        /* ========================================
+           AUTO FOCUS
+        ========================================= */
+
+        window.addEventListener(
+            "load",
+            function() {
+
+                setTimeout(
+                    function() {
+
+                        userIdInput.focus();
+
+                    },
+                    700
+                );
+
+            }
+        );
+
+
+
+        /* ========================================
+           PREVENT SPACES AT START
+        ========================================= */
+
+        userIdInput.addEventListener(
+            "input",
+            function() {
+
+                this.value =
+                    this.value
+                        .replace(
+                            /\s/g,
+                            ""
+                        );
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
+```
