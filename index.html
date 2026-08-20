@@ -12,7 +12,688 @@
     >
 
     <meta
-        name="theme-color"
+        name="theme-color"<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b63d8">
+
+<title>التحدي | تسجيل الدخول</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+
+:root{
+    --blue:#0b63d8;
+    --dark:#0649a8;
+    --red:#d71920;
+    --text:#10233f;
+    --muted:#7a8798;
+    --border:#e2e9f2
+}
+
+body{
+    min-height:100dvh;
+    font-family:Cairo,Arial,sans-serif;
+    background:#fff;
+    color:var(--text);
+    overflow:hidden
+}
+
+.app{
+    min-height:100dvh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden
+}
+
+/* الخلفية */
+
+.app:before,
+.app:after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+    animation:float 9s ease-in-out infinite
+}
+
+.app:before{
+    width:300px;
+    height:300px;
+    top:-150px;
+    right:-120px;
+    background:radial-gradient(circle,rgba(11,99,216,.16),transparent 70%)
+}
+
+.app:after{
+    width:280px;
+    height:280px;
+    bottom:-160px;
+    left:-120px;
+    background:radial-gradient(circle,rgba(215,25,32,.10),transparent 70%);
+    animation-delay:-4s
+}
+
+@keyframes float{
+    50%{transform:translate(-15px,20px) scale(1.08)}
+}
+
+/* المحتوى */
+
+.content{
+    width:100%;
+    max-width:430px;
+    padding:20px;
+    text-align:center;
+    animation:enter .7s ease both
+}
+
+@keyframes enter{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:none}
+}
+
+/* الشعار */
+
+.brand{
+    margin-bottom:22px
+}
+
+.logo-box{
+    width:120px;
+    height:120px;
+    margin:0 auto 12px;
+    position:relative;
+    animation:logo 4s ease-in-out infinite
+}
+
+.logo-box:before{
+    content:"";
+    position:absolute;
+    inset:-12px;
+    border-radius:35px;
+    background:radial-gradient(circle,rgba(11,99,216,.13),transparent 70%);
+    animation:pulse 3s ease-in-out infinite
+}
+
+.logo{
+    position:relative;
+    z-index:2;
+    width:100%;
+    height:100%;
+    object-fit:contain
+}
+
+@keyframes logo{
+    50%{transform:translateY(-5px)}
+}
+
+@keyframes pulse{
+    50%{transform:scale(1.1);opacity:.8}
+}
+
+.brand-title{
+    font-size:25px;
+    line-height:1.5;
+    font-weight:900;
+    color:var(--dark)
+}
+
+.brand-subtitle{
+    margin-top:2px;
+    font-size:12px;
+    font-weight:600;
+    color:var(--muted)
+}
+
+/* بطاقة الدخول */
+
+.login-card{
+    width:100%;
+    padding:25px 20px;
+    background:rgba(255,255,255,.97);
+    border:1px solid rgba(11,99,216,.08);
+    border-radius:23px;
+    box-shadow:0 18px 50px rgba(16,35,63,.09);
+    animation:card .8s .1s ease both
+}
+
+@keyframes card{
+    from{opacity:0;transform:translateY(15px) scale(.98)}
+    to{opacity:1;transform:none}
+}
+
+.login-heading{
+    font-size:19px;
+    font-weight:800
+}
+
+.login-description{
+    margin:4px 0 20px;
+    font-size:11px;
+    color:var(--muted);
+    font-weight:500
+}
+
+/* الإدخال */
+
+.input-wrap{
+    text-align:right;
+    margin-bottom:13px
+}
+
+.input-wrap label{
+    display:block;
+    margin:0 3px 6px;
+    font-size:11px;
+    font-weight:700;
+    color:#647286
+}
+
+.input{
+    width:100%;
+    height:55px;
+    border:1.7px solid var(--border);
+    border-radius:15px;
+    outline:none;
+    background:#f9fbfe;
+    padding:0 15px;
+    direction:ltr;
+    text-align:left;
+    font:700 15px Cairo;
+    color:var(--text);
+    transition:.2s
+}
+
+.input::placeholder{
+    color:#a8b3c1;
+    font-size:13px;
+    font-weight:500
+}
+
+.input:focus{
+    border-color:var(--blue);
+    background:#fff;
+    box-shadow:0 0 0 4px rgba(11,99,216,.07)
+}
+
+/* الزر */
+
+.login-btn{
+    width:100%;
+    height:55px;
+    border:0;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--blue),var(--dark));
+    color:#fff;
+    font:800 15px Cairo;
+    cursor:pointer;
+    box-shadow:0 10px 24px rgba(11,99,216,.22);
+    position:relative;
+    overflow:hidden;
+    transition:.18s
+}
+
+.login-btn:active{
+    transform:scale(.98)
+}
+
+.login-btn:disabled{
+    opacity:.75
+}
+
+.shine{
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:70%;
+    height:100%;
+    transform:skewX(-20deg);
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+    animation:shine 4s infinite
+}
+
+@keyframes shine{
+    0%,35%{left:-100%}
+    70%,100%{left:150%}
+}
+
+.btn-text{
+    position:relative;
+    z-index:2
+}
+
+/* التحميل */
+
+.loading{
+    display:none;
+    justify-content:center;
+    gap:5px;
+    position:relative;
+    z-index:2
+}
+
+.loading.active{display:flex}
+
+.loading i{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:#fff;
+    animation:load .7s infinite alternate
+}
+
+.loading i:nth-child(2){animation-delay:.2s}
+.loading i:nth-child(3){animation-delay:.4s}
+
+@keyframes load{
+    to{opacity:.3;transform:translateY(-4px)}
+}
+
+/* الرسائل */
+
+.message{
+    display:none;
+    margin-top:11px;
+    padding:9px;
+    border-radius:11px;
+    font-size:11px;
+    font-weight:700
+}
+
+.message.show{display:block}
+
+.message.error{
+    color:#a20f16;
+    background:#fff1f2;
+    border:1px solid #ffd5d8
+}
+
+.message.success{
+    color:#086033;
+    background:#edfff5;
+    border:1px solid #c8efd9
+}
+
+/* الفوتر */
+
+.footer{
+    margin-top:13px;
+    font-size:9px;
+    color:#a2adba;
+    font-weight:600
+}
+
+.footer strong{color:var(--red)}
+
+/* شاشة التحميل */
+
+.loader{
+    position:fixed;
+    inset:0;
+    z-index:99;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    background:rgba(255,255,255,.98);
+    opacity:0;
+    visibility:hidden;
+    transition:.25s
+}
+
+.loader.show{
+    opacity:1;
+    visibility:visible
+}
+
+.loader-circle{
+    width:45px;
+    height:45px;
+    border:4px solid #e5edfa;
+    border-top-color:var(--blue);
+    border-right-color:var(--red);
+    border-radius:50%;
+    animation:rotate .7s linear infinite
+}
+
+@keyframes rotate{
+    to{transform:rotate(360deg)}
+}
+
+.loader span{
+    font-size:12px;
+    font-weight:800
+}
+
+/* الشاشات الأكبر */
+
+@media(min-width:600px){
+    .content{max-width:500px}
+    .logo-box{width:130px;height:130px}
+    .brand-title{font-size:30px}
+    .login-card{padding:30px 27px}
+}
+
+@media(max-height:680px){
+    .logo-box{
+        width:85px;
+        height:85px;
+        margin-bottom:7px
+    }
+
+    .brand{
+        margin-bottom:12px
+    }
+
+    .brand-title{
+        font-size:22px
+    }
+
+    .login-card{
+        padding:19px
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="app">
+
+    <div class="content">
+
+        <!-- الشعار -->
+        <header class="brand">
+
+            <div class="logo-box">
+                <img
+                    src="logo.png"
+                    alt="شعار مدرسة التحدي"
+                    class="logo"
+                    id="logo"
+                >
+            </div>
+
+            <h1 class="brand-title">
+                مدرسة التحدي الأهلية المختلطة
+            </h1>
+
+            <p class="brand-subtitle">
+                قسم الحوكمة
+            </p>
+
+        </header>
+
+        <!-- تسجيل الدخول -->
+        <section class="login-card">
+
+            <h2 class="login-heading">
+                تسجيل الدخول
+            </h2>
+
+            <p class="login-description">
+                أدخل الـ ID الخاص بك للدخول إلى حسابك
+            </p>
+
+            <form id="loginForm" autocomplete="off">
+
+                <div class="input-wrap">
+
+                    <label for="userId">
+                        معرف الحساب
+                    </label>
+
+                    <input
+                        id="userId"
+                        class="input"
+                        type="text"
+                        placeholder="مثال: STU001"
+                        maxlength="100"
+                        autocomplete="off"
+                        autocapitalize="characters"
+                        spellcheck="false"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    class="login-btn"
+                    id="loginBtn"
+                    type="submit"
+                >
+
+                    <span class="shine"></span>
+
+                    <span class="btn-text" id="btnText">
+                        تسجيل الدخول
+                    </span>
+
+                    <span class="loading" id="loading">
+                        <i></i><i></i><i></i>
+                    </span>
+
+                </button>
+
+                <div id="message" class="message"></div>
+
+            </form>
+
+        </section>
+
+        <footer class="footer">
+            جميع الحقوق محفوظة ©
+            <strong>مدرسة التحدي</strong>
+        </footer>
+
+    </div>
+
+</main>
+
+<!-- تحميل الصفحة -->
+<div class="loader" id="loader">
+    <div class="loader-circle"></div>
+    <span>جاري فتح حسابك...</span>
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* Firebase */
+
+const firebaseConfig = {
+    apiKey:"AIzaSyAF6kxQoJUan19ZCbGK7djExbouYxOLGF8",
+    authDomain:"ahtahadi-e6f61.firebaseapp.com",
+    projectId:"ahtahadi-e6f61",
+    storageBucket:"ahtahadi-e6f61.firebasestorage.app",
+    messagingSenderId:"271225539711",
+    appId:"1:271225539711:web:9fc4b45cf14d879b55434a",
+    measurementId:"G-S5JDFN1RKF"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+/* العناصر */
+
+const form = document.getElementById("loginForm");
+const input = document.getElementById("userId");
+const button = document.getElementById("loginBtn");
+const btnText = document.getElementById("btnText");
+const loading = document.getElementById("loading");
+const message = document.getElementById("message");
+const loader = document.getElementById("loader");
+
+
+/* صفحات الحسابات */
+
+const routes = {
+    admin:"admin.html",
+    teacher:"teacher.html",
+    student:"student.html",
+    accountant:"accountant.html"
+};
+
+
+/* الرسائل */
+
+function showMessage(text,type="error"){
+    message.textContent = text;
+    message.className = `message show ${type}`;
+}
+
+
+/* حالة الزر */
+
+function setLoading(state){
+
+    button.disabled = state;
+
+    btnText.style.display = state ? "none" : "block";
+
+    loading.classList.toggle("active",state);
+}
+
+
+/* تنظيف ID */
+
+input.addEventListener("input",()=>{
+    input.value = input.value
+        .replace(/\s/g,"")
+        .toUpperCase();
+});
+
+
+/* تسجيل الدخول */
+
+form.addEventListener("submit",async e=>{
+
+    e.preventDefault();
+
+    message.className = "message";
+
+    const id = input.value.trim().toUpperCase();
+
+    if(!id){
+        showMessage("يرجى إدخال الـ ID.");
+        input.focus();
+        return;
+    }
+
+    setLoading(true);
+
+    try{
+
+        const snap = await getDoc(
+            doc(db,"users",id)
+        );
+
+        if(!snap.exists()){
+            setLoading(false);
+            showMessage("الـ ID الذي أدخلته غير موجود.");
+            input.focus();
+            return;
+        }
+
+        const data = snap.data();
+
+        if(data.active === false){
+            setLoading(false);
+            showMessage("هذا الحساب غير مفعل حالياً.");
+            return;
+        }
+
+        const role = String(data.role || "")
+            .trim()
+            .toLowerCase();
+
+        if(!routes[role]){
+            setLoading(false);
+            showMessage("تعذر تحديد نوع هذا الحساب.");
+            console.error("Invalid role:",role);
+            return;
+        }
+
+
+        /* حفظ جلسة المستخدم */
+
+        sessionStorage.setItem(
+            "tahadiUser",
+            JSON.stringify({
+                id,
+                name:data.name || "",
+                role,
+                loginTime:Date.now()
+            })
+        );
+
+
+        showMessage(
+            "تم تسجيل الدخول بنجاح.",
+            "success"
+        );
+
+        setTimeout(()=>{
+            loader.classList.add("show");
+        },200);
+
+        setTimeout(()=>{
+            location.href = routes[role];
+        },650);
+
+    }catch(error){
+
+        console.error(error);
+
+        setLoading(false);
+
+        if(error.code === "permission-denied"){
+            showMessage(
+                "لا توجد صلاحية للوصول إلى بيانات الحساب."
+            );
+        }else{
+            showMessage(
+                "حدث خطأ أثناء الاتصال. تأكد من الإنترنت وإعدادات Firebase."
+            );
+        }
+
+    }
+
+});
+
+
+/* التركيز على الحقل */
+
+window.addEventListener("load",()=>{
+    setTimeout(()=>input.focus(),500);
+});
+
+</script>
+
+</body>
+</html>
         content="#0b63d8"
     >
 
