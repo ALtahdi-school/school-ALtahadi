@@ -8,17 +8,35 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
-    <meta name="theme-color" content="#0b5ed7">
+    <meta
+        name="theme-color"
+        content="#0b63d8"
+    >
 
-    <title>التحدي | مدرسة التحدي</title>
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
+
+    <title>التحدي | تسجيل الدخول</title>
 
 
-    <!-- =========================
-         Google Font
-    ========================== -->
+    <!-- =========================================
+         FONT
+    ========================================== -->
 
     <link
         rel="preconnect"
@@ -37,160 +55,217 @@
     >
 
 
-    <!-- =========================
-         CSS
-    ========================== -->
+    <!-- =========================================
+         STYLE
+    ========================================== -->
 
     <style>
 
-        * {
-            margin: 0;
-            padding: 0;
+        /* =========================================
+           RESET
+        ========================================== */
+
+        *,
+        *::before,
+        *::after {
+
             box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+
+            -webkit-tap-highlight-color: transparent;
+
         }
 
 
+        html {
+
+            width: 100%;
+
+            height: 100%;
+
+            background: #ffffff;
+
+        }
+
+
+        body {
+
+            width: 100%;
+
+            min-height: 100dvh;
+
+            font-family:
+                "Cairo",
+                Arial,
+                sans-serif;
+
+            background: #ffffff;
+
+            color: #10233f;
+
+            overflow: hidden;
+
+            -webkit-font-smoothing: antialiased;
+
+        }
+
+
+        button,
+        input {
+
+            font-family:
+                "Cairo",
+                Arial,
+                sans-serif;
+
+        }
+
+
+        /* =========================================
+           VARIABLES
+        ========================================== */
+
         :root {
 
-            --blue: #0b5ed7;
-            --blue-dark: #0647a5;
-            --blue-light: #eaf3ff;
+            --blue: #0b63d8;
+
+            --blue-dark: #0649a8;
+
+            --blue-light: #edf5ff;
 
             --red: #d71920;
 
             --text: #10233f;
-            --muted: #718096;
+
+            --muted: #7a8798;
+
+            --border: #e3eaf3;
 
             --white: #ffffff;
 
-            --border: #e4eaf2;
-
         }
 
 
-        html,
-        body {
+        /* =========================================
+           APP
+        ========================================== */
+
+        .app {
+
+            position: relative;
 
             width: 100%;
-            min-height: 100%;
 
-        }
+            min-height: 100dvh;
 
+            display: flex;
 
-        body {
+            align-items: center;
 
-            min-height: 100vh;
-
-            font-family: "Cairo", sans-serif;
-
-            background: #ffffff;
-
-            color: var(--text);
+            justify-content: center;
 
             overflow: hidden;
 
+            isolation: isolate;
+
         }
 
 
-        /* =====================================
+        /* =========================================
            BACKGROUND
-        ===================================== */
+        ========================================== */
 
         .background {
 
-            position: fixed;
+            position: absolute;
 
             inset: 0;
+
+            z-index: -1;
 
             overflow: hidden;
 
             pointer-events: none;
 
-            z-index: 0;
-
         }
 
 
-        .blob {
+        .background::before {
+
+            content: "";
 
             position: absolute;
 
-            border-radius: 50%;
+            width: 280px;
 
-            filter: blur(2px);
+            height: 280px;
 
-            opacity: .65;
-
-        }
-
-
-        .blob-1 {
-
-            width: 360px;
-            height: 360px;
-
-            right: -150px;
             top: -130px;
 
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(11,94,215,.16),
-                    rgba(11,94,215,0)
-                );
+            right: -110px;
 
-            animation: blobMove1 10s ease-in-out infinite;
-
-        }
-
-
-        .blob-2 {
-
-            width: 300px;
-            height: 300px;
-
-            left: -140px;
-            bottom: -120px;
+            border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(215,25,32,.10),
-                    rgba(215,25,32,0)
+                    rgba(11,99,216,.17) 0%,
+                    rgba(11,99,216,.05) 45%,
+                    transparent 72%
                 );
 
-            animation: blobMove2 12s ease-in-out infinite;
+            animation:
+                backgroundFloat1
+                9s
+                ease-in-out
+                infinite;
 
         }
 
 
-        .blob-3 {
+        .background::after {
 
-            width: 180px;
-            height: 180px;
+            content: "";
 
-            left: 12%;
-            top: 15%;
+            position: absolute;
+
+            width: 260px;
+
+            height: 260px;
+
+            bottom: -150px;
+
+            left: -110px;
+
+            border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(11,94,215,.07),
-                    rgba(11,94,215,0)
+                    rgba(215,25,32,.10) 0%,
+                    rgba(215,25,32,.03) 48%,
+                    transparent 72%
                 );
 
-            animation: blobMove3 8s ease-in-out infinite;
+            animation:
+                backgroundFloat2
+                11s
+                ease-in-out
+                infinite;
 
         }
 
 
-        @keyframes blobMove1 {
+        @keyframes backgroundFloat1 {
 
             0%,
             100% {
 
                 transform:
-                    translate(0,0)
+                    translate3d(0,0,0)
                     scale(1);
 
             }
@@ -198,7 +273,7 @@
             50% {
 
                 transform:
-                    translate(-25px,25px)
+                    translate3d(-18px,22px,0)
                     scale(1.08);
 
             }
@@ -206,13 +281,13 @@
         }
 
 
-        @keyframes blobMove2 {
+        @keyframes backgroundFloat2 {
 
             0%,
             100% {
 
                 transform:
-                    translate(0,0)
+                    translate3d(0,0,0)
                     scale(1);
 
             }
@@ -220,406 +295,139 @@
             50% {
 
                 transform:
-                    translate(30px,-20px)
-                    scale(1.12);
+                    translate3d(25px,-20px,0)
+                    scale(1.1);
 
             }
 
         }
 
 
-        @keyframes blobMove3 {
+        /* =========================================
+           DECORATIVE DOTS
+        ========================================== */
 
-            0%,
-            100% {
-
-                transform:
-                    translate(0,0);
-
-            }
-
-            50% {
-
-                transform:
-                    translate(20px,30px);
-
-            }
-
-        }
-
-
-        /* =====================================
-           DECORATIVE LINES
-        ===================================== */
-
-        .line {
+        .dot {
 
             position: absolute;
 
-            height: 1px;
+            border-radius: 50%;
 
-            background:
-                linear-gradient(
-                    90deg,
-                    transparent,
-                    rgba(11,94,215,.15),
-                    transparent
-                );
+            background: var(--blue);
 
-            width: 70%;
+            opacity: .10;
 
-            left: 15%;
+            animation:
+                dotFloat
+                6s
+                ease-in-out
+                infinite;
 
         }
 
 
-        .line-1 {
+        .dot-1 {
 
-            top: 18%;
+            width: 9px;
 
-            animation: lineMove 6s ease-in-out infinite;
+            height: 9px;
 
-        }
+            top: 17%;
 
-
-        .line-2 {
-
-            bottom: 18%;
-
-            animation: lineMove 7s ease-in-out infinite reverse;
+            left: 12%;
 
         }
 
 
-        @keyframes lineMove {
+        .dot-2 {
+
+            width: 6px;
+
+            height: 6px;
+
+            top: 30%;
+
+            right: 13%;
+
+            animation-delay: -2s;
+
+        }
+
+
+        .dot-3 {
+
+            width: 8px;
+
+            height: 8px;
+
+            bottom: 24%;
+
+            right: 19%;
+
+            animation-delay: -4s;
+
+        }
+
+
+        @keyframes dotFloat {
 
             0%,
             100% {
 
-                opacity: .3;
-                transform: scaleX(.8);
+                transform:
+                    translateY(0);
 
             }
 
             50% {
 
-                opacity: .8;
-                transform: scaleX(1);
+                transform:
+                    translateY(-12px);
 
             }
 
         }
 
 
-        /* =====================================
-           PAGE
-        ===================================== */
+        /* =========================================
+           MAIN CONTENT
+        ========================================== */
 
-        .page {
+        .content {
 
-            position: relative;
+            width: 100%;
 
-            z-index: 5;
-
-            min-height: 100vh;
+            padding:
+                max(20px, env(safe-area-inset-top))
+                20px
+                max(18px, env(safe-area-inset-bottom))
+                20px;
 
             display: flex;
+
+            flex-direction: column;
 
             align-items: center;
 
             justify-content: center;
 
-            padding: 20px;
-
-        }
-
-
-        .container {
-
-            width: 100%;
-
-            max-width: 440px;
-
             animation:
-                pageEnter
-                .9s
+                contentEnter
+                .8s
                 cubic-bezier(.22,.61,.36,1)
                 both;
 
         }
 
 
-        @keyframes pageEnter {
+        @keyframes contentEnter {
 
             from {
 
                 opacity: 0;
 
                 transform:
-                    translateY(35px)
-                    scale(.96);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-
-            }
-
-        }
-
-
-        /* =====================================
-           LOGO
-        ===================================== */
-
-        .logo-area {
-
-            text-align: center;
-
-            margin-bottom: 25px;
-
-        }
-
-
-        .logo-box {
-
-            width: 115px;
-
-            height: 115px;
-
-            margin: auto;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            position: relative;
-
-            animation:
-                logoAnimation
-                4s
-                ease-in-out
-                infinite;
-
-        }
-
-
-        .logo-box::before {
-
-            content: "";
-
-            position: absolute;
-
-            inset: -8px;
-
-            border-radius: 32px;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(11,94,215,.13),
-                    transparent 65%
-                );
-
-            animation:
-                logoGlow
-                3s
-                ease-in-out
-                infinite;
-
-        }
-
-
-        .logo {
-
-            position: relative;
-
-            z-index: 2;
-
-            width: 100%;
-
-            height: 100%;
-
-            object-fit: contain;
-
-            border-radius: 28px;
-
-        }
-
-
-        .logo-fallback {
-
-            position: relative;
-
-            z-index: 2;
-
-            width: 100%;
-
-            height: 100%;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border-radius: 28px;
-
-            color: white;
-
-            font-size: 43px;
-
-            font-weight: 900;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--blue),
-                    var(--blue-dark)
-                );
-
-            box-shadow:
-                0 18px 40px
-                rgba(11,94,215,.23);
-
-        }
-
-
-        @keyframes logoAnimation {
-
-            0%,
-            100% {
-
-                transform:
-                    translateY(0)
-                    rotate(0deg);
-
-            }
-
-            50% {
-
-                transform:
-                    translateY(-7px)
-                    rotate(1deg);
-
-            }
-
-        }
-
-
-        @keyframes logoGlow {
-
-            0%,
-            100% {
-
-                transform: scale(.95);
-
-                opacity: .5;
-
-            }
-
-            50% {
-
-                transform: scale(1.08);
-
-                opacity: 1;
-
-            }
-
-        }
-
-
-        /* =====================================
-           TITLE
-        ===================================== */
-
-        .title {
-
-            margin-top: 8px;
-
-            font-size: 34px;
-
-            line-height: 1.2;
-
-            font-weight: 900;
-
-            color: var(--blue-dark);
-
-        }
-
-
-        .title .red {
-
-            color: var(--red);
-
-        }
-
-
-        .subtitle {
-
-            margin-top: 5px;
-
-            color: var(--muted);
-
-            font-size: 13px;
-
-            font-weight: 600;
-
-        }
-
-
-        /* =====================================
-           CARD
-        ===================================== */
-
-        .card {
-
-            background:
-                rgba(255,255,255,.96);
-
-            border:
-                1px solid
-                rgba(11,94,215,.09);
-
-            border-radius: 28px;
-
-            padding: 32px 30px;
-
-            box-shadow:
-                0 25px 70px
-                rgba(16,35,63,.10),
-
-                0 5px 20px
-                rgba(11,94,215,.05);
-
-            backdrop-filter: blur(15px);
-
-            animation:
-                cardEnter
-                1s
-                .15s
-                ease
-                both;
-
-        }
-
-
-        @keyframes cardEnter {
-
-            from {
-
-                opacity: 0;
-
-                transform:
-                    translateY(20px);
+                    translateY(25px);
 
             }
 
@@ -635,41 +443,337 @@
         }
 
 
-        .card-title {
+        /* =========================================
+           LOGO
+        ========================================== */
+
+        .brand {
+
+            width: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
 
             text-align: center;
 
-            font-size: 19px;
-
-            font-weight: 800;
-
-            margin-bottom: 4px;
+            margin-bottom: 22px;
 
         }
 
 
-        .card-description {
-
-            text-align: center;
-
-            font-size: 12px;
-
-            color: var(--muted);
-
-            margin-bottom: 24px;
-
-        }
-
-
-        /* =====================================
-           INPUT
-        ===================================== */
-
-        .input-container {
+        .logo-wrapper {
 
             position: relative;
 
-            margin-bottom: 16px;
+            width: 100px;
+
+            height: 100px;
+
+            margin-bottom: 11px;
+
+            animation:
+                logoFloat
+                4s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .logo-wrapper::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: -12px;
+
+            border-radius: 31px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(11,99,216,.12),
+                    transparent 68%
+                );
+
+            animation:
+                logoPulse
+                3s
+                ease-in-out
+                infinite;
+
+        }
+
+
+        .logo {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: block;
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            border-radius: 25px;
+
+        }
+
+
+        .logo-fallback {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            height: 100%;
+
+            border-radius: 25px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #ffffff;
+
+            font-size: 40px;
+
+            font-weight: 900;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            box-shadow:
+                0 15px 35px
+                rgba(11,99,216,.23);
+
+        }
+
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+
+                transform:
+                    translateY(0);
+
+            }
+
+            50% {
+
+                transform:
+                    translateY(-6px);
+
+            }
+
+        }
+
+
+        @keyframes logoPulse {
+
+            0%,
+            100% {
+
+                transform:
+                    scale(.95);
+
+                opacity: .45;
+
+            }
+
+            50% {
+
+                transform:
+                    scale(1.08);
+
+                opacity: .9;
+
+            }
+
+        }
+
+
+        /* =========================================
+           BRAND TEXT
+        ========================================== */
+
+        .brand-title {
+
+            font-size: 30px;
+
+            line-height: 1.2;
+
+            font-weight: 900;
+
+            color: var(--blue-dark);
+
+            letter-spacing: -.5px;
+
+        }
+
+
+        .brand-title b {
+
+            color: var(--red);
+
+        }
+
+
+        .brand-subtitle {
+
+            margin-top: 4px;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            color: var(--muted);
+
+        }
+
+
+        /* =========================================
+           LOGIN CARD
+        ========================================== */
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 390px;
+
+            padding:
+                26px
+                21px
+                24px;
+
+            background:
+                rgba(255,255,255,.97);
+
+            border:
+                1px solid
+                rgba(11,99,216,.08);
+
+            border-radius: 24px;
+
+            box-shadow:
+                0 20px 55px
+                rgba(16,35,63,.09);
+
+            animation:
+                cardEnter
+                .9s
+                .1s
+                ease
+                both;
+
+        }
+
+
+        @keyframes cardEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(18px)
+                    scale(.98);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* =========================================
+           CARD TEXT
+        ========================================== */
+
+        .login-heading {
+
+            text-align: center;
+
+            font-size: 18px;
+
+            font-weight: 800;
+
+            color: var(--text);
+
+        }
+
+
+        .login-description {
+
+            text-align: center;
+
+            margin-top: 4px;
+
+            margin-bottom: 21px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            font-weight: 500;
+
+        }
+
+
+        /* =========================================
+           INPUT
+        ========================================== */
+
+        .input-wrapper {
+
+            position: relative;
+
+            width: 100%;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .input-label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            padding-right: 3px;
+
+            font-size: 11px;
+
+            color: #647286;
+
+            font-weight: 700;
 
         }
 
@@ -678,45 +782,50 @@
 
             position: absolute;
 
-            right: 17px;
+            right: 15px;
 
-            top: 50%;
+            bottom: 0;
 
-            transform:
-                translateY(-50%);
+            width: 44px;
+
+            height: 56px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
 
             color: var(--blue);
 
-            font-size: 13px;
+            font-size: 11px;
 
             font-weight: 900;
 
-            z-index: 2;
+            pointer-events: none;
 
         }
 
 
         .id-input {
 
+            display: block;
+
             width: 100%;
 
-            height: 60px;
+            height: 56px;
 
             border:
-                2px solid
+                1.8px solid
                 var(--border);
 
-            border-radius: 17px;
+            border-radius: 15px;
 
             outline: none;
 
             background: #f9fbfe;
 
             color: var(--text);
-
-            font-family:
-                "Cairo",
-                sans-serif;
 
             font-size: 15px;
 
@@ -727,28 +836,30 @@
             text-align: left;
 
             padding:
-                0 52px
-                0 18px;
+                0
+                48px
+                0
+                15px;
 
             transition:
-                .25s ease;
+                border-color .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+
+            -webkit-appearance: none;
+
+            appearance: none;
 
         }
 
 
         .id-input::placeholder {
 
-            color: #a7b2c1;
+            color: #a8b3c1;
+
+            font-size: 13px;
 
             font-weight: 500;
-
-        }
-
-
-        .id-input:hover {
-
-            border-color:
-                #cbd8e8;
 
         }
 
@@ -763,41 +874,43 @@
 
             box-shadow:
                 0 0 0 4px
-                rgba(11,94,215,.08);
+                rgba(11,99,216,.07);
 
         }
 
 
-        /* =====================================
-           BUTTON
-        ===================================== */
+        /* =========================================
+           LOGIN BUTTON
+        ========================================== */
 
         .login-button {
 
             position: relative;
 
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
             width: 100%;
 
-            height: 60px;
+            height: 56px;
 
-            border: none;
+            border: 0;
 
-            border-radius: 17px;
-
-            color: #ffffff;
+            border-radius: 15px;
 
             background:
                 linear-gradient(
                     135deg,
-                    var(--blue),
-                    var(--blue-dark)
+                    #0b63d8,
+                    #0649a8
                 );
 
-            font-family:
-                "Cairo",
-                sans-serif;
+            color: #ffffff;
 
-            font-size: 16px;
+            font-size: 15px;
 
             font-weight: 800;
 
@@ -806,23 +919,17 @@
             overflow: hidden;
 
             box-shadow:
-                0 13px 28px
-                rgba(11,94,215,.22);
+                0 11px 25px
+                rgba(11,99,216,.22);
 
             transition:
-                .25s ease;
+                transform .18s ease,
+                box-shadow .18s ease,
+                opacity .18s ease;
 
-        }
+            -webkit-user-select: none;
 
-
-        .login-button:hover {
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 17px 35px
-                rgba(11,94,215,.29);
+            user-select: none;
 
         }
 
@@ -830,18 +937,21 @@
         .login-button:active {
 
             transform:
-                scale(.985);
+                scale(.98);
+
+            box-shadow:
+                0 6px 15px
+                rgba(11,99,216,.18);
 
         }
 
 
         .login-button:disabled {
 
-            cursor:
-                not-allowed;
+            opacity: .8;
 
-            opacity:
-                .85;
+            cursor:
+                default;
 
         }
 
@@ -852,9 +962,9 @@
 
             top: 0;
 
-            left: -120%;
+            left: -110%;
 
-            width: 80%;
+            width: 70%;
 
             height: 100%;
 
@@ -871,7 +981,8 @@
 
             animation:
                 shine
-                4s
+                4.5s
+                ease-in-out
                 infinite;
 
         }
@@ -879,13 +990,14 @@
 
         @keyframes shine {
 
-            0% {
+            0%,
+            35% {
 
-                left: -120%;
+                left: -110%;
 
             }
 
-            35%,
+            70%,
             100% {
 
                 left: 150%;
@@ -895,7 +1007,7 @@
         }
 
 
-        .button-content {
+        .button-text {
 
             position: relative;
 
@@ -904,11 +1016,15 @@
         }
 
 
-        /* =====================================
-           BUTTON LOADING
-        ===================================== */
+        /* =========================================
+           LOADING DOTS
+        ========================================== */
 
-        .button-loading {
+        .loading {
+
+            position: relative;
+
+            z-index: 2;
 
             display: none;
 
@@ -921,33 +1037,34 @@
         }
 
 
-        .button-loading.active {
+        .loading.active {
 
             display: flex;
 
         }
 
 
-        .button-loading span {
+        .loading span {
 
-            width: 7px;
+            width: 6px;
 
-            height: 7px;
+            height: 6px;
 
             border-radius: 50%;
 
-            background: white;
+            background:
+                #ffffff;
 
             animation:
-                dots
-                .8s
+                loadingDots
+                .75s
                 infinite
                 alternate;
 
         }
 
 
-        .button-loading span:nth-child(2) {
+        .loading span:nth-child(2) {
 
             animation-delay:
                 .2s;
@@ -955,7 +1072,7 @@
         }
 
 
-        .button-loading span:nth-child(3) {
+        .loading span:nth-child(3) {
 
             animation-delay:
                 .4s;
@@ -963,11 +1080,11 @@
         }
 
 
-        @keyframes dots {
+        @keyframes loadingDots {
 
             from {
 
-                opacity: .3;
+                opacity: .25;
 
                 transform:
                     translateY(0);
@@ -986,32 +1103,31 @@
         }
 
 
-        /* =====================================
+        /* =========================================
            MESSAGE
-        ===================================== */
+        ========================================== */
 
         .message {
 
             display: none;
 
-            margin-top: 15px;
+            width: 100%;
+
+            margin-top: 12px;
 
             padding:
-                12px
-                14px;
+                10px
+                12px;
 
-            border-radius: 13px;
+            border-radius: 12px;
 
             text-align: center;
 
-            font-size: 12px;
+            font-size: 11px;
+
+            line-height: 1.7;
 
             font-weight: 700;
-
-            animation:
-                messageEnter
-                .3s
-                ease;
 
         }
 
@@ -1020,43 +1136,51 @@
 
             display: block;
 
+            animation:
+                messageIn
+                .25s
+                ease
+                both;
+
         }
 
 
         .message.error {
 
-            color: #a70e15;
+            color: #a20f16;
 
-            background: #fff1f2;
+            background:
+                #fff1f2;
 
             border:
                 1px solid
-                #ffd2d5;
+                #ffd5d8;
 
         }
 
 
         .message.success {
 
-            color: #076134;
+            color: #086033;
 
-            background: #edfff5;
+            background:
+                #edfff5;
 
             border:
                 1px solid
-                #c7f0d9;
+                #c8efd9;
 
         }
 
 
-        @keyframes messageEnter {
+        @keyframes messageIn {
 
             from {
 
                 opacity: 0;
 
                 transform:
-                    translateY(-6px);
+                    translateY(-4px);
 
             }
 
@@ -1072,48 +1196,46 @@
         }
 
 
-        /* =====================================
+        /* =========================================
            FOOTER
-        ===================================== */
+        ========================================== */
 
         .footer {
 
+            margin-top: 15px;
+
             text-align: center;
 
-            margin-top: 18px;
+            color: #a2adba;
 
-            color: #9ba7b7;
-
-            font-size: 10px;
+            font-size: 9px;
 
             font-weight: 600;
 
         }
 
 
-        .footer span {
+        .footer strong {
 
-            color: var(--red);
+            color:
+                var(--red);
 
         }
 
 
-        /* =====================================
+        /* =========================================
            FULL SCREEN LOADER
-        ===================================== */
+        ========================================== */
 
-        .screen-loader {
+        .page-loader {
 
             position: fixed;
 
             inset: 0;
 
-            z-index: 99999;
+            z-index: 1000;
 
-            background:
-                rgba(255,255,255,.97);
-
-            display: none;
+            display: flex;
 
             align-items: center;
 
@@ -1121,27 +1243,40 @@
 
             flex-direction: column;
 
-            gap: 15px;
+            gap: 14px;
+
+            background:
+                rgba(255,255,255,.98);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition:
+                opacity .25s ease,
+                visibility .25s ease;
 
         }
 
 
-        .screen-loader.active {
+        .page-loader.active {
 
-            display: flex;
+            opacity: 1;
+
+            visibility: visible;
 
         }
 
 
-        .spinner {
+        .loader-circle {
 
-            width: 50px;
+            width: 46px;
 
-            height: 50px;
+            height: 46px;
 
             border:
                 4px solid
-                #e5eefb;
+                #e6eefb;
 
             border-top-color:
                 var(--blue);
@@ -1152,15 +1287,26 @@
             border-radius: 50%;
 
             animation:
-                spin
-                .8s
+                rotateLoader
+                .75s
                 linear
                 infinite;
 
         }
 
 
-        @keyframes spin {
+        .loader-title {
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            color: var(--text);
+
+        }
+
+
+        @keyframes rotateLoader {
 
             to {
 
@@ -1172,75 +1318,153 @@
         }
 
 
-        .loader-text {
+        /* =========================================
+           SMALL PHONES
+        ========================================== */
 
-            font-size: 13px;
+        @media (max-height: 680px) {
 
-            font-weight: 700;
+            .content {
 
-            color: var(--text);
+                padding-top: 12px;
 
-        }
-
-
-        /* =====================================
-           MOBILE
-        ===================================== */
-
-        @media (max-width: 480px) {
-
-            body {
-
-                overflow-y: auto;
+                padding-bottom: 12px;
 
             }
 
 
-            .page {
+            .brand {
 
-                min-height: 100dvh;
+                margin-bottom: 12px;
+
+            }
+
+
+            .logo-wrapper {
+
+                width: 72px;
+
+                height: 72px;
+
+                margin-bottom: 5px;
+
+            }
+
+
+            .brand-title {
+
+                font-size: 25px;
+
+            }
+
+
+            .brand-subtitle {
+
+                font-size: 10px;
+
+            }
+
+
+            .login-card {
 
                 padding:
+                    19px
+                    18px
                     18px;
 
-            }
-
-
-            .card {
-
-                padding:
-                    27px
-                    20px;
-
-                border-radius:
-                    24px;
+                border-radius: 21px;
 
             }
 
 
-            .logo-box {
+            .login-heading {
 
-                width: 92px;
-
-                height: 92px;
+                font-size: 16px;
 
             }
 
 
-            .title {
+            .login-description {
 
-                font-size: 29px;
+                margin-bottom: 14px;
 
             }
 
 
-            .subtitle {
+            .input-label {
 
-                font-size: 12px;
+                margin-bottom: 5px;
+
+            }
+
+
+            .id-input,
+            .login-button {
+
+                height: 50px;
+
+            }
+
+
+            .input-icon {
+
+                height: 50px;
+
+            }
+
+
+            .footer {
+
+                margin-top: 9px;
 
             }
 
         }
+
+
+        /* =========================================
+           TABLET / DESKTOP
+           ما يزال Mobile First
+        ========================================== */
+
+        @media (min-width: 600px) {
+
+            .content {
+
+                max-width: 500px;
+
+            }
+
+
+            .login-card {
+
+                max-width: 430px;
+
+                padding:
+                    31px
+                    28px
+                    27px;
+
+            }
+
+
+            .logo-wrapper {
+
+                width: 110px;
+
+                height: 110px;
+
+            }
+
+
+            .brand-title {
+
+                font-size: 34px;
+
+            }
+
+        }
+
 
     </style>
 
@@ -1250,65 +1474,62 @@
 <body>
 
 
-    <!-- =====================================
+    <!-- =========================================
          BACKGROUND
-    ====================================== -->
+    ========================================== -->
 
     <div class="background">
 
-        <div class="blob blob-1"></div>
+        <span class="dot dot-1"></span>
 
-        <div class="blob blob-2"></div>
+        <span class="dot dot-2"></span>
 
-        <div class="blob blob-3"></div>
-
-        <div class="line line-1"></div>
-
-        <div class="line line-2"></div>
+        <span class="dot dot-3"></span>
 
     </div>
 
 
-
-    <!-- =====================================
-         FULL SCREEN LOADER
-    ====================================== -->
+    <!-- =========================================
+         PAGE LOADER
+    ========================================== -->
 
     <div
-        class="screen-loader"
-        id="screenLoader"
+        class="page-loader"
+        id="pageLoader"
     >
 
-        <div class="spinner"></div>
+        <div class="loader-circle"></div>
 
-        <div class="loader-text">
-            جاري فتح الحساب...
+        <div class="loader-title">
+            جاري فتح حسابك...
         </div>
 
     </div>
 
 
+    <!-- =========================================
+         APP
+    ========================================== -->
 
-    <!-- =====================================
-         PAGE
-    ====================================== -->
+    <main class="app">
 
-    <main class="page">
 
-        <div class="container">
+        <div class="content">
 
 
             <!-- =================================
-                 LOGO
+                 BRAND
             ================================== -->
 
-            <div class="logo-area">
+            <div class="brand">
 
-                <div class="logo-box">
+
+                <div class="logo-wrapper">
+
 
                     <!--
-                        عندما ترسل الشعار:
-                        ضع اسم الصورة logo.png
+                        ضع شعار المدرسة باسم:
+                        logo.png
                     -->
 
                     <img
@@ -1318,6 +1539,7 @@
                         id="schoolLogo"
                     >
 
+
                     <div
                         class="logo-fallback"
                         id="logoFallback"
@@ -1326,21 +1548,23 @@
                         ت
                     </div>
 
+
                 </div>
 
 
-                <h1 class="title">
+                <h1 class="brand-title">
 
-                    التحدي<span class="red">.</span>
+                    التحدي<span>.</span>
 
                 </h1>
 
 
-                <p class="subtitle">
+                <p class="brand-subtitle">
 
                     نظام مدرسة التحدي
 
                 </p>
+
 
             </div>
 
@@ -1350,34 +1574,44 @@
                  LOGIN CARD
             ================================== -->
 
-            <section class="card">
+            <section class="login-card">
 
 
-                <h2 class="card-title">
+                <h2 class="login-heading">
 
                     تسجيل الدخول
 
                 </h2>
 
 
-                <p class="card-description">
+                <p class="login-description">
 
-                    أدخل الـ ID الخاص بك للوصول إلى حسابك
+                    أدخل الـ ID الخاص بك للدخول إلى حسابك
 
                 </p>
 
 
 
                 <!-- =================================
-                     FORM
+                     LOGIN FORM
                 ================================== -->
 
-                <form id="loginForm">
+                <form
+                    id="loginForm"
+                    autocomplete="off"
+                >
 
 
-                    <!-- INPUT -->
+                    <div class="input-wrapper">
 
-                    <div class="input-container">
+
+                        <label
+                            class="input-label"
+                            for="userId"
+                        >
+                            معرف الحساب
+                        </label>
+
 
                         <div class="input-icon">
                             ID
@@ -1385,21 +1619,23 @@
 
 
                         <input
+                            type="text"
                             id="userId"
                             class="id-input"
-                            type="text"
-                            placeholder="أدخل الـ ID"
+                            placeholder="مثال: STU001"
+                            inputmode="text"
                             autocomplete="off"
+                            autocorrect="off"
                             autocapitalize="characters"
                             spellcheck="false"
+                            maxlength="100"
                             required
                         >
+
 
                     </div>
 
 
-
-                    <!-- BUTTON -->
 
                     <button
                         type="submit"
@@ -1407,11 +1643,14 @@
                         id="loginButton"
                     >
 
-                        <div class="button-shine"></div>
+
+                        <span
+                            class="button-shine"
+                        ></span>
 
 
                         <span
-                            class="button-content"
+                            class="button-text"
                             id="buttonText"
                         >
                             تسجيل الدخول
@@ -1419,21 +1658,22 @@
 
 
                         <span
-                            class="button-loading"
-                            id="buttonLoading"
+                            class="loading"
+                            id="loading"
                         >
 
                             <span></span>
+
                             <span></span>
+
                             <span></span>
 
                         </span>
 
+
                     </button>
 
 
-
-                    <!-- MESSAGE -->
 
                     <div
                         class="message"
@@ -1442,6 +1682,7 @@
 
 
                 </form>
+
 
             </section>
 
@@ -1454,12 +1695,13 @@
             <div class="footer">
 
                 جميع الحقوق محفوظة ©
-                <span>مدرسة التحدي</span>
+                <strong>مدرسة التحدي</strong>
 
             </div>
 
 
         </div>
+
 
     </main>
 
@@ -1473,7 +1715,7 @@
 
 
         /* ========================================
-           FIREBASE SDK
+           FIREBASE APP
         ========================================= */
 
         import {
@@ -1483,6 +1725,10 @@
         "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
+        /* ========================================
+           FIRESTORE
+        ========================================= */
+
         import {
             getFirestore,
             doc,
@@ -1490,7 +1736,6 @@
         }
         from
         "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
 
 
         /* ========================================
@@ -1523,31 +1768,33 @@
         };
 
 
-
         /* ========================================
-           INITIALIZE FIREBASE
+           INITIALIZE
         ========================================= */
 
-        const app =
-            initializeApp(firebaseConfig);
+        const firebaseApp =
+            initializeApp(
+                firebaseConfig
+            );
 
 
         const db =
-            getFirestore(app);
-
+            getFirestore(
+                firebaseApp
+            );
 
 
         /* ========================================
            ELEMENTS
         ========================================= */
 
-        const loginForm =
+        const form =
             document.getElementById(
                 "loginForm"
             );
 
 
-        const userIdInput =
+        const userId =
             document.getElementById(
                 "userId"
             );
@@ -1565,9 +1812,9 @@
             );
 
 
-        const buttonLoading =
+        const loading =
             document.getElementById(
-                "buttonLoading"
+                "loading"
             );
 
 
@@ -1577,9 +1824,9 @@
             );
 
 
-        const screenLoader =
+        const pageLoader =
             document.getElementById(
-                "screenLoader"
+                "pageLoader"
             );
 
 
@@ -1595,31 +1842,11 @@
             );
 
 
-
         /* ========================================
-           LOGO FALLBACK
+           ACCOUNT ROUTES
         ========================================= */
 
-        schoolLogo.addEventListener(
-            "error",
-            function() {
-
-                schoolLogo.style.display =
-                    "none";
-
-                logoFallback.style.display =
-                    "flex";
-
-            }
-        );
-
-
-
-        /* ========================================
-           ACCOUNT PAGES
-        ========================================= */
-
-        const ACCOUNT_PAGES = {
+        const routes = {
 
             admin:
                 "admin.html",
@@ -1634,7 +1861,6 @@
                 "accountant.html"
 
         };
-
 
 
         /* ========================================
@@ -1655,7 +1881,6 @@
         }
 
 
-
         /* ========================================
            HIDE MESSAGE
         ========================================= */
@@ -1671,34 +1896,33 @@
         }
 
 
-
         /* ========================================
-           SET LOADING
+           LOADING BUTTON
         ========================================= */
 
-        function setLoading(
-            loading
+        function setButtonLoading(
+            state
         ) {
 
             loginButton.disabled =
-                loading;
+                state;
 
 
-            if (loading) {
+            if (state) {
 
                 buttonText.style.display =
                     "none";
 
-                buttonLoading.classList.add(
+                loading.classList.add(
                     "active"
                 );
 
             } else {
 
                 buttonText.style.display =
-                    "inline";
+                    "block";
 
-                buttonLoading.classList.remove(
+                loading.classList.remove(
                     "active"
                 );
 
@@ -1707,26 +1931,27 @@
         }
 
 
-
         /* ========================================
            CLEAN ID
         ========================================= */
 
-        function cleanID(value) {
+        function normalizeID(
+            value
+        ) {
 
             return value
                 .trim()
+                .replace(/\s+/g, "")
                 .toUpperCase();
 
         }
-
 
 
         /* ========================================
            LOGIN
         ========================================= */
 
-        loginForm.addEventListener(
+        form.addEventListener(
             "submit",
             async function(event) {
 
@@ -1737,14 +1962,14 @@
 
 
                 const id =
-                    cleanID(
-                        userIdInput.value
+                    normalizeID(
+                        userId.value
                     );
 
 
-                /* ==============================
-                   EMPTY ID
-                ============================== */
+                /* =================================
+                   VALIDATION
+                ================================= */
 
                 if (!id) {
 
@@ -1752,26 +1977,28 @@
                         "يرجى إدخال الـ ID."
                     );
 
-                    userIdInput.focus();
+                    userId.focus();
 
                     return;
 
                 }
 
 
-
-                setLoading(true);
-
+                setButtonLoading(
+                    true
+                );
 
 
                 try {
 
 
-                    /* ==============================
-                       FIRESTORE DOCUMENT
-                    ============================== */
+                    /* =================================
+                       FIRESTORE
 
-                    const userReference =
+                       users / ID
+                    ================================= */
+
+                    const reference =
                         doc(
                             db,
                             "users",
@@ -1779,53 +2006,54 @@
                         );
 
 
-                    const userSnapshot =
+                    const snapshot =
                         await getDoc(
-                            userReference
+                            reference
                         );
 
 
-
-                    /* ==============================
-                       USER NOT FOUND
-                    ============================== */
+                    /* =================================
+                       NOT FOUND
+                    ================================= */
 
                     if (
-                        !userSnapshot.exists()
+                        !snapshot.exists()
                     ) {
 
-                        setLoading(false);
-
-                        showMessage(
-                            "هذا الـ ID غير موجود في النظام."
+                        setButtonLoading(
+                            false
                         );
 
-                        userIdInput.focus();
+                        showMessage(
+                            "الـ ID الذي أدخلته غير موجود."
+                        );
+
+                        userId.focus();
 
                         return;
 
                     }
 
 
+                    /* =================================
+                       DATA
+                    ================================= */
 
-                    /* ==============================
-                       USER DATA
-                    ============================== */
-
-                    const userData =
-                        userSnapshot.data();
-
+                    const data =
+                        snapshot.data();
 
 
-                    /* ==============================
-                       ACCOUNT STATUS
-                    ============================== */
+                    /* =================================
+                       ACTIVE
+                    ================================= */
 
                     if (
-                        userData.active === false
+                        data.active === false
                     ) {
 
-                        setLoading(false);
+                        setButtonLoading(
+                            false
+                        );
 
                         showMessage(
                             "هذا الحساب غير مفعل حالياً."
@@ -1836,36 +2064,36 @@
                     }
 
 
-
-                    /* ==============================
+                    /* =================================
                        ROLE
-                    ============================== */
+                    ================================= */
 
                     const role =
                         String(
-                            userData.role || ""
+                            data.role || ""
                         )
                         .trim()
                         .toLowerCase();
 
 
-
-                    /* ==============================
-                       INVALID ROLE
-                    ============================== */
+                    /* =================================
+                       CHECK ROLE
+                    ================================= */
 
                     if (
-                        !ACCOUNT_PAGES[role]
+                        !routes[role]
                     ) {
 
-                        setLoading(false);
+                        setButtonLoading(
+                            false
+                        );
 
                         showMessage(
-                            "نوع الحساب غير محدد بشكل صحيح."
+                            "تعذر تحديد نوع هذا الحساب."
                         );
 
                         console.error(
-                            "Invalid role:",
+                            "Invalid account role:",
                             role
                         );
 
@@ -1874,18 +2102,16 @@
                     }
 
 
-
-                    /* ==============================
-                       SESSION
-                    ============================== */
+                    /* =================================
+                       SESSION DATA
+                    ================================= */
 
                     const session = {
 
                         id: id,
 
                         name:
-                            userData.name ||
-                            "",
+                            data.name || "",
 
                         role: role,
 
@@ -1903,10 +2129,9 @@
                     );
 
 
-
-                    /* ==============================
-                       SUCCESS
-                    ============================== */
+                    /* =================================
+                       SUCCESS MESSAGE
+                    ================================= */
 
                     showMessage(
                         "تم تسجيل الدخول بنجاح.",
@@ -1914,15 +2139,14 @@
                     );
 
 
-
-                    /* ==============================
-                       SCREEN LOADER
-                    ============================== */
+                    /* =================================
+                       PAGE LOADER
+                    ================================= */
 
                     setTimeout(
                         function() {
 
-                            screenLoader.classList.add(
+                            pageLoader.classList.add(
                                 "active"
                             );
 
@@ -1931,21 +2155,20 @@
                     );
 
 
-
-                    /* ==============================
+                    /* =================================
                        REDIRECT
-                    ============================== */
+                    ================================= */
 
                     setTimeout(
                         function() {
 
                             window.location.href =
-                                ACCOUNT_PAGES[
+                                routes[
                                     role
                                 ];
 
                         },
-                        750
+                        700
                     );
 
 
@@ -1953,17 +2176,19 @@
 
 
                     console.error(
-                        "Firebase Error:",
+                        "Firebase error:",
                         error
                     );
 
 
-                    setLoading(false);
+                    setButtonLoading(
+                        false
+                    );
 
 
-                    /* ==============================
-                       ERROR MESSAGE
-                    ============================== */
+                    /* =================================
+                       FIRESTORE PERMISSION
+                    ================================= */
 
                     if (
                         error.code ===
@@ -1971,22 +2196,65 @@
                     ) {
 
                         showMessage(
-                            "ليس لديك صلاحية للوصول إلى بيانات تسجيل الدخول."
+                            "لا توجد صلاحية للوصول إلى بيانات الحساب."
                         );
 
-                    } else {
-
-                        showMessage(
-                            "حدث خطأ أثناء الاتصال بـ Firebase. تأكد من اتصال الإنترنت وإعدادات قاعدة البيانات."
-                        );
+                        return;
 
                     }
+
+
+                    /* =================================
+                       GENERAL ERROR
+                    ================================= */
+
+                    showMessage(
+                        "حدث خطأ أثناء الاتصال. تأكد من الإنترنت وإعدادات Firebase."
+                    );
+
 
                 }
 
             }
         );
 
+
+        /* ========================================
+           INPUT
+        ========================================= */
+
+        userId.addEventListener(
+            "input",
+            function() {
+
+                this.value =
+                    this.value
+                        .replace(
+                            /\s/g,
+                            ""
+                        )
+                        .toUpperCase();
+
+            }
+        );
+
+
+        /* ========================================
+           LOGO ERROR
+        ========================================= */
+
+        schoolLogo.addEventListener(
+            "error",
+            function() {
+
+                schoolLogo.style.display =
+                    "none";
+
+                logoFallback.style.display =
+                    "flex";
+
+            }
+        );
 
 
         /* ========================================
@@ -2000,31 +2268,11 @@
                 setTimeout(
                     function() {
 
-                        userIdInput.focus();
+                        userId.focus();
 
                     },
-                    700
+                    600
                 );
-
-            }
-        );
-
-
-
-        /* ========================================
-           PREVENT SPACES AT START
-        ========================================= */
-
-        userIdInput.addEventListener(
-            "input",
-            function() {
-
-                this.value =
-                    this.value
-                        .replace(
-                            /\s/g,
-                            ""
-                        );
 
             }
         );
