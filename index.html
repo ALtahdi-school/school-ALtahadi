@@ -2,98 +2,75 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    >
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
-    <meta
-        name="theme-color"
-        content="#0b63d8"
-    >
+    <meta name="theme-color" content="#0b63d8">
 
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="default"
-    >
+    <title>طلب توظيف | مدرسة التحدي</title>
 
-    <title>طلب توظيف | مدرسة التحدي الأهلية المختلطة</title>
-
-
-    <!-- =====================================================
+    <!-- =========================
          FONT
-    ====================================================== -->
+    ========================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    <!-- QR CODE -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-    >
-
-
-    <!-- =====================================================
-         QR CODE LIBRARY
-    ====================================================== -->
-
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
-        defer
-    ></script>
-
-
-    <!-- =====================================================
-         STYLE
-    ====================================================== -->
 
     <style>
 
-        /* =====================================================
+        /* =========================
            RESET
-        ====================================================== */
+        ========================== */
 
         *,
         *::before,
         *::after {
-
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
+        }
 
+
+        :root {
+            --blue: #0b63d8;
+            --blue-dark: #0649a8;
+            --blue-light: #edf5ff;
+
+            --red: #d71920;
+
+            --green: #079455;
+
+            --text: #10233f;
+            --muted: #7b8798;
+
+            --border: #e1e8f2;
+
+            --white: #ffffff;
+
+            --bg: #f7faff;
         }
 
 
         html {
-
             width: 100%;
             min-height: 100%;
-            background: #f5f8fd;
+            background: var(--bg);
             -webkit-text-size-adjust: 100%;
-            text-size-adjust: 100%;
-
         }
 
 
         body {
-
             width: 100%;
             min-height: 100dvh;
 
@@ -102,20 +79,18 @@
                 Arial,
                 sans-serif;
 
-            color: #10233f;
-
             background:
                 linear-gradient(
-                    135deg,
-                    #f8fbff 0%,
-                    #eef5ff 50%,
+                    180deg,
+                    #f7faff 0%,
                     #ffffff 100%
                 );
+
+            color: var(--text);
 
             overflow-x: hidden;
 
             -webkit-font-smoothing: antialiased;
-
         }
 
 
@@ -123,98 +98,49 @@
         input,
         select,
         textarea {
-
             font-family:
                 "Cairo",
                 Arial,
                 sans-serif;
-
         }
 
 
-        button,
-        select {
-
+        button {
             cursor: pointer;
-
         }
 
 
-        input,
-        select,
-        textarea {
-
-            font-size: 16px;
-
-        }
-
-
-        /* =====================================================
-           VARIABLES
-        ====================================================== */
-
-        :root {
-
-            --blue: #0b63d8;
-            --blue-dark: #0649a8;
-            --blue-light: #edf5ff;
-
-            --red: #d71920;
-
-            --green: #0b8f58;
-            --green-light: #edfff6;
-
-            --text: #10233f;
-            --muted: #78879a;
-
-            --border: #dfe7f1;
-
-            --white: #ffffff;
-
-            --shadow:
-                0 20px 60px rgba(16, 35, 63, .10);
-
-        }
-
-
-        /* =====================================================
+        /* =========================
            BACKGROUND
-        ====================================================== */
+        ========================== */
 
         .background {
-
             position: fixed;
-
             inset: 0;
-
             overflow: hidden;
-
             pointer-events: none;
-
             z-index: 0;
-
         }
 
 
         .background::before {
-
             content: "";
 
             position: absolute;
 
-            width: 360px;
-            height: 360px;
+            width: 350px;
+            height: 350px;
 
-            top: -180px;
-            right: -120px;
+            top: -170px;
+            right: -150px;
 
             border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(11,99,216,.17),
-                    rgba(11,99,216,.04) 48%,
+                    rgba(11,99,216,.16),
+                    rgba(11,99,216,.04) 45%,
                     transparent 72%
                 );
 
@@ -223,21 +149,19 @@
                 9s
                 ease-in-out
                 infinite;
-
         }
 
 
         .background::after {
-
             content: "";
 
             position: absolute;
 
-            width: 330px;
-            height: 330px;
+            width: 300px;
+            height: 300px;
 
-            bottom: -180px;
-            left: -120px;
+            bottom: -170px;
+            left: -130px;
 
             border-radius: 50%;
 
@@ -245,7 +169,7 @@
                 radial-gradient(
                     circle,
                     rgba(215,25,32,.10),
-                    rgba(215,25,32,.025) 50%,
+                    rgba(215,25,32,.03) 48%,
                     transparent 72%
                 );
 
@@ -254,7 +178,6 @@
                 11s
                 ease-in-out
                 infinite;
-
         }
 
 
@@ -262,21 +185,16 @@
 
             0%,
             100% {
-
                 transform:
-                    translate3d(0,0,0)
+                    translate(0,0)
                     scale(1);
-
             }
 
             50% {
-
                 transform:
-                    translate3d(-20px,25px,0)
+                    translate(-20px,25px)
                     scale(1.08);
-
             }
-
         }
 
 
@@ -284,109 +202,94 @@
 
             0%,
             100% {
-
                 transform:
-                    translate3d(0,0,0)
+                    translate(0,0)
                     scale(1);
-
             }
 
             50% {
-
                 transform:
-                    translate3d(25px,-20px,0)
+                    translate(25px,-20px)
                     scale(1.1);
-
             }
-
         }
 
 
-        /* =====================================================
+        /* =========================
            APP
-        ====================================================== */
+        ========================== */
 
         .app {
-
             position: relative;
-
             z-index: 1;
 
             width: 100%;
-
             min-height: 100dvh;
 
             display: flex;
-
             justify-content: center;
-
-            padding:
-                25px
-                16px
-                40px;
-
         }
 
 
         .container {
-
             width: 100%;
-
             max-width: 560px;
 
-            margin: auto;
-
+            padding:
+                25px
+                18px
+                35px;
         }
 
 
-        /* =====================================================
+        /* =========================
            HEADER
-        ====================================================== */
+        ========================== */
 
         .header {
-
             text-align: center;
-
-            margin-bottom: 22px;
+            margin-bottom: 25px;
 
             animation:
                 fadeDown
                 .7s
                 ease
                 both;
-
         }
 
 
         .logo-box {
-
             position: relative;
 
-            width: 100px;
-            height: 100px;
+            width: 95px;
+            height: 95px;
 
             margin:
                 0
                 auto
-                14px;
+                12px;
 
+            animation:
+                logoFloat
+                4s
+                ease-in-out
+                infinite;
         }
 
 
         .logo-box::before {
-
             content: "";
 
             position: absolute;
 
-            inset: -12px;
+            inset: -10px;
 
-            border-radius: 35px;
+            border-radius: 30px;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(11,99,216,.13),
+                    rgba(11,99,216,.12),
                     transparent 70%
                 );
 
@@ -395,38 +298,30 @@
                 3s
                 ease-in-out
                 infinite;
-
         }
 
 
         .logo {
-
             position: relative;
-
             z-index: 2;
-
-            display: block;
 
             width: 100%;
             height: 100%;
 
             object-fit: contain;
 
-            border-radius: 25px;
-
+            border-radius: 24px;
         }
 
 
         .logo-fallback {
-
             position: relative;
-
             z-index: 2;
 
             width: 100%;
             height: 100%;
 
-            border-radius: 25px;
+            border-radius: 24px;
 
             display: none;
 
@@ -435,8 +330,7 @@
 
             color: white;
 
-            font-size: 42px;
-
+            font-size: 38px;
             font-weight: 900;
 
             background:
@@ -449,7 +343,21 @@
             box-shadow:
                 0 15px 35px
                 rgba(11,99,216,.23);
+        }
 
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-6px);
+            }
         }
 
 
@@ -457,177 +365,97 @@
 
             0%,
             100% {
-
-                transform: scale(.96);
-                opacity: .5;
-
+                transform: scale(.95);
+                opacity: .45;
             }
 
             50% {
-
                 transform: scale(1.08);
                 opacity: .9;
-
             }
-
         }
 
 
-        .school-title {
-
-            font-size: 24px;
+        .school-name {
+            font-size: 22px;
+            font-weight: 900;
 
             line-height: 1.5;
 
-            font-weight: 900;
-
             color: var(--blue-dark);
-
         }
 
 
-        .school-department {
-
+        .department {
             margin-top: 3px;
 
-            font-size: 13px;
-
+            font-size: 12px;
             font-weight: 700;
 
             color: var(--muted);
-
         }
 
 
-        .school-slogan {
-
-            margin-top: 7px;
-
-            color: #53657b;
+        .slogan {
+            margin-top: 9px;
 
             font-size: 11px;
-
-            font-weight: 600;
-
             line-height: 1.8;
 
+            color: #65758a;
+            font-weight: 600;
         }
 
 
-        /* =====================================================
-           CARD
-        ====================================================== */
+        /* =========================
+           START BUTTON
+        ========================== */
 
-        .card {
+        .start-section {
+            animation:
+                fadeUp
+                .7s
+                .15s
+                ease
+                both;
+        }
 
-            width: 100%;
+
+        .start-card {
+            padding: 27px 22px;
 
             background:
-                rgba(255,255,255,.97);
+                rgba(255,255,255,.95);
 
             border:
                 1px solid
                 rgba(11,99,216,.08);
 
-            border-radius: 28px;
+            border-radius: 25px;
 
-            padding: 25px 21px 22px;
-
-            box-shadow: var(--shadow);
-
-            animation:
-                cardEnter
-                .7s
-                .08s
-                ease
-                both;
-
-        }
-
-
-        @keyframes cardEnter {
-
-            from {
-
-                opacity: 0;
-
-                transform:
-                    translateY(20px)
-                    scale(.98);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-
-            }
-
-        }
-
-
-        @keyframes fadeDown {
-
-            from {
-
-                opacity: 0;
-
-                transform:
-                    translateY(-18px);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    translateY(0);
-
-            }
-
-        }
-
-
-        /* =====================================================
-           WELCOME
-        ====================================================== */
-
-        .welcome {
+            box-shadow:
+                0 20px 60px
+                rgba(16,35,63,.09);
 
             text-align: center;
-
-            padding: 10px 5px 20px;
-
         }
 
 
-        .welcome-icon {
+        .start-icon {
+            width: 65px;
+            height: 65px;
 
-            width: 72px;
-            height: 72px;
-
-            margin:
-                0
-                auto
-                15px;
-
-            border-radius: 22px;
+            margin: 0 auto 14px;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
+            border-radius: 20px;
+
             color: white;
 
-            font-size: 30px;
-
-            font-weight: 900;
+            font-size: 27px;
 
             background:
                 linear-gradient(
@@ -637,71 +465,40 @@
                 );
 
             box-shadow:
-                0 14px 30px
+                0 12px 28px
                 rgba(11,99,216,.22);
-
-            animation:
-                iconFloat
-                3s
-                ease-in-out
-                infinite;
-
         }
 
 
-        @keyframes iconFloat {
-
-            0%,
-            100% {
-
-                transform: translateY(0);
-
-            }
-
-            50% {
-
-                transform: translateY(-6px);
-
-            }
-
-        }
-
-
-        .welcome h2 {
-
-            font-size: 23px;
-
+        .start-title {
+            font-size: 20px;
             font-weight: 900;
-
-            color: var(--text);
-
         }
 
 
-        .welcome p {
-
-            margin-top: 7px;
-
-            font-size: 12px;
-
-            line-height: 1.9;
+        .start-description {
+            margin-top: 6px;
 
             color: var(--muted);
 
+            font-size: 11px;
+            line-height: 1.8;
         }
 
 
         .start-button {
-
             width: 100%;
+            height: 55px;
 
-            height: 56px;
+            margin-top: 20px;
 
             border: 0;
-
-            border-radius: 16px;
+            border-radius: 15px;
 
             color: white;
+
+            font-size: 14px;
+            font-weight: 800;
 
             background:
                 linear-gradient(
@@ -710,312 +507,204 @@
                     var(--blue-dark)
                 );
 
-            font-size: 15px;
-
-            font-weight: 800;
-
             box-shadow:
-                0 12px 28px
+                0 11px 25px
                 rgba(11,99,216,.22);
 
             transition:
-                transform .2s ease,
-                box-shadow .2s ease;
-
+                .2s ease;
         }
 
 
         .start-button:active {
-
             transform: scale(.98);
+        }
+
+
+        /* =========================
+           FORM
+        ========================== */
+
+        .form-section {
+            display: none;
+
+            animation:
+                fadeUp
+                .45s
+                ease
+                both;
+        }
+
+
+        .form-section.active {
+            display: block;
+        }
+
+
+        .form-card {
+            background:
+                rgba(255,255,255,.97);
+
+            border:
+                1px solid
+                rgba(11,99,216,.08);
+
+            border-radius: 25px;
+
+            padding: 22px 18px;
 
             box-shadow:
-                0 6px 15px
-                rgba(11,99,216,.18);
-
+                0 20px 60px
+                rgba(16,35,63,.09);
         }
 
 
-        /* =====================================================
-           FORM HEADER
-        ====================================================== */
+        /* =========================
+           PROGRESS
+        ========================== */
 
-        .form-header {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-            margin-bottom: 22px;
-
+        .progress-area {
+            margin-bottom: 24px;
         }
 
 
-        .form-icon {
-
-            width: 46px;
-            height: 46px;
-
-            flex-shrink: 0;
-
-            border-radius: 14px;
-
+        .progress-top {
             display: flex;
-
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
 
-            color: white;
+            margin-bottom: 10px;
+        }
 
-            font-size: 19px;
 
-            font-weight: 900;
+        .progress-title {
+            font-size: 12px;
+            font-weight: 800;
+
+            color: var(--blue-dark);
+        }
+
+
+        .progress-number {
+            font-size: 10px;
+            font-weight: 700;
+
+            color: var(--muted);
+        }
+
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+
+            border-radius: 20px;
+
+            background: #edf1f6;
+
+            overflow: hidden;
+        }
+
+
+        .progress-fill {
+            height: 100%;
+            width: 33.333%;
+
+            border-radius: inherit;
 
             background:
                 linear-gradient(
-                    145deg,
+                    90deg,
                     var(--blue),
-                    var(--blue-dark)
+                    #428df0
                 );
 
+            transition:
+                width
+                .4s
+                cubic-bezier(.22,.61,.36,1);
         }
 
 
-        .form-header h2 {
+        /* =========================
+           STEP
+        ========================== */
 
-            font-size: 19px;
+        .step {
+            display: none;
 
+            animation:
+                stepIn
+                .4s
+                ease
+                both;
+        }
+
+
+        .step.active {
+            display: block;
+        }
+
+
+        @keyframes stepIn {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateX(0);
+            }
+        }
+
+
+        .step-heading {
+            font-size: 18px;
             font-weight: 900;
 
+            color: var(--text);
         }
 
 
-        .form-header p {
-
-            margin-top: 2px;
+        .step-description {
+            margin-top: 4px;
+            margin-bottom: 20px;
 
             color: var(--muted);
 
             font-size: 10px;
-
+            font-weight: 500;
         }
 
 
-        /* =====================================================
-           PROGRESS
-        ====================================================== */
-
-        .progress {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            margin-bottom: 24px;
-
-        }
-
-
-        .progress-step {
-
-            display: flex;
-
-            align-items: center;
-
-        }
-
-
-        .progress-circle {
-
-            width: 32px;
-            height: 32px;
-
-            border-radius: 50%;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 11px;
-
-            font-weight: 900;
-
-            color: #8493a7;
-
-            background: #eef2f7;
-
-            border: 2px solid #e2e8f0;
-
-            transition: .3s ease;
-
-        }
-
-
-        .progress-step.active .progress-circle,
-        .progress-step.completed .progress-circle {
-
-            color: white;
-
-            background: var(--blue);
-
-            border-color: var(--blue);
-
-        }
-
-
-        .progress-step.completed .progress-circle {
-
-            background: var(--green);
-
-            border-color: var(--green);
-
-        }
-
-
-        .progress-line {
-
-            width: 38px;
-
-            height: 3px;
-
-            background: #e4e9f0;
-
-            transition: .3s ease;
-
-        }
-
-
-        .progress-line.active {
-
-            background: var(--blue);
-
-        }
-
-
-        /* =====================================================
-           FORM PAGES
-        ====================================================== */
-
-        .form-page {
-
-            display: none;
-
-            animation:
-                pageIn
-                .35s
-                ease
-                both;
-
-        }
-
-
-        .form-page.active {
-
-            display: block;
-
-        }
-
-
-        @keyframes pageIn {
-
-            from {
-
-                opacity: 0;
-
-                transform:
-                    translateX(15px);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    translateX(0);
-
-            }
-
-        }
-
-
-        /* =====================================================
-           SECTION TITLE
-        ====================================================== */
-
-        .section-title {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-            margin-bottom: 15px;
-
-            color: var(--text);
-
-            font-size: 14px;
-
-            font-weight: 900;
-
-        }
-
-
-        .section-title::before {
-
-            content: "";
-
-            width: 4px;
-
-            height: 20px;
-
-            border-radius: 10px;
-
-            background: var(--blue);
-
-        }
-
-
-        /* =====================================================
+        /* =========================
            FIELD
-        ====================================================== */
+        ========================== */
 
         .field {
-
             margin-bottom: 15px;
-
         }
 
 
         .field label {
-
             display: block;
 
             margin-bottom: 7px;
 
             padding-right: 3px;
 
-            color: #5d6d81;
-
             font-size: 11px;
-
             font-weight: 800;
 
+            color: #536278;
         }
 
 
-        .field label .required {
-
+        .required {
             color: var(--red);
-
-            margin-right: 2px;
-
         }
 
 
@@ -1029,51 +718,42 @@
                 1.7px solid
                 var(--border);
 
-            border-radius: 14px;
-
             outline: none;
+
+            border-radius: 14px;
 
             background: #f9fbfe;
 
             color: var(--text);
 
-            padding:
-                0
-                14px;
+            font-size: 13px;
+            font-weight: 600;
 
             transition:
                 border-color .2s ease,
-                box-shadow .2s ease,
                 background .2s ease,
-                transform .2s ease;
-
-            -webkit-appearance: none;
-
-            appearance: none;
-
+                box-shadow .2s ease;
         }
 
 
         .field input,
         .field select {
-
             height: 53px;
 
+            padding:
+                0
+                14px;
         }
 
 
         .field textarea {
-
             min-height: 105px;
 
-            padding-top: 13px;
-
-            padding-bottom: 13px;
+            padding: 13px 14px;
 
             resize: vertical;
 
             line-height: 1.8;
-
         }
 
 
@@ -1081,107 +761,97 @@
         .field select:focus,
         .field textarea:focus {
 
-            border-color: var(--blue);
+            border-color:
+                var(--blue);
 
-            background: white;
+            background:
+                white;
 
             box-shadow:
                 0 0 0 4px
                 rgba(11,99,216,.07);
-
         }
 
 
         .field input::placeholder,
         .field textarea::placeholder {
-
-            color: #aab5c3;
-
-            font-size: 12px;
-
+            color: #a9b3c0;
+            font-weight: 500;
         }
 
 
-        .field select {
+        select {
+            appearance: none;
+            -webkit-appearance: none;
 
-            color: var(--text);
+            background-image:
+                linear-gradient(45deg, transparent 50%, #718096 50%),
+                linear-gradient(135deg, #718096 50%, transparent 50%);
 
-            cursor: pointer;
+            background-position:
+                calc(100% - 18px) 22px,
+                calc(100% - 12px) 22px;
 
+            background-size:
+                6px 6px,
+                6px 6px;
+
+            background-repeat: no-repeat;
+
+            padding-left: 38px !important;
         }
 
 
-        .field select:invalid {
-
-            color: #aab5c3;
-
-        }
-
-
-        .field select option {
-
-            color: var(--text);
-
-        }
-
+        /* =========================
+           TWO COLUMNS
+        ========================== */
 
         .two-columns {
-
             display: grid;
 
             grid-template-columns:
-                1fr
-                1fr;
+                1fr 1fr;
 
-            gap: 11px;
-
+            gap: 10px;
         }
 
 
-        /* =====================================================
+        /* =========================
            BUTTONS
-        ====================================================== */
+        ========================== */
 
         .buttons {
-
             display: flex;
-
             gap: 10px;
 
             margin-top: 22px;
-
         }
 
 
-        .btn {
-
-            flex: 1;
+        .next-button,
+        .back-button,
+        .submit-button {
 
             height: 54px;
 
             border: 0;
 
-            border-radius: 15px;
+            border-radius: 14px;
 
             font-size: 13px;
-
             font-weight: 800;
 
             transition:
                 transform .18s ease,
+                box-shadow .18s ease,
                 opacity .18s ease;
-
         }
 
 
-        .btn:active {
+        .next-button,
+        .submit-button {
 
-            transform: scale(.98);
-
-        }
-
-
-        .btn-primary {
+            flex: 1;
 
             color: white;
 
@@ -1193,75 +863,59 @@
                 );
 
             box-shadow:
-                0 10px 23px
+                0 10px 22px
                 rgba(11,99,216,.20);
-
         }
 
 
-        .btn-secondary {
+        .back-button {
 
-            color: #52647a;
+            width: 105px;
 
-            background: #eef2f7;
+            color: #536278;
 
+            background: #f0f3f7;
         }
 
 
-        .btn-success {
-
-            color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #0b9c61,
-                    #087746
-                );
-
-            box-shadow:
-                0 10px 23px
-                rgba(11,143,88,.18);
-
+        .next-button:active,
+        .back-button:active,
+        .submit-button:active {
+            transform: scale(.98);
         }
 
 
-        .btn:disabled {
-
+        .submit-button:disabled {
             opacity: .65;
-
-            cursor: not-allowed;
-
+            cursor: default;
         }
 
 
-        /* =====================================================
+        /* =========================
            MESSAGE
-        ====================================================== */
+        ========================== */
 
         .message {
 
             display: none;
 
-            margin-top: 14px;
+            margin-top: 13px;
 
-            padding: 11px 13px;
+            padding: 11px 12px;
 
-            border-radius: 13px;
+            border-radius: 12px;
 
             font-size: 11px;
 
-            line-height: 1.8;
+            line-height: 1.7;
 
             font-weight: 700;
 
             text-align: center;
-
         }
 
 
         .message.show {
-
             display: block;
 
             animation:
@@ -1269,480 +923,380 @@
                 .25s
                 ease
                 both;
-
         }
 
 
         .message.error {
-
             color: #a20f16;
 
             background: #fff1f2;
 
-            border:
-                1px solid
-                #ffd4d8;
-
+            border: 1px solid #ffd5d8;
         }
 
 
         .message.success {
-
             color: #086033;
 
             background: #edfff5;
 
-            border:
-                1px solid
-                #c7efd8;
-
+            border: 1px solid #c8efd9;
         }
 
 
         @keyframes messageIn {
 
             from {
-
                 opacity: 0;
-
                 transform: translateY(-5px);
-
             }
 
             to {
-
                 opacity: 1;
-
                 transform: translateY(0);
-
             }
-
         }
 
 
-        /* =====================================================
-           SUCCESS PAGE
-        ====================================================== */
+        /* =========================
+           LOADING
+        ========================== */
 
-        .success-page {
+        .loading {
+            display: inline-flex;
 
+            align-items: center;
+            justify-content: center;
+
+            gap: 5px;
+        }
+
+
+        .loading span {
+
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            animation:
+                loadingDot
+                .7s
+                infinite
+                alternate;
+        }
+
+
+        .loading span:nth-child(2) {
+            animation-delay: .15s;
+        }
+
+
+        .loading span:nth-child(3) {
+            animation-delay: .3s;
+        }
+
+
+        @keyframes loadingDot {
+
+            from {
+                opacity: .25;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(-4px);
+            }
+        }
+
+
+        /* =========================
+           SUCCESS
+        ========================== */
+
+        .success-section {
             display: none;
-
-            text-align: center;
 
             animation:
                 successIn
                 .6s
-                ease
+                cubic-bezier(.22,.61,.36,1)
                 both;
-
         }
 
 
-        .success-page.active {
-
+        .success-section.active {
             display: block;
-
         }
 
 
         @keyframes successIn {
 
             from {
-
                 opacity: 0;
-
                 transform:
-                    translateY(20px)
+                    translateY(25px)
                     scale(.97);
-
             }
 
             to {
-
                 opacity: 1;
-
                 transform:
                     translateY(0)
                     scale(1);
-
             }
+        }
 
+
+        .success-card {
+            background: white;
+
+            border-radius: 27px;
+
+            padding:
+                30px
+                20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 20px 60px
+                rgba(16,35,63,.10);
         }
 
 
         .success-icon {
 
-            width: 78px;
-            height: 78px;
+            width: 76px;
+            height: 76px;
 
             margin:
                 0
                 auto
                 17px;
 
-            border-radius: 50%;
-
             display: flex;
-
             align-items: center;
             justify-content: center;
 
+            border-radius: 50%;
+
             color: white;
 
-            font-size: 37px;
-
-            font-weight: 900;
+            font-size: 35px;
 
             background:
                 linear-gradient(
                     145deg,
-                    #0b9c61,
-                    #087746
+                    #0bbf73,
+                    #078d54
                 );
 
             box-shadow:
-                0 15px 35px
-                rgba(11,143,88,.22);
+                0 13px 30px
+                rgba(7,148,84,.20);
 
             animation:
-                successPop
-                .7s
-                cubic-bezier(.17,.89,.32,1.49)
-                both;
-
+                successPulse
+                2s
+                ease-in-out
+                infinite;
         }
 
 
-        @keyframes successPop {
+        @keyframes successPulse {
 
-            from {
-
-                transform:
-                    scale(.2);
-
-                opacity: 0;
-
+            0%,
+            100% {
+                transform: scale(1);
             }
 
-            to {
-
-                transform:
-                    scale(1);
-
-                opacity: 1;
-
+            50% {
+                transform: scale(1.05);
             }
-
         }
 
 
-        .success-page h2 {
+        .success-title {
 
             font-size: 21px;
-
             font-weight: 900;
 
-            color: var(--green);
-
+            color: #10233f;
         }
 
 
-        .success-page > p {
+        .success-description {
 
-            margin-top: 8px;
+            margin-top: 9px;
+
+            font-size: 11px;
+            line-height: 2;
 
             color: var(--muted);
 
-            font-size: 11px;
-
-            line-height: 1.9;
-
-        }
-
-
-        /* =====================================================
-           UID BOX
-        ====================================================== */
-
-        .uid-box {
-
-            margin-top: 20px;
-
-            padding: 17px;
-
-            border-radius: 18px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f1f7ff,
-                    #f8fbff
-                );
-
-            border:
-                1px solid
-                #dce9fa;
-
+            font-weight: 600;
         }
 
 
         .uid-label {
 
-            color: var(--muted);
+            margin-top: 23px;
 
             font-size: 10px;
+            font-weight: 800;
 
-            font-weight: 700;
-
+            color: #728096;
         }
 
 
-        .uid-code {
+        .uid-box {
 
-            direction: ltr;
+            margin-top: 8px;
 
-            margin-top: 4px;
+            padding: 13px;
 
-            font-size: 28px;
+            border-radius: 15px;
+
+            background:
+                #f2f7ff;
+
+            border:
+                1px solid
+                #dce9fb;
+
+            color:
+                var(--blue-dark);
+
+            font-size: 27px;
 
             letter-spacing: 3px;
 
-            color: var(--blue-dark);
-
             font-weight: 900;
 
-            user-select: text;
-
+            direction: ltr;
         }
 
 
-        .copy-button {
+        .qr-wrapper {
 
-            width: 100%;
+            margin:
+                20px
+                auto
+                0;
 
-            height: 45px;
+            width: 175px;
+            height: 175px;
 
-            margin-top: 12px;
+            padding: 10px;
 
-            border: 0;
-
-            border-radius: 12px;
-
-            color: white;
-
-            background: var(--blue);
-
-            font-size: 12px;
-
-            font-weight: 800;
-
-        }
-
-
-        /* =====================================================
-           QR
-        ====================================================== */
-
-        .qr-section {
-
-            margin-top: 18px;
-
-            padding: 17px;
-
-            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             background: white;
 
             border:
                 1px solid
-                var(--border);
+                #e3eaf3;
 
+            border-radius: 18px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(16,35,63,.07);
         }
 
 
-        .qr-title {
+        #qrcode {
+            display: flex;
 
-            font-size: 12px;
-
-            font-weight: 900;
-
-            color: var(--text);
-
+            align-items: center;
+            justify-content: center;
         }
 
 
-        .qr-description {
+        .save-note {
 
-            margin-top: 5px;
+            margin-top: 16px;
 
-            color: var(--muted);
+            padding: 11px 12px;
+
+            border-radius: 12px;
+
+            color: #526277;
+
+            background: #f8fafc;
 
             font-size: 10px;
 
             line-height: 1.8;
 
+            font-weight: 600;
         }
 
 
-        #qrcode {
-
-            width: 190px;
-            height: 190px;
-
-            margin:
-                15px
-                auto
-                10px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            padding: 10px;
-
-            background: white;
-
-        }
-
-
-        #qrcode img,
-        #qrcode canvas {
-
-            max-width: 100%;
-            max-height: 100%;
-
-        }
-
-
-        .screenshot-note {
-
-            color: var(--red);
-
-            font-size: 11px;
-
-            font-weight: 800;
-
-            line-height: 1.8;
-
-        }
-
-
-        /* =====================================================
-           WHATSAPP
-        ====================================================== */
-
-        .whatsapp-button {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 8px;
-
-            width: 100%;
-
-            height: 52px;
-
-            margin-top: 15px;
-
-            border: 0;
-
-            border-radius: 15px;
-
-            color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #20c76b,
-                    #0a9b4d
-                );
-
-            font-size: 12px;
-
-            font-weight: 800;
-
-            text-decoration: none;
-
-            box-shadow:
-                0 10px 24px
-                rgba(16,185,88,.20);
-
-        }
-
-
-        .whatsapp-icon {
-
-            font-size: 19px;
-
-        }
-
-
-        /* =====================================================
+        /* =========================
            FOOTER
-        ====================================================== */
+        ========================== */
 
         .footer {
 
-            margin-top: 16px;
+            margin-top: 18px;
 
             text-align: center;
 
-            color: #9ba7b5;
+            color: #a1acb9;
 
             font-size: 9px;
 
             font-weight: 600;
-
         }
 
 
         .footer strong {
-
             color: var(--red);
-
         }
 
 
-        /* =====================================================
-           FULL PAGE LOADER
-        ====================================================== */
+        /* =========================
+           FULL SCREEN LOADER
+        ========================== */
 
-        .loader {
+        .page-loader {
 
             position: fixed;
-
             inset: 0;
 
             z-index: 9999;
 
-            display: none;
+            display: flex;
 
             align-items: center;
-
             justify-content: center;
 
             flex-direction: column;
 
-            gap: 14px;
+            gap: 13px;
 
             background:
-                rgba(255,255,255,.96);
+                rgba(255,255,255,.97);
 
-            backdrop-filter:
-                blur(7px);
+            opacity: 0;
+            visibility: hidden;
 
+            transition:
+                .25s ease;
         }
 
 
-        .loader.active {
+        .page-loader.active {
 
-            display: flex;
-
+            opacity: 1;
+            visibility: visible;
         }
 
 
@@ -1753,7 +1307,7 @@
 
             border:
                 4px solid
-                #e4edf9;
+                #e6eefb;
 
             border-top-color:
                 var(--blue);
@@ -1768,187 +1322,179 @@
                 .75s
                 linear
                 infinite;
-
         }
 
 
         .loader-text {
 
-            color: var(--text);
-
             font-size: 12px;
-
             font-weight: 800;
 
+            color: var(--text);
         }
 
 
         @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* =========================
+           ANIMATIONS
+        ========================== */
+
+        @keyframes fadeDown {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(-20px);
+            }
 
             to {
-
+                opacity: 1;
                 transform:
-                    rotate(360deg);
-
+                    translateY(0);
             }
-
         }
 
 
-        /* =====================================================
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =========================
            MOBILE
-        ====================================================== */
+        ========================== */
 
-        @media (max-width: 480px) {
+        @media (max-width: 420px) {
 
-            .app {
-
+            .container {
                 padding:
-                    18px
-                    12px
+                    20px
+                    13px
                     30px;
-
-            }
-
-
-            .school-title {
-
-                font-size: 21px;
-
-            }
-
-
-            .school-department {
-
-                font-size: 12px;
-
-            }
-
-
-            .card {
-
-                padding:
-                    21px
-                    16px
-                    18px;
-
-                border-radius: 23px;
-
-            }
-
-
-            .two-columns {
-
-                grid-template-columns:
-                    1fr;
-
-                gap: 0;
-
-            }
-
-
-            .uid-code {
-
-                font-size: 25px;
-
-            }
-
-        }
-
-
-        /* =====================================================
-           SMALL HEIGHT
-        ====================================================== */
-
-        @media (max-height: 680px) {
-
-            .app {
-
-                padding-top: 12px;
-
             }
 
 
             .logo-box {
+                width: 82px;
+                height: 82px;
+            }
 
-                width: 76px;
-                height: 76px;
 
-                margin-bottom: 9px;
+            .school-name {
+                font-size: 19px;
+            }
 
+
+            .slogan {
+                font-size: 10px;
+            }
+
+
+            .form-card {
+                padding:
+                    19px
+                    15px;
+            }
+
+
+            .two-columns {
+                gap: 8px;
+            }
+
+
+            .back-button {
+                width: 90px;
+            }
+        }
+
+
+        @media (max-height: 650px) {
+
+            .container {
+                padding-top: 14px;
             }
 
 
             .header {
-
                 margin-bottom: 15px;
-
             }
 
 
-            .school-title {
+            .logo-box {
+                width: 68px;
+                height: 68px;
 
-                font-size: 20px;
-
+                margin-bottom: 7px;
             }
 
 
-            .school-slogan {
-
-                margin-top: 3px;
-
+            .school-name {
+                font-size: 18px;
             }
 
+
+            .slogan {
+                margin-top: 4px;
+            }
         }
 
     </style>
-
 </head>
 
 
 <body>
 
-
-    <!-- =====================================================
+    <!-- =========================
          BACKGROUND
-    ====================================================== -->
+    ========================== -->
 
     <div class="background"></div>
 
 
-    <!-- =====================================================
+    <!-- =========================
          LOADER
-    ====================================================== -->
+    ========================== -->
 
-    <div
-        class="loader"
-        id="loader"
-    >
+    <div class="page-loader" id="pageLoader">
 
         <div class="loader-circle"></div>
 
-        <div
-            class="loader-text"
-            id="loaderText"
-        >
-            جاري إرسال الطلب...
+        <div class="loader-text">
+            جارٍ إرسال طلبك...
         </div>
 
     </div>
 
 
-    <!-- =====================================================
+    <!-- =========================
          APP
-    ====================================================== -->
+    ========================== -->
 
     <main class="app">
 
         <div class="container">
 
 
-            <!-- =================================================
+            <!-- =========================
                  HEADER
-            ================================================== -->
+            ========================== -->
 
             <header class="header">
 
@@ -1971,52 +1517,44 @@
                 </div>
 
 
-                <h1 class="school-title">
+                <h1 class="school-name">
                     مدرسة التحدي الأهلية المختلطة
                 </h1>
 
 
-                <div class="school-department">
+                <div class="department">
                     قسم الحوكمة
                 </div>
 
 
-                <p class="school-slogan">
+                <p class="slogan">
                     كن من ضمن عائلة التحدي لصناعة جيل يزهو بالعلم والمعرفة
                 </p>
 
             </header>
 
 
-            <!-- =================================================
-                 MAIN CARD
-            ================================================== -->
+            <!-- =========================
+                 START
+            ========================== -->
 
-            <section class="card">
+            <section
+                class="start-section"
+                id="startSection"
+            >
 
+                <div class="start-card">
 
-                <!-- =================================================
-                     WELCOME PAGE
-                ================================================== -->
-
-                <div
-                    id="welcomePage"
-                    class="welcome"
-                >
-
-                    <div class="welcome-icon">
-                        ت
+                    <div class="start-icon">
+                        ✓
                     </div>
 
-
-                    <h2>
+                    <h2 class="start-title">
                         طلب توظيف
                     </h2>
 
-
-                    <p>
-                        نرحب بك للانضمام إلى عائلة مدرسة التحدي.
-                        <br>
+                    <p class="start-description">
+                        يسعدنا اهتمامك بالانضمام إلى عائلة التحدي.
                         يرجى تعبئة الاستمارة بالمعلومات الصحيحة.
                     </p>
 
@@ -2026,214 +1564,456 @@
                         class="start-button"
                         id="startButton"
                     >
-                        طلب توظيف
+                        بدء تقديم الطلب
                     </button>
 
                 </div>
 
-
-                <!-- =================================================
-                     FORM
-                ================================================== -->
-
-                <div
-                    id="formContainer"
-                    style="display:none;"
-                >
+            </section>
 
 
-                    <!-- =================================================
-                         FORM HEADER
-                    ================================================== -->
+            <!-- =========================
+                 FORM
+            ========================== -->
 
-                    <div class="form-header">
+            <section
+                class="form-section"
+                id="formSection"
+            >
 
-                        <div class="form-icon">
-                            ✓
-                        </div>
-
-                        <div>
-
-                            <h2>
-                                استمارة طلب التوظيف
-                            </h2>
-
-                            <p>
-                                يرجى إدخال معلوماتك بدقة
-                            </p>
-
-                        </div>
-
-                    </div>
+                <div class="form-card">
 
 
-                    <!-- =================================================
-                         PROGRESS
-                    ================================================== -->
+                    <!-- PROGRESS -->
 
-                    <div class="progress">
+                    <div class="progress-area">
 
-                        <div
-                            class="progress-step active"
-                            id="progress1"
-                        >
+                        <div class="progress-top">
 
-                            <div class="progress-circle">
-                                1
-                            </div>
+                            <span
+                                class="progress-title"
+                                id="progressTitle"
+                            >
+                                البيانات الشخصية
+                            </span>
+
+                            <span
+                                class="progress-number"
+                                id="progressNumber"
+                            >
+                                1 من 3
+                            </span>
 
                         </div>
 
 
-                        <div
-                            class="progress-line"
-                            id="line1"
-                        ></div>
+                        <div class="progress-bar">
 
-
-                        <div
-                            class="progress-step"
-                            id="progress2"
-                        >
-
-                            <div class="progress-circle">
-                                2
-                            </div>
-
-                        </div>
-
-
-                        <div
-                            class="progress-line"
-                            id="line2"
-                        ></div>
-
-
-                        <div
-                            class="progress-step"
-                            id="progress3"
-                        >
-
-                            <div class="progress-circle">
-                                3
-                            </div>
+                            <div
+                                class="progress-fill"
+                                id="progressFill"
+                            ></div>
 
                         </div>
 
                     </div>
 
 
-                    <!-- =================================================
-                         FORM
-                    ================================================== -->
+                    <!-- =====================
+                         STEP 1
+                    ====================== -->
 
-                    <form
-                        id="jobForm"
-                        autocomplete="off"
+                    <div
+                        class="step active"
+                        id="step1"
                     >
 
+                        <h2 class="step-heading">
+                            البيانات الشخصية
+                        </h2>
 
-                        <!-- =============================================
-                             PAGE 1
-                        ============================================== -->
+                        <p class="step-description">
+                            أدخل معلوماتك الشخصية الأساسية.
+                        </p>
 
-                        <div
-                            class="form-page active"
-                            id="page1"
-                        >
 
-                            <div class="section-title">
-                                البيانات الشخصية
-                            </div>
+                        <!-- NAME -->
 
+                        <div class="field">
+
+                            <label>
+                                الاسم الرباعي
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                placeholder="اكتب الاسم الرباعي"
+                                autocomplete="name"
+                            >
+
+                        </div>
+
+
+                        <!-- GENDER -->
+
+                        <div class="field">
+
+                            <label>
+                                الجنس
+                                <span class="required">*</span>
+                            </label>
+
+                            <select id="gender">
+
+                                <option value="">
+                                    اختر الجنس
+                                </option>
+
+                                <option value="ذكر">
+                                    ذكر
+                                </option>
+
+                                <option value="أنثى">
+                                    أنثى
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- BIRTH -->
+
+                        <div class="field">
+
+                            <label>
+                                المواليد
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="birthDate"
+                                placeholder="مثال: 15 / 06 / 1998"
+                                inputmode="numeric"
+                            >
+
+                        </div>
+
+
+                        <!-- PHONE -->
+
+                        <div class="field">
+
+                            <label>
+                                رقم الهاتف (واتساب)
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="مثال: 07XXXXXXXXX"
+                                inputmode="tel"
+                                autocomplete="tel"
+                            >
+
+                        </div>
+
+
+                        <!-- ADDRESS -->
+
+                        <div class="field">
+
+                            <label>
+                                عنوان السكن
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="address"
+                                placeholder="المحافظة - القضاء - المنطقة"
+                            >
+
+                        </div>
+
+
+                        <div class="buttons">
+
+                            <button
+                                type="button"
+                                class="next-button"
+                                id="next1"
+                            >
+                                التالي
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================
+                         STEP 2
+                    ====================== -->
+
+                    <div
+                        class="step"
+                        id="step2"
+                    >
+
+                        <h2 class="step-heading">
+                            اختيار الوظيفة
+                        </h2>
+
+                        <p class="step-description">
+                            اختر المرحلة والتخصص الذي ترغب بالتدريس فيه.
+                        </p>
+
+
+                        <!-- SCHOOL LEVEL -->
+
+                        <div class="field">
+
+                            <label>
+                                المرحلة الدراسية
+                                <span class="required">*</span>
+                            </label>
+
+                            <select id="schoolLevel">
+
+                                <option value="">
+                                    اختر المرحلة
+                                </option>
+
+                                <option value="الثانوية">
+                                    أرغب بالتدريس في الثانوية
+                                </option>
+
+                                <option value="الابتدائية">
+                                    أرغب بالتدريس في الابتدائية
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- SPECIALIZATION -->
+
+                        <div class="field">
+
+                            <label>
+                                التخصص / المادة الدراسية
+                                <span class="required">*</span>
+                            </label>
+
+                            <select id="specialization">
+
+                                <option value="">
+                                    اختر التخصص
+                                </option>
+
+                                <option value="إسلامية">
+                                    إسلامية
+                                </option>
+
+                                <option value="عربي">
+                                    عربي
+                                </option>
+
+                                <option value="إنكليزي">
+                                    إنكليزي
+                                </option>
+
+                                <option value="رياضيات">
+                                    رياضيات
+                                </option>
+
+                                <option value="كيمياء">
+                                    كيمياء
+                                </option>
+
+                                <option value="فيزياء">
+                                    فيزياء
+                                </option>
+
+                                <option value="أحياء">
+                                    أحياء
+                                </option>
+
+                                <option value="اجتماعيات">
+                                    اجتماعيات
+                                </option>
+
+                                <option value="اقتصاد">
+                                    اقتصاد
+                                </option>
+
+                                <option value="رياضة">
+                                    رياضة
+                                </option>
+
+                                <option value="فنية">
+                                    فنية
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="buttons">
+
+                            <button
+                                type="button"
+                                class="back-button"
+                                id="back2"
+                            >
+                                رجوع
+                            </button>
+
+                            <button
+                                type="button"
+                                class="next-button"
+                                id="next2"
+                            >
+                                التالي
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =====================
+                         STEP 3
+                    ====================== -->
+
+                    <div
+                        class="step"
+                        id="step3"
+                    >
+
+                        <h2 class="step-heading">
+                            الدراسات والخبرات
+                        </h2>
+
+                        <p class="step-description">
+                            أدخل معلوماتك الدراسية والمهنية والخبرات السابقة.
+                        </p>
+
+
+                        <!-- CERTIFICATE -->
+
+                        <div class="field">
+
+                            <label>
+                                الشهادة
+                                <span class="required">*</span>
+                            </label>
+
+                            <select id="certificate">
+
+                                <option value="">
+                                    اختر الشهادة
+                                </option>
+
+                                <option value="بكالوريوس">
+                                    بكالوريوس
+                                </option>
+
+                                <option value="دبلوم">
+                                    دبلوم
+                                </option>
+
+                                <option value="ماجستير">
+                                    ماجستير
+                                </option>
+
+                                <option value="دكتوراه">
+                                    دكتوراه
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- UNIVERSITY -->
+
+                        <div class="field">
+
+                            <label>
+                                اسم الجامعة
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="university"
+                                placeholder="اكتب اسم الجامعة"
+                            >
+
+                        </div>
+
+
+                        <!-- COLLEGE -->
+
+                        <div class="field">
+
+                            <label>
+                                اسم الكلية
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="college"
+                                placeholder="اكتب اسم الكلية"
+                            >
+
+                        </div>
+
+
+                        <!-- STUDY SPECIALIZATION -->
+
+                        <div class="field">
+
+                            <label>
+                                التخصص
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="studySpecialization"
+                                placeholder="مثال: علوم حياة"
+                            >
+
+                        </div>
+
+
+                        <!-- YEAR + GPA -->
+
+                        <div class="two-columns">
 
                             <div class="field">
 
-                                <label for="fullName">
-                                    الاسم الرباعي
+                                <label>
+                                    سنة التخرج
                                     <span class="required">*</span>
                                 </label>
 
                                 <input
                                     type="text"
-                                    id="fullName"
-                                    placeholder="أدخل الاسم الرباعي"
-                                    maxlength="150"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="two-columns">
-
-
-                                <div class="field">
-
-                                    <label for="gender">
-                                        الجنس
-                                        <span class="required">*</span>
-                                    </label>
-
-                                    <select
-                                        id="gender"
-                                        required
-                                    >
-
-                                        <option
-                                            value=""
-                                            disabled
-                                            selected
-                                        >
-                                            اختر الجنس
-                                        </option>
-
-                                        <option value="ذكر">
-                                            ذكر
-                                        </option>
-
-                                        <option value="أنثى">
-                                            أنثى
-                                        </option>
-
-                                    </select>
-
-                                </div>
-
-
-                                <div class="field">
-
-                                    <label for="birthDate">
-                                        المواليد
-                                        <span class="required">*</span>
-                                    </label>
-
-                                    <input
-                                        type="date"
-                                        id="birthDate"
-                                        required
-                                    >
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="phone">
-                                    رقم الهاتف والواتساب
-                                    <span class="required">*</span>
-                                </label>
-
-                                <input
-                                    type="tel"
-                                    id="phone"
-                                    inputmode="tel"
-                                    placeholder="مثال: 07800000000"
-                                    maxlength="20"
-                                    required
+                                    id="graduationYear"
+                                    placeholder="مثال: 2024"
+                                    inputmode="numeric"
+                                    maxlength="4"
                                 >
 
                             </div>
@@ -2241,567 +2021,199 @@
 
                             <div class="field">
 
-                                <label for="address">
-                                    عنوان السكن
+                                <label>
+                                    المعدل
                                     <span class="required">*</span>
                                 </label>
 
                                 <input
                                     type="text"
-                                    id="address"
-                                    placeholder="المحافظة - القضاء - المنطقة"
-                                    maxlength="250"
-                                    required
+                                    id="gpa"
+                                    placeholder="مثال: 78.50"
+                                    inputmode="decimal"
                                 >
-
-                            </div>
-
-
-                            <div
-                                class="message"
-                                id="message1"
-                            ></div>
-
-
-                            <div class="buttons">
-
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    id="next1"
-                                >
-                                    التالي
-                                </button>
 
                             </div>
 
                         </div>
 
 
-                        <!-- =============================================
-                             PAGE 2
-                        ============================================== -->
+                        <!-- EXPERIENCE -->
 
-                        <div
-                            class="form-page"
-                            id="page2"
-                        >
+                        <div class="field">
 
-                            <div class="section-title">
-                                اختيار الوظيفة
-                            </div>
+                            <label>
+                                الخبرات
+                            </label>
 
-
-                            <div class="field">
-
-                                <label for="stage">
-                                    المرحلة التي ترغب بالتدريس فيها
-                                    <span class="required">*</span>
-                                </label>
-
-                                <select
-                                    id="stage"
-                                    required
-                                >
-
-                                    <option
-                                        value=""
-                                        disabled
-                                        selected
-                                    >
-                                        اختر المرحلة
-                                    </option>
-
-                                    <option value="الثانوية">
-                                        أرغب بالتدريس في الثانوية
-                                    </option>
-
-                                    <option value="الابتدائية">
-                                        أرغب بالتدريس في الابتدائية
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="specialization">
-                                    التخصص / المادة الدراسية
-                                    <span class="required">*</span>
-                                </label>
-
-                                <select
-                                    id="specialization"
-                                    required
-                                >
-
-                                    <option
-                                        value=""
-                                        disabled
-                                        selected
-                                    >
-                                        اختر التخصص
-                                    </option>
-
-                                    <option value="إسلامية">
-                                        إسلامية
-                                    </option>
-
-                                    <option value="عربي">
-                                        عربي
-                                    </option>
-
-                                    <option value="إنكليزي">
-                                        إنكليزي
-                                    </option>
-
-                                    <option value="رياضيات">
-                                        رياضيات
-                                    </option>
-
-                                    <option value="كيمياء">
-                                        كيمياء
-                                    </option>
-
-                                    <option value="فيزياء">
-                                        فيزياء
-                                    </option>
-
-                                    <option value="أحياء">
-                                        أحياء
-                                    </option>
-
-                                    <option value="اجتماعيات">
-                                        اجتماعيات
-                                    </option>
-
-                                    <option value="اقتصاد">
-                                        اقتصاد
-                                    </option>
-
-                                    <option value="رياضة">
-                                        رياضة
-                                    </option>
-
-                                    <option value="فنية">
-                                        فنية
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div
-                                class="message"
-                                id="message2"
-                            ></div>
-
-
-                            <div class="buttons">
-
-                                <button
-                                    type="button"
-                                    class="btn btn-secondary"
-                                    id="back2"
-                                >
-                                    السابق
-                                </button>
-
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    id="next2"
-                                >
-                                    التالي
-                                </button>
-
-                            </div>
+                            <textarea
+                                id="experience"
+                                placeholder="اذكر خبراتك في مجال التدريس أو العمل..."
+                            ></textarea>
 
                         </div>
 
 
-                        <!-- =============================================
-                             PAGE 3
-                        ============================================== -->
+                        <!-- PREVIOUS WORK -->
 
-                        <div
-                            class="form-page"
-                            id="page3"
-                        >
+                        <div class="field">
 
-                            <div class="section-title">
-                                الدراسة والخبرات
-                            </div>
+                            <label>
+                                العمل السابق
+                            </label>
 
-
-                            <div class="field">
-
-                                <label for="certificate">
-                                    الشهادة
-                                    <span class="required">*</span>
-                                </label>
-
-                                <select
-                                    id="certificate"
-                                    required
-                                >
-
-                                    <option
-                                        value=""
-                                        disabled
-                                        selected
-                                    >
-                                        اختر الشهادة
-                                    </option>
-
-                                    <option value="دبلوم">
-                                        دبلوم
-                                    </option>
-
-                                    <option value="بكالوريوس">
-                                        بكالوريوس
-                                    </option>
-
-                                    <option value="ماجستير">
-                                        ماجستير
-                                    </option>
-
-                                    <option value="دكتوراه">
-                                        دكتوراه
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="university">
-                                    اسم الجامعة
-                                    <span class="required">*</span>
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="university"
-                                    placeholder="أدخل اسم الجامعة"
-                                    maxlength="200"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="college">
-                                    اسم الكلية
-                                    <span class="required">*</span>
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="college"
-                                    placeholder="أدخل اسم الكلية"
-                                    maxlength="200"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="studySpecialization">
-                                    التخصص
-                                    <span class="required">*</span>
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="studySpecialization"
-                                    placeholder="مثال: علوم الحياة"
-                                    maxlength="200"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="two-columns">
-
-
-                                <div class="field">
-
-                                    <label for="graduationYear">
-                                        سنة التخرج
-                                        <span class="required">*</span>
-                                    </label>
-
-                                    <input
-                                        type="number"
-                                        id="graduationYear"
-                                        placeholder="مثال: 2024"
-                                        min="1950"
-                                        max="2100"
-                                        required
-                                    >
-
-                                </div>
-
-
-                                <div class="field">
-
-                                    <label for="average">
-                                        المعدل
-                                        <span class="required">*</span>
-                                    </label>
-
-                                    <input
-                                        type="number"
-                                        id="average"
-                                        placeholder="مثال: 85"
-                                        min="0"
-                                        max="100"
-                                        step="0.01"
-                                        required
-                                    >
-
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="experience">
-                                    الخبرات
-                                </label>
-
-                                <textarea
-                                    id="experience"
-                                    placeholder="اذكر خبراتك العملية والتدريسية إن وجدت"
-                                    maxlength="1000"
-                                ></textarea>
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="previousWork">
-                                    العمل السابق
-                                </label>
-
-                                <textarea
-                                    id="previousWork"
-                                    placeholder="اذكر أماكن العمل السابقة إن وجدت"
-                                    maxlength="1000"
-                                ></textarea>
-
-                            </div>
-
-
-                            <div class="field">
-
-                                <label for="governmentEmployee">
-                                    هل أنت موظف حكومي؟
-                                    <span class="required">*</span>
-                                </label>
-
-                                <select
-                                    id="governmentEmployee"
-                                    required
-                                >
-
-                                    <option
-                                        value=""
-                                        disabled
-                                        selected
-                                    >
-                                        اختر
-                                    </option>
-
-                                    <option value="نعم">
-                                        نعم
-                                    </option>
-
-                                    <option value="لا">
-                                        لا
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div
-                                class="message"
-                                id="message3"
-                            ></div>
-
-
-                            <div class="buttons">
-
-                                <button
-                                    type="button"
-                                    class="btn btn-secondary"
-                                    id="back3"
-                                >
-                                    السابق
-                                </button>
-
-                                <button
-                                    type="submit"
-                                    class="btn btn-success"
-                                    id="submitButton"
-                                >
-                                    إرسال الطلب
-                                </button>
-
-                            </div>
+                            <textarea
+                                id="previousWork"
+                                placeholder="اذكر أماكن العمل السابقة والوظائف التي شغلتها..."
+                            ></textarea>
 
                         </div>
 
-                    </form>
+
+                        <!-- GOVERNMENT EMPLOYEE -->
+
+                        <div class="field">
+
+                            <label>
+                                هل أنت موظف حكومي؟
+                                <span class="required">*</span>
+                            </label>
+
+                            <select id="governmentEmployee">
+
+                                <option value="">
+                                    اختر
+                                </option>
+
+                                <option value="نعم">
+                                    نعم
+                                </option>
+
+                                <option value="لا">
+                                    لا
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div
+                            class="message"
+                            id="formMessage"
+                        ></div>
+
+
+                        <div class="buttons">
+
+                            <button
+                                type="button"
+                                class="back-button"
+                                id="back3"
+                            >
+                                رجوع
+                            </button>
+
+                            <button
+                                type="button"
+                                class="submit-button"
+                                id="submitButton"
+                            >
+                                إرسال الطلب
+                            </button>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
+            </section>
 
-                <!-- =================================================
-                     SUCCESS PAGE
-                ================================================== -->
 
-                <div
-                    class="success-page"
-                    id="successPage"
-                >
+            <!-- =========================
+                 SUCCESS
+            ========================== -->
+
+            <section
+                class="success-section"
+                id="successSection"
+            >
+
+                <div class="success-card">
 
                     <div class="success-icon">
                         ✓
                     </div>
 
 
-                    <h2>
+                    <h2 class="success-title">
                         تم إرسال طلبك بنجاح
                     </h2>
 
 
-                    <p>
-                        شكراً لك على التقديم على التوظيف.
+                    <p class="success-description">
+                        شكرًا لك على التقديم على التوظيف،
                         <br>
-                        سنتواصل معك لاحقاً عند اكتمال الإجراءات.
+                        سنتواصل معك لاحقًا عند اكتمال الإجراءات.
                     </p>
 
 
-                    <!-- UID -->
-
-                    <div class="uid-box">
-
-                        <div class="uid-label">
-                            الكود الخاص بطلبك
-                        </div>
-
-
-                        <div
-                            class="uid-code"
-                            id="uidCode"
-                        >
-                            B00000
-                        </div>
-
-
-                        <button
-                            type="button"
-                            class="copy-button"
-                            id="copyButton"
-                        >
-                            نسخ الكود
-                        </button>
-
+                    <div class="uid-label">
+                        الكود الخاص بطلبك
                     </div>
 
 
-                    <!-- QR -->
+                    <div
+                        class="uid-box"
+                        id="uidBox"
+                    >
+                        B00000
+                    </div>
 
-                    <div class="qr-section">
 
-                        <div class="qr-title">
-                            رمز طلب التوظيف
-                        </div>
-
-
-                        <div class="qr-description">
-                            احتفظ بهذا الرمز لاستخدامه عند التواصل مع المدرسة.
-                        </div>
-
+                    <div class="qr-wrapper">
 
                         <div id="qrcode"></div>
 
-
-                        <div class="screenshot-note">
-                            📸 صور الشاشة لطلبك واحتفظ بها
-                        </div>
-
                     </div>
 
 
-                    <!-- WHATSAPP -->
+                    <div class="save-note">
 
-                    <a
-                        href="#"
-                        class="whatsapp-button"
-                        id="whatsappButton"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                        هذا الكود الخاص بطلبك.
+                        <br>
+                        يرجى تصوير الشاشة والاحتفاظ به
+                        لمتابعة طلبك لاحقًا.
 
-                        <span class="whatsapp-icon">
-                            ☎
-                        </span>
-
-                        <span>
-                            لديك مشكلة في الطلب؟ تواصل معنا عبر واتساب
-                        </span>
-
-                    </a>
+                    </div>
 
                 </div>
-
 
             </section>
 
 
-            <!-- =================================================
+            <!-- =========================
                  FOOTER
-            ================================================== -->
+            ========================== -->
 
-            <div class="footer">
+            <footer class="footer">
 
                 جميع الحقوق محفوظة ©
-                <strong>مدرسة التحدي الأهلية المختلطة</strong>
+                <strong>مدرسة التحدي</strong>
 
-            </div>
+            </footer>
 
         </div>
 
     </main>
 
 
-    <!-- =====================================================
+    <!-- =========================
          FIREBASE
-    ====================================================== -->
+    ========================== -->
 
     <script type="module">
-
-        /* =====================================================
-           FIREBASE IMPORTS
-        ====================================================== */
 
         import {
             initializeApp
@@ -2814,20 +2226,15 @@
             getDatabase,
             ref,
             get,
-            set,
-            push,
-            query,
-            orderByChild,
-            equalTo,
-            runTransaction
+            set
         }
         from
         "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
 
-        /* =====================================================
+        /* =========================================
            FIREBASE CONFIG
-        ====================================================== */
+        ========================================== */
 
         const firebaseConfig = {
 
@@ -2858,9 +2265,9 @@
         };
 
 
-        /* =====================================================
+        /* =========================================
            INITIALIZE FIREBASE
-        ====================================================== */
+        ========================================== */
 
         const app =
             initializeApp(
@@ -2868,31 +2275,31 @@
             );
 
 
-        const database =
+        const db =
             getDatabase(
                 app
             );
 
 
-        /* =====================================================
+        /* =========================================
            ELEMENTS
-        ====================================================== */
+        ========================================== */
 
-        const welcomePage =
+        const startSection =
             document.getElementById(
-                "welcomePage"
+                "startSection"
             );
 
 
-        const formContainer =
+        const formSection =
             document.getElementById(
-                "formContainer"
+                "formSection"
             );
 
 
-        const successPage =
+        const successSection =
             document.getElementById(
-                "successPage"
+                "successSection"
             );
 
 
@@ -2902,21 +2309,15 @@
             );
 
 
-        const jobForm =
+        const pageLoader =
             document.getElementById(
-                "jobForm"
+                "pageLoader"
             );
 
 
-        const loader =
+        const formMessage =
             document.getElementById(
-                "loader"
-            );
-
-
-        const loaderText =
-            document.getElementById(
-                "loaderText"
+                "formMessage"
             );
 
 
@@ -2926,27 +2327,15 @@
             );
 
 
-        const uidCode =
+        const uidBox =
             document.getElementById(
-                "uidCode"
+                "uidBox"
             );
 
 
-        const copyButton =
-            document.getElementById(
-                "copyButton"
-            );
-
-
-        const qrcodeElement =
+        const qrcode =
             document.getElementById(
                 "qrcode"
-            );
-
-
-        const whatsappButton =
-            document.getElementById(
-                "whatsappButton"
             );
 
 
@@ -2962,162 +2351,161 @@
             );
 
 
-        /* =====================================================
-           PAGES
-        ====================================================== */
+        /* =========================================
+           STEPS
+        ========================================== */
 
-        const pages = {
+        const steps = [
 
-            1:
-                document.getElementById(
-                    "page1"
-                ),
+            document.getElementById("step1"),
 
-            2:
-                document.getElementById(
-                    "page2"
-                ),
+            document.getElementById("step2"),
 
-            3:
-                document.getElementById(
-                    "page3"
-                )
+            document.getElementById("step3")
 
-        };
+        ];
 
 
-        let currentPage = 1;
-
-        let isSubmitting = false;
+        let currentStep = 0;
 
 
-        /* =====================================================
-           WHATSAPP
-        ====================================================== */
+        /* =========================================
+           PROGRESS
+        ========================================== */
 
-        const whatsappMessage =
-            "مرحباً، لدي مشكلة في طلبي الخاص بالتوظيف، أحتاج إلى المساعدة.";
-
-
-        whatsappButton.href =
-            "https://wa.me/9647851521585?text=" +
-            encodeURIComponent(
-                whatsappMessage
+        const progressFill =
+            document.getElementById(
+                "progressFill"
             );
 
 
-        /* =====================================================
-           SHOW / HIDE LOADER
-        ====================================================== */
-
-        function showLoader(
-            text
-        ) {
-
-            loaderText.textContent =
-                text ||
-                "جاري المعالجة...";
-
-            loader.classList.add(
-                "active"
+        const progressTitle =
+            document.getElementById(
+                "progressTitle"
             );
+
+
+        const progressNumber =
+            document.getElementById(
+                "progressNumber"
+            );
+
+
+        const progressTitles = [
+
+            "البيانات الشخصية",
+
+            "اختيار الوظيفة",
+
+            "الدراسات والخبرات"
+
+        ];
+
+
+        function updateProgress() {
+
+            steps.forEach(
+                (step, index) => {
+
+                    step.classList.toggle(
+                        "active",
+                        index === currentStep
+                    );
+
+                }
+            );
+
+
+            progressTitle.textContent =
+                progressTitles[currentStep];
+
+
+            progressNumber.textContent =
+                `${currentStep + 1} من 3`;
+
+
+            progressFill.style.width =
+                `${((currentStep + 1) / 3) * 100}%`;
 
         }
 
 
-        function hideLoader() {
+        /* =========================================
+           START APPLICATION
+        ========================================== */
 
-            loader.classList.remove(
-                "active"
-            );
+        startButton.addEventListener(
+            "click",
+            function() {
 
-        }
+                startSection.style.display =
+                    "none";
+
+                formSection.classList.add(
+                    "active"
+                );
+
+                currentStep = 0;
+
+                updateProgress();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
 
 
-        /* =====================================================
+        /* =========================================
            MESSAGE
-        ====================================================== */
+        ========================================== */
 
-        function showMessage(
-            element,
-            text,
-            type = "error"
-        ) {
+        function showError(text) {
 
-            element.textContent =
+            formMessage.textContent =
                 text;
 
-            element.className =
-                "message show " +
-                type;
+            formMessage.className =
+                "message show error";
 
         }
 
 
-        function hideMessage(
-            element
-        ) {
+        function hideMessage() {
 
-            element.textContent =
+            formMessage.textContent =
                 "";
 
-            element.className =
+            formMessage.className =
                 "message";
 
         }
 
 
-        /* =====================================================
-           NORMALIZE NAME
-        ====================================================== */
+        /* =========================================
+           VALIDATE FIELD
+        ========================================== */
 
-        function normalizeName(
-            name
+        function validateValue(
+            id,
+            message
         ) {
 
-            return name
-                .trim()
-                .replace(/\s+/g, " ")
-                .toLowerCase();
-
-        }
+            const element =
+                document.getElementById(id);
 
 
-        /* =====================================================
-           CHECK REQUIRED PAGE
-        ====================================================== */
-
-        function validatePage(
-            pageNumber
-        ) {
-
-            const page =
-                pages[
-                    pageNumber
-                ];
-
-
-            const inputs =
-                page.querySelectorAll(
-                    "input, select, textarea"
-                );
-
-
-            for (
-                const input of inputs
+            if (
+                !element.value.trim()
             ) {
 
-                if (
-                    !input.checkValidity()
-                ) {
+                showError(message);
 
-                    input.reportValidity();
+                element.focus();
 
-                    input.focus();
-
-                    return false;
-
-                }
+                return false;
 
             }
 
@@ -3127,300 +2515,307 @@
         }
 
 
-        /* =====================================================
-           SHOW PAGE
-        ====================================================== */
+        /* =========================================
+           STEP 1 VALIDATION
+        ========================================== */
 
-        function showPage(
-            pageNumber
-        ) {
+        function validateStep1() {
 
-            Object.values(
-                pages
-            ).forEach(
-                page => {
-
-                    page.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
+            hideMessage();
 
 
-            pages[
-                pageNumber
-            ].classList.add(
-                "active"
-            );
+            if (
+                !validateValue(
+                    "fullName",
+                    "يرجى إدخال الاسم الرباعي."
+                )
+            ) {
+                return false;
+            }
 
 
-            currentPage =
-                pageNumber;
+            if (
+                !validateValue(
+                    "gender",
+                    "يرجى اختيار الجنس."
+                )
+            ) {
+                return false;
+            }
 
 
-            updateProgress();
+            if (
+                !validateValue(
+                    "birthDate",
+                    "يرجى إدخال المواليد."
+                )
+            ) {
+                return false;
+            }
 
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+            if (
+                !validateValue(
+                    "phone",
+                    "يرجى إدخال رقم الهاتف."
+                )
+            ) {
+                return false;
+            }
+
+
+            if (
+                !validateValue(
+                    "address",
+                    "يرجى إدخال عنوان السكن."
+                )
+            ) {
+                return false;
+            }
+
+
+            return true;
 
         }
 
 
-        /* =====================================================
-           PROGRESS
-        ====================================================== */
+        /* =========================================
+           STEP 2 VALIDATION
+        ========================================== */
 
-        function updateProgress() {
+        function validateStep2() {
 
-            const progress1 =
-                document.getElementById(
-                    "progress1"
-                );
-
-            const progress2 =
-                document.getElementById(
-                    "progress2"
-                );
-
-            const progress3 =
-                document.getElementById(
-                    "progress3"
-                );
-
-            const line1 =
-                document.getElementById(
-                    "line1"
-                );
-
-            const line2 =
-                document.getElementById(
-                    "line2"
-                );
-
-
-            [
-                progress1,
-                progress2,
-                progress3
-            ].forEach(
-                item => {
-
-                    item.classList.remove(
-                        "active",
-                        "completed"
-                    );
-
-                }
-            );
-
-
-            [
-                line1,
-                line2
-            ].forEach(
-                item => {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
+            hideMessage();
 
 
             if (
-                currentPage === 1
+                !validateValue(
+                    "schoolLevel",
+                    "يرجى اختيار المرحلة الدراسية."
+                )
             ) {
-
-                progress1.classList.add(
-                    "active"
-                );
-
+                return false;
             }
 
 
             if (
-                currentPage === 2
+                !validateValue(
+                    "specialization",
+                    "يرجى اختيار التخصص."
+                )
             ) {
-
-                progress1.classList.add(
-                    "completed"
-                );
-
-                progress2.classList.add(
-                    "active"
-                );
-
-                line1.classList.add(
-                    "active"
-                );
-
+                return false;
             }
 
 
-            if (
-                currentPage === 3
-            ) {
-
-                progress1.classList.add(
-                    "completed"
-                );
-
-                progress2.classList.add(
-                    "completed"
-                );
-
-                progress3.classList.add(
-                    "active"
-                );
-
-                line1.classList.add(
-                    "active"
-                );
-
-                line2.classList.add(
-                    "active"
-                );
-
-            }
+            return true;
 
         }
 
 
-        /* =====================================================
-           START
-        ====================================================== */
+        /* =========================================
+           STEP 3 VALIDATION
+        ========================================== */
 
-        startButton.addEventListener(
+        function validateStep3() {
+
+            hideMessage();
+
+
+            if (
+                !validateValue(
+                    "certificate",
+                    "يرجى اختيار الشهادة."
+                )
+            ) {
+                return false;
+            }
+
+
+            if (
+                !validateValue(
+                    "university",
+                    "يرجى إدخال اسم الجامعة."
+                )
+            ) {
+                return false;
+            }
+
+
+            if (
+                !validateValue(
+                    "college",
+                    "يرجى إدخال اسم الكلية."
+                )
+            ) {
+                return false;
+            }
+
+
+            if (
+                !validateValue(
+                    "studySpecialization",
+                    "يرجى إدخال التخصص."
+                )
+            ) {
+                return false;
+            }
+
+
+            if (
+                !validateValue(
+                    "graduationYear",
+                    "يرجى إدخال سنة التخرج."
+                )
+            ) {
+                return false;
+            }
+
+
+            if (
+                !validateValue(
+                    "gpa",
+                    "يرجى إدخال المعدل."
+                )
+            ) {
+                return false;
+            }
+
+
+            if (
+                !validateValue(
+                    "governmentEmployee",
+                    "يرجى تحديد حالة الموظف الحكومي."
+                )
+            ) {
+                return false;
+            }
+
+
+            return true;
+
+        }
+
+
+        /* =========================================
+           NEXT 1
+        ========================================== */
+
+        document.getElementById(
+            "next1"
+        ).addEventListener(
             "click",
             function() {
 
-                welcomePage.style.display =
-                    "none";
+                if (
+                    !validateStep1()
+                ) {
+                    return;
+                }
 
-                formContainer.style.display =
-                    "block";
 
-                showPage(1);
+                currentStep = 1;
+
+                hideMessage();
+
+                updateProgress();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
 
             }
         );
 
 
-        /* =====================================================
-           NEXT 1
-        ====================================================== */
-
-        document
-            .getElementById("next1")
-            .addEventListener(
-                "click",
-                function() {
-
-                    hideMessage(
-                        document.getElementById(
-                            "message1"
-                        )
-                    );
-
-
-                    if (
-                        !validatePage(1)
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    showPage(2);
-
-                }
-            );
-
-
-        /* =====================================================
-           BACK 2
-        ====================================================== */
-
-        document
-            .getElementById("back2")
-            .addEventListener(
-                "click",
-                function() {
-
-                    showPage(1);
-
-                }
-            );
-
-
-        /* =====================================================
+        /* =========================================
            NEXT 2
-        ====================================================== */
+        ========================================== */
 
-        document
-            .getElementById("next2")
-            .addEventListener(
-                "click",
-                function() {
+        document.getElementById(
+            "next2"
+        ).addEventListener(
+            "click",
+            function() {
 
-                    hideMessage(
-                        document.getElementById(
-                            "message2"
-                        )
-                    );
-
-
-                    if (
-                        !validatePage(2)
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    showPage(3);
-
+                if (
+                    !validateStep2()
+                ) {
+                    return;
                 }
-            );
 
 
-        /* =====================================================
+                currentStep = 2;
+
+                hideMessage();
+
+                updateProgress();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+
+        /* =========================================
+           BACK 2
+        ========================================== */
+
+        document.getElementById(
+            "back2"
+        ).addEventListener(
+            "click",
+            function() {
+
+                currentStep = 0;
+
+                hideMessage();
+
+                updateProgress();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+
+        /* =========================================
            BACK 3
-        ====================================================== */
+        ========================================== */
 
-        document
-            .getElementById("back3")
-            .addEventListener(
-                "click",
-                function() {
+        document.getElementById(
+            "back3"
+        ).addEventListener(
+            "click",
+            function() {
 
-                    showPage(2);
+                currentStep = 1;
 
-                }
-            );
+                hideMessage();
+
+                updateProgress();
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
 
 
-        /* =====================================================
-           GENERATE UNIQUE UID
-           
-           B = Male
-           G = Female
-           
-           5 digits
-           
-           Example:
-           B58231
-           G10482
-        ====================================================== */
+        /* =========================================
+           GENERATE UID
+        ========================================== */
 
-        async function generateUniqueUID(
+        function generateUID(
             gender
         ) {
 
@@ -3430,703 +2825,347 @@
                     : "G";
 
 
-            const counterPath =
-                prefix === "B"
-                    ? "system/counters/male"
-                    : "system/counters/female";
-
-
-            const counterRef =
-                ref(
-                    database,
-                    counterPath
-                );
-
-
-            /*
-             * Transaction makes the number
-             * increment atomically.
-             *
-             * This prevents two users from
-             * receiving the same number when
-             * requests arrive at the same time.
-             */
-
-            const result =
-                await runTransaction(
-                    counterRef,
-                    currentValue => {
-
-                        let number =
-                            Number(
-                                currentValue
-                            );
-
-
-                        if (
-                            !Number.isFinite(
-                                number
-                            )
-                        ) {
-
-                            number = 0;
-
-                        }
-
-
-                        number++;
-
-
-                        /*
-                         * We have only 5 digits.
-                         * Maximum:
-                         * 99999
-                         */
-
-                        if (
-                            number > 99999
-                        ) {
-
-                            return;
-
-                        }
-
-
-                        return number;
-
-                    }
-                );
-
-
-            if (
-                !result.committed
-            ) {
-
-                throw new Error(
-                    "UID_COUNTER_FAILED"
-                );
-
-            }
-
-
             const number =
-                Number(
-                    result.snapshot.val()
+                Math.floor(
+                    10000 +
+                    Math.random() * 90000
                 );
 
 
-            const uid =
-                prefix +
-                String(
-                    number
-                ).padStart(
-                    5,
-                    "0"
-                );
-
-
-            /*
-             * Extra safety check.
-             * If UID already exists,
-             * generate another one.
-             */
-
-            const existingRef =
-                ref(
-                    database,
-                    "jobApplications/" +
-                    uid
-                );
-
-
-            const existingSnapshot =
-                await get(
-                    existingRef
-                );
-
-
-            if (
-                existingSnapshot.exists()
-            ) {
-
-                return generateUniqueUID(
-                    gender
-                );
-
-            }
-
-
-            return uid;
+            return prefix + number;
 
         }
 
 
-        /* =====================================================
-           CHECK DUPLICATE NAME
-        ====================================================== */
+        /* =========================================
+           FIND UNIQUE UID
+        ========================================== */
 
-        async function checkDuplicateName(
-            fullName
+        async function generateUniqueUID(
+            gender
         ) {
 
-            const normalized =
-                normalizeName(
-                    fullName
-                );
+            let attempts = 0;
+
+            while (
+                attempts < 20
+            ) {
+
+                const uid =
+                    generateUID(
+                        gender
+                    );
 
 
-            const applicationsRef =
-                ref(
-                    database,
-                    "jobApplications"
-                );
+                const uidReference =
+                    ref(
+                        db,
+                        "jobApplications/" + uid
+                    );
 
 
-            const nameQuery =
-                query(
-                    applicationsRef,
-                    orderByChild(
-                        "searchName"
-                    ),
-                    equalTo(
-                        normalized
-                    )
-                );
+                const snapshot =
+                    await get(
+                        uidReference
+                    );
 
 
-            const snapshot =
-                await get(
-                    nameQuery
-                );
+                if (
+                    !snapshot.exists()
+                ) {
+
+                    return uid;
+
+                }
 
 
-            return snapshot.exists();
+                attempts++;
+
+            }
+
+
+            throw new Error(
+                "تعذر إنشاء رمز فريد للطلب."
+            );
 
         }
 
 
-        /* =====================================================
-           COLLECT FORM DATA
-        ====================================================== */
+        /* =========================================
+           GET FORM DATA
+        ========================================== */
 
-        function collectFormData() {
+        function getFormData(
+            uid
+        ) {
 
             return {
 
-                fullName:
-                    document
-                        .getElementById(
-                            "fullName"
-                        )
-                        .value
-                        .trim(),
+                uid: uid,
 
-                gender:
-                    document
-                        .getElementById(
-                            "gender"
-                        )
-                        .value,
+                personal: {
 
-                birthDate:
-                    document
-                        .getElementById(
-                            "birthDate"
-                        )
-                        .value,
+                    fullName:
+                        document
+                            .getElementById("fullName")
+                            .value
+                            .trim(),
 
-                phone:
-                    document
-                        .getElementById(
-                            "phone"
-                        )
-                        .value
-                        .trim(),
+                    gender:
+                        document
+                            .getElementById("gender")
+                            .value,
 
-                address:
-                    document
-                        .getElementById(
-                            "address"
-                        )
-                        .value
-                        .trim(),
+                    birthDate:
+                        document
+                            .getElementById("birthDate")
+                            .value
+                            .trim(),
 
-                stage:
-                    document
-                        .getElementById(
-                            "stage"
-                        )
-                        .value,
+                    phone:
+                        document
+                            .getElementById("phone")
+                            .value
+                            .trim(),
 
-                jobSpecialization:
-                    document
-                        .getElementById(
-                            "specialization"
-                        )
-                        .value,
+                    address:
+                        document
+                            .getElementById("address")
+                            .value
+                            .trim()
 
-                certificate:
-                    document
-                        .getElementById(
-                            "certificate"
-                        )
-                        .value,
+                },
 
-                university:
-                    document
-                        .getElementById(
-                            "university"
-                        )
-                        .value
-                        .trim(),
 
-                college:
-                    document
-                        .getElementById(
-                            "college"
-                        )
-                        .value
-                        .trim(),
+                job: {
 
-                studySpecialization:
-                    document
-                        .getElementById(
-                            "studySpecialization"
-                        )
-                        .value
-                        .trim(),
+                    schoolLevel:
+                        document
+                            .getElementById("schoolLevel")
+                            .value,
 
-                graduationYear:
-                    document
-                        .getElementById(
-                            "graduationYear"
-                        )
-                        .value,
+                    specialization:
+                        document
+                            .getElementById("specialization")
+                            .value
 
-                average:
-                    document
-                        .getElementById(
-                            "average"
-                        )
-                        .value,
+                },
 
-                experience:
-                    document
-                        .getElementById(
-                            "experience"
-                        )
-                        .value
-                        .trim(),
 
-                previousWork:
-                    document
-                        .getElementById(
-                            "previousWork"
-                        )
-                        .value
-                        .trim(),
+                education: {
 
-                governmentEmployee:
-                    document
-                        .getElementById(
-                            "governmentEmployee"
-                        )
-                        .value
+                    certificate:
+                        document
+                            .getElementById("certificate")
+                            .value,
+
+                    university:
+                        document
+                            .getElementById("university")
+                            .value
+                            .trim(),
+
+                    college:
+                        document
+                            .getElementById("college")
+                            .value
+                            .trim(),
+
+                    specialization:
+                        document
+                            .getElementById("studySpecialization")
+                            .value
+                            .trim(),
+
+                    graduationYear:
+                        document
+                            .getElementById("graduationYear")
+                            .value
+                            .trim(),
+
+                    gpa:
+                        document
+                            .getElementById("gpa")
+                            .value
+                            .trim()
+
+                },
+
+
+                experience: {
+
+                    experience:
+                        document
+                            .getElementById("experience")
+                            .value
+                            .trim(),
+
+                    previousWork:
+                        document
+                            .getElementById("previousWork")
+                            .value
+                            .trim(),
+
+                    governmentEmployee:
+                        document
+                            .getElementById("governmentEmployee")
+                            .value
+
+                },
+
+
+                status: "جديد",
+
+                submittedAt:
+                    new Date().toISOString(),
+
+                timestamp:
+                    Date.now()
 
             };
 
         }
 
 
-        /* =====================================================
-           SUBMIT
-        ====================================================== */
+        /* =========================================
+           SUBMIT APPLICATION
+        ========================================== */
 
-        jobForm.addEventListener(
-            "submit",
-            async function(event) {
-
-                event.preventDefault();
-
+        submitButton.addEventListener(
+            "click",
+            async function() {
 
                 if (
-                    isSubmitting
+                    !validateStep3()
                 ) {
-
                     return;
-
                 }
 
 
-                hideMessage(
-                    document.getElementById(
-                        "message3"
-                    )
-                );
-
-
                 if (
-                    !validatePage(3)
+                    submitButton.disabled
                 ) {
-
                     return;
-
                 }
 
 
-                const data =
-                    collectFormData();
-
-
-                /*
-                 * Validate average.
-                 */
-
-                const average =
-                    Number(
-                        data.average
-                    );
-
-
-                if (
-                    !Number.isFinite(
-                        average
-                    ) ||
-                    average < 0 ||
-                    average > 100
-                ) {
-
-                    showMessage(
-                        document.getElementById(
-                            "message3"
-                        ),
-                        "يرجى إدخال معدل صحيح بين 0 و100."
-                    );
-
-                    return;
-
-                }
-
-
-                /*
-                 * Validate graduation year.
-                 */
-
-                const year =
-                    Number(
-                        data.graduationYear
-                    );
-
-
-                if (
-                    year < 1950 ||
-                    year > 2100
-                ) {
-
-                    showMessage(
-                        document.getElementById(
-                            "message3"
-                        ),
-                        "يرجى إدخال سنة تخرج صحيحة."
-                    );
-
-                    return;
-
-                }
-
-
-                isSubmitting =
-                    true;
+                hideMessage();
 
 
                 submitButton.disabled =
                     true;
 
 
-                showLoader(
-                    "جاري التحقق من الطلب..."
+                submitButton.innerHTML = `
+                    <span class="loading">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                `;
+
+
+                pageLoader.classList.add(
+                    "active"
                 );
 
 
                 try {
 
-
-                    /* =============================================
-                       DUPLICATE NAME CHECK
-                    ============================================== */
-
-                    const duplicate =
-                        await checkDuplicateName(
-                            data.fullName
-                        );
+                    const gender =
+                        document
+                            .getElementById(
+                                "gender"
+                            )
+                            .value;
 
 
-                    if (
-                        duplicate
-                    ) {
-
-                        hideLoader();
-
-                        isSubmitting =
-                            false;
-
-                        submitButton.disabled =
-                            false;
-
-
-                        showMessage(
-                            document.getElementById(
-                                "message3"
-                            ),
-                            "هذا الاسم قدم طلباً سابقاً. إذا كان لديك خلل في الاستمارة، يرجى التواصل معنا عبر واتساب."
-                        );
-
-
-                        return;
-
-                    }
-
-
-                    /* =============================================
-                       GENERATE UNIQUE UID
-                    ============================================== */
-
-                    loaderText.textContent =
-                        "جاري إنشاء كود الطلب...";
-
+                    /* =========================
+                       CREATE UNIQUE UID
+                    ========================== */
 
                     const uid =
                         await generateUniqueUID(
-                            data.gender
+                            gender
                         );
 
 
-                    /* =============================================
-                       APPLICATION KEY
-                    ============================================== */
+                    /* =========================
+                       CREATE DATA
+                    ========================== */
 
-                    const applicationRef =
-                        ref(
-                            database,
-                            "jobApplications/" +
+                    const application =
+                        getFormData(
                             uid
                         );
 
 
-                    /*
-                     * Final protection against
-                     * duplicate UID.
-                     */
-
-                    const existing =
-                        await get(
-                            applicationRef
-                        );
-
-
-                    if (
-                        existing.exists()
-                    ) {
-
-                        throw new Error(
-                            "UID_ALREADY_EXISTS"
-                        );
-
-                    }
-
-
-                    /* =============================================
-                       APPLICATION OBJECT
-                    ============================================== */
-
-                    const application = {
-
-                        uid:
-                            uid,
-
-                        fullName:
-                            data.fullName,
-
-                        searchName:
-                            normalizeName(
-                                data.fullName
-                            ),
-
-                        gender:
-                            data.gender,
-
-                        birthDate:
-                            data.birthDate,
-
-                        phone:
-                            data.phone,
-
-                        address:
-                            data.address,
-
-                        job: {
-
-                            stage:
-                                data.stage,
-
-                            specialization:
-                                data.jobSpecialization
-
-                        },
-
-                        education: {
-
-                            certificate:
-                                data.certificate,
-
-                            university:
-                                data.university,
-
-                            college:
-                                data.college,
-
-                            specialization:
-                                data.studySpecialization,
-
-                            graduationYear:
-                                Number(
-                                    data.graduationYear
-                                ),
-
-                            average:
-                                average
-
-                        },
-
-                        experience: {
-
-                            experience:
-                                data.experience,
-
-                            previousWork:
-                                data.previousWork,
-
-                            governmentEmployee:
-                                data.governmentEmployee
-
-                        },
-
-                        status:
-                            "جديد",
-
-                        createdAt:
-                            Date.now()
-
-                    };
-
-
-                    /* =============================================
+                    /* =========================
                        SAVE TO REALTIME DATABASE
-                    ============================================== */
+                    ========================== */
 
-                    loaderText.textContent =
-                        "جاري حفظ طلبك...";
+                    const applicationReference =
+                        ref(
+                            db,
+                            "jobApplications/" + uid
+                        );
 
 
                     await set(
-                        applicationRef,
+                        applicationReference,
                         application
                     );
 
 
-                    /* =============================================
-                       VERIFY SAVE
-                    ============================================== */
+                    /* =========================
+                       SHOW UID
+                    ========================== */
 
-                    const savedSnapshot =
-                        await get(
-                            applicationRef
-                        );
-
-
-                    if (
-                        !savedSnapshot.exists()
-                    ) {
-
-                        throw new Error(
-                            "SAVE_FAILED"
-                        );
-
-                    }
-
-
-                    /* =============================================
-                       SHOW SUCCESS
-                    ============================================== */
-
-                    uidCode.textContent =
+                    uidBox.textContent =
                         uid;
 
 
-                    /*
-                     * Generate QR code.
-                     */
+                    /* =========================
+                       CREATE QR
+                    ========================== */
 
-                    qrcodeElement.innerHTML =
+                    qrcode.innerHTML =
                         "";
 
 
-                    if (
-                        typeof QRCode !==
-                        "undefined"
-                    ) {
-
-                        new QRCode(
-                            qrcodeElement,
-                            {
-
-                                text:
-                                    uid,
-
-                                width:
-                                    170,
-
-                                height:
-                                    170,
-
-                                colorDark:
-                                    "#10233f",
-
-                                colorLight:
-                                    "#ffffff",
-
-                                correctLevel:
-                                    QRCode.CorrectLevel.H
-
-                            }
-                        );
-
-                    } else {
-
-                        qrcodeElement.innerHTML =
-                            `
-                            <div style="
-                                font-size:12px;
-                                color:#a20f16;
-                                font-weight:700;
-                                text-align:center;
-                                padding:20px;
-                            ">
-                                تعذر إنشاء رمز QR.
-                            </div>
-                            `;
-
-                    }
+                    new QRCode(
+                        qrcode,
+                        {
+                            text: uid,
+                            width: 150,
+                            height: 150,
+                            colorDark: "#10233f",
+                            colorLight: "#ffffff",
+                            correctLevel:
+                                QRCode.CorrectLevel.H
+                        }
+                    );
 
 
-                    hideLoader();
+                    /* =========================
+                       HIDE LOADER
+                    ========================== */
+
+                    pageLoader.classList.remove(
+                        "active"
+                    );
 
 
-                    formContainer.style.display =
-                        "none";
+                    /* =========================
+                       SHOW SUCCESS
+                    ========================== */
+
+                    formSection.classList.remove(
+                        "active"
+                    );
 
 
-                    successPage.classList.add(
+                    successSection.classList.add(
                         "active"
                     );
 
@@ -4137,79 +3176,68 @@
                     });
 
 
-                } catch (
-                    error
-                ) {
+                } catch (error) {
 
                     console.error(
-                        "Application submission error:",
+                        "Firebase Error:",
                         error
                     );
 
 
-                    hideLoader();
-
-
-                    isSubmitting =
-                        false;
+                    pageLoader.classList.remove(
+                        "active"
+                    );
 
 
                     submitButton.disabled =
                         false;
 
 
+                    submitButton.textContent =
+                        "إرسال الطلب";
+
+
                     let errorMessage =
-                        "حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.";
+                        "حدث خطأ أثناء إرسال الطلب.";
 
 
                     if (
+                        !navigator.onLine
+                    ) {
+
+                        errorMessage =
+                            "لا يوجد اتصال بالإنترنت. تحقق من اتصالك وحاول مرة أخرى.";
+
+                    } else if (
                         error.code ===
                         "PERMISSION_DENIED"
                     ) {
 
                         errorMessage =
-                            "لا توجد صلاحية للوصول إلى قاعدة البيانات. يرجى التأكد من إعدادات Firebase Realtime Database Rules.";
+                            "Firebase رفض عملية الحفظ. تأكد من إعدادات Rules في Realtime Database.";
 
-                    }
-
-
-                    if (
-                        error.message ===
-                        "UID_COUNTER_FAILED"
+                    } else if (
+                        error.code ===
+                        "permission-denied"
                     ) {
 
                         errorMessage =
-                            "تعذر إنشاء كود الطلب حالياً. يرجى المحاولة مرة أخرى.";
+                            "لا توجد صلاحية للكتابة في قاعدة البيانات. راجع Firebase Rules.";
 
-                    }
-
-
-                    if (
-                        error.message ===
-                        "UID_ALREADY_EXISTS"
+                    } else if (
+                        error.message &&
+                        error.message.includes(
+                            "permission"
+                        )
                     ) {
 
                         errorMessage =
-                            "حدث تعارض نادر في كود الطلب. يرجى الضغط على إرسال مرة أخرى.";
+                            "لا توجد صلاحية لحفظ الطلب في Firebase. راجع Realtime Database Rules.";
 
                     }
 
 
-                    if (
-                        error.message ===
-                        "SAVE_FAILED"
-                    ) {
-
-                        errorMessage =
-                            "لم يتم التأكد من حفظ الطلب في قاعدة البيانات. يرجى المحاولة مرة أخرى.";
-
-                    }
-
-
-                    showMessage(
-                        document.getElementById(
-                            "message3"
-                        ),
+                    showError(
                         errorMessage
                     );
 
@@ -4219,142 +3247,9 @@
         );
 
 
-        /* =====================================================
-           COPY UID
-        ====================================================== */
-
-        copyButton.addEventListener(
-            "click",
-            async function() {
-
-                const code =
-                    uidCode.textContent.trim();
-
-
-                try {
-
-                    await navigator.clipboard.writeText(
-                        code
-                    );
-
-
-                    copyButton.textContent =
-                        "✓ تم نسخ الكود";
-
-
-                    setTimeout(
-                        function() {
-
-                            copyButton.textContent =
-                                "نسخ الكود";
-
-                        },
-                        2000
-                    );
-
-
-                } catch (
-                    error
-                ) {
-
-                    /*
-                     * Fallback for older browsers.
-                     */
-
-                    const temporary =
-                        document.createElement(
-                            "input"
-                        );
-
-
-                    temporary.value =
-                        code;
-
-
-                    document.body.appendChild(
-                        temporary
-                    );
-
-
-                    temporary.select();
-
-
-                    document.execCommand(
-                        "copy"
-                    );
-
-
-                    temporary.remove();
-
-
-                    copyButton.textContent =
-                        "✓ تم نسخ الكود";
-
-
-                    setTimeout(
-                        function() {
-
-                            copyButton.textContent =
-                                "نسخ الكود";
-
-                        },
-                        2000
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* =====================================================
-           PHONE CLEANING
-        ====================================================== */
-
-        document
-            .getElementById(
-                "phone"
-            )
-            .addEventListener(
-                "input",
-                function() {
-
-                    this.value =
-                        this.value.replace(
-                            /[^0-9+]/g,
-                            ""
-                        );
-
-                }
-            );
-
-
-        /* =====================================================
-           NAME CLEANING
-        ====================================================== */
-
-        document
-            .getElementById(
-                "fullName"
-            )
-            .addEventListener(
-                "input",
-                function() {
-
-                    this.value =
-                        this.value
-                            .replace(
-                                /\s+/g,
-                                " "
-                            );
-
-                }
-            );
-
-
-        /* =====================================================
+        /* =========================================
            LOGO FALLBACK
-        ====================================================== */
+        ========================================== */
 
         schoolLogo.addEventListener(
             "error",
@@ -4370,9 +3265,152 @@
         );
 
 
-        /* =====================================================
-           INITIAL PROGRESS
-        ====================================================== */
+        /* =========================================
+           INPUT CLEANING
+        ========================================== */
+
+        document
+            .getElementById("fullName")
+            .addEventListener(
+                "input",
+                function() {
+
+                    this.value =
+                        this.value.replace(
+                            /\s{2,}/g,
+                            " "
+                        );
+
+                }
+            );
+
+
+        document
+            .getElementById("phone")
+            .addEventListener(
+                "input",
+                function() {
+
+                    this.value =
+                        this.value.replace(
+                            /[^0-9+]/g,
+                            ""
+                        );
+
+                }
+            );
+
+
+        document
+            .getElementById("graduationYear")
+            .addEventListener(
+                "input",
+                function() {
+
+                    this.value =
+                        this.value.replace(
+                            /[^0-9]/g,
+                            ""
+                        );
+
+                }
+            );
+
+
+        document
+            .getElementById("gpa")
+            .addEventListener(
+                "input",
+                function() {
+
+                    this.value =
+                        this.value.replace(
+                            /[^0-9.]/g,
+                            ""
+                        );
+
+                }
+            );
+
+
+        /* =========================================
+           BIRTH DATE FORMATTING
+        ========================================== */
+
+        document
+            .getElementById("birthDate")
+            .addEventListener(
+                "input",
+                function() {
+
+                    let value =
+                        this.value.replace(
+                            /[^0-9]/g,
+                            ""
+                        );
+
+
+                    if (
+                        value.length > 8
+                    ) {
+
+                        value =
+                            value.substring(
+                                0,
+                                8
+                            );
+
+                    }
+
+
+                    if (
+                        value.length >= 5
+                    ) {
+
+                        value =
+                            value.substring(0, 2)
+                            + " / "
+                            + value.substring(2, 4)
+                            + " / "
+                            + value.substring(4);
+
+                    } else if (
+                        value.length >= 3
+                    ) {
+
+                        value =
+                            value.substring(0, 2)
+                            + " / "
+                            + value.substring(2);
+
+                    }
+
+
+                    this.value =
+                        value;
+
+                }
+            );
+
+
+        /* =========================================
+           PREVENT DOUBLE SUBMISSION
+        ========================================== */
+
+        window.addEventListener(
+            "beforeunload",
+            function() {
+
+                // يمنع بعض المتصفحات من إعادة إرسال النموذج
+                // أثناء التنقل غير المقصود.
+
+            }
+        );
+
+
+        /* =========================================
+           START
+        ========================================== */
 
         updateProgress();
 
