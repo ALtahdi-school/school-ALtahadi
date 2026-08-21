@@ -7,35 +7,26 @@
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     >
 
-    <meta
-        name="theme-color"
-        content="#0b63d8"
-    >
+    <meta name="theme-color" content="#0b63d8">
 
-    <meta
-        name="mobile-web-app-capable"
-        content="yes"
-    >
+    <meta name="mobile-web-app-capable" content="yes">
 
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <meta
         name="apple-mobile-web-app-status-bar-style"
         content="default"
     >
 
-    <title>التحدي | تسجيل الدخول</title>
+    <title>طلب توظيف | مدرسة التحدي</title>
 
 
-    <!-- =========================================
+    <!-- =====================================================
          FONT
-    ========================================== -->
+    ====================================================== -->
 
     <link
         rel="preconnect"
@@ -54,15 +45,15 @@
     >
 
 
-    <!-- =========================================
+    <!-- =====================================================
          STYLE
-    ========================================== -->
+    ====================================================== -->
 
     <style>
 
-        /* =========================================
+        /* =====================================================
            RESET
-        ========================================== */
+        ====================================================== */
 
         *,
         *::before,
@@ -79,36 +70,91 @@
         }
 
 
-        /* =========================================
-           HTML
-        ========================================== */
-
         html {
 
             width: 100%;
 
-            height: 100%;
+            min-height: 100%;
 
-            margin: 0;
-
-            padding: 0;
-
-            background: #ffffff;
-
-            overflow: hidden;
-
-            touch-action: manipulation;
+            background: #f7faff;
 
             -webkit-text-size-adjust: 100%;
 
             text-size-adjust: 100%;
 
+            scroll-behavior: smooth;
+
         }
 
 
-        /* =========================================
+        body {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            min-height: 100dvh;
+
+            margin: 0;
+
+            padding: 0;
+
+            font-family:
+                "Cairo",
+                Arial,
+                sans-serif;
+
+            color: #10233f;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f7faff 0%,
+                    #ffffff 100%
+                );
+
+            overflow-x: hidden;
+
+            -webkit-font-smoothing: antialiased;
+
+        }
+
+
+        button,
+        input,
+        select,
+        textarea {
+
+            font-family:
+                "Cairo",
+                Arial,
+                sans-serif;
+
+        }
+
+
+        button,
+        select {
+
+            -webkit-user-select: none;
+
+            user-select: none;
+
+        }
+
+
+        input,
+        textarea,
+        select {
+
+            font-size: 16px;
+
+        }
+
+
+        /* =====================================================
            VARIABLES
-        ========================================== */
+        ====================================================== */
 
         :root {
 
@@ -118,116 +164,42 @@
 
             --blue-light: #edf5ff;
 
+            --blue-border: #d8e7fa;
+
             --red: #d71920;
+
+            --green: #078447;
 
             --text: #10233f;
 
             --muted: #7a8798;
 
-            --border: #e3eaf3;
+            --border: #dfe7f1;
 
             --white: #ffffff;
 
-        }
+            --danger-bg: #fff2f3;
 
-
-        /* =========================================
-           BODY
-        ========================================== */
-
-        body {
-
-            width: 100%;
-
-            height: 100%;
-
-            min-height: 100dvh;
-
-            margin: 0;
-
-            padding: 0;
-
-            font-family:
-                "Cairo",
-                Arial,
-                sans-serif;
-
-            background: #ffffff;
-
-            color: var(--text);
-
-            overflow: hidden;
-
-            touch-action: manipulation;
-
-            overscroll-behavior: none;
-
-            -webkit-user-select: none;
-
-            user-select: none;
-
-            -webkit-text-size-adjust: 100%;
-
-            text-size-adjust: 100%;
-
-            -webkit-font-smoothing: antialiased;
+            --danger: #b71921;
 
         }
 
 
-        button,
-        input {
-
-            font-family:
-                "Cairo",
-                Arial,
-                sans-serif;
-
-        }
-
-
-        /* =========================================
-           APP
-        ========================================== */
-
-        .app {
-
-            position: relative;
-
-            width: 100%;
-
-            height: 100dvh;
-
-            min-height: 100dvh;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            overflow: hidden;
-
-            isolation: isolate;
-
-        }
-
-
-        /* =========================================
+        /* =====================================================
            BACKGROUND
-        ========================================== */
+        ====================================================== */
 
         .background {
 
-            position: absolute;
+            position: fixed;
 
             inset: 0;
-
-            z-index: -1;
 
             overflow: hidden;
 
             pointer-events: none;
+
+            z-index: 0;
 
         }
 
@@ -238,26 +210,26 @@
 
             position: absolute;
 
-            width: 280px;
+            width: 340px;
 
-            height: 280px;
+            height: 340px;
 
-            top: -130px;
+            top: -170px;
 
-            right: -110px;
+            right: -130px;
 
             border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(11,99,216,.17) 0%,
+                    rgba(11,99,216,.15) 0%,
                     rgba(11,99,216,.05) 45%,
                     transparent 72%
                 );
 
             animation:
-                backgroundFloat1
+                floatOne
                 9s
                 ease-in-out
                 infinite;
@@ -271,26 +243,26 @@
 
             position: absolute;
 
-            width: 260px;
+            width: 300px;
 
-            height: 260px;
+            height: 300px;
 
-            bottom: -150px;
+            bottom: -170px;
 
-            left: -110px;
+            left: -120px;
 
             border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(215,25,32,.10) 0%,
-                    rgba(215,25,32,.03) 48%,
+                    rgba(215,25,32,.08) 0%,
+                    rgba(215,25,32,.03) 45%,
                     transparent 72%
                 );
 
             animation:
-                backgroundFloat2
+                floatTwo
                 11s
                 ease-in-out
                 infinite;
@@ -298,7 +270,7 @@
         }
 
 
-        @keyframes backgroundFloat1 {
+        @keyframes floatOne {
 
             0%,
             100% {
@@ -312,7 +284,7 @@
             50% {
 
                 transform:
-                    translate3d(-18px,22px,0)
+                    translate3d(-18px,20px,0)
                     scale(1.08);
 
             }
@@ -320,7 +292,7 @@
         }
 
 
-        @keyframes backgroundFloat2 {
+        @keyframes floatTwo {
 
             0%,
             100% {
@@ -334,166 +306,58 @@
             50% {
 
                 transform:
-                    translate3d(25px,-20px,0)
-                    scale(1.1);
+                    translate3d(20px,-20px,0)
+                    scale(1.08);
 
             }
 
         }
 
 
-        /* =========================================
-           DECORATIVE DOTS
-        ========================================== */
+        /* =====================================================
+           APP
+        ====================================================== */
 
-        .dot {
+        .app {
 
-            position: absolute;
+            position: relative;
 
-            border-radius: 50%;
-
-            background: var(--blue);
-
-            opacity: .10;
-
-            animation:
-                dotFloat
-                6s
-                ease-in-out
-                infinite;
-
-        }
-
-
-        .dot-1 {
-
-            width: 9px;
-
-            height: 9px;
-
-            top: 17%;
-
-            left: 12%;
-
-        }
-
-
-        .dot-2 {
-
-            width: 6px;
-
-            height: 6px;
-
-            top: 30%;
-
-            right: 13%;
-
-            animation-delay: -2s;
-
-        }
-
-
-        .dot-3 {
-
-            width: 8px;
-
-            height: 8px;
-
-            bottom: 24%;
-
-            right: 19%;
-
-            animation-delay: -4s;
-
-        }
-
-
-        @keyframes dotFloat {
-
-            0%,
-            100% {
-
-                transform:
-                    translateY(0);
-
-            }
-
-            50% {
-
-                transform:
-                    translateY(-12px);
-
-            }
-
-        }
-
-
-        /* =========================================
-           MAIN CONTENT
-        ========================================== */
-
-        .content {
+            z-index: 1;
 
             width: 100%;
 
-            max-width: 430px;
+            min-height: 100vh;
+
+            min-height: 100dvh;
 
             padding:
-                max(15px, env(safe-area-inset-top))
-                20px
-                max(15px, env(safe-area-inset-bottom))
-                20px;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-
-            text-align: center;
-
-            animation:
-                contentEnter
-                .8s
-                cubic-bezier(.22,.61,.36,1)
-                both;
+                max(24px, env(safe-area-inset-top))
+                18px
+                max(28px, env(safe-area-inset-bottom))
+                18px;
 
         }
 
 
-        @keyframes contentEnter {
+        .container {
 
-            from {
+            width: 100%;
 
-                opacity: 0;
+            max-width: 570px;
 
-                transform:
-                    translateY(25px);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    translateY(0);
-
-            }
+            margin:
+                0
+                auto;
 
         }
 
 
-        /* =========================================
-           LOGO
-        ========================================== */
+        /* =====================================================
+           TOP BRAND
+        ====================================================== */
 
         .brand {
 
-            width: 100%;
-
             display: flex;
 
             flex-direction: column;
@@ -502,7 +366,13 @@
 
             text-align: center;
 
-            margin-bottom: 22px;
+            margin-bottom: 24px;
+
+            animation:
+                fadeUp
+                .7s
+                ease
+                both;
 
         }
 
@@ -511,17 +381,11 @@
 
             position: relative;
 
-            width: 100px;
+            width: 92px;
 
-            height: 100px;
+            height: 92px;
 
-            margin-bottom: 11px;
-
-            animation:
-                logoFloat
-                4s
-                ease-in-out
-                infinite;
+            margin-bottom: 12px;
 
         }
 
@@ -532,14 +396,14 @@
 
             position: absolute;
 
-            inset: -12px;
+            inset: -10px;
 
-            border-radius: 31px;
+            border-radius: 30px;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(11,99,216,.12),
+                    rgba(11,99,216,.13),
                     transparent 68%
                 );
 
@@ -558,15 +422,15 @@
 
             z-index: 2;
 
-            display: block;
-
             width: 100%;
 
             height: 100%;
 
+            display: block;
+
             object-fit: contain;
 
-            border-radius: 25px;
+            border-radius: 24px;
 
         }
 
@@ -581,17 +445,17 @@
 
             height: 100%;
 
-            border-radius: 25px;
-
-            display: flex;
+            display: none;
 
             align-items: center;
 
             justify-content: center;
 
+            border-radius: 24px;
+
             color: #ffffff;
 
-            font-size: 40px;
+            font-size: 38px;
 
             font-weight: 900;
 
@@ -604,27 +468,7 @@
 
             box-shadow:
                 0 15px 35px
-                rgba(11,99,216,.23);
-
-        }
-
-
-        @keyframes logoFloat {
-
-            0%,
-            100% {
-
-                transform:
-                    translateY(0);
-
-            }
-
-            50% {
-
-                transform:
-                    translateY(-6px);
-
-            }
+                rgba(11,99,216,.22);
 
         }
 
@@ -634,88 +478,94 @@
             0%,
             100% {
 
-                transform:
-                    scale(.95);
+                transform: scale(.95);
 
-                opacity: .45;
+                opacity: .5;
 
             }
 
             50% {
 
-                transform:
-                    scale(1.08);
+                transform: scale(1.08);
 
-                opacity: .9;
+                opacity: .95;
 
             }
 
         }
 
 
-        /* =========================================
-           BRAND TEXT
-        ========================================== */
-
         .brand-title {
-
-            font-size: 25px;
-
-            line-height: 1.35;
-
-            font-weight: 900;
 
             color: var(--blue-dark);
 
-            letter-spacing: -.5px;
+            font-size: 23px;
+
+            line-height: 1.5;
+
+            font-weight: 900;
 
         }
 
 
         .brand-subtitle {
 
-            margin-top: 4px;
+            margin-top: 3px;
+
+            color: var(--muted);
 
             font-size: 12px;
 
-            font-weight: 600;
-
-            color: var(--muted);
+            font-weight: 700;
 
         }
 
 
-        /* =========================================
-           LOGIN CARD
-        ========================================== */
+        .brand-quote {
 
-        .login-card {
+            max-width: 430px;
+
+            margin-top: 10px;
+
+            color: #607086;
+
+            font-size: 11px;
+
+            line-height: 1.9;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =====================================================
+           WELCOME CARD
+        ====================================================== */
+
+        .welcome-card {
 
             width: 100%;
 
-            max-width: 390px;
+            padding: 30px 23px;
 
-            padding:
-                26px
-                21px
-                24px;
+            text-align: center;
 
             background:
-                rgba(255,255,255,.97);
+                rgba(255,255,255,.96);
 
             border:
                 1px solid
                 rgba(11,99,216,.08);
 
-            border-radius: 24px;
+            border-radius: 26px;
 
             box-shadow:
-                0 20px 55px
+                0 20px 60px
                 rgba(16,35,63,.09);
 
             animation:
                 cardEnter
-                .9s
+                .75s
                 .1s
                 ease
                 both;
@@ -723,235 +573,79 @@
         }
 
 
-        @keyframes cardEnter {
+        .welcome-icon {
 
-            from {
+            width: 65px;
 
-                opacity: 0;
+            height: 65px;
 
-                transform:
-                    translateY(18px)
-                    scale(.98);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-
-            }
-
-        }
-
-
-        /* =========================================
-           CARD TEXT
-        ========================================== */
-
-        .login-heading {
-
-            text-align: center;
-
-            font-size: 18px;
-
-            font-weight: 800;
-
-            color: var(--text);
-
-        }
-
-
-        .login-description {
-
-            text-align: center;
-
-            margin-top: 4px;
-
-            margin-bottom: 21px;
-
-            color: var(--muted);
-
-            font-size: 11px;
-
-            font-weight: 500;
-
-        }
-
-
-        /* =========================================
-           INPUT
-        ========================================== */
-
-        .input-wrapper {
-
-            position: relative;
-
-            width: 100%;
-
-            margin-bottom: 13px;
-
-        }
-
-
-        .input-label {
-
-            display: block;
-
-            margin-bottom: 7px;
-
-            padding-right: 3px;
-
-            font-size: 11px;
-
-            color: #647286;
-
-            font-weight: 700;
-
-            text-align: right;
-
-        }
-
-
-        .input-icon {
-
-            position: absolute;
-
-            right: 15px;
-
-            bottom: 0;
-
-            width: 44px;
-
-            height: 56px;
+            margin:
+                0
+                auto
+                16px;
 
             display: flex;
 
             align-items: center;
 
             justify-content: center;
+
+            border-radius: 20px;
 
             color: var(--blue);
 
-            font-size: 11px;
+            background: var(--blue-light);
+
+            font-size: 27px;
 
             font-weight: 900;
 
-            pointer-events: none;
-
-            z-index: 2;
-
         }
 
 
-        .id-input {
-
-            display: block;
-
-            width: 100%;
-
-            height: 56px;
-
-            border:
-                1.8px solid
-                var(--border);
-
-            border-radius: 15px;
-
-            outline: none;
-
-            background: #f9fbfe;
+        .welcome-title {
 
             color: var(--text);
 
-            font-size: 15px;
+            font-size: 20px;
 
-            font-weight: 700;
-
-            direction: ltr;
-
-            text-align: left;
-
-            padding:
-                0
-                48px
-                0
-                15px;
-
-            transition:
-                border-color .2s ease,
-                background .2s ease,
-                box-shadow .2s ease;
-
-            -webkit-appearance: none;
-
-            appearance: none;
-
-            -webkit-user-select: text;
-
-            user-select: text;
-
-            touch-action: manipulation;
+            font-weight: 900;
 
         }
 
 
-        .id-input::placeholder {
+        .welcome-text {
 
-            color: #a8b3c1;
+            margin-top: 8px;
 
-            font-size: 13px;
+            color: var(--muted);
 
-            font-weight: 500;
+            font-size: 12px;
 
-        }
+            line-height: 1.9;
 
-
-        .id-input:focus {
-
-            border-color:
-                var(--blue);
-
-            background:
-                #ffffff;
-
-            box-shadow:
-                0 0 0 4px
-                rgba(11,99,216,.07);
+            font-weight: 600;
 
         }
 
 
-        /* =========================================
-           LOGIN BUTTON
-        ========================================== */
-
-        .login-button {
-
-            position: relative;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
+        .start-button {
 
             width: 100%;
 
-            height: 56px;
+            height: 57px;
+
+            margin-top: 23px;
 
             border: 0;
 
-            border-radius: 15px;
+            border-radius: 16px;
 
             background:
                 linear-gradient(
                     135deg,
-                    #0b63d8,
-                    #0649a8
+                    var(--blue),
+                    var(--blue-dark)
                 );
 
             color: #ffffff;
@@ -962,180 +656,203 @@
 
             cursor: pointer;
 
-            overflow: hidden;
-
             box-shadow:
-                0 11px 25px
-                rgba(11,99,216,.22);
+                0 12px 28px
+                rgba(11,99,216,.23);
 
             transition:
                 transform .18s ease,
-                box-shadow .18s ease,
-                opacity .18s ease;
-
-            -webkit-user-select: none;
-
-            user-select: none;
-
-            touch-action: manipulation;
+                box-shadow .18s ease;
 
         }
 
 
-        .login-button:active {
+        .start-button:active {
 
-            transform:
-                scale(.98);
+            transform: scale(.98);
 
             box-shadow:
-                0 6px 15px
+                0 7px 18px
                 rgba(11,99,216,.18);
 
         }
 
 
-        .login-button:disabled {
+        /* =====================================================
+           FORM AREA
+        ====================================================== */
 
-            opacity: .8;
+        .form-area {
 
-            cursor:
-                default;
+            display: none;
+
+            animation:
+                fadeUp
+                .45s
+                ease
+                both;
 
         }
 
 
-        .button-shine {
+        .form-area.active {
 
-            position: absolute;
+            display: block;
 
-            top: 0;
+        }
 
-            left: -110%;
 
-            width: 70%;
+        /* =====================================================
+           PROGRESS
+        ====================================================== */
+
+        .progress-card {
+
+            padding: 16px 17px;
+
+            margin-bottom: 15px;
+
+            background:
+                rgba(255,255,255,.97);
+
+            border:
+                1px solid
+                rgba(11,99,216,.08);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(16,35,63,.06);
+
+        }
+
+
+        .progress-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 11px;
+
+        }
+
+
+        .progress-title {
+
+            color: var(--text);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        .progress-count {
+
+            color: var(--blue);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .progress-line {
+
+            width: 100%;
+
+            height: 6px;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+
+            background: #eaf0f7;
+
+        }
+
+
+        .progress-value {
+
+            width: 33.333%;
 
             height: 100%;
 
-            transform:
-                skewX(-20deg);
+            border-radius: inherit;
 
             background:
                 linear-gradient(
                     90deg,
-                    transparent,
-                    rgba(255,255,255,.25),
-                    transparent
+                    var(--blue),
+                    #3889ed
                 );
 
-            animation:
-                shine
-                4.5s
-                ease-in-out
-                infinite;
+            transition:
+                width .35s ease;
 
         }
 
 
-        @keyframes shine {
+        /* =====================================================
+           FORM CARD
+        ====================================================== */
 
-            0%,
-            35% {
+        .form-card {
 
-                left: -110%;
+            padding: 24px 20px 21px;
 
-            }
+            background:
+                rgba(255,255,255,.98);
 
-            70%,
-            100% {
+            border:
+                1px solid
+                rgba(11,99,216,.08);
 
-                left: 150%;
+            border-radius: 25px;
 
-            }
-
-        }
-
-
-        .button-text {
-
-            position: relative;
-
-            z-index: 2;
+            box-shadow:
+                0 18px 55px
+                rgba(16,35,63,.08);
 
         }
 
 
-        /* =========================================
-           LOADING DOTS
-        ========================================== */
-
-        .loading {
-
-            position: relative;
-
-            z-index: 2;
+        .step {
 
             display: none;
 
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 6px;
-
-        }
-
-
-        .loading.active {
-
-            display: flex;
-
-        }
-
-
-        .loading span {
-
-            width: 6px;
-
-            height: 6px;
-
-            border-radius: 50%;
-
-            background:
-                #ffffff;
-
             animation:
-                loadingDots
-                .75s
-                infinite
-                alternate;
+                stepIn
+                .35s
+                ease
+                both;
 
         }
 
 
-        .loading span:nth-child(2) {
+        .step.active {
 
-            animation-delay:
-                .2s;
-
-        }
-
-
-        .loading span:nth-child(3) {
-
-            animation-delay:
-                .4s;
+            display: block;
 
         }
 
 
-        @keyframes loadingDots {
+        @keyframes stepIn {
 
             from {
 
-                opacity: .25;
+                opacity: 0;
 
                 transform:
-                    translateY(0);
+                    translateX(15px);
 
             }
 
@@ -1144,36 +861,395 @@
                 opacity: 1;
 
                 transform:
-                    translateY(-4px);
+                    translateX(0);
 
             }
 
         }
 
 
-        /* =========================================
+        .step-heading {
+
+            margin-bottom: 21px;
+
+        }
+
+
+        .step-heading h2 {
+
+            color: var(--text);
+
+            font-size: 19px;
+
+            font-weight: 900;
+
+        }
+
+
+        .step-heading p {
+
+            margin-top: 4px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =====================================================
+           FORM GRID
+        ====================================================== */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px 12px;
+
+        }
+
+
+        .field {
+
+            width: 100%;
+
+        }
+
+
+        .field.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .field label {
+
+            display: block;
+
+            margin:
+                0
+                0
+                7px
+                3px;
+
+            color: #59697e;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .required {
+
+            color: var(--red);
+
+        }
+
+
+        .field input,
+        .field select,
+        .field textarea {
+
+            width: 100%;
+
+            border:
+                1.6px solid
+                var(--border);
+
+            outline: none;
+
+            border-radius: 14px;
+
+            background: #f9fbfe;
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            transition:
+                border-color .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+
+        }
+
+
+        .field input,
+        .field select {
+
+            height: 53px;
+
+            padding:
+                0
+                13px;
+
+        }
+
+
+        .field textarea {
+
+            min-height: 105px;
+
+            resize: vertical;
+
+            padding:
+                12px
+                13px;
+
+            line-height: 1.8;
+
+        }
+
+
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+
+            border-color:
+                var(--blue);
+
+            background:
+                #ffffff;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(11,99,216,.06);
+
+        }
+
+
+        .field input::placeholder,
+        .field textarea::placeholder {
+
+            color: #a8b3c1;
+
+            font-weight: 500;
+
+        }
+
+
+        .field select {
+
+            appearance: none;
+
+            -webkit-appearance: none;
+
+            cursor: pointer;
+
+            padding-left: 38px;
+
+            background-image:
+                linear-gradient(45deg, transparent 50%, #8190a4 50%),
+                linear-gradient(135deg, #8190a4 50%, transparent 50%);
+
+            background-position:
+                calc(100% - 17px) 23px,
+                calc(100% - 12px) 23px;
+
+            background-size:
+                5px 5px,
+                5px 5px;
+
+            background-repeat: no-repeat;
+
+        }
+
+
+        /* =====================================================
+           PHONE
+        ====================================================== */
+
+        .phone-note {
+
+            margin-top: 5px;
+
+            color: #96a1af;
+
+            font-size: 9px;
+
+            font-weight: 500;
+
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ====================================================== */
+
+        .buttons {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 24px;
+
+        }
+
+
+        .btn {
+
+            flex: 1;
+
+            height: 53px;
+
+            border: 0;
+
+            border-radius: 14px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            transition:
+                transform .18s ease,
+                opacity .18s ease;
+
+        }
+
+
+        .btn:active {
+
+            transform: scale(.98);
+
+        }
+
+
+        .btn-next,
+        .btn-submit {
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            box-shadow:
+                0 9px 22px
+                rgba(11,99,216,.18);
+
+        }
+
+
+        .btn-back {
+
+            color: #59697e;
+
+            background: #f0f3f7;
+
+        }
+
+
+        .btn:disabled {
+
+            opacity: .65;
+
+            cursor: default;
+
+        }
+
+
+        /* =====================================================
+           SUBMIT LOADING
+        ====================================================== */
+
+        .submit-content {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+        }
+
+
+        .submit-loader {
+
+            display: none;
+
+            width: 17px;
+
+            height: 17px;
+
+            border:
+                2px solid
+                rgba(255,255,255,.35);
+
+            border-top-color:
+                #ffffff;
+
+            border-radius: 50%;
+
+            animation:
+                rotate
+                .7s
+                linear
+                infinite;
+
+        }
+
+
+        .submit-loader.active {
+
+            display: block;
+
+        }
+
+
+        @keyframes rotate {
+
+            to {
+
+                transform:
+                    rotate(360deg);
+
+            }
+
+        }
+
+
+        /* =====================================================
            MESSAGE
-        ========================================== */
+        ====================================================== */
 
         .message {
 
             display: none;
 
-            width: 100%;
-
-            margin-top: 12px;
+            margin-top: 14px;
 
             padding:
-                10px
-                12px;
+                11px
+                13px;
 
             border-radius: 12px;
 
             text-align: center;
 
-            font-size: 11px;
+            font-size: 10px;
 
-            line-height: 1.7;
+            line-height: 1.8;
 
             font-weight: 700;
 
@@ -1195,14 +1271,13 @@
 
         .message.error {
 
-            color: #a20f16;
+            color: var(--danger);
 
-            background:
-                #fff1f2;
+            background: var(--danger-bg);
 
             border:
                 1px solid
-                #ffd5d8;
+                #ffd7da;
 
         }
 
@@ -1211,8 +1286,7 @@
 
             color: #086033;
 
-            background:
-                #edfff5;
+            background: #edfff5;
 
             border:
                 1px solid
@@ -1244,13 +1318,268 @@
         }
 
 
-        /* =========================================
+        /* =====================================================
+           SUCCESS PAGE
+        ====================================================== */
+
+        .success-page {
+
+            display: none;
+
+            text-align: center;
+
+            padding:
+                31px
+                20px
+                25px;
+
+            background:
+                rgba(255,255,255,.98);
+
+            border:
+                1px solid
+                rgba(7,132,71,.10);
+
+            border-radius: 27px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(16,35,63,.09);
+
+            animation:
+                successIn
+                .6s
+                ease
+                both;
+
+        }
+
+
+        .success-page.active {
+
+            display: block;
+
+        }
+
+
+        @keyframes successIn {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(18px)
+                    scale(.98);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        .success-icon {
+
+            width: 76px;
+
+            height: 76px;
+
+            margin:
+                0
+                auto
+                17px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0aaa60,
+                    #078447
+                );
+
+            font-size: 35px;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 13px 30px
+                rgba(7,132,71,.22);
+
+        }
+
+
+        .success-title {
+
+            color: var(--green);
+
+            font-size: 21px;
+
+            font-weight: 900;
+
+        }
+
+
+        .success-text {
+
+            margin-top: 8px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.9;
+
+            font-weight: 600;
+
+        }
+
+
+        .code-label {
+
+            margin-top: 25px;
+
+            color: #65758a;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        .application-code {
+
+            margin:
+                9px
+                auto
+                0;
+
+            padding:
+                15px
+                10px;
+
+            border:
+                2px dashed
+                #b9d1ed;
+
+            border-radius: 16px;
+
+            color: var(--blue-dark);
+
+            background: #f4f8fd;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-size: 30px;
+
+            letter-spacing: 4px;
+
+            direction: ltr;
+
+            font-weight: 900;
+
+        }
+
+
+        .code-warning {
+
+            margin-top: 12px;
+
+            padding:
+                10px
+                12px;
+
+            border-radius: 12px;
+
+            color: #8b5b00;
+
+            background: #fff9e8;
+
+            border:
+                1px solid
+                #f6e4ae;
+
+            font-size: 10px;
+
+            line-height: 1.8;
+
+            font-weight: 700;
+
+        }
+
+
+        .copy-button {
+
+            width: 100%;
+
+            height: 50px;
+
+            margin-top: 14px;
+
+            border: 0;
+
+            border-radius: 14px;
+
+            color: var(--blue);
+
+            background: var(--blue-light);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+        }
+
+
+        .copy-button:active {
+
+            transform: scale(.98);
+
+        }
+
+
+        .success-footer {
+
+            margin-top: 21px;
+
+            color: #a1aab6;
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+        }
+
+
+        /* =====================================================
            FOOTER
-        ========================================== */
+        ====================================================== */
 
         .footer {
 
-            margin-top: 15px;
+            margin-top: 18px;
 
             text-align: center;
 
@@ -1265,15 +1594,14 @@
 
         .footer strong {
 
-            color:
-                var(--red);
+            color: var(--red);
 
         }
 
 
-        /* =========================================
-           FULL SCREEN LOADER
-        ========================================== */
+        /* =====================================================
+           PAGE LOADER
+        ====================================================== */
 
         .page-loader {
 
@@ -1281,7 +1609,7 @@
 
             inset: 0;
 
-            z-index: 1000;
+            z-index: 9999;
 
             display: flex;
 
@@ -1291,7 +1619,7 @@
 
             flex-direction: column;
 
-            gap: 14px;
+            gap: 13px;
 
             background:
                 rgba(255,255,255,.98);
@@ -1318,13 +1646,13 @@
 
         .loader-circle {
 
-            width: 46px;
+            width: 45px;
 
-            height: 46px;
+            height: 45px;
 
             border:
                 4px solid
-                #e6eefb;
+                #e5edf8;
 
             border-top-color:
                 var(--blue);
@@ -1335,7 +1663,7 @@
             border-radius: 50%;
 
             animation:
-                rotateLoader
+                rotate
                 .75s
                 linear
                 infinite;
@@ -1345,153 +1673,97 @@
 
         .loader-title {
 
+            color: var(--text);
+
             font-size: 12px;
 
             font-weight: 800;
 
-            color: var(--text);
-
         }
 
 
-        @keyframes rotateLoader {
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
 
-            to {
+        @media (max-width: 450px) {
 
-                transform:
-                    rotate(360deg);
+            .app {
 
-            }
+                padding-left: 14px;
 
-        }
-
-
-        /* =========================================
-           SMALL PHONES
-        ========================================== */
-
-        @media (max-height: 680px) {
-
-            .content {
-
-                padding-top: 10px;
-
-                padding-bottom: 10px;
-
-            }
-
-
-            .brand {
-
-                margin-bottom: 11px;
-
-            }
-
-
-            .logo-wrapper {
-
-                width: 72px;
-
-                height: 72px;
-
-                margin-bottom: 5px;
+                padding-right: 14px;
 
             }
 
 
             .brand-title {
 
-                font-size: 21px;
-
-                line-height: 1.3;
+                font-size: 20px;
 
             }
 
 
-            .brand-subtitle {
-
-                font-size: 10px;
-
-            }
-
-
-            .login-card {
+            .welcome-card {
 
                 padding:
-                    18px
-                    17px
-                    17px;
-
-                border-radius: 21px;
+                    27px
+                    18px;
 
             }
 
 
-            .login-heading {
+            .form-card {
 
-                font-size: 16px;
-
-            }
-
-
-            .login-description {
-
-                margin-bottom: 13px;
+                padding:
+                    21px
+                    15px
+                    18px;
 
             }
 
 
-            .input-label {
+            .form-grid {
 
-                margin-bottom: 5px;
-
-            }
-
-
-            .id-input,
-            .login-button {
-
-                height: 50px;
+                gap:
+                    13px
+                    10px;
 
             }
 
 
-            .input-icon {
+            .field input,
+            .field select {
 
-                height: 50px;
-
-            }
-
-
-            .footer {
-
-                margin-top: 8px;
+                height: 51px;
 
             }
 
         }
 
 
-        /* =========================================
-           VERY SMALL PHONES
-        ========================================== */
+        @media (max-width: 360px) {
 
-        @media (max-height: 580px) {
+            .form-grid {
 
-            .brand {
+                grid-template-columns: 1fr;
 
-                margin-bottom: 7px;
+            }
+
+
+            .field.full {
+
+                grid-column:
+                    auto;
 
             }
 
 
             .logo-wrapper {
 
-                width: 58px;
+                width: 78px;
 
-                height: 58px;
-
-                margin-bottom: 3px;
+                height: 78px;
 
             }
 
@@ -1503,99 +1775,43 @@
             }
 
 
-            .brand-subtitle {
+            .welcome-title {
 
-                font-size: 9px;
-
-            }
-
-
-            .login-card {
-
-                padding:
-                    14px
-                    15px;
+                font-size: 18px;
 
             }
 
 
-            .login-heading {
+            .application-code {
 
-                font-size: 15px;
-
-            }
-
-
-            .login-description {
-
-                margin-bottom: 9px;
-
-                font-size: 10px;
-
-            }
-
-
-            .id-input,
-            .login-button {
-
-                height: 46px;
-
-            }
-
-
-            .input-icon {
-
-                height: 46px;
-
-            }
-
-
-            .footer {
-
-                font-size: 8px;
+                font-size: 26px;
 
             }
 
         }
 
 
-        /* =========================================
-           TABLET / DESKTOP
-        ========================================== */
+        @media (min-width: 700px) {
 
-        @media (min-width: 600px) {
+            .app {
 
-            .content {
-
-                max-width: 500px;
-
-            }
-
-
-            .login-card {
-
-                max-width: 430px;
-
-                padding:
-                    31px
-                    28px
-                    27px;
+                padding-top: 40px;
 
             }
 
 
             .logo-wrapper {
 
-                width: 110px;
+                width: 105px;
 
-                height: 110px;
+                height: 105px;
 
             }
 
 
             .brand-title {
 
-                font-size: 34px;
+                font-size: 27px;
 
             }
 
@@ -1609,24 +1825,16 @@
 <body>
 
 
-    <!-- =========================================
+    <!-- =====================================================
          BACKGROUND
-    ========================================== -->
+    ====================================================== -->
 
-    <div class="background">
-
-        <span class="dot dot-1"></span>
-
-        <span class="dot dot-2"></span>
-
-        <span class="dot dot-3"></span>
-
-    </div>
+    <div class="background"></div>
 
 
-    <!-- =========================================
-         PAGE LOADER
-    ========================================== -->
+    <!-- =====================================================
+         LOADER
+    ====================================================== -->
 
     <div
         class="page-loader"
@@ -1636,26 +1844,26 @@
         <div class="loader-circle"></div>
 
         <div class="loader-title">
-            جاري فتح حسابك...
+            جاري إرسال طلبك...
         </div>
 
     </div>
 
 
-    <!-- =========================================
+    <!-- =====================================================
          APP
-    ========================================== -->
+    ====================================================== -->
 
     <main class="app">
 
-        <div class="content">
+        <div class="container">
 
 
-            <!-- =================================
+            <!-- =================================================
                  BRAND
-            ================================== -->
+            ================================================== -->
 
-            <div class="brand">
+            <header class="brand">
 
                 <div class="logo-wrapper">
 
@@ -1669,7 +1877,6 @@
                     <div
                         class="logo-fallback"
                         id="logoFallback"
-                        style="display:none;"
                     >
                         ت
                     </div>
@@ -1678,7 +1885,7 @@
 
 
                 <h1 class="brand-title">
-                    مدرسة التحدي الأهلية المختلطة
+                    طلب توظيف في مدرسة التحدي الأهلية المختلطة
                 </h1>
 
 
@@ -1686,162 +1893,796 @@
                     قسم الحوكمة
                 </p>
 
-            </div>
+
+                <p class="brand-quote">
+                    كن من ضمن عائلة التحدي لصناعة جيل يزهو بالعلم والمعرفة
+                </p>
+
+            </header>
 
 
-            <!-- =================================
-                 LOGIN CARD
-            ================================== -->
+            <!-- =================================================
+                 WELCOME
+            ================================================== -->
 
-            <section class="login-card">
+            <section
+                class="welcome-card"
+                id="welcomePage"
+            >
 
-                <h2 class="login-heading">
-                    تسجيل الدخول
+                <div class="welcome-icon">
+                    ✦
+                </div>
+
+
+                <h2 class="welcome-title">
+                    انضم إلى عائلة التحدي
                 </h2>
 
 
-                <p class="login-description">
-                    أدخل الـ ID الخاص بك للدخول إلى حسابك
+                <p class="welcome-text">
+                    نرحب بالكفاءات التعليمية الراغبة بالانضمام إلى
+                    كادر مدرسة التحدي الأهلية المختلطة.
+                    يرجى تعبئة استمارة التقديم بالمعلومات الصحيحة.
                 </p>
 
 
-                <!-- =================================
-                     LOGIN FORM
-                ================================== -->
-
-                <form
-                    id="loginForm"
-                    autocomplete="off"
+                <button
+                    type="button"
+                    class="start-button"
+                    id="startButton"
                 >
+                    طلب توظيف
+                </button>
 
-                    <div class="input-wrapper">
+            </section>
 
-                        <label
-                            class="input-label"
-                            for="userId"
+
+            <!-- =================================================
+                 FORM
+            ================================================== -->
+
+            <section
+                class="form-area"
+                id="formArea"
+            >
+
+
+                <!-- =================================================
+                     PROGRESS
+                ================================================== -->
+
+                <div class="progress-card">
+
+                    <div class="progress-top">
+
+                        <span
+                            class="progress-title"
+                            id="progressTitle"
                         >
-                            معرف الحساب
-                        </label>
+                            البيانات الشخصية
+                        </span>
 
 
-                        <div class="input-icon">
-                            ID
-                        </div>
-
-
-                        <input
-                            type="text"
-                            id="userId"
-                            class="id-input"
-                            placeholder="مثال: STU001"
-                            inputmode="text"
-                            autocomplete="off"
-                            autocorrect="off"
-                            autocapitalize="characters"
-                            spellcheck="false"
-                            maxlength="100"
-                            required
+                        <span
+                            class="progress-count"
+                            id="progressCount"
                         >
+                            1 من 3
+                        </span>
 
                     </div>
 
 
-                    <button
-                        type="submit"
-                        class="login-button"
-                        id="loginButton"
-                    >
+                    <div class="progress-line">
 
-                        <span
-                            class="button-shine"
-                        ></span>
+                        <div
+                            class="progress-value"
+                            id="progressValue"
+                        ></div>
 
+                    </div>
 
-                        <span
-                            class="button-text"
-                            id="buttonText"
-                        >
-                            تسجيل الدخول
-                        </span>
+                </div>
 
 
-                        <span
-                            class="loading"
-                            id="loading"
-                        >
+                <!-- =================================================
+                     FORM CARD
+                ================================================== -->
 
-                            <span></span>
+                <form
+                    class="form-card"
+                    id="applicationForm"
+                    autocomplete="off"
+                >
 
-                            <span></span>
 
-                            <span></span>
-
-                        </span>
-
-                    </button>
-
+                    <!-- =============================================
+                         STEP 1
+                    ============================================== -->
 
                     <div
-                        class="message"
-                        id="message"
-                    ></div>
+                        class="step active"
+                        id="step1"
+                    >
+
+                        <div class="step-heading">
+
+                            <h2>
+                                البيانات الشخصية
+                            </h2>
+
+                            <p>
+                                يرجى إدخال معلوماتك الشخصية بشكل صحيح.
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- الاسم -->
+
+                            <div class="field full">
+
+                                <label for="fullName">
+                                    الاسم الرباعي
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="fullName"
+                                    name="fullName"
+                                    placeholder="أدخل الاسم الرباعي"
+                                    maxlength="100"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- الجنس -->
+
+                            <div class="field">
+
+                                <label for="gender">
+                                    الجنس
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="gender"
+                                    name="gender"
+                                    required
+                                >
+
+                                    <option
+                                        value=""
+                                        selected
+                                        disabled
+                                    >
+                                        اختر الجنس
+                                    </option>
+
+                                    <option value="ذكر">
+                                        ذكر
+                                    </option>
+
+                                    <option value="أنثى">
+                                        أنثى
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- المواليد -->
+
+                            <div class="field">
+
+                                <label for="birthDate">
+                                    المواليد
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="birthDate"
+                                    name="birthDate"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- الهاتف -->
+
+                            <div class="field full">
+
+                                <label for="phone">
+                                    رقم الهاتف واتساب
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    inputmode="tel"
+                                    placeholder="07XXXXXXXXX"
+                                    maxlength="15"
+                                    required
+                                >
+
+                                <div class="phone-note">
+                                    يرجى إدخال رقم فعال يمكن التواصل معك من خلاله.
+                                </div>
+
+                            </div>
+
+
+                            <!-- السكن -->
+
+                            <div class="field full">
+
+                                <label for="address">
+                                    عنوان السكن
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="address"
+                                    name="address"
+                                    placeholder="المحافظة - القضاء - المنطقة"
+                                    maxlength="150"
+                                    required
+                                >
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="buttons">
+
+                            <button
+                                type="button"
+                                class="btn btn-next"
+                                id="next1"
+                            >
+                                التالي
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =============================================
+                         STEP 2
+                    ============================================== -->
+
+                    <div
+                        class="step"
+                        id="step2"
+                    >
+
+                        <div class="step-heading">
+
+                            <h2>
+                                الوظيفة والتخصص
+                            </h2>
+
+                            <p>
+                                اختر المرحلة الدراسية والتخصص الذي ترغب بالتدريس فيه.
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- المرحلة -->
+
+                            <div class="field full">
+
+                                <label for="schoolLevel">
+                                    أرغب بالتدريس في
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="schoolLevel"
+                                    name="schoolLevel"
+                                    required
+                                >
+
+                                    <option
+                                        value=""
+                                        selected
+                                        disabled
+                                    >
+                                        اختر المرحلة الدراسية
+                                    </option>
+
+                                    <option value="الثانوية">
+                                        أرغب بالتدريس في الثانوية
+                                    </option>
+
+                                    <option value="الابتدائية">
+                                        أرغب بالتدريس في الابتدائية
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- التخصص -->
+
+                            <div class="field full">
+
+                                <label for="specialization">
+                                    التخصص
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="specialization"
+                                    name="specialization"
+                                    required
+                                >
+
+                                    <option
+                                        value=""
+                                        selected
+                                        disabled
+                                    >
+                                        اختر التخصص
+                                    </option>
+
+                                    <option value="إسلامية">
+                                        إسلامية
+                                    </option>
+
+                                    <option value="عربي">
+                                        عربي
+                                    </option>
+
+                                    <option value="إنكليزي">
+                                        إنكليزي
+                                    </option>
+
+                                    <option value="رياضيات">
+                                        رياضيات
+                                    </option>
+
+                                    <option value="كيمياء">
+                                        كيمياء
+                                    </option>
+
+                                    <option value="فيزياء">
+                                        فيزياء
+                                    </option>
+
+                                    <option value="أحياء">
+                                        أحياء
+                                    </option>
+
+                                    <option value="اجتماعيات">
+                                        اجتماعيات
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="buttons">
+
+                            <button
+                                type="button"
+                                class="btn btn-back"
+                                id="back2"
+                            >
+                                السابق
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-next"
+                                id="next2"
+                            >
+                                التالي
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =============================================
+                         STEP 3
+                    ============================================== -->
+
+                    <div
+                        class="step"
+                        id="step3"
+                    >
+
+                        <div class="step-heading">
+
+                            <h2>
+                                الدراسة والخبرات
+                            </h2>
+
+                            <p>
+                                أكمل المعلومات الدراسية والمهنية لإرسال الطلب.
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+
+                            <!-- الشهادة -->
+
+                            <div class="field">
+
+                                <label for="certificate">
+                                    الشهادة
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="certificate"
+                                    name="certificate"
+                                    required
+                                >
+
+                                    <option
+                                        value=""
+                                        selected
+                                        disabled
+                                    >
+                                        اختر الشهادة
+                                    </option>
+
+                                    <option value="دبلوم">
+                                        دبلوم
+                                    </option>
+
+                                    <option value="بكالوريوس">
+                                        بكالوريوس
+                                    </option>
+
+                                    <option value="دبلوم عالي">
+                                        دبلوم عالي
+                                    </option>
+
+                                    <option value="ماجستير">
+                                        ماجستير
+                                    </option>
+
+                                    <option value="دكتوراه">
+                                        دكتوراه
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <!-- تخصص الدراسة -->
+
+                            <div class="field">
+
+                                <label for="studySpecialization">
+                                    التخصص
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="studySpecialization"
+                                    name="studySpecialization"
+                                    placeholder="مثال: رياضيات"
+                                    maxlength="100"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- سنة التخرج -->
+
+                            <div class="field">
+
+                                <label for="graduationYear">
+                                    سنة التخرج
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="graduationYear"
+                                    name="graduationYear"
+                                    placeholder="مثال: 2022"
+                                    min="1950"
+                                    max="2100"
+                                    inputmode="numeric"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- المعدل -->
+
+                            <div class="field">
+
+                                <label for="average">
+                                    المعدل
+                                    <span class="required">*</span>
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="average"
+                                    name="average"
+                                    placeholder="مثال: 78.50"
+                                    min="0"
+                                    max="100"
+                                    step="0.01"
+                                    inputmode="decimal"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <!-- الخبرات -->
+
+                            <div class="field full">
+
+                                <label for="experience">
+                                    الخبرات
+                                </label>
+
+                                <textarea
+                                    id="experience"
+                                    name="experience"
+                                    placeholder="اذكر سنوات الخبرة والخبرات التعليمية التي تمتلكها..."
+                                    maxlength="1000"
+                                ></textarea>
+
+                            </div>
+
+
+                            <!-- العمل السابق -->
+
+                            <div class="field full">
+
+                                <label for="previousWork">
+                                    العمل السابق
+                                </label>
+
+                                <textarea
+                                    id="previousWork"
+                                    name="previousWork"
+                                    placeholder="اذكر أماكن العمل السابقة والوظيفة..."
+                                    maxlength="1000"
+                                ></textarea>
+
+                            </div>
+
+
+                            <!-- موظف حكومي -->
+
+                            <div class="field full">
+
+                                <label for="governmentEmployee">
+                                    موظف حكومي
+                                    <span class="required">*</span>
+                                </label>
+
+                                <select
+                                    id="governmentEmployee"
+                                    name="governmentEmployee"
+                                    required
+                                >
+
+                                    <option
+                                        value=""
+                                        selected
+                                        disabled
+                                    >
+                                        اختر الإجابة
+                                    </option>
+
+                                    <option value="نعم">
+                                        نعم
+                                    </option>
+
+                                    <option value="لا">
+                                        لا
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="buttons">
+
+                            <button
+                                type="button"
+                                class="btn btn-back"
+                                id="back3"
+                            >
+                                السابق
+                            </button>
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-submit"
+                                id="submitButton"
+                            >
+
+                                <span class="submit-content">
+
+                                    <span id="submitText">
+                                        إرسال الطلب
+                                    </span>
+
+                                    <span
+                                        class="submit-loader"
+                                        id="submitLoader"
+                                    ></span>
+
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="message"
+                            id="formMessage"
+                        ></div>
+
+                    </div>
 
                 </form>
 
             </section>
 
 
-            <!-- =================================
-                 FOOTER
-            ================================== -->
+            <!-- =================================================
+                 SUCCESS
+            ================================================== -->
 
-            <div class="footer">
+            <section
+                class="success-page"
+                id="successPage"
+            >
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+
+                <h2 class="success-title">
+                    تم إرسال طلبك بنجاح
+                </h2>
+
+
+                <p class="success-text">
+                    تم استلام طلب التوظيف الخاص بك.
+                    <br>
+                    سيتم التواصل معك لاحقاً، شكراً لك.
+                </p>
+
+
+                <div class="code-label">
+                    الكود الخاص بطلبك
+                </div>
+
+
+                <div
+                    class="application-code"
+                    id="applicationCode"
+                >
+                    B00000
+                </div>
+
+
+                <div class="code-warning">
+                    هذا الكود خاص بطلبك، يرجى تصوير الشاشة والاحتفاظ به
+                    للمتابعة عند الحاجة.
+                </div>
+
+
+                <button
+                    type="button"
+                    class="copy-button"
+                    id="copyButton"
+                >
+                    نسخ كود الطلب
+                </button>
+
+
+                <div class="success-footer">
+                    مدرسة التحدي الأهلية المختلطة — قسم الحوكمة
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <footer
+                class="footer"
+                id="mainFooter"
+            >
 
                 جميع الحقوق محفوظة ©
                 <strong>مدرسة التحدي</strong>
 
-            </div>
-
+            </footer>
 
         </div>
 
     </main>
 
 
-    <!-- =========================================
+    <!-- =====================================================
          FIREBASE
-    ========================================== -->
+    ====================================================== -->
 
     <script type="module">
 
 
-        /* ========================================
-           FIREBASE APP
-        ========================================= */
+        /* =====================================================
+           FIREBASE IMPORTS
+        ====================================================== */
 
         import {
             initializeApp
-        }
-        from
+        } from
         "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 
-        /* ========================================
-           FIRESTORE
-        ========================================= */
-
         import {
-            getFirestore,
-            doc,
-            getDoc
-        }
-        from
-        "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+            getDatabase,
+            ref,
+            runTransaction,
+            set
+        } from
+        "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
 
-        /* ========================================
+        /* =====================================================
            FIREBASE CONFIG
-        ========================================= */
+        ====================================================== */
 
         const firebaseConfig = {
 
@@ -1864,14 +2705,17 @@
                 "1:271225539711:web:9fc4b45cf14d879b55434a",
 
             measurementId:
-                "G-S5JDFN1RKF"
+                "G-S5JDFN1RKF",
+
+            databaseURL:
+                "https://tahadi-school-default-rtdb.europe-west1.firebasedatabase.app"
 
         };
 
 
-        /* ========================================
+        /* =====================================================
            INITIALIZE FIREBASE
-        ========================================= */
+        ====================================================== */
 
         const firebaseApp =
             initializeApp(
@@ -1879,55 +2723,49 @@
             );
 
 
-        const db =
-            getFirestore(
+        const database =
+            getDatabase(
                 firebaseApp
             );
 
 
-        /* ========================================
+        /* =====================================================
            ELEMENTS
-        ========================================= */
+        ====================================================== */
 
-        const form =
+        const welcomePage =
             document.getElementById(
-                "loginForm"
+                "welcomePage"
             );
 
 
-        const userId =
+        const startButton =
             document.getElementById(
-                "userId"
+                "startButton"
             );
 
 
-        const loginButton =
+        const formArea =
             document.getElementById(
-                "loginButton"
+                "formArea"
             );
 
 
-        const buttonText =
+        const applicationForm =
             document.getElementById(
-                "buttonText"
+                "applicationForm"
             );
 
 
-        const loading =
+        const successPage =
             document.getElementById(
-                "loading"
+                "successPage"
             );
 
 
-        const message =
+        const mainFooter =
             document.getElementById(
-                "message"
-            );
-
-
-        const pageLoader =
-            document.getElementById(
-                "pageLoader"
+                "mainFooter"
             );
 
 
@@ -1943,333 +2781,948 @@
             );
 
 
-        /* ========================================
-           ACCOUNT ROUTES
-        ========================================= */
-
-        const routes = {
-
-            admin:
-                "admin.html",
-
-            teacher:
-                "teacher.html",
-
-            student:
-                "student.html",
-
-            accountant:
-                "accountant.html"
-
-        };
+        const progressTitle =
+            document.getElementById(
+                "progressTitle"
+            );
 
 
-        /* ========================================
+        const progressCount =
+            document.getElementById(
+                "progressCount"
+            );
+
+
+        const progressValue =
+            document.getElementById(
+                "progressValue"
+            );
+
+
+        const formMessage =
+            document.getElementById(
+                "formMessage"
+            );
+
+
+        const submitButton =
+            document.getElementById(
+                "submitButton"
+            );
+
+
+        const submitText =
+            document.getElementById(
+                "submitText"
+            );
+
+
+        const submitLoader =
+            document.getElementById(
+                "submitLoader"
+            );
+
+
+        const applicationCode =
+            document.getElementById(
+                "applicationCode"
+            );
+
+
+        const copyButton =
+            document.getElementById(
+                "copyButton"
+            );
+
+
+        /* =====================================================
+           STEPS
+        ====================================================== */
+
+        const steps = [
+
+            document.getElementById("step1"),
+
+            document.getElementById("step2"),
+
+            document.getElementById("step3")
+
+        ];
+
+
+        let currentStep = 0;
+
+
+        /* =====================================================
+           STEP TITLES
+        ====================================================== */
+
+        const stepTitles = [
+
+            "البيانات الشخصية",
+
+            "الوظيفة والتخصص",
+
+            "الدراسة والخبرات"
+
+        ];
+
+
+        /* =====================================================
+           START APPLICATION
+        ====================================================== */
+
+        startButton.addEventListener(
+            "click",
+            function() {
+
+                welcomePage.style.display =
+                    "none";
+
+                formArea.classList.add(
+                    "active"
+                );
+
+                window.scrollTo(
+                    {
+                        top: 0,
+                        behavior: "smooth"
+                    }
+                );
+
+                updateStep();
+
+                setTimeout(
+                    function() {
+
+                        const firstInput =
+                            document.getElementById(
+                                "fullName"
+                            );
+
+                        if (firstInput) {
+
+                            firstInput.focus();
+
+                        }
+
+                    },
+                    350
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           UPDATE STEP
+        ====================================================== */
+
+        function updateStep() {
+
+            steps.forEach(
+                function(step, index) {
+
+                    step.classList.toggle(
+                        "active",
+                        index === currentStep
+                    );
+
+                }
+            );
+
+
+            const percentage =
+                ((currentStep + 1) / 3) * 100;
+
+
+            progressValue.style.width =
+                percentage + "%";
+
+
+            progressTitle.textContent =
+                stepTitles[currentStep];
+
+
+            progressCount.textContent =
+                (currentStep + 1) + " من 3";
+
+
+            window.scrollTo(
+                {
+                    top: 0,
+                    behavior: "smooth"
+                }
+            );
+
+
+            hideMessage();
+
+        }
+
+
+        /* =====================================================
+           VALIDATE CURRENT STEP
+        ====================================================== */
+
+        function validateCurrentStep() {
+
+            const current =
+                steps[currentStep];
+
+
+            const fields =
+                current.querySelectorAll(
+                    "input, select, textarea"
+                );
+
+
+            for (
+                const field of fields
+            ) {
+
+                if (
+                    field.hasAttribute("required") &&
+                    !field.value.trim()
+                ) {
+
+                    field.focus();
+
+                    showMessage(
+                        "يرجى إكمال جميع الحقول المطلوبة."
+                    );
+
+                    return false;
+
+                }
+
+
+                if (
+                    !field.checkValidity()
+                ) {
+
+                    field.focus();
+
+                    showMessage(
+                        "يرجى التأكد من صحة البيانات المدخلة."
+                    );
+
+                    return false;
+
+                }
+
+            }
+
+
+            /* =================================================
+               SPECIAL VALIDATION - NAME
+            ================================================= */
+
+            if (
+                currentStep === 0
+            ) {
+
+                const name =
+                    document
+                        .getElementById("fullName")
+                        .value
+                        .trim();
+
+
+                const nameParts =
+                    name
+                        .split(/\s+/)
+                        .filter(
+                            part => part.length > 0
+                        );
+
+
+                if (
+                    nameParts.length < 4
+                ) {
+
+                    document
+                        .getElementById("fullName")
+                        .focus();
+
+
+                    showMessage(
+                        "يرجى إدخال الاسم الرباعي كاملاً."
+                    );
+
+
+                    return false;
+
+                }
+
+
+                /* =============================================
+                   PHONE VALIDATION
+                ============================================== */
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim()
+                        .replace(
+                            /[\s-]/g,
+                            ""
+                        );
+
+
+                const phonePattern =
+                    /^(07\d{9}|\+9647\d{9}|009647\d{9})$/;
+
+
+                if (
+                    !phonePattern.test(phone)
+                ) {
+
+                    document
+                        .getElementById("phone")
+                        .focus();
+
+
+                    showMessage(
+                        "يرجى إدخال رقم هاتف عراقي صحيح."
+                    );
+
+
+                    return false;
+
+                }
+
+            }
+
+
+            /* =================================================
+               AVERAGE VALIDATION
+            ============================================== */
+
+            if (
+                currentStep === 2
+            ) {
+
+                const average =
+                    Number(
+                        document
+                            .getElementById("average")
+                            .value
+                    );
+
+
+                if (
+                    Number.isNaN(average) ||
+                    average < 0 ||
+                    average > 100
+                ) {
+
+                    document
+                        .getElementById("average")
+                        .focus();
+
+
+                    showMessage(
+                        "المعدل يجب أن يكون بين 0 و100."
+                    );
+
+
+                    return false;
+
+                }
+
+
+                const graduationYear =
+                    Number(
+                        document
+                            .getElementById("graduationYear")
+                            .value
+                    );
+
+
+                const currentYear =
+                    new Date().getFullYear();
+
+
+                if (
+                    graduationYear < 1950 ||
+                    graduationYear > currentYear
+                ) {
+
+                    document
+                        .getElementById(
+                            "graduationYear"
+                        )
+                        .focus();
+
+
+                    showMessage(
+                        "يرجى إدخال سنة تخرج صحيحة."
+                    );
+
+
+                    return false;
+
+                }
+
+            }
+
+
+            return true;
+
+        }
+
+
+        /* =====================================================
+           NEXT 1
+        ====================================================== */
+
+        document
+            .getElementById("next1")
+            .addEventListener(
+                "click",
+                function() {
+
+                    if (
+                        !validateCurrentStep()
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    currentStep = 1;
+
+                    updateStep();
+
+                }
+            );
+
+
+        /* =====================================================
+           NEXT 2
+        ====================================================== */
+
+        document
+            .getElementById("next2")
+            .addEventListener(
+                "click",
+                function() {
+
+                    if (
+                        !validateCurrentStep()
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    currentStep = 2;
+
+                    updateStep();
+
+                }
+            );
+
+
+        /* =====================================================
+           BACK 2
+        ====================================================== */
+
+        document
+            .getElementById("back2")
+            .addEventListener(
+                "click",
+                function() {
+
+                    currentStep = 0;
+
+                    updateStep();
+
+                }
+            );
+
+
+        /* =====================================================
+           BACK 3
+        ====================================================== */
+
+        document
+            .getElementById("back3")
+            .addEventListener(
+                "click",
+                function() {
+
+                    currentStep = 1;
+
+                    updateStep();
+
+                }
+            );
+
+
+        /* =====================================================
            SHOW MESSAGE
-        ========================================= */
+        ====================================================== */
 
         function showMessage(
             text,
             type = "error"
         ) {
 
-            message.textContent =
+            formMessage.textContent =
                 text;
 
-            message.className =
+            formMessage.className =
                 "message show " + type;
 
         }
 
 
-        /* ========================================
+        /* =====================================================
            HIDE MESSAGE
-        ========================================= */
+        ====================================================== */
 
         function hideMessage() {
 
-            message.textContent =
+            formMessage.textContent =
                 "";
 
-            message.className =
+            formMessage.className =
                 "message";
 
         }
 
 
-        /* ========================================
-           BUTTON LOADING
-        ========================================= */
+        /* =====================================================
+           GENERATE UID
+        ====================================================== */
 
-        function setButtonLoading(
-            state
+        function generateUID(
+            gender
         ) {
 
-            loginButton.disabled =
-                state;
+            const prefix =
+                gender === "ذكر"
+                    ? "B"
+                    : "G";
 
 
-            if (state) {
-
-                buttonText.style.display =
-                    "none";
-
-                loading.classList.add(
-                    "active"
+            const number =
+                Math.floor(
+                    10000 +
+                    Math.random() * 90000
                 );
 
-            } else {
 
-                buttonText.style.display =
-                    "block";
+            return prefix + number;
 
-                loading.classList.remove(
-                    "active"
+        }
+
+
+        /* =====================================================
+           CLAIM UNIQUE UID
+           
+           Firebase transaction ensures that two users
+           cannot successfully reserve the same UID.
+        ====================================================== */
+
+        async function reserveUID(
+            uid
+        ) {
+
+            const applicationRef =
+                ref(
+                    database,
+                    "jobApplications/" + uid
                 );
+
+
+            const result =
+                await runTransaction(
+                    applicationRef,
+                    function(currentData) {
+
+                        if (
+                            currentData !== null
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        return {
+
+                            reserved: true,
+
+                            createdAt:
+                                Date.now()
+
+                        };
+
+                    }
+                );
+
+
+            return {
+
+                committed:
+                    result.committed,
+
+                reference:
+                    applicationRef
+
+            };
+
+        }
+
+
+        /* =====================================================
+           CREATE UNIQUE UID
+        ====================================================== */
+
+        async function createUniqueUID(
+            gender
+        ) {
+
+            const maxAttempts = 20;
+
+
+            for (
+                let attempt = 0;
+                attempt < maxAttempts;
+                attempt++
+            ) {
+
+                const uid =
+                    generateUID(
+                        gender
+                    );
+
+
+                const reservation =
+                    await reserveUID(
+                        uid
+                    );
+
+
+                if (
+                    reservation.committed
+                ) {
+
+                    return {
+
+                        uid: uid,
+
+                        reference:
+                            reservation.reference
+
+                    };
+
+                }
 
             }
 
-        }
 
-
-        /* ========================================
-           NORMALIZE ID
-        ========================================= */
-
-        function normalizeID(
-            value
-        ) {
-
-            return value
-                .trim()
-                .replace(/\s+/g, "")
-                .toUpperCase();
+            throw new Error(
+                "UID_GENERATION_FAILED"
+            );
 
         }
 
 
-        /* ========================================
-           LOGIN
-        ========================================= */
+        /* =====================================================
+           COLLECT FORM DATA
+        ====================================================== */
 
-        form.addEventListener(
+        function collectFormData() {
+
+            const gender =
+                document
+                    .getElementById("gender")
+                    .value;
+
+
+            return {
+
+                fullName:
+                    document
+                        .getElementById("fullName")
+                        .value
+                        .trim(),
+
+                gender:
+                    gender,
+
+                birthDate:
+                    document
+                        .getElementById("birthDate")
+                        .value,
+
+                phone:
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim()
+                        .replace(
+                            /[\s-]/g,
+                            ""
+                        ),
+
+                address:
+                    document
+                        .getElementById("address")
+                        .value
+                        .trim(),
+
+                schoolLevel:
+                    document
+                        .getElementById("schoolLevel")
+                        .value,
+
+                specialization:
+                    document
+                        .getElementById("specialization")
+                        .value,
+
+                certificate:
+                    document
+                        .getElementById("certificate")
+                        .value,
+
+                studySpecialization:
+                    document
+                        .getElementById(
+                            "studySpecialization"
+                        )
+                        .value
+                        .trim(),
+
+                graduationYear:
+                    Number(
+                        document
+                            .getElementById(
+                                "graduationYear"
+                            )
+                            .value
+                    ),
+
+                average:
+                    Number(
+                        document
+                            .getElementById(
+                                "average"
+                            )
+                            .value
+                    ),
+
+                experience:
+                    document
+                        .getElementById(
+                            "experience"
+                        )
+                        .value
+                        .trim(),
+
+                previousWork:
+                    document
+                        .getElementById(
+                            "previousWork"
+                        )
+                        .value
+                        .trim(),
+
+                governmentEmployee:
+                    document
+                        .getElementById(
+                            "governmentEmployee"
+                        )
+                        .value
+
+            };
+
+        }
+
+
+        /* =====================================================
+           SUBMIT FORM
+        ====================================================== */
+
+        applicationForm.addEventListener(
             "submit",
             async function(event) {
 
                 event.preventDefault();
 
 
-                hideMessage();
-
-
-                const id =
-                    normalizeID(
-                        userId.value
-                    );
-
-
-                /* =================================
-                   VALIDATION
-                ================================= */
-
-                if (!id) {
-
-                    showMessage(
-                        "يرجى إدخال الـ ID."
-                    );
-
-                    userId.focus();
+                if (
+                    !validateCurrentStep()
+                ) {
 
                     return;
 
                 }
 
 
-                setButtonLoading(
-                    true
+                submitButton.disabled =
+                    true;
+
+                submitText.textContent =
+                    "جاري إرسال الطلب...";
+
+                submitLoader.classList.add(
+                    "active"
+                );
+
+                hideMessage();
+
+
+                const pageLoader =
+                    document.getElementById(
+                        "pageLoader"
+                    );
+
+
+                pageLoader.classList.add(
+                    "active"
                 );
 
 
                 try {
 
 
-                    /* =================================
-                       FIRESTORE
-
-                       users / ID
-                    ================================= */
-
-                    const reference =
-                        doc(
-                            db,
-                            "users",
-                            id
-                        );
-
-
-                    const snapshot =
-                        await getDoc(
-                            reference
-                        );
-
-
-                    /* =================================
-                       ACCOUNT NOT FOUND
-                    ================================= */
-
-                    if (
-                        !snapshot.exists()
-                    ) {
-
-                        setButtonLoading(
-                            false
-                        );
-
-                        showMessage(
-                            "الـ ID الذي أدخلته غير موجود."
-                        );
-
-                        userId.focus();
-
-                        return;
-
-                    }
-
-
-                    /* =================================
-                       ACCOUNT DATA
-                    ================================= */
+                    /* =========================================
+                       COLLECT DATA
+                    ========================================== */
 
                     const data =
-                        snapshot.data();
+                        collectFormData();
 
 
-                    /* =================================
-                       ACTIVE CHECK
-                    ================================= */
+                    /* =========================================
+                       CREATE UNIQUE UID
+                    ========================================== */
 
-                    if (
-                        data.active === false
-                    ) {
-
-                        setButtonLoading(
-                            false
+                    const reservation =
+                        await createUniqueUID(
+                            data.gender
                         );
 
-                        showMessage(
-                            "هذا الحساب غير مفعل حالياً."
-                        );
 
-                        return;
-
-                    }
+                    const uid =
+                        reservation.uid;
 
 
-                    /* =================================
-                       ROLE
-                    ================================= */
-
-                    const role =
-                        String(
-                            data.role || ""
-                        )
-                        .trim()
-                        .toLowerCase();
+                    const applicationRef =
+                        reservation.reference;
 
 
-                    /* =================================
-                       ROLE CHECK
-                    ================================= */
+                    /* =========================================
+                       FINAL DATA
+                    ========================================== */
 
-                    if (
-                        !routes[role]
-                    ) {
+                    const applicationData = {
 
-                        setButtonLoading(
-                            false
-                        );
+                        uid:
+                            uid,
 
-                        showMessage(
-                            "تعذر تحديد نوع هذا الحساب."
-                        );
+                        fullName:
+                            data.fullName,
 
-                        console.error(
-                            "Invalid account role:",
-                            role
-                        );
+                        gender:
+                            data.gender,
 
-                        return;
+                        birthDate:
+                            data.birthDate,
 
-                    }
+                        phone:
+                            data.phone,
 
+                        address:
+                            data.address,
 
-                    /* =================================
-                       SESSION
-                    ================================= */
+                        schoolLevel:
+                            data.schoolLevel,
 
-                    const session = {
+                        specialization:
+                            data.specialization,
 
-                        id: id,
+                        certificate:
+                            data.certificate,
 
-                        name:
-                            data.name || "",
+                        studySpecialization:
+                            data.studySpecialization,
 
-                        role: role,
+                        graduationYear:
+                            data.graduationYear,
 
-                        loginTime:
+                        average:
+                            data.average,
+
+                        experience:
+                            data.experience,
+
+                        previousWork:
+                            data.previousWork,
+
+                        governmentEmployee:
+                            data.governmentEmployee,
+
+                        status:
+                            "pending",
+
+                        submittedAt:
                             Date.now()
 
                     };
 
 
-                    sessionStorage.setItem(
-                        "tahadiUser",
-                        JSON.stringify(
-                            session
-                        )
+                    /* =========================================
+                       SAVE APPLICATION
+                    ========================================== */
+
+                    await set(
+                        applicationRef,
+                        applicationData
                     );
 
 
-                    /* =================================
-                       SUCCESS
-                    ================================= */
+                    /* =========================================
+                       SHOW SUCCESS
+                    ========================================== */
 
-                    showMessage(
-                        "تم تسجيل الدخول بنجاح.",
-                        "success"
+                    applicationCode.textContent =
+                        uid;
+
+
+                    formArea.classList.remove(
+                        "active"
                     );
 
 
-                    /* =================================
-                       SHOW PAGE LOADER
-                    ================================= */
-
-                    setTimeout(
-                        function() {
-
-                            pageLoader.classList.add(
-                                "active"
-                            );
-
-                        },
-                        250
+                    successPage.classList.add(
+                        "active"
                     );
 
 
-                    /* =================================
-                       REDIRECT
-                    ================================= */
+                    mainFooter.style.display =
+                        "none";
 
-                    setTimeout(
-                        function() {
 
-                            window.location.href =
-                                routes[
-                                    role
-                                ];
+                    pageLoader.classList.remove(
+                        "active"
+                    );
 
-                        },
-                        700
+
+                    window.scrollTo(
+                        {
+                            top: 0,
+                            behavior: "smooth"
+                        }
                     );
 
 
@@ -2277,41 +3730,56 @@
 
 
                     console.error(
-                        "Firebase error:",
+                        "Application submission error:",
                         error
                     );
 
 
-                    setButtonLoading(
-                        false
+                    pageLoader.classList.remove(
+                        "active"
                     );
 
 
-                    /* =================================
-                       PERMISSION ERROR
-                    ================================= */
+                    submitButton.disabled =
+                        false;
+
+
+                    submitText.textContent =
+                        "إرسال الطلب";
+
+
+                    submitLoader.classList.remove(
+                        "active"
+                    );
+
 
                     if (
+                        error &&
                         error.code ===
-                        "permission-denied"
+                        "PERMISSION_DENIED"
                     ) {
 
                         showMessage(
-                            "لا توجد صلاحية للوصول إلى بيانات الحساب."
+                            "لا توجد صلاحية للاتصال بقاعدة البيانات. يرجى مراجعة قواعد Firebase."
                         );
 
-                        return;
+                    } else if (
+                        error &&
+                        error.message ===
+                        "UID_GENERATION_FAILED"
+                    ) {
+
+                        showMessage(
+                            "تعذر إنشاء رقم الطلب حالياً. يرجى المحاولة مرة أخرى."
+                        );
+
+                    } else {
+
+                        showMessage(
+                            "حدث خطأ أثناء إرسال الطلب. تأكد من اتصال الإنترنت وحاول مرة أخرى."
+                        );
 
                     }
-
-
-                    /* =================================
-                       GENERAL ERROR
-                    ================================= */
-
-                    showMessage(
-                        "حدث خطأ أثناء الاتصال. تأكد من الإنترنت وإعدادات Firebase."
-                    );
 
                 }
 
@@ -2319,29 +3787,105 @@
         );
 
 
-        /* ========================================
-           INPUT CLEANING
-        ========================================= */
+        /* =====================================================
+           COPY UID
+        ====================================================== */
 
-        userId.addEventListener(
-            "input",
-            function() {
+        copyButton.addEventListener(
+            "click",
+            async function() {
 
-                this.value =
-                    this.value
-                        .replace(
-                            /\s/g,
-                            ""
-                        )
-                        .toUpperCase();
+                const code =
+                    applicationCode.textContent.trim();
+
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        code
+                    );
+
+
+                    copyButton.textContent =
+                        "✓ تم نسخ الكود";
+
+
+                    setTimeout(
+                        function() {
+
+                            copyButton.textContent =
+                                "نسخ كود الطلب";
+
+                        },
+                        2000
+                    );
+
+
+                } catch (error) {
+
+
+                    /* =========================================
+                       FALLBACK FOR OLDER WEBVIEW
+                    ========================================== */
+
+                    const temporaryInput =
+                        document.createElement(
+                            "input"
+                        );
+
+
+                    temporaryInput.value =
+                        code;
+
+
+                    document.body.appendChild(
+                        temporaryInput
+                    );
+
+
+                    temporaryInput.select();
+
+
+                    try {
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+
+                        copyButton.textContent =
+                            "✓ تم نسخ الكود";
+
+
+                        setTimeout(
+                            function() {
+
+                                copyButton.textContent =
+                                    "نسخ كود الطلب";
+
+                            },
+                            2000
+                        );
+
+                    } catch (copyError) {
+
+                        copyButton.textContent =
+                            "يرجى نسخ الكود يدوياً";
+
+                    }
+
+
+                    temporaryInput.remove();
+
+                }
 
             }
         );
 
 
-        /* ========================================
-           LOGO ERROR / FALLBACK
-        ========================================= */
+        /* =====================================================
+           LOGO FALLBACK
+        ====================================================== */
 
         schoolLogo.addEventListener(
             "error",
@@ -2357,30 +3901,51 @@
         );
 
 
-        /* ========================================
-           AUTO FOCUS
-        ========================================= */
+        /* =====================================================
+           PHONE CLEANING
+        ====================================================== */
 
-        window.addEventListener(
-            "load",
-            function() {
+        document
+            .getElementById("phone")
+            .addEventListener(
+                "input",
+                function() {
 
-                setTimeout(
-                    function() {
+                    this.value =
+                        this.value
+                            .replace(
+                                /[^\d+]/g,
+                                ""
+                            );
 
-                        userId.focus();
-
-                    },
-                    600
-                );
-
-            }
-        );
+                }
+            );
 
 
-        /* ========================================
+        /* =====================================================
+           NAME CLEANING
+        ====================================================== */
+
+        document
+            .getElementById("fullName")
+            .addEventListener(
+                "input",
+                function() {
+
+                    this.value =
+                        this.value
+                            .replace(
+                                /\s{2,}/g,
+                                " "
+                            );
+
+                }
+            );
+
+
+        /* =====================================================
            PREVENT PINCH ZOOM
-        ========================================= */
+        ====================================================== */
 
         document.addEventListener(
             "gesturestart",
@@ -2421,11 +3986,12 @@
         );
 
 
-        /* ========================================
-           PREVENT DOUBLE-TAP ZOOM
-        ========================================= */
+        /* =====================================================
+           PREVENT DOUBLE TAP ZOOM
+        ====================================================== */
 
         let lastTouchEnd = 0;
+
 
         document.addEventListener(
             "touchend",
@@ -2433,6 +3999,7 @@
 
                 const now =
                     Date.now();
+
 
                 if (
                     now - lastTouchEnd <= 300
@@ -2442,7 +4009,9 @@
 
                 }
 
-                lastTouchEnd = now;
+
+                lastTouchEnd =
+                    now;
 
             },
             {
@@ -2450,8 +4019,8 @@
             }
         );
 
-    </script>
 
+    </script>
 
 </body>
 
