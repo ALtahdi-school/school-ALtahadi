@@ -1,1 +1,2619 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>وظائف التحدي | مدرسة التحدي</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --blue: #0b63d8;
+            --blue-dark: #0649a8;
+            --blue-light: #edf5ff;
+
+            --green: #079455;
+            --green-light: #edfff5;
+
+            --red: #d71920;
+            --red-light: #fff1f2;
+
+            --orange: #f59e0b;
+            --orange-light: #fff8e7;
+
+            --text: #10233f;
+            --muted: #718096;
+            --border: #dfe7f1;
+
+            --white: #ffffff;
+            --bg: #f5f8fc;
+        }
+
+        html {
+            min-height: 100%;
+            background: var(--bg);
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                "Cairo",
+                Arial,
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f5f8fc 0%,
+                    #ffffff 100%
+                );
+
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font-family:
+                "Cairo",
+                Arial,
+                sans-serif;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           BACKGROUND
+        ========================================== */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .background::before {
+            content: "";
+
+            position: absolute;
+
+            width: 450px;
+            height: 450px;
+
+            top: -250px;
+            right: -180px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(11,99,216,.13),
+                    rgba(11,99,216,.03) 50%,
+                    transparent 72%
+                );
+        }
+
+        .background::after {
+            content: "";
+
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            bottom: -220px;
+            left: -180px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(215,25,32,.08),
+                    transparent 70%
+                );
+        }
+
+
+        /* =========================================
+           APP
+        ========================================== */
+
+        .app {
+            position: relative;
+            z-index: 1;
+
+            width: 100%;
+
+            padding:
+                28px
+                16px
+                50px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1450px;
+            margin: 0 auto;
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================== */
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-box {
+            width: 150px;
+            min-height: 60px;
+
+            margin:
+                0
+                auto
+                12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            border-radius: 20px;
+        }
+
+        .logo-fallback {
+            width: 100%;
+            min-height: 60px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            color: #fff;
+
+            font-size: 24px;
+            font-weight: 900;
+
+            padding: 8px 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            white-space: nowrap;
+        }
+
+        .school-name {
+            font-size: 25px;
+            font-weight: 900;
+            color: var(--blue-dark);
+        }
+
+        .department {
+            margin-top: 2px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            color: var(--muted);
+        }
+
+        .page-title {
+            margin-top: 16px;
+
+            font-size: 22px;
+            font-weight: 900;
+
+            color: var(--text);
+        }
+
+        .page-description {
+            margin-top: 5px;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            color: var(--muted);
+        }
+
+
+        /* =========================================
+           SEARCH CARD
+        ========================================== */
+
+        .search-card {
+            background: rgba(255,255,255,.98);
+
+            border:
+                1px solid
+                rgba(11,99,216,.08);
+
+            border-radius: 20px;
+
+            padding: 20px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(16,35,63,.08);
+        }
+
+        .search-title {
+            font-size: 15px;
+            font-weight: 900;
+
+            margin-bottom: 5px;
+        }
+
+        .search-description {
+            font-size: 10px;
+            font-weight: 600;
+
+            color: var(--muted);
+
+            margin-bottom: 14px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-wrapper {
+            flex: 1;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 50px;
+
+            padding:
+                0
+                15px;
+
+            border:
+                1.5px solid
+                var(--border);
+
+            border-radius: 12px;
+
+            outline: none;
+
+            background: #f9fbfe;
+
+            color: var(--text);
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: .2s;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--blue);
+
+            background: #fff;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(11,99,216,.06);
+        }
+
+        .search-button {
+            min-width: 135px;
+            height: 50px;
+
+            border: 0;
+            border-radius: 12px;
+
+            color: #fff;
+
+            font-size: 12px;
+            font-weight: 900;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            box-shadow:
+                0 8px 20px
+                rgba(11,99,216,.20);
+
+            transition: .2s;
+        }
+
+        .search-button:hover {
+            transform: translateY(-1px);
+        }
+
+        .search-button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================================
+           RESULT
+        ========================================== */
+
+        .result {
+            display: none;
+
+            margin-bottom: 20px;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-header {
+            padding: 17px 20px;
+
+            color: #fff;
+
+            border-radius:
+                18px
+                18px
+                0
+                0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+        }
+
+        .result-header-title {
+            font-size: 15px;
+            font-weight: 900;
+        }
+
+        .result-header-subtitle {
+            margin-top: 3px;
+
+            font-size: 9px;
+            font-weight: 600;
+
+            opacity: .85;
+        }
+
+        .result-body {
+            background: #fff;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-top: 0;
+
+            border-radius:
+                0
+                0
+                18px
+                18px;
+
+            overflow: hidden;
+        }
+
+        .status-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .status-table tr {
+            border-bottom:
+                1px solid
+                #edf1f6;
+        }
+
+        .status-table tr:last-child {
+            border-bottom: 0;
+        }
+
+        .status-table th {
+            width: 30%;
+
+            padding: 15px 18px;
+
+            text-align: right;
+
+            background: #fafcff;
+
+            color: #607086;
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .status-table td {
+            padding: 15px 18px;
+
+            font-size: 12px;
+            font-weight: 800;
+
+            color: var(--text);
+        }
+
+
+        /* =========================================
+           BADGES
+        ========================================== */
+
+        .badge {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 28px;
+
+            padding:
+                4px
+                11px;
+
+            border-radius: 8px;
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .badge-default {
+            color: #526277;
+            background: #f1f4f8;
+        }
+
+        .badge-blue {
+            color: #0649a8;
+            background: #edf5ff;
+        }
+
+        .badge-green {
+            color: #067343;
+            background: #edfff5;
+        }
+
+        .badge-red {
+            color: #b4232d;
+            background: #fff1f2;
+        }
+
+        .badge-orange {
+            color: #a16207;
+            background: #fff8e7;
+        }
+
+
+        /* =========================================
+           ALL APPLICANTS
+        ========================================== */
+
+        .all-applicants-card {
+            background: #fff;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(16,35,63,.08);
+
+            overflow: hidden;
+        }
+
+        .all-applicants-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding:
+                18px
+                20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #f6f9fd
+                );
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+        .all-applicants-title {
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        .all-applicants-description {
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .applicant-count {
+            flex-shrink: 0;
+
+            padding:
+                6px
+                12px;
+
+            border-radius: 10px;
+
+            color: var(--blue-dark);
+
+            background: var(--blue-light);
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+
+        /* =========================================
+           EXCEL TABLE
+        ========================================== */
+
+        .table-scroll {
+            width: 100%;
+
+            overflow-x: auto;
+            overflow-y: auto;
+
+            max-height: 650px;
+
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .applicants-table {
+            width: 100%;
+
+            min-width: 1050px;
+
+            border-collapse: separate;
+
+            border-spacing: 0;
+        }
+
+        .applicants-table th {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5;
+
+            padding:
+                13px
+                12px;
+
+            white-space: nowrap;
+
+            text-align: center;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            border-left:
+                1px solid
+                rgba(255,255,255,.15);
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .applicants-table td {
+            padding:
+                12px
+                10px;
+
+            white-space: nowrap;
+
+            text-align: center;
+
+            border-left:
+                1px solid
+                #edf1f6;
+
+            border-bottom:
+                1px solid
+                #edf1f6;
+
+            color: var(--text);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            background: #fff;
+        }
+
+        .applicants-table tbody tr {
+            transition: .15s;
+            cursor: pointer;
+        }
+
+        .applicants-table tbody tr:hover td {
+            background: #f5f9ff;
+        }
+
+        .applicants-table td:first-child {
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-weight: 900;
+
+            color: var(--blue-dark);
+
+            direction: ltr;
+        }
+
+        .table-badge {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-width: 70px;
+
+            min-height: 25px;
+
+            padding:
+                3px
+                8px;
+
+            border-radius: 7px;
+
+            font-size: 8px;
+            font-weight: 900;
+        }
+
+
+        /* =========================================
+           TABLE FOOTER
+        ========================================== */
+
+        .table-footer {
+            padding:
+                12px
+                18px;
+
+            background: #fafcff;
+
+            border-top:
+                1px solid
+                var(--border);
+
+            color: var(--muted);
+
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           EMPTY TABLE
+        ========================================== */
+
+        .table-empty {
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================== */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+            font-weight: 700;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================================
+           LOADING
+        ========================================== */
+
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+
+            z-index: 9999;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                rgba(246,249,253,.96);
+
+            backdrop-filter: blur(7px);
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: .2s;
+        }
+
+        .loading-screen.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-box {
+            width: 90%;
+            max-width: 300px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            background: #fff;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(16,35,63,.14);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+
+            margin:
+                0
+                auto
+                13px;
+
+            border:
+                4px solid
+                #e6eef9;
+
+            border-top-color:
+                var(--blue);
+
+            border-radius: 50%;
+
+            animation:
+                spin .8s linear infinite;
+        }
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        .loading-text {
+            color: var(--text);
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           TOAST
+        ========================================== */
+
+        .toast {
+            position: fixed;
+
+            z-index: 10000;
+
+            left: 50%;
+            bottom: 25px;
+
+            transform:
+                translate(-50%, 30px);
+
+            width:
+                calc(100% - 30px);
+
+            max-width: 420px;
+
+            padding:
+                13px
+                16px;
+
+            border-radius: 12px;
+
+            color: #fff;
+
+            background: #10233f;
+
+            text-align: center;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition: .25s;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+
+            transform:
+                translate(-50%, 0);
+        }
+
+        .toast.error {
+            background: var(--red);
+        }
+
+        .toast.success {
+            background: var(--green);
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 650px) {
+
+            .app {
+                padding:
+                    22px
+                    10px
+                    45px;
+            }
+
+            .school-name {
+                font-size: 21px;
+            }
+
+            .page-title {
+                font-size: 19px;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-button {
+                width: 100%;
+            }
+
+            .all-applicants-header {
+                align-items: flex-start;
+            }
+
+            .status-table,
+            .status-table tbody,
+            .status-table tr,
+            .status-table th,
+            .status-table td {
+                display: block;
+                width: 100%;
+            }
+
+            .status-table tr {
+                padding:
+                    12px
+                    16px;
+            }
+
+            .status-table th {
+                padding:
+                    0
+                    0
+                    5px;
+
+                background: transparent;
+            }
+
+            .status-table td {
+                padding: 0;
+            }
+
+            .logo-box {
+                width: 135px;
+                min-height: 55px;
+            }
+
+            .logo-fallback {
+                min-height: 55px;
+                font-size: 20px;
+            }
+
+        }
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="background"></div>
+
+
+<!-- =========================================
+     LOADING
+========================================== -->
+
+<div
+    id="loadingScreen"
+    class="loading-screen">
+
+    <div class="loading-box">
+
+        <div class="spinner"></div>
+
+        <div
+            id="loadingText"
+            class="loading-text">
+
+            جارِ تحميل بيانات المتقدمين...
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     TOAST
+========================================== -->
+
+<div
+    id="toast"
+    class="toast">
+</div>
+
+
+<!-- =========================================
+     APP
+========================================== -->
+
+<main class="app">
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div class="logo-box">
+
+                <img
+                    id="schoolLogo"
+                    class="logo"
+                    src=""
+                    alt="وظائف التحدي"
+                    style="display:none;">
+
+                <div
+                    id="logoFallback"
+                    class="logo-fallback">
+
+                    وظائف التحدي
+
+                </div>
+
+            </div>
+
+
+            <div class="school-name">
+                مدرسة التحدي الأهلية المختلطة
+            </div>
+
+
+            <div class="department">
+                قسم الحوكمة
+            </div>
+
+
+            <div class="page-title">
+                استعلام طلبات التوظيف
+            </div>
+
+
+            <div class="page-description">
+                البحث عن حالة طلب التوظيف ومتابعة مراحل الطلب
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             SEARCH
+        ====================================== -->
+
+        <section class="search-card">
+
+            <div class="search-title">
+                البحث عن طلب التوظيف
+            </div>
+
+            <div class="search-description">
+                أدخل الكود الخاص بك لمعرفة تفاصيل طلبك
+            </div>
+
+
+            <form
+                id="searchForm"
+                class="search-form">
+
+                <div class="input-wrapper">
+
+                    <input
+                        id="codeInput"
+                        type="text"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                        placeholder="أدخل الكود الخاص بك">
+
+                </div>
+
+
+                <button
+                    id="searchButton"
+                    class="search-button"
+                    type="submit">
+
+                    بحث عن الطلب
+
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- =====================================
+             SELECTED APPLICANT RESULT
+        ====================================== -->
+
+        <section
+            id="result"
+            class="result">
+
+            <div class="result-header">
+
+                <div class="result-header-title">
+                    حالة طلب التوظيف
+                </div>
+
+                <div class="result-header-subtitle">
+                    تفاصيل الطلب الخاص بالمتقدم
+                </div>
+
+            </div>
+
+
+            <div class="result-body">
+
+                <table class="status-table">
+
+                    <tbody>
+
+                        <tr>
+
+                            <th>
+                                الكود
+                            </th>
+
+                            <td
+                                id="resultCode">
+                                -
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <th>
+                                مرحلة التدقيق
+                            </th>
+
+                            <td>
+
+                                <span
+                                    id="reviewStage"
+                                    class="badge badge-default">
+
+                                    -
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <th>
+                                الحاجة إليك
+                            </th>
+
+                            <td>
+
+                                <span
+                                    id="needStatus"
+                                    class="badge badge-default">
+
+                                    -
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <th>
+                                مرحلة المقابلة
+                            </th>
+
+                            <td>
+
+                                <span
+                                    id="interviewStage"
+                                    class="badge badge-default">
+
+                                    -
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <th>
+                                تاريخ المقابلة
+                            </th>
+
+                            <td
+                                id="interviewDate">
+
+                                -
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <th>
+                                قرار لجنة المقابلات
+                            </th>
+
+                            <td>
+
+                                <span
+                                    id="committeeDecision"
+                                    class="badge badge-default">
+
+                                    -
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <th>
+                                القبول أو الرفض
+                            </th>
+
+                            <td>
+
+                                <span
+                                    id="acceptanceStatus"
+                                    class="badge badge-default">
+
+                                    -
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+
+                            <th>
+                                تاريخ المباشرة
+                            </th>
+
+                            <td
+                                id="startDate">
+
+                                -
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             ALL APPLICANTS TABLE
+        ====================================== -->
+
+        <section class="all-applicants-card">
+
+
+            <div class="all-applicants-header">
+
+                <div>
+
+                    <div class="all-applicants-title">
+                        جميع المتقدمين
+                    </div>
+
+                    <div class="all-applicants-description">
+                        جدول متابعة مراحل طلبات التوظيف
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="applicantCount"
+                    class="applicant-count">
+
+                    0 متقدم
+
+                </div>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-scroll">
+
+                <table
+                    class="applicants-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                الكود
+                            </th>
+
+                            <th>
+                                مرحلة التدقيق
+                            </th>
+
+                            <th>
+                                الحاجة إليك
+                            </th>
+
+                            <th>
+                                مرحلة المقابلة
+                            </th>
+
+                            <th>
+                                تاريخ المقابلة
+                            </th>
+
+                            <th>
+                                قرار لجنة المقابلات
+                            </th>
+
+                            <th>
+                                القبول أو الرفض
+                            </th>
+
+                            <th>
+                                تاريخ المباشرة
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="applicantsTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                class="table-empty">
+
+                                جارِ تحميل البيانات...
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <div
+                id="tableFooter"
+                class="table-footer">
+
+                يتم تحميل البيانات...
+
+            </div>
+
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            مدرسة التحدي الأهلية المختلطة
+
+            <br>
+
+            قسم الحوكمة
+
+        </footer>
+
+
+    </div>
+
+</main>
+
+
+
+<script type="module">
+
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getDatabase,
+    ref,
+    get
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAF6kxQoJUan19ZCbGK7djExbouYxOLGF8",
+
+    authDomain:
+        "ahtahadi-e6f61.firebaseapp.com",
+
+    databaseURL:
+        "https://tahadi-school-default-rtdb.europe-west1.firebasedatabase.app",
+
+    projectId:
+        "ahtahadi-e6f61",
+
+    storageBucket:
+        "ahtahadi-e6f61.firebasestorage.app",
+
+    messagingSenderId:
+        "271225539711",
+
+    appId:
+        "1:271225539711:web:9fc4b45cf14d879b55434a",
+
+    measurementId:
+        "G-S5JDFN1RKF"
+
+};
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const db =
+    getDatabase(
+        app
+    );
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const loadingScreen =
+    document.getElementById(
+        "loadingScreen"
+    );
+
+
+const loadingText =
+    document.getElementById(
+        "loadingText"
+    );
+
+
+const toast =
+    document.getElementById(
+        "toast"
+    );
+
+
+const searchForm =
+    document.getElementById(
+        "searchForm"
+    );
+
+
+const codeInput =
+    document.getElementById(
+        "codeInput"
+    );
+
+
+const result =
+    document.getElementById(
+        "result"
+    );
+
+
+const resultCode =
+    document.getElementById(
+        "resultCode"
+    );
+
+
+const reviewStage =
+    document.getElementById(
+        "reviewStage"
+    );
+
+
+const needStatus =
+    document.getElementById(
+        "needStatus"
+    );
+
+
+const interviewStage =
+    document.getElementById(
+        "interviewStage"
+    );
+
+
+const interviewDate =
+    document.getElementById(
+        "interviewDate"
+    );
+
+
+const committeeDecision =
+    document.getElementById(
+        "committeeDecision"
+    );
+
+
+const acceptanceStatus =
+    document.getElementById(
+        "acceptanceStatus"
+    );
+
+
+const startDate =
+    document.getElementById(
+        "startDate"
+    );
+
+
+const applicantsTableBody =
+    document.getElementById(
+        "applicantsTableBody"
+    );
+
+
+const applicantCount =
+    document.getElementById(
+        "applicantCount"
+    );
+
+
+const tableFooter =
+    document.getElementById(
+        "tableFooter"
+    );
+
+
+/* =========================================================
+   FIELD NAMES
+========================================================= */
+
+const FIELD_NAMES = {
+
+    reviewStage:
+        "reviewStage",
+
+    needStatus:
+        "needStatus",
+
+    interviewStage:
+        "interviewStage",
+
+    interviewDate:
+        "interviewDate",
+
+    committeeDecision:
+        "committeeDecision",
+
+    acceptanceStatus:
+        "acceptanceStatus",
+
+    startDate:
+        "startDate"
+
+};
+
+
+/* =========================================================
+   DATA
+========================================================= */
+
+let allApplicants = [];
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+function showLoading(
+    state,
+    text = "جارِ تحميل البيانات..."
+) {
+
+    loadingText.textContent =
+        text;
+
+
+    if (state) {
+
+        loadingScreen.classList.add(
+            "active"
+        );
+
+    } else {
+
+        loadingScreen.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+
+function showToast(
+    message,
+    type = ""
+) {
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.className =
+        "toast";
+
+
+    if (type) {
+
+        toast.classList.add(
+            type
+        );
+
+    }
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            3000
+        );
+
+}
+
+
+/* =========================================================
+   NORMALIZE
+========================================================= */
+
+function normalizeCode(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+/* =========================================================
+   GET FIELD
+========================================================= */
+
+function getValue(
+    applicant,
+    fieldName
+) {
+
+    if (
+        !applicant
+    ) {
+
+        return "";
+
+    }
+
+
+    if (
+        Object.prototype.hasOwnProperty.call(
+            applicant,
+            fieldName
+        )
+    ) {
+
+        return applicant[
+            fieldName
+        ];
+
+    }
+
+
+    if (
+        applicant.status &&
+        typeof applicant.status === "object" &&
+        Object.prototype.hasOwnProperty.call(
+            applicant.status,
+            fieldName
+        )
+    ) {
+
+        return applicant.status[
+            fieldName
+        ];
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   DISPLAY VALUE
+========================================================= */
+
+function displayValue(
+    value
+) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+    ) {
+
+        return "لم يتم تحديدها بعد";
+
+    }
+
+
+    return String(
+        value
+    );
+
+}
+
+
+/* =========================================================
+   BADGE CLASS
+========================================================= */
+
+function getBadgeClass(
+    value
+) {
+
+    const text =
+        String(
+            value || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    if (!text) {
+
+        return "badge-default";
+
+    }
+
+
+    if (
+        text.includes("مقبول") ||
+        text.includes("نعم") ||
+        text.includes("مكتمل") ||
+        text.includes("تمت") ||
+        text.includes("موافق") ||
+        text.includes("accepted")
+    ) {
+
+        return "badge-green";
+
+    }
+
+
+    if (
+        text.includes("مرفوض") ||
+        text.includes("رفض") ||
+        text.includes("غير مقبول") ||
+        text.includes("rejected")
+    ) {
+
+        return "badge-red";
+
+    }
+
+
+    if (
+        text.includes("قيد") ||
+        text.includes("انتظار") ||
+        text.includes("انتضار") ||
+        text.includes("تدقيق") ||
+        text.includes("لم تبدأ") ||
+        text.includes("pending")
+    ) {
+
+        return "badge-orange";
+
+    }
+
+
+    return "badge-blue";
+
+}
+
+
+/* =========================================================
+   BADGE HTML
+========================================================= */
+
+function badgeHTML(
+    value
+) {
+
+    const text =
+        displayValue(
+            value
+        );
+
+
+    const cls =
+        getBadgeClass(
+            value
+        );
+
+
+    return `
+        <span class="table-badge ${cls}">
+            ${escapeHTML(text)}
+        </span>
+    `;
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(
+    value
+) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+    ) {
+
+        return "لم يتم تحديدها بعد";
+
+    }
+
+
+    const text =
+        String(
+            value
+        ).trim();
+
+
+    if (
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            text
+        )
+    ) {
+
+        const parts =
+            text.split("-");
+
+
+        return (
+            parts[2] +
+            "/" +
+            parts[1] +
+            "/" +
+            parts[0]
+        );
+
+    }
+
+
+    return text;
+
+}
+
+
+/* =========================================================
+   APPLICANT OBJECT
+========================================================= */
+
+function prepareApplicant(
+    uid,
+    applicant
+) {
+
+    applicant =
+        applicant || {};
+
+
+    return {
+
+        uid: uid,
+
+        reviewStage:
+            getValue(
+                applicant,
+                FIELD_NAMES.reviewStage
+            ),
+
+        needStatus:
+            getValue(
+                applicant,
+                FIELD_NAMES.needStatus
+            ),
+
+        interviewStage:
+            getValue(
+                applicant,
+                FIELD_NAMES.interviewStage
+            ),
+
+        interviewDate:
+            getValue(
+                applicant,
+                FIELD_NAMES.interviewDate
+            ),
+
+        committeeDecision:
+            getValue(
+                applicant,
+                FIELD_NAMES.committeeDecision
+            ),
+
+        acceptanceStatus:
+            getValue(
+                applicant,
+                FIELD_NAMES.acceptanceStatus
+            ),
+
+        startDate:
+            getValue(
+                applicant,
+                FIELD_NAMES.startDate
+            ),
+
+        raw:
+            applicant
+
+    };
+
+}
+
+
+/* =========================================================
+   LOAD ALL APPLICANTS
+========================================================= */
+
+async function loadApplicants() {
+
+    showLoading(
+        true,
+        "جارِ تحميل جميع المتقدمين..."
+    );
+
+
+    try {
+
+        const applicationsReference =
+            ref(
+                db,
+                "jobApplications"
+            );
+
+
+        const snapshot =
+            await get(
+                applicationsReference
+            );
+
+
+        if (
+            !snapshot.exists()
+        ) {
+
+            allApplicants = [];
+
+            renderApplicants(
+                []
+            );
+
+            tableFooter.textContent =
+                "لا توجد بيانات حاليًا.";
+
+            return;
+
+        }
+
+
+        const data =
+            snapshot.val();
+
+
+        allApplicants =
+            Object.entries(
+                data
+            )
+            .map(
+                ([uid, applicant]) => {
+
+                    return prepareApplicant(
+                        uid,
+                        applicant
+                    );
+
+                }
+            );
+
+
+        allApplicants.sort(
+            (a, b) => {
+
+                return String(
+                    a.uid
+                ).localeCompare(
+                    String(b.uid),
+                    undefined,
+                    {
+                        numeric: true,
+                        sensitivity: "base"
+                    }
+                );
+
+            }
+        );
+
+
+        renderApplicants(
+            allApplicants
+        );
+
+
+    }
+    catch (error) {
+
+        console.error(
+            "Firebase Error:",
+            error
+        );
+
+
+        applicantsTableBody.innerHTML = `
+            <tr>
+                <td
+                    colspan="8"
+                    class="table-empty">
+
+                    حدث خطأ أثناء تحميل بيانات المتقدمين.
+
+                </td>
+            </tr>
+        `;
+
+
+        tableFooter.textContent =
+            "تعذر الاتصال بقاعدة البيانات.";
+
+
+        showToast(
+            "حدث خطأ أثناء تحميل البيانات.",
+            "error"
+        );
+
+    }
+    finally {
+
+        showLoading(
+            false
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderApplicants(
+    applicants
+) {
+
+    applicantCount.textContent =
+        applicants.length +
+        " متقدم";
+
+
+    if (
+        !applicants.length
+    ) {
+
+        applicantsTableBody.innerHTML = `
+            <tr>
+                <td
+                    colspan="8"
+                    class="table-empty">
+
+                    لا توجد بيانات للمتقدمين.
+
+                </td>
+            </tr>
+        `;
+
+
+        tableFooter.textContent =
+            "عدد المتقدمين: 0";
+
+        return;
+
+    }
+
+
+    applicantsTableBody.innerHTML =
+        applicants
+        .map(
+            applicant => {
+
+                return `
+                    <tr
+                        data-uid="${escapeHTML(applicant.uid)}"
+                        title="اضغط لعرض تفاصيل المتقدم">
+
+                        <td>
+                            ${escapeHTML(applicant.uid)}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.reviewStage)}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.needStatus)}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.interviewStage)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                formatDate(
+                                    applicant.interviewDate
+                                )
+                            )}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.committeeDecision)}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.acceptanceStatus)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                formatDate(
+                                    applicant.startDate
+                                )
+                            )}
+                        </td>
+
+                    </tr>
+                `;
+
+            }
+        )
+        .join("");
+
+
+    tableFooter.textContent =
+        "إجمالي المتقدمين: " +
+        applicants.length;
+
+}
+
+
+/* =========================================================
+   SELECT APPLICANT
+========================================================= */
+
+function displayApplicant(
+    applicant
+) {
+
+    resultCode.textContent =
+        applicant.uid;
+
+
+    setBadge(
+        reviewStage,
+        applicant.reviewStage
+    );
+
+
+    setBadge(
+        needStatus,
+        applicant.needStatus
+    );
+
+
+    setBadge(
+        interviewStage,
+        applicant.interviewStage
+    );
+
+
+    interviewDate.textContent =
+        formatDate(
+            applicant.interviewDate
+        );
+
+
+    setBadge(
+        committeeDecision,
+        applicant.committeeDecision
+    );
+
+
+    setBadge(
+        acceptanceStatus,
+        applicant.acceptanceStatus
+    );
+
+
+    startDate.textContent =
+        formatDate(
+            applicant.startDate
+        );
+
+
+    result.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        () => {
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        },
+        100
+    );
+
+}
+
+
+/* =========================================================
+   SET BADGE
+========================================================= */
+
+function setBadge(
+    element,
+    value
+) {
+
+    element.textContent =
+        displayValue(
+            value
+        );
+
+
+    element.className =
+        "badge " +
+        getBadgeClass(
+            value
+        );
+
+}
+
+
+/* =========================================================
+   SEARCH BY CODE
+========================================================= */
+
+async function searchApplicant(
+    enteredCode
+) {
+
+    const code =
+        normalizeCode(
+            enteredCode
+        );
+
+
+    if (!code) {
+
+        showToast(
+            "يرجى إدخال الكود الخاص بك.",
+            "error"
+        );
+
+        codeInput.focus();
+
+        return;
+
+    }
+
+
+    let applicant =
+        allApplicants.find(
+            item =>
+                normalizeCode(
+                    item.uid
+                ) === code
+        );
+
+
+    if (!applicant) {
+
+        await loadApplicants();
+
+
+        applicant =
+            allApplicants.find(
+                item =>
+                    normalizeCode(
+                        item.uid
+                    ) === code
+            );
+
+    }
+
+
+    if (!applicant) {
+
+        result.classList.remove(
+            "show"
+        );
+
+
+        showToast(
+            "الكود الذي أدخلته غير موجود.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    displayApplicant(
+        applicant
+    );
+
+
+    showToast(
+        "تم العثور على الطلب بنجاح.",
+        "success"
+    );
+
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+searchForm.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+
+        searchApplicant(
+            codeInput.value
+        );
+
+    }
+);
+
+
+/* =========================================================
+   CLICK TABLE ROW
+========================================================= */
+
+applicantsTableBody.addEventListener(
+    "click",
+    event => {
+
+        const row =
+            event.target.closest(
+                "tr[data-uid]"
+            );
+
+
+        if (!row) {
+
+            return;
+
+        }
+
+
+        const uid =
+            row.dataset.uid;
+
+
+        codeInput.value =
+            uid;
+
+
+        searchApplicant(
+            uid
+        );
+
+    }
+);
+
+
+/* =========================================================
+   URL CODE
+========================================================= */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const urlCode =
+    urlParams.get(
+        "code"
+    );
+
+
+if (
+    urlCode &&
+    urlCode.trim() !== ""
+) {
+
+    codeInput.value =
+        urlCode;
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadApplicants();
+
+
+</script>
+
+
+</body>
+
+</html>
 
