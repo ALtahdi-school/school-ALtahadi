@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>المتقدمين | مدرسة التحدي</title>
+    <title>وظائف التحدي | مدرسة التحدي</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -172,13 +172,17 @@
         }
 
         .logo-box {
-            width: 75px;
-            height: 75px;
+            width: 150px;
+            min-height: 60px;
 
             margin:
                 0
                 auto
                 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .logo {
@@ -192,7 +196,7 @@
 
         .logo-fallback {
             width: 100%;
-            height: 100%;
+            min-height: 60px;
 
             display: flex;
             align-items: center;
@@ -202,8 +206,10 @@
 
             color: #fff;
 
-            font-size: 30px;
+            font-size: 24px;
             font-weight: 900;
+
+            padding: 8px 14px;
 
             background:
                 linear-gradient(
@@ -211,6 +217,8 @@
                     var(--blue),
                     var(--blue-dark)
                 );
+
+            white-space: nowrap;
         }
 
         .school-name {
@@ -596,52 +604,6 @@
 
 
         /* =========================================
-           TABLE SEARCH
-        ========================================== */
-
-        .table-tools {
-            padding: 15px 18px;
-
-            border-bottom:
-                1px solid
-                var(--border);
-
-            background: #fff;
-        }
-
-        .table-search {
-            width: 100%;
-
-            height: 44px;
-
-            padding:
-                0
-                14px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius: 10px;
-
-            outline: none;
-
-            background: #f9fbfe;
-
-            color: var(--text);
-
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .table-search:focus {
-            border-color: var(--blue);
-
-            background: #fff;
-        }
-
-
-        /* =========================================
            EXCEL TABLE
         ========================================== */
 
@@ -698,10 +660,6 @@
             font-weight: 900;
         }
 
-        .applicants-table th:first-child {
-            right: 0;
-        }
-
         .applicants-table td {
             padding:
                 12px
@@ -729,14 +687,11 @@
 
         .applicants-table tbody tr {
             transition: .15s;
+            cursor: pointer;
         }
 
         .applicants-table tbody tr:hover td {
             background: #f5f9ff;
-        }
-
-        .applicants-table tbody tr {
-            cursor: pointer;
         }
 
         .applicants-table td:first-child {
@@ -1033,6 +988,16 @@
                 padding: 0;
             }
 
+            .logo-box {
+                width: 135px;
+                min-height: 55px;
+            }
+
+            .logo-fallback {
+                min-height: 55px;
+                font-size: 20px;
+            }
+
         }
 
 
@@ -1101,14 +1066,14 @@
                     id="schoolLogo"
                     class="logo"
                     src=""
-                    alt="شعار مدرسة التحدي"
+                    alt="وظائف التحدي"
                     style="display:none;">
 
                 <div
                     id="logoFallback"
                     class="logo-fallback">
 
-                    ت
+                    وظائف التحدي
 
                 </div>
 
@@ -1402,20 +1367,6 @@
             </div>
 
 
-            <!-- TABLE SEARCH -->
-
-            <div class="table-tools">
-
-                <input
-                    id="tableSearch"
-                    class="table-search"
-                    type="text"
-                    autocomplete="off"
-                    placeholder="بحث داخل جدول المتقدمين بالكود...">
-
-            </div>
-
-
             <!-- TABLE -->
 
             <div class="table-scroll">
@@ -1615,12 +1566,6 @@ const codeInput =
     );
 
 
-const searchButton =
-    document.getElementById(
-        "searchButton"
-    );
-
-
 const result =
     document.getElementById(
         "result"
@@ -1672,12 +1617,6 @@ const acceptanceStatus =
 const startDate =
     document.getElementById(
         "startDate"
-    );
-
-
-const tableSearch =
-    document.getElementById(
-        "tableSearch"
     );
 
 
@@ -1855,8 +1794,6 @@ function getValue(
     }
 
 
-    /* الحقل مباشرة داخل المتقدم */
-
     if (
         Object.prototype.hasOwnProperty.call(
             applicant,
@@ -1870,10 +1807,6 @@ function getValue(
 
     }
 
-
-    /*
-     * دعم وجود الحقول داخل status
-     */
 
     if (
         applicant.status &&
@@ -2079,10 +2012,6 @@ function formatDate(
         ).trim();
 
 
-    /*
-     * YYYY-MM-DD
-     */
-
     if (
         /^\d{4}-\d{2}-\d{2}$/.test(
             text
@@ -2225,10 +2154,6 @@ async function loadApplicants() {
             snapshot.val();
 
 
-        /*
-         * كل UID هو متقدم مستقل
-         */
-
         allApplicants =
             Object.entries(
                 data
@@ -2244,10 +2169,6 @@ async function loadApplicants() {
                 }
             );
 
-
-        /*
-         * ترتيب حسب الكود
-         */
 
         allApplicants.sort(
             (a, b) => {
@@ -2419,51 +2340,6 @@ function renderApplicants(
 
 
 /* =========================================================
-   TABLE SEARCH
-========================================================= */
-
-function filterApplicants() {
-
-    const query =
-        normalizeCode(
-            tableSearch.value
-        );
-
-
-    if (!query) {
-
-        renderApplicants(
-            allApplicants
-        );
-
-        return;
-
-    }
-
-
-    const filtered =
-        allApplicants.filter(
-            applicant => {
-
-                return normalizeCode(
-                    applicant.uid
-                )
-                .includes(
-                    query
-                );
-
-            }
-        );
-
-
-    renderApplicants(
-        filtered
-    );
-
-}
-
-
-/* =========================================================
    SELECT APPLICANT
 ========================================================= */
 
@@ -2589,10 +2465,6 @@ async function searchApplicant(
     }
 
 
-    /*
-     * نبحث داخل البيانات التي تم تحميلها.
-     */
-
     let applicant =
         allApplicants.find(
             item =>
@@ -2601,10 +2473,6 @@ async function searchApplicant(
                 ) === code
         );
 
-
-    /*
-     * إذا لم نجده، نعيد تحميل البيانات
-     */
 
     if (!applicant) {
 
@@ -2668,16 +2536,6 @@ searchForm.addEventListener(
         );
 
     }
-);
-
-
-/* =========================================================
-   TABLE SEARCH EVENT
-========================================================= */
-
-tableSearch.addEventListener(
-    "input",
-    filterApplicants
 );
 
 
