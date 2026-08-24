@@ -1,0 +1,2352 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta name="theme-color" content="#0b63d8">
+
+    <title>استعلام طلب التوظيف | مدرسة التحدي</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --blue: #0b63d8;
+            --blue-dark: #0649a8;
+            --blue-light: #edf5ff;
+
+            --green: #079455;
+            --green-light: #edfff5;
+
+            --red: #d71920;
+            --red-light: #fff1f2;
+
+            --orange: #f59e0b;
+            --orange-light: #fff8e7;
+
+            --text: #10233f;
+            --muted: #718096;
+            --border: #e1e8f2;
+
+            --white: #ffffff;
+            --bg: #f6f9fd;
+        }
+
+
+        html {
+            width: 100%;
+            min-height: 100%;
+            background: var(--bg);
+            -webkit-text-size-adjust: 100%;
+        }
+
+
+        body {
+            width: 100%;
+            min-height: 100dvh;
+
+            font-family:
+                "Cairo",
+                Arial,
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f6f9fd 0%,
+                    #ffffff 100%
+                );
+
+            overflow-x: hidden;
+
+            -webkit-font-smoothing: antialiased;
+        }
+
+
+        button,
+        input {
+            font-family:
+                "Cairo",
+                Arial,
+                sans-serif;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           BACKGROUND
+        ========================== */
+
+        .background {
+            position: fixed;
+            inset: 0;
+
+            overflow: hidden;
+
+            pointer-events: none;
+
+            z-index: 0;
+        }
+
+
+        .background::before {
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            top: -220px;
+            right: -170px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(11,99,216,.14),
+                    rgba(11,99,216,.04) 45%,
+                    transparent 72%
+                );
+        }
+
+
+        .background::after {
+            content: "";
+
+            position: absolute;
+
+            width: 360px;
+            height: 360px;
+
+            bottom: -190px;
+            left: -150px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(215,25,32,.08),
+                    rgba(215,25,32,.025) 45%,
+                    transparent 72%
+                );
+        }
+
+
+        /* =========================
+           APP
+        ========================== */
+
+        .app {
+            position: relative;
+
+            z-index: 1;
+
+            width: 100%;
+
+            min-height: 100dvh;
+
+            padding:
+                25px
+                16px
+                50px;
+        }
+
+
+        .container {
+            width: 100%;
+
+            max-width: 850px;
+
+            margin: 0 auto;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+            text-align: center;
+
+            margin-bottom: 25px;
+        }
+
+
+        .logo-box {
+            width: 78px;
+            height: 78px;
+
+            margin:
+                0
+                auto
+                12px;
+        }
+
+
+        .logo {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            border-radius: 20px;
+        }
+
+
+        .logo-fallback {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            color: white;
+
+            font-size: 32px;
+            font-weight: 900;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+        }
+
+
+        .school-name {
+            font-size: 25px;
+
+            font-weight: 900;
+
+            color: var(--blue-dark);
+
+            line-height: 1.5;
+        }
+
+
+        .department {
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .page-title {
+            margin-top: 18px;
+
+            font-size: 22px;
+
+            font-weight: 900;
+
+            color: var(--text);
+        }
+
+
+        .page-description {
+            margin-top: 6px;
+
+            font-size: 11px;
+
+            color: var(--muted);
+
+            font-weight: 600;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           SEARCH CARD
+        ========================== */
+
+        .search-card {
+            background:
+                rgba(255,255,255,.97);
+
+            border:
+                1px solid
+                rgba(11,99,216,.08);
+
+            border-radius: 22px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(16,35,63,.08);
+
+            margin-bottom: 18px;
+        }
+
+
+        .search-title {
+            font-size: 15px;
+
+            font-weight: 900;
+
+            color: var(--text);
+
+            margin-bottom: 6px;
+        }
+
+
+        .search-description {
+            color: var(--muted);
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            margin-bottom: 14px;
+        }
+
+
+        .search-form {
+            display: flex;
+
+            gap: 10px;
+
+            align-items: stretch;
+        }
+
+
+        .input-wrapper {
+            position: relative;
+
+            flex: 1;
+        }
+
+
+        .input-wrapper input {
+            width: 100%;
+
+            height: 50px;
+
+            padding:
+                0
+                15px;
+
+            border:
+                1.5px solid
+                var(--border);
+
+            border-radius: 13px;
+
+            outline: none;
+
+            background: #f9fbfe;
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: .2s ease;
+        }
+
+
+        .input-wrapper input:focus {
+            border-color: var(--blue);
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(11,99,216,.06);
+        }
+
+
+        .search-button {
+            height: 50px;
+
+            min-width: 130px;
+
+            padding:
+                0
+                18px;
+
+            border: 0;
+
+            border-radius: 13px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            font-size: 12px;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 8px 20px
+                rgba(11,99,216,.20);
+
+            transition: .2s ease;
+        }
+
+
+        .search-button:hover {
+            transform: translateY(-1px);
+        }
+
+
+        .search-button:disabled {
+            opacity: .65;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* =========================
+           RESULT
+        ========================== */
+
+        .result {
+            display: none;
+        }
+
+
+        .result.show {
+            display: block;
+        }
+
+
+        .result-header {
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            color: white;
+
+            border-radius: 20px 20px 0 0;
+
+            padding: 18px 20px;
+        }
+
+
+        .result-header-title {
+            font-size: 16px;
+
+            font-weight: 900;
+        }
+
+
+        .result-header-subtitle {
+            margin-top: 3px;
+
+            font-size: 10px;
+
+            opacity: .85;
+
+            font-weight: 600;
+        }
+
+
+        .result-body {
+            background: white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-top: 0;
+
+            border-radius:
+                0
+                0
+                20px
+                20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 15px 45px
+                rgba(16,35,63,.08);
+        }
+
+
+        /* =========================
+           STATUS TABLE
+        ========================== */
+
+        .status-table {
+            width: 100%;
+
+            border-collapse: collapse;
+        }
+
+
+        .status-table tr {
+            border-bottom:
+                1px solid
+                #edf1f6;
+        }
+
+
+        .status-table tr:last-child {
+            border-bottom: 0;
+        }
+
+
+        .status-table th {
+            width: 35%;
+
+            text-align: right;
+
+            padding:
+                16px
+                18px;
+
+            background: #fafcff;
+
+            color: #607086;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            vertical-align: middle;
+        }
+
+
+        .status-table td {
+            padding:
+                16px
+                18px;
+
+            color: var(--text);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            vertical-align: middle;
+        }
+
+
+        .code-value {
+            direction: ltr;
+
+            text-align: right;
+
+            font-family:
+                Arial,
+                sans-serif;
+
+            letter-spacing: .5px;
+        }
+
+
+        /* =========================
+           BADGES
+        ========================== */
+
+        .badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 30px;
+
+            padding:
+                4px
+                12px;
+
+            border-radius: 9px;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            line-height: 1.5;
+        }
+
+
+        .badge-default {
+            color: #526277;
+
+            background: #f1f4f8;
+        }
+
+
+        .badge-blue {
+            color: var(--blue-dark);
+
+            background: var(--blue-light);
+        }
+
+
+        .badge-green {
+            color: #067343;
+
+            background: var(--green-light);
+        }
+
+
+        .badge-red {
+            color: #b4232d;
+
+            background: var(--red-light);
+        }
+
+
+        .badge-orange {
+            color: #a16207;
+
+            background: var(--orange-light);
+        }
+
+
+        /* =========================
+           EMPTY
+        ========================== */
+
+        .empty-state {
+            display: none;
+
+            background: white;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 20px;
+
+            padding: 35px 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 45px
+                rgba(16,35,63,.07);
+        }
+
+
+        .empty-icon {
+            width: 60px;
+            height: 60px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin:
+                0
+                auto
+                12px;
+
+            border-radius: 18px;
+
+            color: #b4232d;
+
+            background: #fff1f2;
+
+            font-size: 25px;
+
+            font-weight: 900;
+        }
+
+
+        .empty-title {
+            font-size: 15px;
+
+            font-weight: 900;
+
+            color: var(--text);
+        }
+
+
+        .empty-description {
+            margin-top: 5px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            line-height: 1.8;
+        }
+
+
+        .empty-state.show {
+            display: block;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           LOADING
+        ========================== */
+
+        .loading-screen {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(246,249,253,.96);
+
+            backdrop-filter: blur(7px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition: .2s ease;
+        }
+
+
+        .loading-screen.active {
+            opacity: 1;
+
+            visibility: visible;
+        }
+
+
+        .loading-box {
+            width: 90%;
+
+            max-width: 300px;
+
+            padding: 25px;
+
+            text-align: center;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(16,35,63,.14);
+        }
+
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+
+            margin:
+                0
+                auto
+                13px;
+
+            border:
+                4px solid
+                #e6eef9;
+
+            border-top-color:
+                var(--blue);
+
+            border-radius: 50%;
+
+            animation:
+                spin .8s linear infinite;
+        }
+
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        .loading-text {
+            color: var(--text);
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================
+           TOAST
+        ========================== */
+
+        .toast {
+            position: fixed;
+
+            z-index: 10000;
+
+            left: 50%;
+
+            bottom: 25px;
+
+            transform:
+                translate(-50%, 30px);
+
+            width:
+                calc(100% - 30px);
+
+            max-width: 420px;
+
+            padding:
+                13px
+                16px;
+
+            border-radius: 13px;
+
+            color: white;
+
+            background: #10233f;
+
+            text-align: center;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 15px 40px
+                rgba(16,35,63,.20);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition: .25s ease;
+        }
+
+
+        .toast.show {
+            opacity: 1;
+
+            visibility: visible;
+
+            transform:
+                translate(-50%, 0);
+        }
+
+
+        .toast.error {
+            background: var(--red);
+        }
+
+
+        .toast.success {
+            background: var(--green);
+        }
+
+
+        /* =========================
+           DESKTOP
+        ========================== */
+
+        @media (min-width: 700px) {
+
+            .app {
+                padding:
+                    45px
+                    25px
+                    60px;
+            }
+
+
+            .header {
+                margin-bottom: 30px;
+            }
+
+
+            .search-card {
+                padding: 25px;
+            }
+
+
+            .status-table th {
+                width: 32%;
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .school-name {
+                font-size: 21px;
+            }
+
+
+            .page-title {
+                font-size: 19px;
+            }
+
+
+            .search-form {
+                flex-direction: column;
+            }
+
+
+            .search-button {
+                width: 100%;
+            }
+
+
+            .status-table,
+            .status-table tbody,
+            .status-table tr,
+            .status-table th,
+            .status-table td {
+                display: block;
+
+                width: 100%;
+            }
+
+
+            .status-table tr {
+                padding: 12px 16px;
+
+                border-bottom:
+                    1px solid
+                    #edf1f6;
+            }
+
+
+            .status-table th {
+                padding:
+                    0
+                    0
+                    5px;
+
+                background: transparent;
+
+                font-size: 9px;
+            }
+
+
+            .status-table td {
+                padding:
+                    0;
+
+                font-size: 12px;
+            }
+
+
+            .badge {
+                min-height: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="background"></div>
+
+
+    <!-- =========================
+         LOADING
+    ========================== -->
+
+    <div
+        id="loadingScreen"
+        class="loading-screen">
+
+        <div class="loading-box">
+
+            <div class="spinner"></div>
+
+            <div class="loading-text">
+                جارِ تحميل بيانات الطلب...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TOAST
+    ========================== -->
+
+    <div
+        id="toast"
+        class="toast">
+    </div>
+
+
+    <!-- =========================
+         APP
+    ========================== -->
+
+    <main class="app">
+
+        <div class="container">
+
+
+            <!-- HEADER -->
+
+            <header class="header">
+
+                <div class="logo-box">
+
+                    <img
+                        id="schoolLogo"
+                        class="logo"
+                        src=""
+                        alt="شعار مدرسة التحدي"
+                        style="display:none;">
+
+                    <div
+                        id="logoFallback"
+                        class="logo-fallback">
+                        ت
+                    </div>
+
+                </div>
+
+
+                <div class="school-name">
+                    مدرسة التحدي الأهلية المختلطة
+                </div>
+
+
+                <div class="department">
+                    قسم الحوكمة
+                </div>
+
+
+                <div class="page-title">
+                    استعلام حالة طلب التوظيف
+                </div>
+
+
+                <div class="page-description">
+                    أدخل الكود الخاص بك لمعرفة آخر تحديثات طلب التوظيف والمراحل التي وصل إليها طلبك.
+                </div>
+
+            </header>
+
+
+            <!-- SEARCH -->
+
+            <section class="search-card">
+
+                <div class="search-title">
+                    البحث عن طلب التوظيف
+                </div>
+
+
+                <div class="search-description">
+                    استخدم الكود الخاص بك كما تم تزويدك به بعد تقديم الطلب.
+                </div>
+
+
+                <form
+                    id="searchForm"
+                    class="search-form">
+
+                    <div class="input-wrapper">
+
+                        <input
+                            id="codeInput"
+                            type="text"
+                            autocomplete="off"
+                            autocapitalize="off"
+                            spellcheck="false"
+                            placeholder="أدخل الكود الخاص بك">
+
+                    </div>
+
+
+                    <button
+                        id="searchButton"
+                        class="search-button"
+                        type="submit">
+
+                        بحث عن الطلب
+
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <!-- EMPTY -->
+
+            <section
+                id="emptyState"
+                class="empty-state">
+
+                <div class="empty-icon">
+                    !
+                </div>
+
+                <div class="empty-title">
+                    لم يتم العثور على الطلب
+                </div>
+
+                <div class="empty-description">
+                    تأكد من كتابة الكود بشكل صحيح ثم حاول مرة أخرى.
+                </div>
+
+            </section>
+
+
+            <!-- RESULT -->
+
+            <section
+                id="result"
+                class="result">
+
+
+                <div class="result-header">
+
+                    <div class="result-header-title">
+                        حالة طلب التوظيف
+                    </div>
+
+                    <div class="result-header-subtitle">
+                        البيانات الخاصة بالمتقدم
+                    </div>
+
+                </div>
+
+
+                <div class="result-body">
+
+                    <table class="status-table">
+
+                        <tbody>
+
+
+                            <!-- CODE -->
+
+                            <tr>
+
+                                <th>
+                                    الكود
+                                </th>
+
+                                <td
+                                    id="resultCode"
+                                    class="code-value">
+                                    -
+                                </td>
+
+                            </tr>
+
+
+                            <!-- REVIEW -->
+
+                            <tr>
+
+                                <th>
+                                    مرحلة التدقيق
+                                </th>
+
+                                <td>
+                                    <span
+                                        id="reviewStage"
+                                        class="badge badge-default">
+                                        -
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <!-- NEED -->
+
+                            <tr>
+
+                                <th>
+                                    الحاجة إليك
+                                </th>
+
+                                <td>
+                                    <span
+                                        id="needStatus"
+                                        class="badge badge-default">
+                                        -
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <!-- INTERVIEW STAGE -->
+
+                            <tr>
+
+                                <th>
+                                    مرحلة المقابلة
+                                </th>
+
+                                <td>
+                                    <span
+                                        id="interviewStage"
+                                        class="badge badge-default">
+                                        -
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <!-- INTERVIEW DATE -->
+
+                            <tr>
+
+                                <th>
+                                    تاريخ المقابلة
+                                </th>
+
+                                <td id="interviewDate">
+                                    -
+                                </td>
+
+                            </tr>
+
+
+                            <!-- COMMITTEE -->
+
+                            <tr>
+
+                                <th>
+                                    قرار لجنة المقابلات
+                                </th>
+
+                                <td>
+                                    <span
+                                        id="committeeDecision"
+                                        class="badge badge-default">
+                                        -
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <!-- ACCEPT / REJECT -->
+
+                            <tr>
+
+                                <th>
+                                    القبول أو الرفض
+                                </th>
+
+                                <td>
+                                    <span
+                                        id="acceptanceStatus"
+                                        class="badge badge-default">
+                                        -
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <!-- START DATE -->
+
+                            <tr>
+
+                                <th>
+                                    تاريخ المباشرة
+                                </th>
+
+                                <td id="startDate">
+                                    -
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <footer class="footer">
+
+                مدرسة التحدي الأهلية المختلطة
+                <br>
+                قسم الحوكمة
+
+            </footer>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FIREBASE
+    ========================== -->
+
+    <script type="module">
+
+
+        import {
+            initializeApp
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+        import {
+            getDatabase,
+            ref,
+            get
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
+
+
+        /* =====================================================
+           FIREBASE CONFIG
+        ====================================================== */
+
+        const firebaseConfig = {
+
+            apiKey:
+                "AIzaSyAF6kxQoJUan19ZCbGK7djExbouYxOLGF8",
+
+            authDomain:
+                "ahtahadi-e6f61.firebaseapp.com",
+
+            databaseURL:
+                "https://tahadi-school-default-rtdb.europe-west1.firebasedatabase.app",
+
+            projectId:
+                "ahtahadi-e6f61",
+
+            storageBucket:
+                "ahtahadi-e6f61.firebasestorage.app",
+
+            messagingSenderId:
+                "271225539711",
+
+            appId:
+                "1:271225539711:web:9fc4b45cf14d879b55434a",
+
+            measurementId:
+                "G-S5JDFN1RKF"
+
+        };
+
+
+        /* =====================================================
+           INITIALIZE FIREBASE
+        ====================================================== */
+
+        const app =
+            initializeApp(
+                firebaseConfig
+            );
+
+
+        const db =
+            getDatabase(
+                app
+            );
+
+
+        /* =====================================================
+           ELEMENTS
+        ====================================================== */
+
+        const loadingScreen =
+            document.getElementById(
+                "loadingScreen"
+            );
+
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        const searchForm =
+            document.getElementById(
+                "searchForm"
+            );
+
+
+        const codeInput =
+            document.getElementById(
+                "codeInput"
+            );
+
+
+        const searchButton =
+            document.getElementById(
+                "searchButton"
+            );
+
+
+        const result =
+            document.getElementById(
+                "result"
+            );
+
+
+        const emptyState =
+            document.getElementById(
+                "emptyState"
+            );
+
+
+        /* =====================================================
+           RESULT ELEMENTS
+        ====================================================== */
+
+        const resultCode =
+            document.getElementById(
+                "resultCode"
+            );
+
+
+        const reviewStage =
+            document.getElementById(
+                "reviewStage"
+            );
+
+
+        const needStatus =
+            document.getElementById(
+                "needStatus"
+            );
+
+
+        const interviewStage =
+            document.getElementById(
+                "interviewStage"
+            );
+
+
+        const interviewDate =
+            document.getElementById(
+                "interviewDate"
+            );
+
+
+        const committeeDecision =
+            document.getElementById(
+                "committeeDecision"
+            );
+
+
+        const acceptanceStatus =
+            document.getElementById(
+                "acceptanceStatus"
+            );
+
+
+        const startDate =
+            document.getElementById(
+                "startDate"
+            );
+
+
+        /* =====================================================
+           OPTIONAL LOGO
+        ====================================================== */
+
+        /*
+         * إذا عندك رابط شعار المدرسة ضعه هنا.
+         *
+         * مثال:
+         *
+         * const SCHOOL_LOGO_URL =
+         *     "https://....";
+         *
+         */
+
+        const SCHOOL_LOGO_URL = "";
+
+
+        const schoolLogo =
+            document.getElementById(
+                "schoolLogo"
+            );
+
+
+        const logoFallback =
+            document.getElementById(
+                "logoFallback"
+            );
+
+
+        if (
+            SCHOOL_LOGO_URL.trim() !== ""
+        ) {
+
+            schoolLogo.src =
+                SCHOOL_LOGO_URL;
+
+            schoolLogo.style.display =
+                "block";
+
+            logoFallback.style.display =
+                "none";
+
+        }
+
+
+        /* =====================================================
+           FIELD NAMES
+           
+           أسماء الحقول التي تتم قراءتها من Firebase.
+           
+           إذا كانت أسماء الحقول عندك مختلفة،
+           غيّرها من هنا فقط.
+        ====================================================== */
+
+        const FIELD_NAMES = {
+
+            reviewStage:
+                "reviewStage",
+
+            needStatus:
+                "needStatus",
+
+            interviewStage:
+                "interviewStage",
+
+            interviewDate:
+                "interviewDate",
+
+            committeeDecision:
+                "committeeDecision",
+
+            acceptanceStatus:
+                "acceptanceStatus",
+
+            startDate:
+                "startDate"
+
+        };
+
+
+        /* =====================================================
+           HELPERS
+        ====================================================== */
+
+
+        function showLoading(
+            show
+        ) {
+
+            if (show) {
+
+                loadingScreen.classList.add(
+                    "active"
+                );
+
+            } else {
+
+                loadingScreen.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+        let toastTimer = null;
+
+
+        function showToast(
+            message,
+            type = ""
+        ) {
+
+            clearTimeout(
+                toastTimer
+            );
+
+
+            toast.textContent =
+                message;
+
+
+            toast.className =
+                "toast";
+
+
+            if (type) {
+
+                toast.classList.add(
+                    type
+                );
+
+            }
+
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            toastTimer =
+                setTimeout(
+                    function() {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                    },
+                    3000
+                );
+
+        }
+
+
+        function normalizeCode(
+            value
+        ) {
+
+            return String(
+                value || ""
+            )
+                .trim()
+                .toLowerCase();
+
+        }
+
+
+        function getValue(
+            applicant,
+            fieldName
+        ) {
+
+            if (
+                !applicant ||
+                !fieldName
+            ) {
+
+                return "";
+
+            }
+
+
+            /*
+             * قراءة الحقل إذا كان مباشرة داخل المتقدم
+             */
+
+            if (
+                Object.prototype.hasOwnProperty.call(
+                    applicant,
+                    fieldName
+                )
+            ) {
+
+                return applicant[
+                    fieldName
+                ];
+
+            }
+
+
+            /*
+             * دعم وضع البيانات داخل status
+             */
+
+            if (
+                applicant.status &&
+                typeof applicant.status === "object" &&
+                Object.prototype.hasOwnProperty.call(
+                    applicant.status,
+                    fieldName
+                )
+            ) {
+
+                return applicant.status[
+                    fieldName
+                ];
+
+            }
+
+
+            return "";
+
+        }
+
+
+        function displayValue(
+            value
+        ) {
+
+            if (
+                value === null ||
+                value === undefined ||
+                String(value).trim() === ""
+            ) {
+
+                return "لم يتم تحديدها بعد";
+
+            }
+
+
+            return String(
+                value
+            );
+
+        }
+
+
+        /* =====================================================
+           BADGE COLOR
+        ====================================================== */
+
+        function getBadgeClass(
+            value
+        ) {
+
+            const text =
+                String(
+                    value || ""
+                ).toLowerCase().trim();
+
+
+            if (!text) {
+
+                return "badge-default";
+
+            }
+
+
+            if (
+                text.includes("مقبول") ||
+                text.includes("نعم") ||
+                text.includes("مكتمل") ||
+                text.includes("تمت") ||
+                text.includes("موافق") ||
+                text.includes("accepted")
+            ) {
+
+                return "badge-green";
+
+            }
+
+
+            if (
+                text.includes("رفض") ||
+                text.includes("مرفوض") ||
+                text.includes("لا") ||
+                text.includes("غير مقبول") ||
+                text.includes("rejected")
+            ) {
+
+                return "badge-red";
+
+            }
+
+
+            if (
+                text.includes("انتظار") ||
+                text.includes("قيد") ||
+                text.includes("تدقيق") ||
+                text.includes("لم تبدأ") ||
+                text.includes("pending")
+            ) {
+
+                return "badge-orange";
+
+            }
+
+
+            return "badge-blue";
+
+        }
+
+
+        function setBadge(
+            element,
+            value
+        ) {
+
+            const text =
+                displayValue(
+                    value
+                );
+
+
+            element.textContent =
+                text;
+
+
+            element.className =
+                "badge " +
+                getBadgeClass(
+                    value
+                );
+
+        }
+
+
+        /* =====================================================
+           FORMAT DATE
+        ====================================================== */
+
+        function formatDate(
+            value
+        ) {
+
+            if (
+                value === null ||
+                value === undefined ||
+                String(value).trim() === ""
+            ) {
+
+                return "لم يتم تحديدها بعد";
+
+            }
+
+
+            const text =
+                String(
+                    value
+                ).trim();
+
+
+            /*
+             * إذا كانت قيمة التاريخ أصلًا
+             * بصيغة واضحة نعرضها كما هي.
+             */
+
+            if (
+                /^\d{4}-\d{2}-\d{2}$/.test(
+                    text
+                )
+            ) {
+
+                const parts =
+                    text.split("-");
+
+
+                return (
+                    parts[2] +
+                    "/" +
+                    parts[1] +
+                    "/" +
+                    parts[0]
+                );
+
+            }
+
+
+            return text;
+
+        }
+
+
+        /* =====================================================
+           HIDE RESULT
+        ====================================================== */
+
+        function clearResult() {
+
+            result.classList.remove(
+                "show"
+            );
+
+            emptyState.classList.remove(
+                "show"
+            );
+
+        }
+
+
+        /* =====================================================
+           DISPLAY APPLICANT
+        ====================================================== */
+
+        function displayApplicant(
+            uid,
+            applicant
+        ) {
+
+            resultCode.textContent =
+                uid;
+
+
+            const review =
+                getValue(
+                    applicant,
+                    FIELD_NAMES.reviewStage
+                );
+
+
+            const need =
+                getValue(
+                    applicant,
+                    FIELD_NAMES.needStatus
+                );
+
+
+            const interview =
+                getValue(
+                    applicant,
+                    FIELD_NAMES.interviewStage
+                );
+
+
+            const date =
+                getValue(
+                    applicant,
+                    FIELD_NAMES.interviewDate
+                );
+
+
+            const committee =
+                getValue(
+                    applicant,
+                    FIELD_NAMES.committeeDecision
+                );
+
+
+            const acceptance =
+                getValue(
+                    applicant,
+                    FIELD_NAMES.acceptanceStatus
+                );
+
+
+            const start =
+                getValue(
+                    applicant,
+                    FIELD_NAMES.startDate
+                );
+
+
+            setBadge(
+                reviewStage,
+                review
+            );
+
+
+            setBadge(
+                needStatus,
+                need
+            );
+
+
+            setBadge(
+                interviewStage,
+                interview
+            );
+
+
+            interviewDate.textContent =
+                formatDate(
+                    date
+                );
+
+
+            setBadge(
+                committeeDecision,
+                committee
+            );
+
+
+            setBadge(
+                acceptanceStatus,
+                acceptance
+            );
+
+
+            startDate.textContent =
+                formatDate(
+                    start
+                );
+
+
+            emptyState.classList.remove(
+                "show"
+            );
+
+
+            result.classList.add(
+                "show"
+            );
+
+
+            setTimeout(
+                function() {
+
+                    result.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                },
+                100
+            );
+
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ====================================================== */
+
+        async function searchApplicant(
+            enteredCode
+        ) {
+
+            const code =
+                normalizeCode(
+                    enteredCode
+                );
+
+
+            if (!code) {
+
+                clearResult();
+
+                showToast(
+                    "يرجى إدخال الكود الخاص بك.",
+                    "error"
+                );
+
+                codeInput.focus();
+
+                return;
+
+            }
+
+
+            showLoading(
+                true
+            );
+
+
+            searchButton.disabled =
+                true;
+
+
+            try {
+
+                /*
+                 * نقرأ نفس شجرة jobApplications
+                 * الموجودة في لوحة الإدارة.
+                 */
+
+                const applicationsReference =
+                    ref(
+                        db,
+                        "jobApplications"
+                    );
+
+
+                const snapshot =
+                    await get(
+                        applicationsReference
+                    );
+
+
+                if (
+                    !snapshot.exists()
+                ) {
+
+                    clearResult();
+
+                    emptyState.classList.add(
+                        "show"
+                    );
+
+                    showToast(
+                        "لا توجد بيانات للمتقدمين حاليًا.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                const data =
+                    snapshot.val();
+
+
+                /*
+                 * الـ UID هو مفتاح المتقدم
+                 * داخل jobApplications.
+                 */
+
+                let foundUID = null;
+
+                let foundApplicant = null;
+
+
+                Object.entries(
+                    data
+                ).some(
+                    function([
+                        uid,
+                        applicant
+                    ]) {
+
+                        if (
+                            normalizeCode(
+                                uid
+                            ) === code
+                        ) {
+
+                            foundUID =
+                                uid;
+
+                            foundApplicant =
+                                applicant || {};
+
+                            return true;
+
+                        }
+
+
+                        return false;
+
+                    }
+                );
+
+
+                if (
+                    !foundUID
+                ) {
+
+                    clearResult();
+
+                    emptyState.classList.add(
+                        "show"
+                    );
+
+                    showToast(
+                        "الكود الذي أدخلته غير موجود.",
+                        "error"
+                    );
+
+                    return;
+
+                }
+
+
+                displayApplicant(
+                    foundUID,
+                    foundApplicant
+                );
+
+
+                showToast(
+                    "تم العثور على طلبك بنجاح.",
+                    "success"
+                );
+
+            }
+            catch (
+                error
+            ) {
+
+                console.error(
+                    "Firebase Error:",
+                    error
+                );
+
+
+                clearResult();
+
+                emptyState.classList.add(
+                    "show"
+                );
+
+
+                showToast(
+                    "حدث خطأ أثناء الاتصال بقاعدة البيانات.",
+                    "error"
+                );
+
+            }
+            finally {
+
+                showLoading(
+                    false
+                );
+
+                searchButton.disabled =
+                    false;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           FORM
+        ====================================================== */
+
+        searchForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                searchApplicant(
+                    codeInput.value
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           ENTER KEY
+        ====================================================== */
+
+        codeInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    event.preventDefault();
+
+                    searchForm.requestSubmit();
+
+                }
+
+            }
+        );
+
+
+        /* =====================================================
+           URL CODE
+           
+           يدعم:
+           page.html?code=XXXX
+        ====================================================== */
+
+        const urlParams =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const urlCode =
+            urlParams.get(
+                "code"
+            );
+
+
+        if (
+            urlCode &&
+            urlCode.trim() !== ""
+        ) {
+
+            codeInput.value =
+                urlCode;
+
+
+            searchApplicant(
+                urlCode
+            );
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
