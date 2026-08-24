@@ -3,23 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <meta name="theme-color" content="#0b63d8">
-
-    <title>استعلام طلب التوظيف | مدرسة التحدي</title>
+    <title>المتقدمين | مدرسة التحدي</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-
 
     <style>
 
@@ -46,24 +38,20 @@
 
             --text: #10233f;
             --muted: #718096;
-            --border: #e1e8f2;
+            --border: #dfe7f1;
 
             --white: #ffffff;
-            --bg: #f6f9fd;
+            --bg: #f5f8fc;
         }
 
-
         html {
-            width: 100%;
             min-height: 100%;
             background: var(--bg);
             -webkit-text-size-adjust: 100%;
         }
 
-
         body {
-            width: 100%;
-            min-height: 100dvh;
+            min-height: 100vh;
 
             font-family:
                 "Cairo",
@@ -75,15 +63,12 @@
             background:
                 linear-gradient(
                     180deg,
-                    #f6f9fd 0%,
+                    #f5f8fc 0%,
                     #ffffff 100%
                 );
 
             overflow-x: hidden;
-
-            -webkit-font-smoothing: antialiased;
         }
-
 
         button,
         input {
@@ -93,61 +78,55 @@
                 sans-serif;
         }
 
-
         button {
             cursor: pointer;
         }
 
 
-        /* =========================
+        /* =========================================
            BACKGROUND
-        ========================== */
+        ========================================== */
 
         .background {
             position: fixed;
             inset: 0;
-
             overflow: hidden;
-
             pointer-events: none;
-
             z-index: 0;
         }
-
 
         .background::before {
             content: "";
 
             position: absolute;
 
-            width: 420px;
-            height: 420px;
+            width: 450px;
+            height: 450px;
 
-            top: -220px;
-            right: -170px;
+            top: -250px;
+            right: -180px;
 
             border-radius: 50%;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(11,99,216,.14),
-                    rgba(11,99,216,.04) 45%,
+                    rgba(11,99,216,.13),
+                    rgba(11,99,216,.03) 50%,
                     transparent 72%
                 );
         }
-
 
         .background::after {
             content: "";
 
             position: absolute;
 
-            width: 360px;
-            height: 360px;
+            width: 400px;
+            height: 400px;
 
-            bottom: -190px;
-            left: -150px;
+            bottom: -220px;
+            left: -180px;
 
             border-radius: 50%;
 
@@ -155,62 +134,52 @@
                 radial-gradient(
                     circle,
                     rgba(215,25,32,.08),
-                    rgba(215,25,32,.025) 45%,
-                    transparent 72%
+                    transparent 70%
                 );
         }
 
 
-        /* =========================
+        /* =========================================
            APP
-        ========================== */
+        ========================================== */
 
         .app {
             position: relative;
-
             z-index: 1;
 
             width: 100%;
 
-            min-height: 100dvh;
-
             padding:
-                25px
+                28px
                 16px
                 50px;
         }
 
-
         .container {
             width: 100%;
-
-            max-width: 850px;
-
+            max-width: 1450px;
             margin: 0 auto;
         }
 
 
-        /* =========================
+        /* =========================================
            HEADER
-        ========================== */
+        ========================================== */
 
         .header {
             text-align: center;
-
             margin-bottom: 25px;
         }
 
-
         .logo-box {
-            width: 78px;
-            height: 78px;
+            width: 75px;
+            height: 75px;
 
             margin:
                 0
                 auto
                 12px;
         }
-
 
         .logo {
             width: 100%;
@@ -221,143 +190,112 @@
             border-radius: 20px;
         }
 
-
         .logo-fallback {
             width: 100%;
             height: 100%;
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
             border-radius: 20px;
 
-            color: white;
+            color: #fff;
 
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 900;
 
             background:
                 linear-gradient(
-                    145deg,
+                    135deg,
                     var(--blue),
                     var(--blue-dark)
                 );
         }
 
-
         .school-name {
             font-size: 25px;
-
             font-weight: 900;
-
             color: var(--blue-dark);
-
-            line-height: 1.5;
         }
-
 
         .department {
-            margin-top: 3px;
-
-            color: var(--muted);
+            margin-top: 2px;
 
             font-size: 12px;
-
             font-weight: 700;
+
+            color: var(--muted);
         }
 
-
         .page-title {
-            margin-top: 18px;
+            margin-top: 16px;
 
             font-size: 22px;
-
             font-weight: 900;
 
             color: var(--text);
         }
 
-
         .page-description {
-            margin-top: 6px;
+            margin-top: 5px;
 
             font-size: 11px;
-
-            color: var(--muted);
-
             font-weight: 600;
 
-            line-height: 1.8;
+            color: var(--muted);
         }
 
 
-        /* =========================
+        /* =========================================
            SEARCH CARD
-        ========================== */
+        ========================================== */
 
         .search-card {
-            background:
-                rgba(255,255,255,.97);
+            background: rgba(255,255,255,.98);
 
             border:
                 1px solid
                 rgba(11,99,216,.08);
 
-            border-radius: 22px;
+            border-radius: 20px;
 
             padding: 20px;
+
+            margin-bottom: 20px;
 
             box-shadow:
                 0 15px 45px
                 rgba(16,35,63,.08);
-
-            margin-bottom: 18px;
         }
-
 
         .search-title {
             font-size: 15px;
-
             font-weight: 900;
 
-            color: var(--text);
-
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
-
         .search-description {
-            color: var(--muted);
-
             font-size: 10px;
-
             font-weight: 600;
+
+            color: var(--muted);
 
             margin-bottom: 14px;
         }
 
-
         .search-form {
             display: flex;
-
             gap: 10px;
-
-            align-items: stretch;
         }
 
-
         .input-wrapper {
-            position: relative;
-
             flex: 1;
         }
 
-
         .input-wrapper input {
             width: 100%;
-
             height: 50px;
 
             padding:
@@ -368,7 +306,7 @@
                 1.5px solid
                 var(--border);
 
-            border-radius: 13px;
+            border-radius: 12px;
 
             outline: none;
 
@@ -377,38 +315,32 @@
             color: var(--text);
 
             font-size: 13px;
-
             font-weight: 700;
 
-            transition: .2s ease;
+            transition: .2s;
         }
-
 
         .input-wrapper input:focus {
             border-color: var(--blue);
 
-            background: white;
+            background: #fff;
 
             box-shadow:
                 0 0 0 4px
                 rgba(11,99,216,.06);
         }
 
-
         .search-button {
+            min-width: 135px;
             height: 50px;
 
-            min-width: 130px;
-
-            padding:
-                0
-                18px;
-
             border: 0;
+            border-radius: 12px;
 
-            border-radius: 13px;
+            color: #fff;
 
-            color: white;
+            font-size: 12px;
+            font-weight: 900;
 
             background:
                 linear-gradient(
@@ -416,83 +348,73 @@
                     var(--blue),
                     var(--blue-dark)
                 );
-
-            font-size: 12px;
-
-            font-weight: 900;
 
             box-shadow:
                 0 8px 20px
                 rgba(11,99,216,.20);
 
-            transition: .2s ease;
+            transition: .2s;
         }
-
 
         .search-button:hover {
             transform: translateY(-1px);
         }
 
-
         .search-button:disabled {
-            opacity: .65;
-
+            opacity: .6;
             cursor: not-allowed;
-
-            transform: none;
         }
 
 
-        /* =========================
+        /* =========================================
            RESULT
-        ========================== */
+        ========================================== */
 
         .result {
             display: none;
-        }
 
+            margin-bottom: 20px;
+        }
 
         .result.show {
             display: block;
         }
 
-
         .result-header {
+            padding: 17px 20px;
+
+            color: #fff;
+
+            border-radius:
+                18px
+                18px
+                0
+                0;
+
             background:
                 linear-gradient(
                     135deg,
                     var(--blue),
                     var(--blue-dark)
                 );
-
-            color: white;
-
-            border-radius: 20px 20px 0 0;
-
-            padding: 18px 20px;
         }
-
 
         .result-header-title {
-            font-size: 16px;
-
+            font-size: 15px;
             font-weight: 900;
         }
-
 
         .result-header-subtitle {
             margin-top: 3px;
 
-            font-size: 10px;
+            font-size: 9px;
+            font-weight: 600;
 
             opacity: .85;
-
-            font-weight: 600;
         }
 
-
         .result-body {
-            background: white;
+            background: #fff;
 
             border:
                 1px solid
@@ -503,27 +425,16 @@
             border-radius:
                 0
                 0
-                20px
-                20px;
+                18px
+                18px;
 
             overflow: hidden;
-
-            box-shadow:
-                0 15px 45px
-                rgba(16,35,63,.08);
         }
-
-
-        /* =========================
-           STATUS TABLE
-        ========================== */
 
         .status-table {
             width: 100%;
-
             border-collapse: collapse;
         }
-
 
         .status-table tr {
             border-bottom:
@@ -531,131 +442,89 @@
                 #edf1f6;
         }
 
-
         .status-table tr:last-child {
             border-bottom: 0;
         }
 
-
         .status-table th {
-            width: 35%;
+            width: 30%;
+
+            padding: 15px 18px;
 
             text-align: right;
-
-            padding:
-                16px
-                18px;
 
             background: #fafcff;
 
             color: #607086;
 
             font-size: 11px;
-
             font-weight: 800;
-
-            vertical-align: middle;
         }
-
 
         .status-table td {
-            padding:
-                16px
-                18px;
-
-            color: var(--text);
+            padding: 15px 18px;
 
             font-size: 12px;
-
             font-weight: 800;
 
-            vertical-align: middle;
+            color: var(--text);
         }
 
 
-        .code-value {
-            direction: ltr;
-
-            text-align: right;
-
-            font-family:
-                Arial,
-                sans-serif;
-
-            letter-spacing: .5px;
-        }
-
-
-        /* =========================
+        /* =========================================
            BADGES
-        ========================== */
+        ========================================== */
 
         .badge {
             display: inline-flex;
 
             align-items: center;
-
             justify-content: center;
 
-            min-height: 30px;
+            min-height: 28px;
 
             padding:
                 4px
-                12px;
+                11px;
 
-            border-radius: 9px;
+            border-radius: 8px;
 
-            font-size: 10px;
-
+            font-size: 9px;
             font-weight: 900;
-
-            line-height: 1.5;
         }
-
 
         .badge-default {
             color: #526277;
-
             background: #f1f4f8;
         }
 
-
         .badge-blue {
-            color: var(--blue-dark);
-
-            background: var(--blue-light);
+            color: #0649a8;
+            background: #edf5ff;
         }
-
 
         .badge-green {
             color: #067343;
-
-            background: var(--green-light);
+            background: #edfff5;
         }
-
 
         .badge-red {
             color: #b4232d;
-
-            background: var(--red-light);
+            background: #fff1f2;
         }
-
 
         .badge-orange {
             color: #a16207;
-
-            background: var(--orange-light);
+            background: #fff8e7;
         }
 
 
-        /* =========================
-           EMPTY
-        ========================== */
+        /* =========================================
+           ALL APPLICANTS
+        ========================================== */
 
-        .empty-state {
-            display: none;
-
-            background: white;
+        .all-applicants-card {
+            background: #fff;
 
             border:
                 1px solid
@@ -663,72 +532,287 @@
 
             border-radius: 20px;
 
-            padding: 35px 20px;
-
-            text-align: center;
-
             box-shadow:
                 0 15px 45px
-                rgba(16,35,63,.07);
+                rgba(16,35,63,.08);
+
+            overflow: hidden;
+        }
+
+        .all-applicants-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            padding:
+                18px
+                20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #f6f9fd
+                );
+
+            border-bottom:
+                1px solid
+                var(--border);
+        }
+
+        .all-applicants-title {
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        .all-applicants-description {
+            margin-top: 3px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+            font-weight: 600;
+        }
+
+        .applicant-count {
+            flex-shrink: 0;
+
+            padding:
+                6px
+                12px;
+
+            border-radius: 10px;
+
+            color: var(--blue-dark);
+
+            background: var(--blue-light);
+
+            font-size: 10px;
+            font-weight: 900;
         }
 
 
-        .empty-icon {
-            width: 60px;
-            height: 60px;
+        /* =========================================
+           TABLE SEARCH
+        ========================================== */
 
-            display: flex;
+        .table-tools {
+            padding: 15px 18px;
+
+            border-bottom:
+                1px solid
+                var(--border);
+
+            background: #fff;
+        }
+
+        .table-search {
+            width: 100%;
+
+            height: 44px;
+
+            padding:
+                0
+                14px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 10px;
+
+            outline: none;
+
+            background: #f9fbfe;
+
+            color: var(--text);
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .table-search:focus {
+            border-color: var(--blue);
+
+            background: #fff;
+        }
+
+
+        /* =========================================
+           EXCEL TABLE
+        ========================================== */
+
+        .table-scroll {
+            width: 100%;
+
+            overflow-x: auto;
+            overflow-y: auto;
+
+            max-height: 650px;
+
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .applicants-table {
+            width: 100%;
+
+            min-width: 1050px;
+
+            border-collapse: separate;
+
+            border-spacing: 0;
+        }
+
+        .applicants-table th {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 5;
+
+            padding:
+                13px
+                12px;
+
+            white-space: nowrap;
+
+            text-align: center;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--blue),
+                    var(--blue-dark)
+                );
+
+            border-left:
+                1px solid
+                rgba(255,255,255,.15);
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .applicants-table th:first-child {
+            right: 0;
+        }
+
+        .applicants-table td {
+            padding:
+                12px
+                10px;
+
+            white-space: nowrap;
+
+            text-align: center;
+
+            border-left:
+                1px solid
+                #edf1f6;
+
+            border-bottom:
+                1px solid
+                #edf1f6;
+
+            color: var(--text);
+
+            font-size: 10px;
+            font-weight: 700;
+
+            background: #fff;
+        }
+
+        .applicants-table tbody tr {
+            transition: .15s;
+        }
+
+        .applicants-table tbody tr:hover td {
+            background: #f5f9ff;
+        }
+
+        .applicants-table tbody tr {
+            cursor: pointer;
+        }
+
+        .applicants-table td:first-child {
+            font-family:
+                Arial,
+                sans-serif;
+
+            font-weight: 900;
+
+            color: var(--blue-dark);
+
+            direction: ltr;
+        }
+
+        .table-badge {
+            display: inline-flex;
 
             align-items: center;
             justify-content: center;
 
-            margin:
-                0
-                auto
-                12px;
+            min-width: 70px;
 
-            border-radius: 18px;
+            min-height: 25px;
 
-            color: #b4232d;
+            padding:
+                3px
+                8px;
 
-            background: #fff1f2;
+            border-radius: 7px;
 
-            font-size: 25px;
-
+            font-size: 8px;
             font-weight: 900;
         }
 
 
-        .empty-title {
-            font-size: 15px;
+        /* =========================================
+           TABLE FOOTER
+        ========================================== */
 
-            font-weight: 900;
+        .table-footer {
+            padding:
+                12px
+                18px;
 
-            color: var(--text);
-        }
+            background: #fafcff;
 
-
-        .empty-description {
-            margin-top: 5px;
+            border-top:
+                1px solid
+                var(--border);
 
             color: var(--muted);
 
-            font-size: 10px;
-
-            font-weight: 600;
-
-            line-height: 1.8;
+            font-size: 9px;
+            font-weight: 700;
         }
 
 
-        .empty-state.show {
-            display: block;
+        /* =========================================
+           EMPTY TABLE
+        ========================================== */
+
+        .table-empty {
+            padding: 45px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 11px;
+            font-weight: 700;
         }
 
 
-        /* =========================
+        /* =========================================
            FOOTER
-        ========================== */
+        ========================================== */
 
         .footer {
             text-align: center;
@@ -738,20 +822,18 @@
             color: var(--muted);
 
             font-size: 9px;
-
             font-weight: 700;
 
             line-height: 1.8;
         }
 
 
-        /* =========================
+        /* =========================================
            LOADING
-        ========================== */
+        ========================================== */
 
         .loading-screen {
             position: fixed;
-
             inset: 0;
 
             z-index: 9999;
@@ -759,7 +841,6 @@
             display: flex;
 
             align-items: center;
-
             justify-content: center;
 
             background:
@@ -768,30 +849,25 @@
             backdrop-filter: blur(7px);
 
             opacity: 0;
-
             visibility: hidden;
 
-            transition: .2s ease;
+            transition: .2s;
         }
-
 
         .loading-screen.active {
             opacity: 1;
-
             visibility: visible;
         }
 
-
         .loading-box {
             width: 90%;
-
             max-width: 300px;
 
             padding: 25px;
 
             text-align: center;
 
-            background: white;
+            background: #fff;
 
             border-radius: 20px;
 
@@ -799,7 +875,6 @@
                 0 20px 60px
                 rgba(16,35,63,.14);
         }
-
 
         .spinner {
             width: 40px;
@@ -823,26 +898,25 @@
                 spin .8s linear infinite;
         }
 
-
         @keyframes spin {
+
             to {
                 transform: rotate(360deg);
             }
-        }
 
+        }
 
         .loading-text {
             color: var(--text);
 
             font-size: 11px;
-
             font-weight: 800;
         }
 
 
-        /* =========================
+        /* =========================================
            TOAST
-        ========================== */
+        ========================================== */
 
         .toast {
             position: fixed;
@@ -850,7 +924,6 @@
             z-index: 10000;
 
             left: 50%;
-
             bottom: 25px;
 
             transform:
@@ -865,106 +938,72 @@
                 13px
                 16px;
 
-            border-radius: 13px;
+            border-radius: 12px;
 
-            color: white;
+            color: #fff;
 
             background: #10233f;
 
             text-align: center;
 
             font-size: 10px;
-
             font-weight: 800;
 
-            box-shadow:
-                0 15px 40px
-                rgba(16,35,63,.20);
-
             opacity: 0;
-
             visibility: hidden;
 
-            transition: .25s ease;
+            transition: .25s;
         }
-
 
         .toast.show {
             opacity: 1;
-
             visibility: visible;
 
             transform:
                 translate(-50%, 0);
         }
 
-
         .toast.error {
             background: var(--red);
         }
-
 
         .toast.success {
             background: var(--green);
         }
 
 
-        /* =========================
-           DESKTOP
-        ========================== */
+        /* =========================================
+           MOBILE
+        ========================================== */
 
-        @media (min-width: 700px) {
+        @media (max-width: 650px) {
 
             .app {
                 padding:
-                    45px
-                    25px
-                    60px;
+                    22px
+                    10px
+                    45px;
             }
-
-
-            .header {
-                margin-bottom: 30px;
-            }
-
-
-            .search-card {
-                padding: 25px;
-            }
-
-
-            .status-table th {
-                width: 32%;
-            }
-
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================== */
-
-        @media (max-width: 600px) {
 
             .school-name {
                 font-size: 21px;
             }
 
-
             .page-title {
                 font-size: 19px;
             }
-
 
             .search-form {
                 flex-direction: column;
             }
 
-
             .search-button {
                 width: 100%;
             }
 
+            .all-applicants-header {
+                align-items: flex-start;
+            }
 
             .status-table,
             .status-table tbody,
@@ -972,19 +1011,14 @@
             .status-table th,
             .status-table td {
                 display: block;
-
                 width: 100%;
             }
 
-
             .status-table tr {
-                padding: 12px 16px;
-
-                border-bottom:
-                    1px solid
-                    #edf1f6;
+                padding:
+                    12px
+                    16px;
             }
-
 
             .status-table th {
                 padding:
@@ -993,24 +1027,14 @@
                     5px;
 
                 background: transparent;
-
-                font-size: 9px;
             }
-
 
             .status-table td {
-                padding:
-                    0;
-
-                font-size: 12px;
-            }
-
-
-            .badge {
-                min-height: 28px;
+                padding: 0;
             }
 
         }
+
 
     </style>
 
@@ -1020,1331 +1044,1715 @@
 <body>
 
 
-    <div class="background"></div>
+<div class="background"></div>
 
 
-    <!-- =========================
-         LOADING
-    ========================== -->
+<!-- =========================================
+     LOADING
+========================================== -->
 
-    <div
-        id="loadingScreen"
-        class="loading-screen">
+<div
+    id="loadingScreen"
+    class="loading-screen">
 
-        <div class="loading-box">
+    <div class="loading-box">
 
-            <div class="spinner"></div>
+        <div class="spinner"></div>
 
-            <div class="loading-text">
-                جارِ تحميل بيانات الطلب...
+        <div
+            id="loadingText"
+            class="loading-text">
+
+            جارِ تحميل بيانات المتقدمين...
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     TOAST
+========================================== -->
+
+<div
+    id="toast"
+    class="toast">
+</div>
+
+
+<!-- =========================================
+     APP
+========================================== -->
+
+<main class="app">
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div class="logo-box">
+
+                <img
+                    id="schoolLogo"
+                    class="logo"
+                    src=""
+                    alt="شعار مدرسة التحدي"
+                    style="display:none;">
+
+                <div
+                    id="logoFallback"
+                    class="logo-fallback">
+
+                    ت
+
+                </div>
+
             </div>
 
-        </div>
 
-    </div>
-
-
-    <!-- =========================
-         TOAST
-    ========================== -->
-
-    <div
-        id="toast"
-        class="toast">
-    </div>
-
-
-    <!-- =========================
-         APP
-    ========================== -->
-
-    <main class="app">
-
-        <div class="container">
-
-
-            <!-- HEADER -->
-
-            <header class="header">
-
-                <div class="logo-box">
-
-                    <img
-                        id="schoolLogo"
-                        class="logo"
-                        src=""
-                        alt="شعار مدرسة التحدي"
-                        style="display:none;">
-
-                    <div
-                        id="logoFallback"
-                        class="logo-fallback">
-                        ت
-                    </div>
-
-                </div>
-
-
-                <div class="school-name">
-                    مدرسة التحدي الأهلية المختلطة
-                </div>
-
-
-                <div class="department">
-                    قسم الحوكمة
-                </div>
-
-
-                <div class="page-title">
-                    استعلام حالة طلب التوظيف
-                </div>
-
-
-                <div class="page-description">
-                    أدخل الكود الخاص بك لمعرفة آخر تحديثات طلب التوظيف والمراحل التي وصل إليها طلبك.
-                </div>
-
-            </header>
-
-
-            <!-- SEARCH -->
-
-            <section class="search-card">
-
-                <div class="search-title">
-                    البحث عن طلب التوظيف
-                </div>
-
-
-                <div class="search-description">
-                    استخدم الكود الخاص بك كما تم تزويدك به بعد تقديم الطلب.
-                </div>
-
-
-                <form
-                    id="searchForm"
-                    class="search-form">
-
-                    <div class="input-wrapper">
-
-                        <input
-                            id="codeInput"
-                            type="text"
-                            autocomplete="off"
-                            autocapitalize="off"
-                            spellcheck="false"
-                            placeholder="أدخل الكود الخاص بك">
-
-                    </div>
-
-
-                    <button
-                        id="searchButton"
-                        class="search-button"
-                        type="submit">
-
-                        بحث عن الطلب
-
-                    </button>
-
-                </form>
-
-            </section>
-
-
-            <!-- EMPTY -->
-
-            <section
-                id="emptyState"
-                class="empty-state">
-
-                <div class="empty-icon">
-                    !
-                </div>
-
-                <div class="empty-title">
-                    لم يتم العثور على الطلب
-                </div>
-
-                <div class="empty-description">
-                    تأكد من كتابة الكود بشكل صحيح ثم حاول مرة أخرى.
-                </div>
-
-            </section>
-
-
-            <!-- RESULT -->
-
-            <section
-                id="result"
-                class="result">
-
-
-                <div class="result-header">
-
-                    <div class="result-header-title">
-                        حالة طلب التوظيف
-                    </div>
-
-                    <div class="result-header-subtitle">
-                        البيانات الخاصة بالمتقدم
-                    </div>
-
-                </div>
-
-
-                <div class="result-body">
-
-                    <table class="status-table">
-
-                        <tbody>
-
-
-                            <!-- CODE -->
-
-                            <tr>
-
-                                <th>
-                                    الكود
-                                </th>
-
-                                <td
-                                    id="resultCode"
-                                    class="code-value">
-                                    -
-                                </td>
-
-                            </tr>
-
-
-                            <!-- REVIEW -->
-
-                            <tr>
-
-                                <th>
-                                    مرحلة التدقيق
-                                </th>
-
-                                <td>
-                                    <span
-                                        id="reviewStage"
-                                        class="badge badge-default">
-                                        -
-                                    </span>
-                                </td>
-
-                            </tr>
-
-
-                            <!-- NEED -->
-
-                            <tr>
-
-                                <th>
-                                    الحاجة إليك
-                                </th>
-
-                                <td>
-                                    <span
-                                        id="needStatus"
-                                        class="badge badge-default">
-                                        -
-                                    </span>
-                                </td>
-
-                            </tr>
-
-
-                            <!-- INTERVIEW STAGE -->
-
-                            <tr>
-
-                                <th>
-                                    مرحلة المقابلة
-                                </th>
-
-                                <td>
-                                    <span
-                                        id="interviewStage"
-                                        class="badge badge-default">
-                                        -
-                                    </span>
-                                </td>
-
-                            </tr>
-
-
-                            <!-- INTERVIEW DATE -->
-
-                            <tr>
-
-                                <th>
-                                    تاريخ المقابلة
-                                </th>
-
-                                <td id="interviewDate">
-                                    -
-                                </td>
-
-                            </tr>
-
-
-                            <!-- COMMITTEE -->
-
-                            <tr>
-
-                                <th>
-                                    قرار لجنة المقابلات
-                                </th>
-
-                                <td>
-                                    <span
-                                        id="committeeDecision"
-                                        class="badge badge-default">
-                                        -
-                                    </span>
-                                </td>
-
-                            </tr>
-
-
-                            <!-- ACCEPT / REJECT -->
-
-                            <tr>
-
-                                <th>
-                                    القبول أو الرفض
-                                </th>
-
-                                <td>
-                                    <span
-                                        id="acceptanceStatus"
-                                        class="badge badge-default">
-                                        -
-                                    </span>
-                                </td>
-
-                            </tr>
-
-
-                            <!-- START DATE -->
-
-                            <tr>
-
-                                <th>
-                                    تاريخ المباشرة
-                                </th>
-
-                                <td id="startDate">
-                                    -
-                                </td>
-
-                            </tr>
-
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </section>
-
-
-            <footer class="footer">
-
+            <div class="school-name">
                 مدرسة التحدي الأهلية المختلطة
-                <br>
+            </div>
+
+
+            <div class="department">
                 قسم الحوكمة
+            </div>
 
-            </footer>
 
+            <div class="page-title">
+                استعلام طلبات التوظيف
+            </div>
 
-        </div>
 
-    </main>
+            <div class="page-description">
+                البحث عن حالة طلب التوظيف ومتابعة مراحل الطلب
+            </div>
 
+        </header>
 
-    <!-- =========================
-         FIREBASE
-    ========================== -->
 
-    <script type="module">
+        <!-- =====================================
+             SEARCH
+        ====================================== -->
 
+        <section class="search-card">
 
-        import {
-            initializeApp
-        }
-        from
-        "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+            <div class="search-title">
+                البحث عن طلب التوظيف
+            </div>
 
+            <div class="search-description">
+                أدخل الكود الخاص بك لمعرفة تفاصيل طلبك
+            </div>
 
-        import {
-            getDatabase,
-            ref,
-            get
-        }
-        from
-        "https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
+            <form
+                id="searchForm"
+                class="search-form">
 
-        /* =====================================================
-           FIREBASE CONFIG
-        ====================================================== */
+                <div class="input-wrapper">
 
-        const firebaseConfig = {
+                    <input
+                        id="codeInput"
+                        type="text"
+                        autocomplete="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                        placeholder="أدخل الكود الخاص بك">
 
-            apiKey:
-                "AIzaSyAF6kxQoJUan19ZCbGK7djExbouYxOLGF8",
+                </div>
 
-            authDomain:
-                "ahtahadi-e6f61.firebaseapp.com",
 
-            databaseURL:
-                "https://tahadi-school-default-rtdb.europe-west1.firebasedatabase.app",
+                <button
+                    id="searchButton"
+                    class="search-button"
+                    type="submit">
 
-            projectId:
-                "ahtahadi-e6f61",
+                    بحث عن الطلب
 
-            storageBucket:
-                "ahtahadi-e6f61.firebasestorage.app",
+                </button>
 
-            messagingSenderId:
-                "271225539711",
+            </form>
 
-            appId:
-                "1:271225539711:web:9fc4b45cf14d879b55434a",
+        </section>
 
-            measurementId:
-                "G-S5JDFN1RKF"
 
-        };
+        <!-- =====================================
+             SELECTED APPLICANT RESULT
+        ====================================== -->
 
+        <section
+            id="result"
+            class="result">
 
-        /* =====================================================
-           INITIALIZE FIREBASE
-        ====================================================== */
+            <div class="result-header">
 
-        const app =
-            initializeApp(
-                firebaseConfig
-            );
+                <div class="result-header-title">
+                    حالة طلب التوظيف
+                </div>
 
+                <div class="result-header-subtitle">
+                    تفاصيل الطلب الخاص بالمتقدم
+                </div>
 
-        const db =
-            getDatabase(
-                app
-            );
+            </div>
 
 
-        /* =====================================================
-           ELEMENTS
-        ====================================================== */
+            <div class="result-body">
 
-        const loadingScreen =
-            document.getElementById(
-                "loadingScreen"
-            );
+                <table class="status-table">
 
+                    <tbody>
 
-        const toast =
-            document.getElementById(
-                "toast"
-            );
+                        <tr>
 
+                            <th>
+                                الكود
+                            </th>
 
-        const searchForm =
-            document.getElementById(
-                "searchForm"
-            );
+                            <td
+                                id="resultCode">
+                                -
+                            </td>
 
+                        </tr>
 
-        const codeInput =
-            document.getElementById(
-                "codeInput"
-            );
 
+                        <tr>
 
-        const searchButton =
-            document.getElementById(
-                "searchButton"
-            );
+                            <th>
+                                مرحلة التدقيق
+                            </th>
 
+                            <td>
 
-        const result =
-            document.getElementById(
-                "result"
-            );
+                                <span
+                                    id="reviewStage"
+                                    class="badge badge-default">
 
+                                    -
 
-        const emptyState =
-            document.getElementById(
-                "emptyState"
-            );
+                                </span>
 
+                            </td>
 
-        /* =====================================================
-           RESULT ELEMENTS
-        ====================================================== */
+                        </tr>
 
-        const resultCode =
-            document.getElementById(
-                "resultCode"
-            );
 
+                        <tr>
 
-        const reviewStage =
-            document.getElementById(
-                "reviewStage"
-            );
+                            <th>
+                                الحاجة إليك
+                            </th>
 
+                            <td>
 
-        const needStatus =
-            document.getElementById(
-                "needStatus"
-            );
+                                <span
+                                    id="needStatus"
+                                    class="badge badge-default">
 
+                                    -
 
-        const interviewStage =
-            document.getElementById(
-                "interviewStage"
-            );
+                                </span>
 
+                            </td>
 
-        const interviewDate =
-            document.getElementById(
-                "interviewDate"
-            );
+                        </tr>
 
 
-        const committeeDecision =
-            document.getElementById(
-                "committeeDecision"
-            );
+                        <tr>
 
+                            <th>
+                                مرحلة المقابلة
+                            </th>
 
-        const acceptanceStatus =
-            document.getElementById(
-                "acceptanceStatus"
-            );
+                            <td>
 
+                                <span
+                                    id="interviewStage"
+                                    class="badge badge-default">
 
-        const startDate =
-            document.getElementById(
-                "startDate"
-            );
+                                    -
 
+                                </span>
 
-        /* =====================================================
-           OPTIONAL LOGO
-        ====================================================== */
+                            </td>
 
-        /*
-         * إذا عندك رابط شعار المدرسة ضعه هنا.
-         *
-         * مثال:
-         *
-         * const SCHOOL_LOGO_URL =
-         *     "https://....";
-         *
-         */
+                        </tr>
 
-        const SCHOOL_LOGO_URL = "";
 
+                        <tr>
 
-        const schoolLogo =
-            document.getElementById(
-                "schoolLogo"
-            );
+                            <th>
+                                تاريخ المقابلة
+                            </th>
 
+                            <td
+                                id="interviewDate">
 
-        const logoFallback =
-            document.getElementById(
-                "logoFallback"
-            );
+                                -
 
+                            </td>
 
-        if (
-            SCHOOL_LOGO_URL.trim() !== ""
-        ) {
+                        </tr>
 
-            schoolLogo.src =
-                SCHOOL_LOGO_URL;
 
-            schoolLogo.style.display =
-                "block";
+                        <tr>
 
-            logoFallback.style.display =
-                "none";
+                            <th>
+                                قرار لجنة المقابلات
+                            </th>
 
-        }
+                            <td>
 
+                                <span
+                                    id="committeeDecision"
+                                    class="badge badge-default">
 
-        /* =====================================================
-           FIELD NAMES
-           
-           أسماء الحقول التي تتم قراءتها من Firebase.
-           
-           إذا كانت أسماء الحقول عندك مختلفة،
-           غيّرها من هنا فقط.
-        ====================================================== */
+                                    -
 
-        const FIELD_NAMES = {
+                                </span>
 
-            reviewStage:
-                "reviewStage",
+                            </td>
 
-            needStatus:
-                "needStatus",
+                        </tr>
 
-            interviewStage:
-                "interviewStage",
 
-            interviewDate:
-                "interviewDate",
+                        <tr>
 
-            committeeDecision:
-                "committeeDecision",
+                            <th>
+                                القبول أو الرفض
+                            </th>
 
-            acceptanceStatus:
-                "acceptanceStatus",
+                            <td>
 
-            startDate:
-                "startDate"
+                                <span
+                                    id="acceptanceStatus"
+                                    class="badge badge-default">
 
-        };
+                                    -
 
+                                </span>
 
-        /* =====================================================
-           HELPERS
-        ====================================================== */
+                            </td>
 
+                        </tr>
 
-        function showLoading(
-            show
-        ) {
 
-            if (show) {
+                        <tr>
 
-                loadingScreen.classList.add(
-                    "active"
-                );
+                            <th>
+                                تاريخ المباشرة
+                            </th>
 
-            } else {
+                            <td
+                                id="startDate">
 
-                loadingScreen.classList.remove(
-                    "active"
-                );
+                                -
 
-            }
+                            </td>
 
-        }
+                        </tr>
 
+                    </tbody>
 
-        let toastTimer = null;
+                </table>
 
+            </div>
 
-        function showToast(
-            message,
-            type = ""
-        ) {
+        </section>
 
-            clearTimeout(
-                toastTimer
-            );
 
+        <!-- =====================================
+             ALL APPLICANTS TABLE
+        ====================================== -->
 
-            toast.textContent =
-                message;
+        <section class="all-applicants-card">
 
 
-            toast.className =
-                "toast";
+            <div class="all-applicants-header">
 
+                <div>
 
-            if (type) {
+                    <div class="all-applicants-title">
+                        جميع المتقدمين
+                    </div>
 
-                toast.classList.add(
-                    type
-                );
+                    <div class="all-applicants-description">
+                        جدول متابعة مراحل طلبات التوظيف
+                    </div>
 
-            }
+                </div>
 
 
-            toast.classList.add(
-                "show"
-            );
+                <div
+                    id="applicantCount"
+                    class="applicant-count">
 
+                    0 متقدم
 
-            toastTimer =
-                setTimeout(
-                    function() {
+                </div>
 
-                        toast.classList.remove(
-                            "show"
-                        );
+            </div>
 
-                    },
-                    3000
-                );
 
-        }
+            <!-- TABLE SEARCH -->
 
+            <div class="table-tools">
 
-        function normalizeCode(
-            value
-        ) {
+                <input
+                    id="tableSearch"
+                    class="table-search"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="بحث داخل جدول المتقدمين بالكود...">
 
-            return String(
-                value || ""
-            )
-                .trim()
-                .toLowerCase();
+            </div>
 
-        }
 
+            <!-- TABLE -->
 
-        function getValue(
-            applicant,
-            fieldName
-        ) {
+            <div class="table-scroll">
 
-            if (
-                !applicant ||
-                !fieldName
-            ) {
+                <table
+                    class="applicants-table">
 
-                return "";
+                    <thead>
 
-            }
+                        <tr>
 
+                            <th>
+                                الكود
+                            </th>
 
-            /*
-             * قراءة الحقل إذا كان مباشرة داخل المتقدم
-             */
+                            <th>
+                                مرحلة التدقيق
+                            </th>
 
-            if (
-                Object.prototype.hasOwnProperty.call(
-                    applicant,
-                    fieldName
-                )
-            ) {
+                            <th>
+                                الحاجة إليك
+                            </th>
 
-                return applicant[
-                    fieldName
-                ];
+                            <th>
+                                مرحلة المقابلة
+                            </th>
 
-            }
+                            <th>
+                                تاريخ المقابلة
+                            </th>
 
+                            <th>
+                                قرار لجنة المقابلات
+                            </th>
 
-            /*
-             * دعم وضع البيانات داخل status
-             */
+                            <th>
+                                القبول أو الرفض
+                            </th>
 
-            if (
-                applicant.status &&
-                typeof applicant.status === "object" &&
-                Object.prototype.hasOwnProperty.call(
-                    applicant.status,
-                    fieldName
-                )
-            ) {
+                            <th>
+                                تاريخ المباشرة
+                            </th>
 
-                return applicant.status[
-                    fieldName
-                ];
+                        </tr>
 
-            }
+                    </thead>
 
 
-            return "";
+                    <tbody
+                        id="applicantsTableBody">
 
-        }
+                        <tr>
 
+                            <td
+                                colspan="8"
+                                class="table-empty">
 
-        function displayValue(
-            value
-        ) {
+                                جارِ تحميل البيانات...
 
-            if (
-                value === null ||
-                value === undefined ||
-                String(value).trim() === ""
-            ) {
+                            </td>
 
-                return "لم يتم تحديدها بعد";
+                        </tr>
 
-            }
+                    </tbody>
 
+                </table>
 
-            return String(
-                value
-            );
+            </div>
 
-        }
 
+            <div
+                id="tableFooter"
+                class="table-footer">
 
-        /* =====================================================
-           BADGE COLOR
-        ====================================================== */
+                يتم تحميل البيانات...
 
-        function getBadgeClass(
-            value
-        ) {
+            </div>
 
-            const text =
-                String(
-                    value || ""
-                ).toLowerCase().trim();
 
+        </section>
 
-            if (!text) {
 
-                return "badge-default";
+        <!-- FOOTER -->
 
-            }
+        <footer class="footer">
 
+            مدرسة التحدي الأهلية المختلطة
 
-            if (
-                text.includes("مقبول") ||
-                text.includes("نعم") ||
-                text.includes("مكتمل") ||
-                text.includes("تمت") ||
-                text.includes("موافق") ||
-                text.includes("accepted")
-            ) {
+            <br>
 
-                return "badge-green";
+            قسم الحوكمة
 
-            }
+        </footer>
 
 
-            if (
-                text.includes("رفض") ||
-                text.includes("مرفوض") ||
-                text.includes("لا") ||
-                text.includes("غير مقبول") ||
-                text.includes("rejected")
-            ) {
+    </div>
 
-                return "badge-red";
+</main>
 
-            }
 
 
-            if (
-                text.includes("انتظار") ||
-                text.includes("قيد") ||
-                text.includes("تدقيق") ||
-                text.includes("لم تبدأ") ||
-                text.includes("pending")
-            ) {
+<script type="module">
 
-                return "badge-orange";
 
-            }
+/* =========================================================
+   FIREBASE
+========================================================= */
 
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-            return "badge-blue";
 
-        }
+import {
+    getDatabase,
+    ref,
+    get
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-database.js";
 
 
-        function setBadge(
-            element,
-            value
-        ) {
+const firebaseConfig = {
 
-            const text =
-                displayValue(
-                    value
-                );
+    apiKey:
+        "AIzaSyAF6kxQoJUan19ZCbGK7djExbouYxOLGF8",
 
+    authDomain:
+        "ahtahadi-e6f61.firebaseapp.com",
 
-            element.textContent =
-                text;
+    databaseURL:
+        "https://tahadi-school-default-rtdb.europe-west1.firebasedatabase.app",
 
+    projectId:
+        "ahtahadi-e6f61",
 
-            element.className =
-                "badge " +
-                getBadgeClass(
-                    value
-                );
+    storageBucket:
+        "ahtahadi-e6f61.firebasestorage.app",
 
-        }
+    messagingSenderId:
+        "271225539711",
 
+    appId:
+        "1:271225539711:web:9fc4b45cf14d879b55434a",
 
-        /* =====================================================
-           FORMAT DATE
-        ====================================================== */
+    measurementId:
+        "G-S5JDFN1RKF"
 
-        function formatDate(
-            value
-        ) {
+};
 
-            if (
-                value === null ||
-                value === undefined ||
-                String(value).trim() === ""
-            ) {
 
-                return "لم يتم تحديدها بعد";
+const app =
+    initializeApp(
+        firebaseConfig
+    );
 
-            }
 
+const db =
+    getDatabase(
+        app
+    );
 
-            const text =
-                String(
-                    value
-                ).trim();
 
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-            /*
-             * إذا كانت قيمة التاريخ أصلًا
-             * بصيغة واضحة نعرضها كما هي.
-             */
+const loadingScreen =
+    document.getElementById(
+        "loadingScreen"
+    );
 
-            if (
-                /^\d{4}-\d{2}-\d{2}$/.test(
-                    text
-                )
-            ) {
 
-                const parts =
-                    text.split("-");
+const loadingText =
+    document.getElementById(
+        "loadingText"
+    );
 
 
-                return (
-                    parts[2] +
-                    "/" +
-                    parts[1] +
-                    "/" +
-                    parts[0]
-                );
+const toast =
+    document.getElementById(
+        "toast"
+    );
 
-            }
 
+const searchForm =
+    document.getElementById(
+        "searchForm"
+    );
 
-            return text;
 
-        }
+const codeInput =
+    document.getElementById(
+        "codeInput"
+    );
 
 
-        /* =====================================================
-           HIDE RESULT
-        ====================================================== */
+const searchButton =
+    document.getElementById(
+        "searchButton"
+    );
 
-        function clearResult() {
 
-            result.classList.remove(
-                "show"
-            );
+const result =
+    document.getElementById(
+        "result"
+    );
 
-            emptyState.classList.remove(
-                "show"
-            );
 
-        }
+const resultCode =
+    document.getElementById(
+        "resultCode"
+    );
 
 
-        /* =====================================================
-           DISPLAY APPLICANT
-        ====================================================== */
+const reviewStage =
+    document.getElementById(
+        "reviewStage"
+    );
 
-        function displayApplicant(
-            uid,
-            applicant
-        ) {
 
-            resultCode.textContent =
-                uid;
+const needStatus =
+    document.getElementById(
+        "needStatus"
+    );
 
 
-            const review =
-                getValue(
-                    applicant,
-                    FIELD_NAMES.reviewStage
-                );
+const interviewStage =
+    document.getElementById(
+        "interviewStage"
+    );
 
 
-            const need =
-                getValue(
-                    applicant,
-                    FIELD_NAMES.needStatus
-                );
+const interviewDate =
+    document.getElementById(
+        "interviewDate"
+    );
 
 
-            const interview =
-                getValue(
-                    applicant,
-                    FIELD_NAMES.interviewStage
-                );
+const committeeDecision =
+    document.getElementById(
+        "committeeDecision"
+    );
 
 
-            const date =
-                getValue(
-                    applicant,
-                    FIELD_NAMES.interviewDate
-                );
+const acceptanceStatus =
+    document.getElementById(
+        "acceptanceStatus"
+    );
 
 
-            const committee =
-                getValue(
-                    applicant,
-                    FIELD_NAMES.committeeDecision
-                );
+const startDate =
+    document.getElementById(
+        "startDate"
+    );
 
 
-            const acceptance =
-                getValue(
-                    applicant,
-                    FIELD_NAMES.acceptanceStatus
-                );
+const tableSearch =
+    document.getElementById(
+        "tableSearch"
+    );
 
 
-            const start =
-                getValue(
-                    applicant,
-                    FIELD_NAMES.startDate
-                );
+const applicantsTableBody =
+    document.getElementById(
+        "applicantsTableBody"
+    );
 
 
-            setBadge(
-                reviewStage,
-                review
-            );
+const applicantCount =
+    document.getElementById(
+        "applicantCount"
+    );
 
 
-            setBadge(
-                needStatus,
-                need
-            );
+const tableFooter =
+    document.getElementById(
+        "tableFooter"
+    );
 
 
-            setBadge(
-                interviewStage,
-                interview
-            );
+/* =========================================================
+   FIELD NAMES
+========================================================= */
 
+const FIELD_NAMES = {
 
-            interviewDate.textContent =
-                formatDate(
-                    date
-                );
+    reviewStage:
+        "reviewStage",
 
+    needStatus:
+        "needStatus",
 
-            setBadge(
-                committeeDecision,
-                committee
-            );
+    interviewStage:
+        "interviewStage",
 
+    interviewDate:
+        "interviewDate",
 
-            setBadge(
-                acceptanceStatus,
-                acceptance
-            );
+    committeeDecision:
+        "committeeDecision",
 
+    acceptanceStatus:
+        "acceptanceStatus",
 
-            startDate.textContent =
-                formatDate(
-                    start
-                );
+    startDate:
+        "startDate"
 
+};
 
-            emptyState.classList.remove(
-                "show"
-            );
 
+/* =========================================================
+   DATA
+========================================================= */
 
-            result.classList.add(
-                "show"
-            );
+let allApplicants = [];
 
 
-            setTimeout(
-                function() {
+/* =========================================================
+   LOADING
+========================================================= */
 
-                    result.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
+function showLoading(
+    state,
+    text = "جارِ تحميل البيانات..."
+) {
 
-                },
-                100
-            );
+    loadingText.textContent =
+        text;
 
-        }
 
+    if (state) {
 
-        /* =====================================================
-           SEARCH
-        ====================================================== */
+        loadingScreen.classList.add(
+            "active"
+        );
 
-        async function searchApplicant(
-            enteredCode
-        ) {
+    } else {
 
-            const code =
-                normalizeCode(
-                    enteredCode
-                );
+        loadingScreen.classList.remove(
+            "active"
+        );
 
+    }
 
-            if (!code) {
+}
 
-                clearResult();
 
-                showToast(
-                    "يرجى إدخال الكود الخاص بك.",
-                    "error"
-                );
+/* =========================================================
+   TOAST
+========================================================= */
 
-                codeInput.focus();
+let toastTimer = null;
 
-                return;
 
-            }
+function showToast(
+    message,
+    type = ""
+) {
 
+    clearTimeout(
+        toastTimer
+    );
 
-            showLoading(
-                true
-            );
 
+    toast.textContent =
+        message;
 
-            searchButton.disabled =
-                true;
 
+    toast.className =
+        "toast";
 
-            try {
 
-                /*
-                 * نقرأ نفس شجرة jobApplications
-                 * الموجودة في لوحة الإدارة.
-                 */
+    if (type) {
 
-                const applicationsReference =
-                    ref(
-                        db,
-                        "jobApplications"
-                    );
+        toast.classList.add(
+            type
+        );
 
+    }
 
-                const snapshot =
-                    await get(
-                        applicationsReference
-                    );
 
+    toast.classList.add(
+        "show"
+    );
 
-                if (
-                    !snapshot.exists()
-                ) {
 
-                    clearResult();
+    toastTimer =
+        setTimeout(
+            () => {
 
-                    emptyState.classList.add(
-                        "show"
-                    );
-
-                    showToast(
-                        "لا توجد بيانات للمتقدمين حاليًا.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                const data =
-                    snapshot.val();
-
-
-                /*
-                 * الـ UID هو مفتاح المتقدم
-                 * داخل jobApplications.
-                 */
-
-                let foundUID = null;
-
-                let foundApplicant = null;
-
-
-                Object.entries(
-                    data
-                ).some(
-                    function([
-                        uid,
-                        applicant
-                    ]) {
-
-                        if (
-                            normalizeCode(
-                                uid
-                            ) === code
-                        ) {
-
-                            foundUID =
-                                uid;
-
-                            foundApplicant =
-                                applicant || {};
-
-                            return true;
-
-                        }
-
-
-                        return false;
-
-                    }
-                );
-
-
-                if (
-                    !foundUID
-                ) {
-
-                    clearResult();
-
-                    emptyState.classList.add(
-                        "show"
-                    );
-
-                    showToast(
-                        "الكود الذي أدخلته غير موجود.",
-                        "error"
-                    );
-
-                    return;
-
-                }
-
-
-                displayApplicant(
-                    foundUID,
-                    foundApplicant
-                );
-
-
-                showToast(
-                    "تم العثور على طلبك بنجاح.",
-                    "success"
-                );
-
-            }
-            catch (
-                error
-            ) {
-
-                console.error(
-                    "Firebase Error:",
-                    error
-                );
-
-
-                clearResult();
-
-                emptyState.classList.add(
+                toast.classList.remove(
                     "show"
                 );
 
+            },
+            3000
+        );
 
-                showToast(
-                    "حدث خطأ أثناء الاتصال بقاعدة البيانات.",
-                    "error"
-                );
-
-            }
-            finally {
-
-                showLoading(
-                    false
-                );
-
-                searchButton.disabled =
-                    false;
-
-            }
-
-        }
+}
 
 
-        /* =====================================================
-           FORM
-        ====================================================== */
+/* =========================================================
+   NORMALIZE
+========================================================= */
 
-        searchForm.addEventListener(
-            "submit",
-            function(event) {
+function normalizeCode(
+    value
+) {
 
-                event.preventDefault();
+    return String(
+        value || ""
+    )
+    .trim()
+    .toLowerCase();
+
+}
 
 
-                searchApplicant(
-                    codeInput.value
-                );
+/* =========================================================
+   GET FIELD
+========================================================= */
 
-            }
+function getValue(
+    applicant,
+    fieldName
+) {
+
+    if (
+        !applicant
+    ) {
+
+        return "";
+
+    }
+
+
+    /* الحقل مباشرة داخل المتقدم */
+
+    if (
+        Object.prototype.hasOwnProperty.call(
+            applicant,
+            fieldName
+        )
+    ) {
+
+        return applicant[
+            fieldName
+        ];
+
+    }
+
+
+    /*
+     * دعم وجود الحقول داخل status
+     */
+
+    if (
+        applicant.status &&
+        typeof applicant.status === "object" &&
+        Object.prototype.hasOwnProperty.call(
+            applicant.status,
+            fieldName
+        )
+    ) {
+
+        return applicant.status[
+            fieldName
+        ];
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   DISPLAY VALUE
+========================================================= */
+
+function displayValue(
+    value
+) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+    ) {
+
+        return "لم يتم تحديدها بعد";
+
+    }
+
+
+    return String(
+        value
+    );
+
+}
+
+
+/* =========================================================
+   BADGE CLASS
+========================================================= */
+
+function getBadgeClass(
+    value
+) {
+
+    const text =
+        String(
+            value || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    if (!text) {
+
+        return "badge-default";
+
+    }
+
+
+    if (
+        text.includes("مقبول") ||
+        text.includes("نعم") ||
+        text.includes("مكتمل") ||
+        text.includes("تمت") ||
+        text.includes("موافق") ||
+        text.includes("accepted")
+    ) {
+
+        return "badge-green";
+
+    }
+
+
+    if (
+        text.includes("مرفوض") ||
+        text.includes("رفض") ||
+        text.includes("غير مقبول") ||
+        text.includes("rejected")
+    ) {
+
+        return "badge-red";
+
+    }
+
+
+    if (
+        text.includes("قيد") ||
+        text.includes("انتظار") ||
+        text.includes("انتضار") ||
+        text.includes("تدقيق") ||
+        text.includes("لم تبدأ") ||
+        text.includes("pending")
+    ) {
+
+        return "badge-orange";
+
+    }
+
+
+    return "badge-blue";
+
+}
+
+
+/* =========================================================
+   BADGE HTML
+========================================================= */
+
+function badgeHTML(
+    value
+) {
+
+    const text =
+        displayValue(
+            value
         );
 
 
-        /* =====================================================
-           ENTER KEY
-        ====================================================== */
-
-        codeInput.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Enter"
-                ) {
-
-                    event.preventDefault();
-
-                    searchForm.requestSubmit();
-
-                }
-
-            }
+    const cls =
+        getBadgeClass(
+            value
         );
 
 
-        /* =====================================================
-           URL CODE
-           
-           يدعم:
-           page.html?code=XXXX
-        ====================================================== */
+    return `
+        <span class="table-badge ${cls}">
+            ${escapeHTML(text)}
+        </span>
+    `;
 
-        const urlParams =
-            new URLSearchParams(
-                window.location.search
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(
+    value
+) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        String(value).trim() === ""
+    ) {
+
+        return "لم يتم تحديدها بعد";
+
+    }
+
+
+    const text =
+        String(
+            value
+        ).trim();
+
+
+    /*
+     * YYYY-MM-DD
+     */
+
+    if (
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            text
+        )
+    ) {
+
+        const parts =
+            text.split("-");
+
+
+        return (
+            parts[2] +
+            "/" +
+            parts[1] +
+            "/" +
+            parts[0]
+        );
+
+    }
+
+
+    return text;
+
+}
+
+
+/* =========================================================
+   APPLICANT OBJECT
+========================================================= */
+
+function prepareApplicant(
+    uid,
+    applicant
+) {
+
+    applicant =
+        applicant || {};
+
+
+    return {
+
+        uid: uid,
+
+        reviewStage:
+            getValue(
+                applicant,
+                FIELD_NAMES.reviewStage
+            ),
+
+        needStatus:
+            getValue(
+                applicant,
+                FIELD_NAMES.needStatus
+            ),
+
+        interviewStage:
+            getValue(
+                applicant,
+                FIELD_NAMES.interviewStage
+            ),
+
+        interviewDate:
+            getValue(
+                applicant,
+                FIELD_NAMES.interviewDate
+            ),
+
+        committeeDecision:
+            getValue(
+                applicant,
+                FIELD_NAMES.committeeDecision
+            ),
+
+        acceptanceStatus:
+            getValue(
+                applicant,
+                FIELD_NAMES.acceptanceStatus
+            ),
+
+        startDate:
+            getValue(
+                applicant,
+                FIELD_NAMES.startDate
+            ),
+
+        raw:
+            applicant
+
+    };
+
+}
+
+
+/* =========================================================
+   LOAD ALL APPLICANTS
+========================================================= */
+
+async function loadApplicants() {
+
+    showLoading(
+        true,
+        "جارِ تحميل جميع المتقدمين..."
+    );
+
+
+    try {
+
+        const applicationsReference =
+            ref(
+                db,
+                "jobApplications"
             );
 
 
-        const urlCode =
-            urlParams.get(
-                "code"
+        const snapshot =
+            await get(
+                applicationsReference
             );
 
 
         if (
-            urlCode &&
-            urlCode.trim() !== ""
+            !snapshot.exists()
         ) {
 
-            codeInput.value =
-                urlCode;
+            allApplicants = [];
 
-
-            searchApplicant(
-                urlCode
+            renderApplicants(
+                []
             );
+
+            tableFooter.textContent =
+                "لا توجد بيانات حاليًا.";
+
+            return;
 
         }
 
-    </script>
+
+        const data =
+            snapshot.val();
+
+
+        /*
+         * كل UID هو متقدم مستقل
+         */
+
+        allApplicants =
+            Object.entries(
+                data
+            )
+            .map(
+                ([uid, applicant]) => {
+
+                    return prepareApplicant(
+                        uid,
+                        applicant
+                    );
+
+                }
+            );
+
+
+        /*
+         * ترتيب حسب الكود
+         */
+
+        allApplicants.sort(
+            (a, b) => {
+
+                return String(
+                    a.uid
+                ).localeCompare(
+                    String(b.uid),
+                    undefined,
+                    {
+                        numeric: true,
+                        sensitivity: "base"
+                    }
+                );
+
+            }
+        );
+
+
+        renderApplicants(
+            allApplicants
+        );
+
+
+    }
+    catch (error) {
+
+        console.error(
+            "Firebase Error:",
+            error
+        );
+
+
+        applicantsTableBody.innerHTML = `
+            <tr>
+                <td
+                    colspan="8"
+                    class="table-empty">
+
+                    حدث خطأ أثناء تحميل بيانات المتقدمين.
+
+                </td>
+            </tr>
+        `;
+
+
+        tableFooter.textContent =
+            "تعذر الاتصال بقاعدة البيانات.";
+
+
+        showToast(
+            "حدث خطأ أثناء تحميل البيانات.",
+            "error"
+        );
+
+    }
+    finally {
+
+        showLoading(
+            false
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderApplicants(
+    applicants
+) {
+
+    applicantCount.textContent =
+        applicants.length +
+        " متقدم";
+
+
+    if (
+        !applicants.length
+    ) {
+
+        applicantsTableBody.innerHTML = `
+            <tr>
+                <td
+                    colspan="8"
+                    class="table-empty">
+
+                    لا توجد بيانات للمتقدمين.
+
+                </td>
+            </tr>
+        `;
+
+
+        tableFooter.textContent =
+            "عدد المتقدمين: 0";
+
+        return;
+
+    }
+
+
+    applicantsTableBody.innerHTML =
+        applicants
+        .map(
+            applicant => {
+
+                return `
+                    <tr
+                        data-uid="${escapeHTML(applicant.uid)}"
+                        title="اضغط لعرض تفاصيل المتقدم">
+
+                        <td>
+                            ${escapeHTML(applicant.uid)}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.reviewStage)}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.needStatus)}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.interviewStage)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                formatDate(
+                                    applicant.interviewDate
+                                )
+                            )}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.committeeDecision)}
+                        </td>
+
+                        <td>
+                            ${badgeHTML(applicant.acceptanceStatus)}
+                        </td>
+
+                        <td>
+                            ${escapeHTML(
+                                formatDate(
+                                    applicant.startDate
+                                )
+                            )}
+                        </td>
+
+                    </tr>
+                `;
+
+            }
+        )
+        .join("");
+
+
+    tableFooter.textContent =
+        "إجمالي المتقدمين: " +
+        applicants.length;
+
+}
+
+
+/* =========================================================
+   TABLE SEARCH
+========================================================= */
+
+function filterApplicants() {
+
+    const query =
+        normalizeCode(
+            tableSearch.value
+        );
+
+
+    if (!query) {
+
+        renderApplicants(
+            allApplicants
+        );
+
+        return;
+
+    }
+
+
+    const filtered =
+        allApplicants.filter(
+            applicant => {
+
+                return normalizeCode(
+                    applicant.uid
+                )
+                .includes(
+                    query
+                );
+
+            }
+        );
+
+
+    renderApplicants(
+        filtered
+    );
+
+}
+
+
+/* =========================================================
+   SELECT APPLICANT
+========================================================= */
+
+function displayApplicant(
+    applicant
+) {
+
+    resultCode.textContent =
+        applicant.uid;
+
+
+    setBadge(
+        reviewStage,
+        applicant.reviewStage
+    );
+
+
+    setBadge(
+        needStatus,
+        applicant.needStatus
+    );
+
+
+    setBadge(
+        interviewStage,
+        applicant.interviewStage
+    );
+
+
+    interviewDate.textContent =
+        formatDate(
+            applicant.interviewDate
+        );
+
+
+    setBadge(
+        committeeDecision,
+        applicant.committeeDecision
+    );
+
+
+    setBadge(
+        acceptanceStatus,
+        applicant.acceptanceStatus
+    );
+
+
+    startDate.textContent =
+        formatDate(
+            applicant.startDate
+        );
+
+
+    result.classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        () => {
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        },
+        100
+    );
+
+}
+
+
+/* =========================================================
+   SET BADGE
+========================================================= */
+
+function setBadge(
+    element,
+    value
+) {
+
+    element.textContent =
+        displayValue(
+            value
+        );
+
+
+    element.className =
+        "badge " +
+        getBadgeClass(
+            value
+        );
+
+}
+
+
+/* =========================================================
+   SEARCH BY CODE
+========================================================= */
+
+async function searchApplicant(
+    enteredCode
+) {
+
+    const code =
+        normalizeCode(
+            enteredCode
+        );
+
+
+    if (!code) {
+
+        showToast(
+            "يرجى إدخال الكود الخاص بك.",
+            "error"
+        );
+
+        codeInput.focus();
+
+        return;
+
+    }
+
+
+    /*
+     * نبحث داخل البيانات التي تم تحميلها.
+     */
+
+    let applicant =
+        allApplicants.find(
+            item =>
+                normalizeCode(
+                    item.uid
+                ) === code
+        );
+
+
+    /*
+     * إذا لم نجده، نعيد تحميل البيانات
+     */
+
+    if (!applicant) {
+
+        await loadApplicants();
+
+
+        applicant =
+            allApplicants.find(
+                item =>
+                    normalizeCode(
+                        item.uid
+                    ) === code
+            );
+
+    }
+
+
+    if (!applicant) {
+
+        result.classList.remove(
+            "show"
+        );
+
+
+        showToast(
+            "الكود الذي أدخلته غير موجود.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    displayApplicant(
+        applicant
+    );
+
+
+    showToast(
+        "تم العثور على الطلب بنجاح.",
+        "success"
+    );
+
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+searchForm.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+
+        searchApplicant(
+            codeInput.value
+        );
+
+    }
+);
+
+
+/* =========================================================
+   TABLE SEARCH EVENT
+========================================================= */
+
+tableSearch.addEventListener(
+    "input",
+    filterApplicants
+);
+
+
+/* =========================================================
+   CLICK TABLE ROW
+========================================================= */
+
+applicantsTableBody.addEventListener(
+    "click",
+    event => {
+
+        const row =
+            event.target.closest(
+                "tr[data-uid]"
+            );
+
+
+        if (!row) {
+
+            return;
+
+        }
+
+
+        const uid =
+            row.dataset.uid;
+
+
+        codeInput.value =
+            uid;
+
+
+        searchApplicant(
+            uid
+        );
+
+    }
+);
+
+
+/* =========================================================
+   URL CODE
+========================================================= */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const urlCode =
+    urlParams.get(
+        "code"
+    );
+
+
+if (
+    urlCode &&
+    urlCode.trim() !== ""
+) {
+
+    codeInput.value =
+        urlCode;
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadApplicants();
+
+
+</script>
 
 
 </body>
